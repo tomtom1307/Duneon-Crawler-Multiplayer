@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static Unity.Burst.Intrinsics.X86;
+using static UnityEditor.Progress;
 
 namespace Project
 {
@@ -27,7 +28,7 @@ namespace Project
         public List<Room> AddedRooms;
         public List<Vector2> occupied;
         public List<Vector2> AllDoors;
-        public List<Vector3> corridors;
+        public List<Vector4> corridors;
         public List<int> connected;
         public List<family> families;
         
@@ -52,7 +53,7 @@ namespace Project
                 occupied.Add(cell);
             }
             
-
+            //Room placement
             for (int i = 0; i < numberOfRooms; i++) 
             {
                 int attempts = 0;
@@ -148,7 +149,7 @@ namespace Project
             //Start connecting corridors
             for (int i = 0; i < numberOfRooms; i++)
             {
-                print(i);
+
                 List<int> availableRooms = new List<int>();
                 //Create standard available rooms list
                 for (int j = 0; j < numberOfRooms; j++) { 
@@ -171,13 +172,22 @@ namespace Project
 
 
                 int connectedRoom = 0;
+                Vector4 endCorridor = Vector4.zero;
+                Vector4 StartCorridor = Vector4.zero;
                 //Find closest corridor available
                 if (availableRooms.Count > 0 )
                 {
                     //FOR TESTING
                     //connectedRoom = availableRooms[Random.Range(0, availableRooms.Count)];
 
-                    connectedRoom = 
+
+                    //Choose start corridor and end corridor
+                    endCorridor = CG.FindClosestCorridor(i, corridors, availableRooms, out connectedRoom, out StartCorridor);
+
+                    //Draw the Lines to visualize connections
+                    Debug.DrawLine(grid.GetWorldPos((int)StartCorridor.x, (int)StartCorridor.y) + centertingVector, grid.GetWorldPos((int)endCorridor.x, (int)endCorridor.y)+ centertingVector, UnityEngine.Color.green, 100f);
+                    CorridorPathfinding(StartCorridor, endCorridor, i);
+                    
 
                 }
                 else
@@ -208,15 +218,7 @@ namespace Project
 
 
             }
-            //For some reason additional room in family
-            foreach (family fam in families)
-            {
-                print("fam:" + n);
-                foreach (var room in fam.rooms)
-                {
-                    print(room);
-                }
-            }
+            
             
         }
 
@@ -240,7 +242,142 @@ namespace Project
         }
 
 
-        public Vector2[] getDoorPositionswithCorridorStartPositions(Vector2 size, int x, int y,List<int> doorArray,List<Vector3>CorridorArray, int roomIndex)
+        public void CorridorPathfinding(Vector4 start, Vector4 stop, int roomNumber)
+        {
+            List<Vector2> path = FindPath(start, stop);
+
+            //Set Path
+            foreach (var item in path)
+            {
+                grid.SetVal((int)item.x, (int)item.y, 3);
+                Instantiate(corridorPrefab, grid.GetWorldPos((int)item[0], (int)item[1]) + centertingVector, Quaternion.identity);
+                corridors.Add(new Vector4(item.x, item.y, roomNumber, 0));
+            }
+   
+            
+
+        }
+
+        public float CorridorAttempts;
+        public List<Vector2> FindPath(Vector2 start, Vector2 stop)
+        {
+            List<Vector2> path = new List<Vector2>();
+            float distance = Vector2.Distance(stop, start);
+            Vector2 currentPos = start;
+            List<Vector2> obstacles = new List<Vector2>();
+            bool Obstacle = false;
+            float lastDistance = 0;
+            int attempts1 = 0;
+            int attempts2 = 0;
+            while(distance != 0 && attempts1 < CorridorAttempts)
+            {
+                Vector2 dirVec = (stop - currentPos).normalized;
+                Vector2 checkDir = Vector2.zero;
+                //Check which direction is larger x or y
+                if (Mathf.Abs(dirVec.x) > Mathf.Abs(dirVec.y))
+                {
+                    //Check in the direction
+                    checkDir = new Vector2(dirVec.x, 0).normalized;
+                }
+                //Otherwise
+                else
+                {
+                    checkDir = new Vector2(0,dirVec.y).normalized;
+                }
+                while(attempts2 < CorridorAttempts)
+                {
+                    
+                    Vector2 nextTile = checkDir + currentPos;
+                    
+                    int xPos = (int)nextTile.x;
+                    int yPos = (int)nextTile.y;
+                    
+                   
+                    //if in line with the room but checking the wrong direction
+                    if ((dirVec.x == 0 || dirVec.y == 0) && Vector2.Dot(checkDir, dirVec) != 1)
+                    {
+                        break;
+                    }
+
+                    //If direction vector is perpendicular to a room blocking the path
+                    else if((dirVec.x == 0 || dirVec.y == 0) && Vector2.Dot(checkDir, dirVec) == 1 && grid.GetVal(xPos,yPos) > 3)
+                    {
+                        Vector2 initialDir = checkDir;
+                        List<int> pm = new List<int>{ -1, 1 };
+                        checkDir = new Vector2(Mathf.Abs(checkDir.y) * dirVec.x * pm[Random.Range(0,pm.Count)], dirVec.y * Mathf.Abs(checkDir.x)* pm[Random.Range(0, pm.Count)]).normalized;
+                        
+                        Obstacle = true;
+                        obstacles.Add(nextTile);
+                        Vector2 obstacleDir = currentPos + initialDir;
+                        int attempts3 = 0;
+                        while (grid.GetVal((int)obstacleDir.x, (int)obstacleDir.y) > 3&& attempts3 < 10)
+                        {
+                            nextTile = checkDir + currentPos;
+                            xPos = (int)nextTile.x;
+                            yPos = (int)nextTile.y;
+
+                            if (grid.GetVal(xPos, yPos) <= 3)
+                            {
+                                path.Add(nextTile);
+                                currentPos = nextTile;
+                            }
+                            else
+                            {
+                                
+                                Obstacle = true;
+                                obstacles.Add(nextTile);
+                                break;
+                            }
+                            attempts3 ++;
+                        }
+                    }
+
+
+                    //If not an obstacle
+                    else if (grid.GetVal(xPos, yPos) <= 3)
+                    {
+                        //Then continue in this direction
+                        path.Add(nextTile);
+                        currentPos = nextTile;
+
+                        //grid.SetVal(xPos, yPos, 3);
+                        //Instantiate(corridorPrefab, grid.GetWorldPos(xPos, yPos) + centertingVector, Quaternion.identity);
+
+
+                    }
+
+                    //Force 
+                    else if (Obstacle)
+                    {
+                        print("HIT OBSTACLE");
+                        break;
+                    }
+
+                    else
+                    {
+                        checkDir = new Vector2(Mathf.Abs(checkDir.y)*dirVec.x, dirVec.y*Mathf.Abs(checkDir.x)).normalized;
+                        lastDistance = Vector2.Distance(currentPos, stop);
+                        Obstacle = true;
+                        obstacles.Add(nextTile);
+                        
+                    }
+                    dirVec = stop - currentPos;
+                    attempts2++;
+                }
+                attempts1++;
+            }
+            if(attempts1 == CorridorAttempts)
+            {
+                Debug.LogError("Couldnt find path");
+            }
+
+            return path;
+        }
+
+        
+
+
+        public Vector2[] getDoorPositionswithCorridorStartPositions(Vector2 size, int x, int y,List<int> doorArray,List<Vector4>CorridorArray, int roomIndex)
         {
             Vector2[] arrayofCoords = new Vector2[doorArray.Count];
             int xRange = (((int)size[0] - 1) / 2);
@@ -256,14 +393,14 @@ namespace Project
                     
                     foreach (int door in doorArray)
                     {
-                        grid.SetVal(x + j, y + k, 2);
+                        grid.SetVal(x + j, y + k, 5);
                         if (f == door)
                         {
                             
                             Vector2 doorPos = new Vector2(x + j, y + k);
                             arrayofCoords[d] = doorPos;
                             Vector2 corridorPos = getCorridorStartPositions(doorPos, new Vector2(x, y));
-                            CorridorArray.Add(new Vector3(corridorPos.x,corridorPos.y, roomIndex));
+                            CorridorArray.Add(new Vector4(corridorPos.x,corridorPos.y, roomIndex, 0));
                             grid.SetVal((int)corridorPos[0], (int)corridorPos[1], 3);
                             d++;
                         }
