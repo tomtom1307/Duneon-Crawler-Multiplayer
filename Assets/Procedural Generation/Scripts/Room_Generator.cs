@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -20,12 +21,14 @@ namespace Project
         public int MaxAttempts;
         Grid grid;
         CorridorGeneration CG;
+        CorridorWallHandle CWH;
         Testing test;
         Vector3 centertingVector;
         public List<GameObject> roomsObj;
         public GameObject corridorPrefab;
         public List<GameObject> AddedRoomsObj;
         public List<Room> AddedRooms;
+        public List<GameObject> coridorGO;
         public List<Vector2> occupied;
         public List<Vector2> AllDoors;
         public List<Vector4> corridors;
@@ -40,6 +43,7 @@ namespace Project
         // Start is called before the first frame update
         void Start()
         {
+            CWH = GetComponent<CorridorWallHandle>();
             families = new List<family>();
             //Line of Occupied states surrounding grid to avoid edge case
             test = GetComponent<Testing>();
@@ -118,7 +122,7 @@ namespace Project
                     occupied.Add(new Vector2(xPos, yPos));
                 }
 
-
+                
                 // Get door positions and corridor positions
                 Doors = getDoorPositionswithCorridorStartPositions(roomComp.size, x, y, roomComp.DoorPos, corridors, i);
                 
@@ -139,13 +143,16 @@ namespace Project
                 grid.SetVal((int)item[0], (int)item[1], 10);
             }
 
+
+            //REMINDER THAT WALLS DEPEND ON ORDER OF CORRIDOR GENERATION CALLED IN THIS FUNCTION 
             //put in corridor starts
             foreach (var item in corridors)
             {
-                Instantiate(corridorPrefab, grid.GetWorldPos((int)item[0], (int)item[1])+centertingVector, Quaternion.identity);
+                GameObject cor = Instantiate(corridorPrefab, grid.GetWorldPos((int)item[0], (int)item[1])+centertingVector, Quaternion.identity);
+                coridorGO.Add(cor);
             }
 
-            int n = 0;
+
             //Start connecting corridors
             for (int i = 0; i < numberOfRooms; i++)
             {
@@ -218,7 +225,9 @@ namespace Project
 
 
             }
-            
+
+            CWH.TILECHECKK(corridors, coridorGO, grid);
+
             
         }
 
@@ -250,7 +259,8 @@ namespace Project
             foreach (var item in path)
             {
                 grid.SetVal((int)item.x, (int)item.y, 3);
-                Instantiate(corridorPrefab, grid.GetWorldPos((int)item[0], (int)item[1]) + centertingVector, Quaternion.identity);
+                GameObject cor = Instantiate(corridorPrefab, grid.GetWorldPos((int)item[0], (int)item[1]) + centertingVector, Quaternion.identity);
+                coridorGO.Add(cor);
                 corridors.Add(new Vector4(item.x, item.y, roomNumber, 0));
             }
    
@@ -304,7 +314,7 @@ namespace Project
                     {
                         Vector2 initialDir = checkDir;
                         List<int> pm = new List<int>{ -1, 1 };
-                        checkDir = new Vector2(Mathf.Abs(checkDir.y) * dirVec.x * pm[Random.Range(0,pm.Count)], dirVec.y * Mathf.Abs(checkDir.x)* pm[Random.Range(0, pm.Count)]).normalized;
+                        checkDir = new Vector2( dirVec.y * pm[Random.Range(0,pm.Count)], dirVec.x * pm[Random.Range(0, pm.Count)]).normalized;
                         
                         Obstacle = true;
                         obstacles.Add(nextTile);
@@ -368,7 +378,7 @@ namespace Project
             }
             if(attempts1 == CorridorAttempts)
             {
-                Debug.LogError("Couldnt find path");
+                //Debug.LogError("Couldnt find path");
             }
 
             return path;

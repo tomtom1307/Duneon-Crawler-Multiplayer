@@ -11,6 +11,9 @@ namespace Project
         public List<Vector2> ocupied;
         public List<int> DoorPos;
         public bool Considered;
+
+        
+
         private void Start()
         {
             

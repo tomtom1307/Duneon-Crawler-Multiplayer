@@ -273,6 +273,7 @@ GameObject:
   - component: {fileID: 1801563520}
   - component: {fileID: 1801563521}
   - component: {fileID: 1801563522}
+  - component: {fileID: 1801563523}
   m_Layer: 0
   m_Name: Grid Generation
   m_TagString: Untagged
@@ -336,12 +337,13 @@ MonoBehaviour:
     type: 3}
   AddedRoomsObj: []
   AddedRooms: []
+  coridorGO: []
   occupied: []
   AllDoors: []
   corridors: []
   connected: 
   families: []
-  CorridorAttempts: 100
+  CorridorAttempts: 1000
 --- !u!114 &1801563522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,6 +354,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45a99bada4c0ea3448f9f229a9708f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1801563523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801563517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01457c56d53e8ee438fa5e5e85f3ab33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1822785288

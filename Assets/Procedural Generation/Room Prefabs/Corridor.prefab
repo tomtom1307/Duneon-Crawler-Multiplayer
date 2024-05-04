@@ -742,7 +742,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7711298664668822091}
   - component: {fileID: 2270816143631557681}
-  - component: {fileID: 4686499966619139357}
+  - component: {fileID: 806101347902450672}
   m_Layer: 0
   m_Name: Corridor
   m_TagString: Untagged
@@ -788,7 +788,7 @@ MonoBehaviour:
   ocupied: []
   DoorPos: 
   Considered: 0
---- !u!114 &4686499966619139357
+--- !u!114 &806101347902450672
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -797,9 +797,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8767618854634293907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01457c56d53e8ee438fa5e5e85f3ab33, type: 3}
+  m_Script: {fileID: 11500000, guid: ab5194bb2b9835c4f9272b05bcb03f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UpWall: {fileID: 7157674268172914563}
+  DownWall: {fileID: 2247165572889934373}
+  LeftWall: {fileID: 9129158963618739646}
+  RightWall: {fileID: 6977572641994656052}
 --- !u!1 &9129158963618739646
 GameObject:
   m_ObjectHideFlags: 0
