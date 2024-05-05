@@ -13,9 +13,7 @@ namespace Project
         public List<int> rooms;
         public family(List<int> rooms)
         {
-            this.rooms = rooms;
-
-            
+            this.rooms = rooms; 
         }
 
         public void mergeFams(family fam, List<family> families)
