@@ -25,6 +25,7 @@ namespace Project
         Testing test;
         Vector3 centertingVector;
         public List<GameObject> roomsObj;
+        public List<GameObject> startendroomsObj;
         public GameObject corridorPrefab;
         public List<GameObject> AddedRoomsObj;
         public List<Room> AddedRooms;
@@ -50,7 +51,6 @@ namespace Project
             CG = GetComponent<CorridorGeneration>();
             test.GenerateGrid();
             grid = test.grid;
-            centertingVector = new Vector3(test.CellSize, 0, test.CellSize) / 2;
             //add Boundaries to occupied
             foreach (var cell in grid.bounds)
             {
@@ -60,6 +60,8 @@ namespace Project
             //Room placement
             for (int i = 0; i < numberOfRooms; i++) 
             {
+                centertingVector = new Vector3(0,0,0) / 2;
+                Vector2 RoomSize = new Vector2();
                 int attempts = 0;
                 //Loop for attempting to place room if not possible after 10 attempts break generation loop
                 
@@ -68,11 +70,18 @@ namespace Project
                     //RNG section
                     x = Mathf.RoundToInt(Random.Range(1, grid.width));
                     y = Mathf.RoundToInt(Random.Range(1, grid.height));
-                    chosenRoom = roomsObj[Mathf.RoundToInt(Random.Range(0, roomsObj.Count))];
+                    if (i > 0)
+                    {
+                        chosenRoom = roomsObj[Mathf.RoundToInt(Random.Range(0, roomsObj.Count))];
+                    } 
+                    else
+                    {
+                        chosenRoom = startendroomsObj[i];  
+                    }
 
-
+                        
                     //Get roomSize
-                    Vector2 RoomSize = chosenRoom.GetComponent<Room>().size;
+                    RoomSize = chosenRoom.GetComponent<Room>().size;
                     //CheckPossibleOccupiedCells
                     RoomCells = getRoomCells(RoomSize, x, y);
 
@@ -85,7 +94,7 @@ namespace Project
                             break;
                         }
                         //if Overlap then 
-                        Debug.Log($"Attempt:{attempts}: OverLap!");
+                        //Debug.Log($"Attempt:{attempts}: OverLap!");
                         attempts++;
                         continue;
                     }
@@ -98,6 +107,8 @@ namespace Project
                     break;
                 }
 
+                if (RoomSize[0] % 2 != 0){centertingVector[0]=test.CellSize/2;}
+                if (RoomSize[1] % 2 != 0){centertingVector[2]=test.CellSize/2;}
                 // Get spawn pos
                 Vector3 pos = grid.GetWorldPos(x, y)+ centertingVector ;
                 //Instantiate room prefab
@@ -390,15 +401,19 @@ namespace Project
         public Vector2[] getDoorPositionswithCorridorStartPositions(Vector2 size, int x, int y,List<int> doorArray,List<Vector4>CorridorArray, int roomIndex)
         {
             Vector2[] arrayofCoords = new Vector2[doorArray.Count];
-            int xRange = (((int)size[0] - 1) / 2);
-            int yRange = (((int)size[1] - 1) / 2);
-
+            float xRange = (((int)size[0] - 1) / 2f);
+            float yRange = (((int)size[1] - 1) / 2f);
+            // range compensators for even length rooms
+            float ex = 0;
+            float ey = 0;
+            if (size[0] % 2 == 0){ex=+0.5f;}
+            if (size[1] % 2 == 0){ey=+0.5f;}
             int f = 0;
             int d = 0;
             //Set occupied cells to occupied
-            for (int j = xRange; j >= -xRange; j--)
+            for (int j = (int)(xRange-ex); j >= (int)(-xRange-ex); j--)
             {
-                for (int k = yRange; k >= -yRange; k--)
+                for (int k = (int)(yRange-ey); k >= (int)(-yRange-ey); k--)
                 {
                     
                     foreach (int door in doorArray)
@@ -430,22 +445,27 @@ namespace Project
         }
 
 
-        public Vector2[] getRoomCells(Vector2 size, int x , int y)
+        public Vector2[] getRoomCells(Vector2 size, float x , float y)
         {
 
             Vector2[] arrayofCoords = new Vector2[(int)((size[0]+2*Padding) * (size[1] + 2 * Padding))];
-            int xRange = (((int)size[0] - 1) / 2);
-            int xRangePadded = xRange+Padding;
-            int yRange = (((int)size[1] - 1) / 2);
-            int yRangePadded = yRange + Padding;
+            float ex = 0; //evenlength corrections
+            float ey = 0;
+            if (size[0] % 2 == 0){ex=+0.5f;}
+            if (size[1] % 2 == 0){ey=+0.5f;}
+            float xRange = (((int)size[0] - 1) / 2);
+            float xRangePadded = xRange+Padding+ex;
+            float yRange = (((int)size[1] - 1) / 2);
+            float yRangePadded = yRange + Padding+ey;
 
+            
             int f = 0;
             //Set occupied cells to occupied
-            for (int j = xRangePadded; j >= -xRangePadded; j--)
+            for (float j = xRangePadded; j >= -xRangePadded; j--)
             {
-                for (int k = yRangePadded; k >= -yRangePadded; k--)
+                for (float k = yRangePadded; k >= -yRangePadded; k--)
                 {
-                    arrayofCoords[f] = new Vector2(x+j,y+k);
+                    arrayofCoords[f] = new Vector2((int)(x+j),(int)(y+k));
                     //print(arrayofCoords[f]);
                     
                     f++;

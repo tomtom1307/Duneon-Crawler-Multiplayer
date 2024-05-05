@@ -36,16 +36,11 @@ namespace Project
                 int wallDirIndex = 0;
                 foreach (var dir in directions)
                 {
-                    Debug.Log(wallDirIndex);
+                    //Debug.Log(wallDirIndex);
 
                     int gridVal = getGridVal(pos + dir, grid);
-                    if (gridVal == 0 || gridVal == 1)
-                    {
-                        go.DoWall(wallDirIndex);
 
-                    }
-
-                    else if (gridVal == 3)
+                    if (gridVal == 3)
                     {
                         go.DoEmpty(wallDirIndex);
                     }
