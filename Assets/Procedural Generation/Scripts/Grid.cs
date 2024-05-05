@@ -36,7 +36,7 @@ namespace Project
                     Debug.DrawLine(GetWorldPos(x, y), GetWorldPos(x, y+1), Color.white, 100f);
                     if(x == 0 || y == 0 || x == width-1|| y == height-1)
                     {
-                        SetVal(x, y, 1);
+                        SetVal(x, y, 5);
                         bounds.Add(new Vector2(x, y));
                     }
                     

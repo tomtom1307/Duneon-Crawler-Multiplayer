@@ -31,6 +31,7 @@ namespace Project
         public List<Room> AddedRooms;
         public List<GameObject> coridorGO;
         public List<Vector2> occupied;
+        public List<Vector2> boundcells;
         public List<Vector2> AllDoors;
         public List<Vector4> corridors;
         public List<int> connected;
