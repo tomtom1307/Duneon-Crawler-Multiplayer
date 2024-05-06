@@ -297,6 +297,7 @@ GameObject:
   - component: {fileID: 5120480313008119304}
   - component: {fileID: 2461890248801719378}
   - component: {fileID: 48115446195336253}
+  - component: {fileID: 3390272108242596934}
   m_Layer: 9
   m_Name: Training Dummy
   m_TagString: Untagged
@@ -312,7 +313,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9067589914978115397}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00000003090855, y: 0.7071085, z: -0.7071051, w: 0.00000003090872}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0.7071068, w: -0}
   m_LocalPosition: {x: -15.04, y: 0.68, z: 12.6}
   m_LocalScale: {x: 205, y: 230, z: 135}
   m_ConstrainProportionsScale: 0
@@ -401,7 +402,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &8820934756023289083
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -456,7 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4103916243
+  GlobalObjectIdHash: 2888554386
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -481,6 +482,8 @@ MonoBehaviour:
   ResetTime: 2
   ResetDistance: 3
   reset: 1
+  PoofParticles: {fileID: 5353173498504393103, guid: 0682c295afcf46e4d94db5d99d11bd8c,
+    type: 3}
 --- !u!114 &5120480313008119304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,6 +500,8 @@ MonoBehaviour:
   MaxHealth: 100
   HealthBar: {fileID: 109010348113582859}
   HealthCanvas: {fileID: 2112485803235297092}
+  _health:
+    m_InternalValue: 0
   flashTime: 0.15
   DebugButton: 107
   white: {fileID: 2100000, guid: b94de6c244e062b49b5c957cfe424211, type: 2}
@@ -546,6 +551,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &3390272108242596934
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9067589914978115397}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f13c838b3a6b36b4bbc54f8cae10951f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &9213770724928443886
 GameObject:
   m_ObjectHideFlags: 0
