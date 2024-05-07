@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using Unity.VisualScripting;
+using System;
+using Random = UnityEngine.Random;
 
 namespace Project
 {
@@ -29,17 +31,37 @@ namespace Project
             } 
             Room_Generator = GetComponent<Room_Generator>();
         }
+        public void HostGen() 
+        {
+            CurrentSeed = Random.Range(0, 100000000);
+            Random.InitState(CurrentSeed);
+            GeneratedSeed.Value = CurrentSeed;
+            Room_Generator.RoomGen();
+
+        }
         public void GenSeed() 
-            {
-                CurrentSeed = Random.Range(0, 100000000);
-                Random.InitState(CurrentSeed);
-                GeneratedSeed.Value = CurrentSeed;
-                Room_Generator.RoomGen();
-            }
+        {
+            StartCoroutine(Loading(HostGen));
+        }
+
+
         public void ReadSeed()
+        {
+            StartCoroutine(Loading(ClientGen));
+        }
+        
+        public void ClientGen()
         {
             Random.InitState(GeneratedSeed.Value);
             Room_Generator.RoomGen();
         }
+
+        public IEnumerator Loading(Action methodName)
+        {
+            yield return new WaitForSeconds(0.5f);
+            methodName();
+
+        }
+
     }
 }

@@ -28,12 +28,14 @@ public class TestingNetcodeUI : MonoBehaviour
         {
             Debug.Log("Client");
             NetworkManager.Singleton.StartClient();
-            PC.enabled = enabled;
             Seeding.instance.ReadSeed();
+            PC.enabled = enabled;
+            
             Hide();
         });
     }
 
+    
 
     private void Hide()
     {
