@@ -43,7 +43,7 @@ namespace Project
         Vector2[] RoomCells;
         Vector2[] Doors;
         // Start is called before the first frame update
-        void Start()
+        public void RoomGen()
         {
             CWH = GetComponent<CorridorWallHandle>();
             families = new List<family>();
