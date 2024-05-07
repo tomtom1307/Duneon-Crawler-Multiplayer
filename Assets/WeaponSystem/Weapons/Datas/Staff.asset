@@ -48,14 +48,17 @@ MonoBehaviour:
       type: {class: SphereOverlapData, ns: Project, asm: Assembly-CSharp}
       data:
         <AttackData>k__BackingField:
-        - <Distance>k__BackingField: 100
+        - <Distance>k__BackingField: 10
+        - <Distance>k__BackingField: 10
         <DetectableLayers>k__BackingField:
           serializedVersion: 2
           m_Bits: 512
-        <detectionRadius>k__BackingField: 100
+        <detectionRadius>k__BackingField: 10
     - rid: 1852571070197661698
       type: {class: SecondaryDamageData, ns: Project, asm: Assembly-CSharp}
       data:
         <AttackData>k__BackingField:
+        - <DamageAmount>k__BackingField: 2
+          <KnockBackAmount>k__BackingField: 500
         - <DamageAmount>k__BackingField: 2
           <KnockBackAmount>k__BackingField: 500

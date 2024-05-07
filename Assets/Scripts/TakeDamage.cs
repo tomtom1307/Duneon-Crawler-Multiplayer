@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 namespace Project
@@ -24,22 +25,40 @@ namespace Project
         public Color HeadshotColor;
         public Color NormalColor;
         public GameObject damageText;
-
+        public bool SkinnedMesh;
 
         MeshRenderer meshRenderer;
-        Material[] origColors;
+        SkinnedMeshRenderer SkinmeshRenderer;
+        [SerializeField] Material[] origColors;
         Material[] whites;
+        EnemyReferences ER;
         Camera cam;
         Rigidbody rb;
+        
 
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
-
-            meshRenderer = gameObject.GetComponent<MeshRenderer>();
+            if(GetComponent<EnemyReferences>() != null )
+            {
+                ER = GetComponent<EnemyReferences>();
+            }
+            
+            
+            if(SkinnedMesh)
+            {
+                SkinmeshRenderer = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+                origColors = SkinmeshRenderer.materials;
+                whites = SkinmeshRenderer.materials;
+            }
+            else
+            {
+                meshRenderer = gameObject.GetComponent<MeshRenderer>();
+                origColors = meshRenderer.materials;
+                whites = meshRenderer.materials;
+            }
             cam = Camera.main;
-            origColors = meshRenderer.materials;
-            whites = meshRenderer.materials;
+            
             for (int i = 0; i < origColors.Length; i++)
             {
                 whites[i] = white;
@@ -78,6 +97,8 @@ namespace Project
         {
             if (headshot) Damage *= 2;
             _health.Value -= Damage;
+            if (SkinnedMesh)
+                
             
             HandleLocalVisualsClientRpc(Damage, headshot);
             
@@ -115,6 +136,7 @@ namespace Project
         void FaceUIToPlayer()
         {
             HealthCanvas.transform.LookAt(cam.transform.position);
+            
         }
 
         void DamageFlash()
@@ -124,8 +146,15 @@ namespace Project
 
         void FlashStart()
         {
+            if (SkinnedMesh)
+            {
+                SkinmeshRenderer.SetMaterials(whites.ToList());
+            }
+            else
+            {
+                meshRenderer.SetMaterials(whites.ToList());
+            }
 
-            meshRenderer.SetMaterials(whites.ToList());
 
             Invoke("FlashEnd", flashTime);
         }
@@ -133,7 +162,33 @@ namespace Project
         void FlashEnd()
         {
 
-            meshRenderer.SetMaterials(origColors.ToList());
+            if (SkinnedMesh)
+            {
+                SkinmeshRenderer.SetMaterials(origColors.ToList());
+                
+            }
+            else
+            {
+                meshRenderer.SetMaterials(origColors.ToList());
+            }
+            
+            
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void EnableNavMeshServerRpc()
+        {
+            ER.navMeshAgent.enabled = true;
+            ER.animator.ResetTrigger("Hit");
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void DisableNavMeshServerRpc()
+        {
+            if (!SkinnedMesh) return;
+            ER.navMeshAgent.enabled = false;
+            Invoke("EnableNavMeshServerRpc", 1f);
+            ER.animator.SetTrigger("Hit");
         }
 
 

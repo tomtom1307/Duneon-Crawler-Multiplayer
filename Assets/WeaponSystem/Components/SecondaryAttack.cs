@@ -13,16 +13,18 @@ namespace Project
         {
             if (collider.tag == "Head")
             {
-                print("Head");
-                TD = collider.GetComponentInParent<TakeDamage>();
-                TD.DoDamageServerRpc(currentAttackData.DamageAmount, true);
-                TD.KnockBackServerRpc(Camera.main.transform.position, currentAttackData.KnockBackAmount);
+                return;
             }
             else
             {
                 TD = collider.GetComponent<TakeDamage>();
                 TD.DoDamageServerRpc(currentAttackData.DamageAmount);
-                TD.KnockBackServerRpc(Camera.main.transform.position, currentAttackData.KnockBackAmount);
+                if(collider.GetComponent<Rigidbody>() != null)
+                {
+                    TD.DisableNavMeshServerRpc();
+                    TD.KnockBackServerRpc(Camera.main.transform.position, currentAttackData.KnockBackAmount);
+                }
+                
             }
 
 
