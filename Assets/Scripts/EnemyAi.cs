@@ -18,6 +18,7 @@ namespace Project
         private float pathUpdateDeadline;
         public List<Transform> playerlist;
         Rigidbody rb;
+        public Transform headTarget;
 
         private void Awake()
         {
@@ -46,11 +47,12 @@ namespace Project
                 bool inRange = (Vector3.Distance(transform.position, target.position) <= attackDistance);
                 if(inRange)
                 {
-                    //LookAtTarget();
+                    LookAtTarget();
                 }
                 else
                 {
                     UpdatePath();
+                    headTarget.position = target.position;
                 }
             }
         }

@@ -179,6 +179,7 @@ namespace Project
         public void EnableNavMeshServerRpc()
         {
             ER.navMeshAgent.enabled = true;
+            ER.animator.applyRootMotion = true;
             ER.animator.ResetTrigger("Hit");
         }
 
@@ -187,6 +188,7 @@ namespace Project
         {
             if (!SkinnedMesh) return;
             ER.navMeshAgent.enabled = false;
+            ER.animator.applyRootMotion = false;
             Invoke("EnableNavMeshServerRpc", 1f);
             ER.animator.SetTrigger("Hit");
         }
