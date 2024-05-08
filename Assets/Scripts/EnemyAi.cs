@@ -74,6 +74,7 @@ namespace Project
             {
                 if(Vector3.Distance(transform.position, item.position) < MinDist)
                 {
+                    MinDist = Vector3.Distance(transform.position, item.position);
                     target = item;
                 }
             }

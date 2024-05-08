@@ -13,6 +13,8 @@ public class PlayerAttack : NetworkBehaviour
     [SerializeField] public float AttackCooldown;
     [SerializeField] private Camera cam;
     public int mouseButton;
+    public float ChargePercentage;
+    public float ChargeSpeed = 3f;
 
     private void Awake()
     {
@@ -20,6 +22,7 @@ public class PlayerAttack : NetworkBehaviour
         weapon = cam.GetComponentInChildren<WeaponHolder>();
         weapon.OnExit += ExitHandler;
         Attacking = false;
+        
     }
 
     void Enter()
@@ -37,10 +40,13 @@ public class PlayerAttack : NetworkBehaviour
         if(Input.GetMouseButton(1))
         {
             weapon.EnterSecondaryAttack();
+            ChargePercentage += (Time.deltaTime * ChargeSpeed);
+            ChargePercentage = Mathf.Clamp(ChargePercentage, 0, 1);
             StartCoroutine("Cooldown");
         }
         else if(Input.GetMouseButtonUp(1))
         {
+            Invoke("ResetCharge", 0.3f);
             weapon.anim.SetBool("SecondaryRelease", true);
         }
         if (Attacking) return;
@@ -50,6 +56,12 @@ public class PlayerAttack : NetworkBehaviour
             Enter();
         }
         
+    }
+
+    public void ResetCharge()
+    {
+        ChargePercentage = 0;
+
     }
 
 

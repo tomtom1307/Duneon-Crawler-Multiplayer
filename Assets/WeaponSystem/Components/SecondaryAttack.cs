@@ -8,9 +8,12 @@ namespace Project
     {
         private ActionSphereOverlap sphereDetect;
         TakeDamage TD;
+        public float ChargePercentage;
+        PlayerAttack PA;
 
         private void HandleColliderDetection(Collider collider)
         {
+            ChargePercentage = PA.ChargePercentage;
             if (collider.tag == "Head")
             {
                 return;
@@ -18,11 +21,11 @@ namespace Project
             else
             {
                 TD = collider.GetComponent<TakeDamage>();
-                TD.DoDamageServerRpc(currentAttackData.DamageAmount);
+                TD.DoDamageServerRpc(ChargePercentage * currentAttackData.DamageAmount);
                 if(collider.GetComponent<Rigidbody>() != null)
                 {
                     TD.DisableNavMeshServerRpc();
-                    TD.KnockBackServerRpc(Camera.main.transform.position, currentAttackData.KnockBackAmount);
+                    TD.KnockBackServerRpc(Camera.main.transform.position, ChargePercentage*currentAttackData.KnockBackAmount);
                 }
                 
             }
@@ -33,7 +36,7 @@ namespace Project
         protected override void Awake()
         {
             base.Awake();
-
+            PA = GetComponent<PlayerAttack>();
             sphereDetect = GetComponent<ActionSphereOverlap>();
 
         }

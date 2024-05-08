@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -34,10 +35,13 @@ namespace Project
         EnemyReferences ER;
         Camera cam;
         Rigidbody rb;
+        public List<Collider> colliders;
         
 
         private void Start()
         {
+            
+            
             Ded = false;
             rb = GetComponent<Rigidbody>();
             if(GetComponent<EnemyReferences>() != null )
@@ -51,6 +55,7 @@ namespace Project
                 SkinmeshRenderer = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
                 origColors = SkinmeshRenderer.materials;
                 whites = SkinmeshRenderer.materials;
+
             }
             else
             {
@@ -68,12 +73,12 @@ namespace Project
 
 
 
-            if(NetworkManager.Singleton.LocalClientId == 0)
+            if (NetworkManager.Singleton.LocalClientId == 0)
             {
                 _health.Value = MaxHealth;
             }
 
-            
+
 
         }
 
@@ -98,24 +103,14 @@ namespace Project
         {
             if (headshot) Damage *= 2;
             _health.Value -= Damage;
-            if (SkinnedMesh && _health.Value <= 0)
-            {
-                
-                Die();
-            }
+            
                 
             
             HandleLocalVisualsClientRpc(Damage, headshot);
             
         }
 
-        public void Die()
-        {
-            ER.AI.enabled = false;
-            Destroy(ER.navMeshAgent);
-            CancelInvoke("EnableNavMeshServerRpc");
-            Invoke("Delete", 4);
-        }
+
 
 
         [ClientRpc]
@@ -123,10 +118,22 @@ namespace Project
         {
 
             HealthBar.fillAmount = _health.Value / MaxHealth;
+            
+            
             DamageFlash();
             GenerateDamageNumber(Damage, headshot);
         }
 
+        [ClientRpc]
+        void DisableHealthBarClientRpc()
+        {
+            
+
+            HealthCanvas.enabled = false;
+            ER.AI.enabled = false;
+
+            
+        }
 
         [ServerRpc(RequireOwnership = false)]
         public void KnockBackServerRpc(Vector3 playerPos, float KnockBack = 5)
@@ -149,7 +156,7 @@ namespace Project
         void FaceUIToPlayer()
         {
             HealthCanvas.transform.LookAt(cam.transform.position);
-            
+
         }
 
         void DamageFlash()
@@ -207,9 +214,25 @@ namespace Project
             {
                 Ded = true;
                 ER.animator.Play("Die", -1, 0);
+                ER.DissolveController.StartDissolve();
+                DisableHealthBarClientRpc();
+                
+
+               
+                Destroy(ER.navMeshAgent);
+                CancelInvoke("EnableNavMeshServerRpc");
+                Invoke("Delete", 4);
+                foreach (var item in colliders)
+                {
+                    item.enabled = false;
+                }
+                Destroy(GetComponent<NetworkRigidbody>());
+                Destroy(rb);
+
             }
             else
             {
+                
                 ER.navMeshAgent.enabled = false;
                 ER.animator.Play("Hit", -1, 0f);
                 ER.animator.applyRootMotion = false;

@@ -11,20 +11,23 @@ namespace Project
         private Camera cam;
         private Collider[] detected;
         public event Action<Collider> OnDetectedColliders;
+        public float ChargePercentage;
+        PlayerAttack PA;
 
         protected override void Start()
         {
             
             base.Start();
+            PA = GetComponent<PlayerAttack>();
             cam = Camera.main;
         }
 
         private void HandleAttackAction()
         {
-            
+            ChargePercentage = PA.ChargePercentage;
        
             //Debug.Log("Handle Attack Action");
-            detected = Physics.OverlapSphere(cam.transform.position, data.detectionRadius, data.DetectableLayers);
+            detected = Physics.OverlapSphere(cam.transform.position, data.detectionRadius* ChargePercentage, data.DetectableLayers);
 
             if (detected == null)
             {
@@ -36,6 +39,7 @@ namespace Project
                 
                 if(collider.tag != "Head")
                 {
+
                     OnDetectedColliders?.Invoke(collider);
                 }
                 

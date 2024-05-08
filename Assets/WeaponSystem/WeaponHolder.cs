@@ -17,6 +17,7 @@ namespace Project.Weapons
             get => currentAttackCounter;
             private set => currentAttackCounter = value >= Data.NumberOfAttacks ? 0  : value;
         }
+
         [SerializeField] List<WeaponComponent> components;
         public event Action OnExit;
         public event Action OnEnter;

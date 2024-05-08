@@ -8,17 +8,20 @@ namespace Project
     {
         private ActionRayCast rayCast;
         TakeDamage TD;
-
+        
         private void HandleColliderDetection(Collider collider)
         {
-            if(collider.tag == "Head")
+            
+
+            if (collider.tag == "Head")
             {
                 print("Head");
                 TD = collider.GetComponentInParent<TakeDamage>();
                 TD.DoDamageServerRpc(currentAttackData.DamageAmount, true);
+                TD.DisableNavMeshServerRpc();
                 if (collider.GetComponent<Rigidbody>() != null)
                 {
-                    TD.DisableNavMeshServerRpc();
+                    
                     TD.KnockBackServerRpc(Camera.main.transform.position, currentAttackData.KnockBackAmount);
                 }
                 
@@ -27,10 +30,11 @@ namespace Project
             {
                 TD =collider.GetComponent<TakeDamage>();
                 TD.DoDamageServerRpc(currentAttackData.DamageAmount);
+                TD.DisableNavMeshServerRpc();
                 if (collider.GetComponent<Rigidbody>() != null)
                 {
-                    TD.DisableNavMeshServerRpc();
-                    TD.KnockBackServerRpc(Camera.main.transform.position, currentAttackData.KnockBackAmount);
+                    
+                    TD.KnockBackServerRpc(Camera.main.transform.position,  currentAttackData.KnockBackAmount);
                 }
                     
 

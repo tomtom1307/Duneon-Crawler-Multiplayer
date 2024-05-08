@@ -11,6 +11,7 @@ namespace Project
         [HideInInspector]public NavMeshAgent navMeshAgent;
         [HideInInspector]public Animator animator;
         public EnemyAi AI;
+        public DissolveController DissolveController;
 
         [Header("Stats")]
 
@@ -19,6 +20,7 @@ namespace Project
         private void Awake()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
+            DissolveController = GetComponent<DissolveController>();
             animator = GetComponent<Animator>();
             AI = GetComponent<EnemyAi>();
         }

@@ -146,12 +146,12 @@ PrefabInstance:
     - target: {fileID: 4474761175605256462, guid: 9431b1ce2f00b574a9377690d3932065,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.23
+      value: -20.76
       objectReference: {fileID: 0}
     - target: {fileID: 4474761175605256462, guid: 9431b1ce2f00b574a9377690d3932065,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.819986
+      value: -6.149986
       objectReference: {fileID: 0}
     - target: {fileID: 4474761175605256462, guid: 9431b1ce2f00b574a9377690d3932065,
         type: 3}
@@ -446,7 +446,7 @@ PrefabInstance:
     - target: {fileID: 4474761175605256462, guid: 9431b1ce2f00b574a9377690d3932065,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.82
+      value: -6.15
       objectReference: {fileID: 0}
     - target: {fileID: 4474761175605256462, guid: 9431b1ce2f00b574a9377690d3932065,
         type: 3}
@@ -775,7 +775,7 @@ GameObject:
   - component: {fileID: 828308229}
   - component: {fileID: 828308228}
   - component: {fileID: 828308227}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -812,7 +812,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -880,7 +880,7 @@ GameObject:
   - component: {fileID: 879281083}
   - component: {fileID: 879281080}
   - component: {fileID: 879281082}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -901,9 +901,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 6303861101246749147, guid: 6e60731a23a35cb4fad62e695abc6935, type: 3}
-  SpawnDelay: 1
+  SpawnDelay: 4
   SpawnRange: 10
-  spawnAmount: 3
+  spawnAmount: 4
 --- !u!4 &879281081
 Transform:
   m_ObjectHideFlags: 0
@@ -969,16 +969,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 179622748855082962, guid: 6e60731a23a35cb4fad62e695abc6935,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 179622748855082962, guid: 6e60731a23a35cb4fad62e695abc6935,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 861450129563983907, guid: 6e60731a23a35cb4fad62e695abc6935,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1038,6 +1028,21 @@ PrefabInstance:
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1128536629
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467531321482024765, guid: 6e60731a23a35cb4fad62e695abc6935,
+        type: 3}
+      propertyPath: m_ResetSeedOnPlay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467531321482024765, guid: 6e60731a23a35cb4fad62e695abc6935,
+        type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467531321482024765, guid: 6e60731a23a35cb4fad62e695abc6935,
+        type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1139,7 +1144,7 @@ PrefabInstance:
     - target: {fileID: 4474761175605256462, guid: 9431b1ce2f00b574a9377690d3932065,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.82
+      value: -6.15
       objectReference: {fileID: 0}
     - target: {fileID: 4474761175605256462, guid: 9431b1ce2f00b574a9377690d3932065,
         type: 3}
@@ -1638,6 +1643,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1882362570289342424, guid: 58d5af2ebcdbda54c830802a35599a17,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5074076691755384222, guid: 58d5af2ebcdbda54c830802a35599a17,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1692,6 +1702,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Electricity Explode
+      objectReference: {fileID: 0}
+    - target: {fileID: 5125635176976004437, guid: 58d5af2ebcdbda54c830802a35599a17,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6762,6 +6777,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623351260724698337, guid: e7848a2b43e2dab458db3b93ebb81616,
+        type: 3}
+      propertyPath: ChargeSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5851933013226556710, guid: e7848a2b43e2dab458db3b93ebb81616,
         type: 3}
