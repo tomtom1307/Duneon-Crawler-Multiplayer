@@ -39,11 +39,6 @@ namespace Project
             Room_Generator.RoomGen();
 
         }
-        public void GenSeed() 
-        {
-            StartCoroutine(Loading(HostGen));
-        }
-
 
         public void ReadSeed()
         {
@@ -58,8 +53,14 @@ namespace Project
 
         public IEnumerator Loading(Action methodName)
         {
-            yield return new WaitForSeconds(0.5f);
-            methodName();
+            while(GeneratedSeed.Value == 0)
+            {
+                yield return new WaitForSeconds(0.5f);
+            }
+                Debug.Log("Seed updated and Client called RoomGen. Seed: "+ GeneratedSeed.Value);
+                methodName();
+                yield return null;
+  
 
         }
 

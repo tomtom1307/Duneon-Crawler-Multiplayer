@@ -20,7 +20,7 @@ public class TestingNetcodeUI : MonoBehaviour
             Debug.Log("HOST");
             NetworkManager.Singleton.StartHost();
             PC.enabled = enabled;
-            Seeding.instance.GenSeed();
+            Seeding.instance.HostGen();
             Hide();
 
         });
