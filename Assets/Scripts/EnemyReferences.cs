@@ -10,6 +10,7 @@ namespace Project
     {
         [HideInInspector]public NavMeshAgent navMeshAgent;
         [HideInInspector]public Animator animator;
+        public EnemyAi AI;
 
         [Header("Stats")]
 
@@ -19,6 +20,7 @@ namespace Project
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             animator = GetComponent<Animator>();
+            AI = GetComponent<EnemyAi>();
         }
 
     }

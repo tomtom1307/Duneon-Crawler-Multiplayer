@@ -27,7 +27,7 @@ namespace Project
 
         private void Start()
         {
-            attackDistance = enemyReferences.navMeshAgent.stoppingDistance;
+            attackDistance = enemyReferences.navMeshAgent.stoppingDistance + 1;
             List<Object> list = FindObjectsOfType(typeof(PlayerMovement)).ToList();
             foreach (var item in list)
             {
@@ -48,6 +48,8 @@ namespace Project
                 if(inRange)
                 {
                     LookAtTarget();
+                    if(!enemyReferences.animator.GetBool("Attacking")) enemyReferences.animator.SetBool("Attacking", true); 
+
                 }
                 else
                 {
@@ -56,6 +58,12 @@ namespace Project
                 }
             }
         }
+
+        private void AttackExit()
+        {
+            enemyReferences.animator.SetBool("Attacking", false);
+        }
+
 
 
         private Transform DetectPlayer()

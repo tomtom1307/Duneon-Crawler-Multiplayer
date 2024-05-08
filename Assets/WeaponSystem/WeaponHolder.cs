@@ -26,7 +26,7 @@ namespace Project.Weapons
         public GameObject baseGO { get; private set; }
         public AnimationEventHandler eventHandler { get; private set; }
         private int currentAttackCounter;
-
+        public VFXHandler visualAttacks;
         private Timer attackCounterResetTimer;
 
 
@@ -34,6 +34,7 @@ namespace Project.Weapons
         private void Awake()
         {
             components = GetComponents<WeaponComponent>().ToList();
+            
             baseGO = transform.Find("Base").gameObject;
             eventHandler = baseGO.GetComponent<AnimationEventHandler>();
             anim = GetComponentInChildren<Animator>();
@@ -56,6 +57,7 @@ namespace Project.Weapons
 
         public void Enter()
         {
+            visualAttacks = GetComponentInChildren<VFXHandler>();
             anim.SetBool("active", true);
             anim.SetInteger("counter", CurrentAttackCounter);
             attackCounterResetTimer.StopTimer();

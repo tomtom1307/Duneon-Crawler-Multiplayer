@@ -26,7 +26,7 @@ namespace Project
         public Color NormalColor;
         public GameObject damageText;
         public bool SkinnedMesh;
-
+        bool Ded;
         MeshRenderer meshRenderer;
         SkinnedMeshRenderer SkinmeshRenderer;
         [SerializeField] Material[] origColors;
@@ -38,6 +38,7 @@ namespace Project
 
         private void Start()
         {
+            Ded = false;
             rb = GetComponent<Rigidbody>();
             if(GetComponent<EnemyReferences>() != null )
             {
@@ -97,11 +98,23 @@ namespace Project
         {
             if (headshot) Damage *= 2;
             _health.Value -= Damage;
-            if (SkinnedMesh)
+            if (SkinnedMesh && _health.Value <= 0)
+            {
+                
+                Die();
+            }
                 
             
             HandleLocalVisualsClientRpc(Damage, headshot);
             
+        }
+
+        public void Die()
+        {
+            ER.AI.enabled = false;
+            Destroy(ER.navMeshAgent);
+            CancelInvoke("EnableNavMeshServerRpc");
+            Invoke("Delete", 4);
         }
 
 
@@ -180,17 +193,34 @@ namespace Project
         {
             ER.navMeshAgent.enabled = true;
             ER.animator.applyRootMotion = true;
-            ER.animator.ResetTrigger("Hit");
+            
         }
 
         [ServerRpc(RequireOwnership = false)]
         public void DisableNavMeshServerRpc()
         {
-            if (!SkinnedMesh) return;
-            ER.navMeshAgent.enabled = false;
-            ER.animator.applyRootMotion = false;
-            Invoke("EnableNavMeshServerRpc", 1f);
-            ER.animator.SetTrigger("Hit");
+            if (!SkinnedMesh || Ded) return;
+
+            
+
+            if (_health.Value <= 0 )
+            {
+                Ded = true;
+                ER.animator.Play("Die", -1, 0);
+            }
+            else
+            {
+                ER.navMeshAgent.enabled = false;
+                ER.animator.Play("Hit", -1, 0f);
+                ER.animator.applyRootMotion = false;
+                Invoke("EnableNavMeshServerRpc", 1f);
+            }
+            
+        }
+
+        public void Delete()
+        {
+            Destroy(gameObject);
         }
 
 
