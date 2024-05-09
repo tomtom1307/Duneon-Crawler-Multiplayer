@@ -37,7 +37,6 @@ namespace Project
             Random.InitState(CurrentSeed);
             GeneratedSeed.Value = CurrentSeed;
             Room_Generator.RoomGen();
-
         }
 
         public void ReadSeed()

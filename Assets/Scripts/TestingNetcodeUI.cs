@@ -4,6 +4,7 @@ using Project;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class TestingNetcodeUI : MonoBehaviour
 {
@@ -16,22 +17,22 @@ public class TestingNetcodeUI : MonoBehaviour
     {
         PC.enabled = false;
         startHostButton.onClick.AddListener(() =>
-        {
+        {   
+            Hide();
             Debug.Log("HOST");
             NetworkManager.Singleton.StartHost();
             PC.enabled = enabled;
-            Seeding.instance.HostGen();
-            Hide();
-
+            try{Seeding.instance.HostGen();}
+            catch(Exception e){Debug.Log("Could not call RoomGen: " + e.ToString());}
+            
         });
         startClientButton.onClick.AddListener(() =>
         {
+            Hide();
             Debug.Log("Client");
             NetworkManager.Singleton.StartClient();
             Seeding.instance.ReadSeed();
             PC.enabled = enabled;
-            
-            Hide();
         });
     }
 
