@@ -50,17 +50,26 @@ namespace Project
             Room_Generator.RoomGen();
         }
 
+        public void NoRoomGen()
+        {
+            GeneratedSeed.Value = 0;
+        }
         public IEnumerator Loading(Action methodName)
         {
-            while(GeneratedSeed.Value == 0)
+            float f = 0f; //Kill coroutine after 10s wait
+            while(GeneratedSeed.Value == 0 && f < 10f)
             {
                 yield return new WaitForSeconds(0.5f);
+                f = f + 0.5f;
             }
-                Debug.Log("Seed updated and Client called RoomGen. Seed: "+ GeneratedSeed.Value);
-                methodName();
-                yield return null;
-  
+                if (f < 10f)
+                {
+                    Debug.Log("Seed updated and Client called RoomGen. Seed: "+ GeneratedSeed.Value);
+                    methodName();
+                }
+                else{Debug.Log("Seed did not update. RoomGen cancelled.");}
 
+                yield return null;
         }
 
     }

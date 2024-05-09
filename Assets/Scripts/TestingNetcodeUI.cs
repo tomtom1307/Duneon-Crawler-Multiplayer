@@ -23,7 +23,12 @@ public class TestingNetcodeUI : MonoBehaviour
             NetworkManager.Singleton.StartHost();
             PC.enabled = enabled;
             try{Seeding.instance.HostGen();}
-            catch(Exception e){Debug.Log("Could not call RoomGen: " + e.ToString());}
+            catch(Exception e)
+            {
+                Debug.Log("Could not call HostGen: " + e.ToString());
+                Debug.Log("Setting seed to 0");
+                Seeding.instance.NoRoomGen();
+            }
             
         });
         startClientButton.onClick.AddListener(() =>
@@ -31,8 +36,9 @@ public class TestingNetcodeUI : MonoBehaviour
             Hide();
             Debug.Log("Client");
             NetworkManager.Singleton.StartClient();
-            Seeding.instance.ReadSeed();
             PC.enabled = enabled;
+            try{Seeding.instance.ReadSeed();}
+            catch(Exception e){Debug.Log("Could not call ReadSeed: " + e.ToString());}
         });
     }
 
