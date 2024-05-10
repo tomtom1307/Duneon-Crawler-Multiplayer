@@ -2785,7 +2785,7 @@ GameObject:
   - component: {fileID: 7767700700273684900}
   m_Layer: 0
   m_Name: Mage
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2846,7 +2846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 936891590
+  GlobalObjectIdHash: 580854907
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -2867,7 +2867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 100
-  sprintSpeed: 150
+  sprintSpeed: 180
   climbSpeed: 50
   crouchSpeed: 90
   crouchYScale: 0.3
@@ -2886,8 +2886,11 @@ MonoBehaviour:
     m_Bits: 64
   grounded: 0
   climbing: 0
+  landed: 0
+  relLandingVel: 0
   maxSlopeAngle: 30
   orientation: {fileID: 5194943807187523446}
+  rb: {fileID: 0}
   state: 0
   MC: {fileID: 0}
   SphereRadius: 0.25

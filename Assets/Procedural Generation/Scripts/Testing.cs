@@ -12,6 +12,7 @@ namespace Project
         public float CellSize;
         public int width;
         public int height;
+        public bool ShowGrid;
         public Grid grid;
         
         // Start is called before the first frame update
@@ -22,7 +23,7 @@ namespace Project
 
         public void GenerateGrid()
         {
-            grid = new Grid(width, height, CellSize);
+            grid = new Grid(width, height, CellSize, ShowGrid);
         }
 
         

@@ -2496,7 +2496,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7766139118766102367
 Transform:
   m_ObjectHideFlags: 0
@@ -3238,7 +3238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5403634427677182867
 Transform:
   m_ObjectHideFlags: 0
@@ -5230,7 +5230,6 @@ GameObject:
   m_Component:
   - component: {fileID: 745567746609117687}
   - component: {fileID: 8879037854611056185}
-  - component: {fileID: 7971318797644256434}
   - component: {fileID: 196390493238104077}
   m_Layer: 0
   m_Name: ColliderBox
@@ -5262,27 +5261,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9023619706582627866}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &7971318797644256434
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9023619706582627866}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &196390493238104077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5295,6 +5273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b22530f8dcd9e4ba67a7a204423228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boxcol: {fileID: 0}
 --- !u!1 &9037733180156315474
 GameObject:
   m_ObjectHideFlags: 0

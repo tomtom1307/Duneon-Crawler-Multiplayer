@@ -1,3 +1,4 @@
+using Project;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -9,6 +10,8 @@ public class PlayerCam : MonoBehaviour
 
     public float sensitivity;
     public Transform orientation;
+    CamAnimations camAnim;
+    public Transform camHolder;
 
     float xRot;
     float yRot;
@@ -16,7 +19,7 @@ public class PlayerCam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        camAnim = GetComponent<CamAnimations>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -34,7 +37,18 @@ public class PlayerCam : MonoBehaviour
 
         xRot = Mathf.Clamp(xRot, -90f, 90f);
 
-        transform.rotation = Quaternion.Euler(xRot, yRot, 0);
+        camHolder.rotation = Quaternion.Euler(xRot, yRot, 0);
         orientation.rotation = Quaternion.Euler(0, yRot, 0);
     }
+
+    private void OnDisable()
+    {
+        camAnim.enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        camAnim.enabled = true;
+    }
+
 }

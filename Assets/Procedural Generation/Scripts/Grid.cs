@@ -10,16 +10,20 @@ namespace Project
     {
         public int width;
         public int height;
+        
         private float cellSize;
         int[,] gridArray;
+        bool gridImage;
         private TextMesh[,] textvalues;
         public List<Vector2> bounds;
 
-        public Grid(int width, int height, float cellSize)
+        public Grid(int width, int height, float cellSize, bool GridImage)
         {
             this.width = width;
             this.height = height;
             this.cellSize = cellSize;
+            this.gridImage = GridImage;
+
             
 
             //+2 to add boundary around the grid to catch edge cases
@@ -30,10 +34,16 @@ namespace Project
             {
                 for (int y = 0; y < gridArray.GetLength(1); y++)
                 {
-                    textvalues[x,y] = UtilsClass.CreateWorldText(gridArray[x, y].ToString(), null, GetWorldPos(x, y)+new Vector3(cellSize,0,cellSize)/2, 20, Color.white, TextAnchor.MiddleCenter);
-                    textvalues[x,y].transform.rotation = Quaternion.Euler(90, 0, 0);
-                    Debug.DrawLine(GetWorldPos(x, y), GetWorldPos(x + 1, y), Color.white, 100f);
-                    Debug.DrawLine(GetWorldPos(x, y), GetWorldPos(x, y+1), Color.white, 100f);
+                    if (gridImage)
+                    {
+                        textvalues[x, y] = UtilsClass.CreateWorldText(gridArray[x, y].ToString(), null, GetWorldPos(x, y) + new Vector3(cellSize, 0, cellSize) / 2, 20, Color.white, TextAnchor.MiddleCenter);
+                        textvalues[x, y].transform.rotation = Quaternion.Euler(90, 0, 0);
+                        Debug.DrawLine(GetWorldPos(x, y), GetWorldPos(x + 1, y), Color.white, 100f);
+                        Debug.DrawLine(GetWorldPos(x, y), GetWorldPos(x, y + 1), Color.white, 100f);
+                    }
+                    
+                    
+                   
                     if(x == 0 || y == 0 || x == width-1|| y == height-1)
                     {
                         SetVal(x, y, 5);
@@ -42,8 +52,12 @@ namespace Project
                     
                 }
             }
-            Debug.DrawLine(GetWorldPos(0, height), GetWorldPos(width, height), Color.white, 100f);
-            Debug.DrawLine(GetWorldPos(width, 0), GetWorldPos(width, height), Color.white, 100f);
+            if (GridImage)
+            {
+                Debug.DrawLine(GetWorldPos(0, height), GetWorldPos(width, height), Color.white, 100f);
+                Debug.DrawLine(GetWorldPos(width, 0), GetWorldPos(width, height), Color.white, 100f);
+            }
+            
 
 
             
@@ -66,7 +80,11 @@ namespace Project
             if (x >= 0 && y >= 0 && x < width && y < height)
             {
                 gridArray[x, y] = value;
-                textvalues[x, y].text = gridArray[x, y].ToString();
+                if (gridImage)
+                {
+                    textvalues[x, y].text = gridArray[x, y].ToString();
+                }
+                
             }
         }
 
@@ -80,8 +98,8 @@ namespace Project
 
         public int GetVal(int x, int y)
         {
-            string val = textvalues[x, y].text;
-            return int.Parse(val);
+            int val = gridArray[x, y];
+            return val;
         }
 
 

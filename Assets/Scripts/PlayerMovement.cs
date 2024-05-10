@@ -40,6 +40,8 @@ public class PlayerMovement: NetworkBehaviour
     public LayerMask whatIsGround;
     public bool grounded;
     public bool climbing;
+    public bool landed;
+    public float relLandingVel;
     bool exitingslope;
 
     [Header("Slope handling")]
@@ -53,7 +55,7 @@ public class PlayerMovement: NetworkBehaviour
 
     Vector3 moveDirection;
 
-    Rigidbody rb;
+    public Rigidbody rb;
 
     public MovementState state;
     public MoveCam MC;
@@ -104,7 +106,7 @@ public class PlayerMovement: NetworkBehaviour
         }
 
         //Sprinting
-        else if (grounded && Input.GetKey(sprintKey)&& Input.GetKey(forwardKey) )
+        else if (grounded && Input.GetKey(sprintKey))
         {
            
             state = MovementState.sprinting;
@@ -133,6 +135,22 @@ public class PlayerMovement: NetworkBehaviour
             state = MovementState.air;
         }
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 6)
+        {
+            landed = true;
+            relLandingVel = collision.relativeVelocity.y;
+            Invoke("resetLanded", 0.3f);
+        }
+        else landed = false;
+    }
+
+    public void resetLanded()
+    {
+        landed = false;
     }
 
     private void Start()

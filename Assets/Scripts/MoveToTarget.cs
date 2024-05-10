@@ -11,7 +11,7 @@ namespace Project
         public GameObject onDestroySpawn;
         public void Update()
         {
-            transform.position = Vector3.Lerp(transform.position, target, 0.1f);
+            transform.position = Vector3.Lerp(transform.position, target, 0.2f);
             
             if (Vector3.Distance(transform.position, target) < 1) 
             {
