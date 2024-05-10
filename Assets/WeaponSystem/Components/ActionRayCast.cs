@@ -37,6 +37,7 @@ namespace Project
                     target = hit.point;
                 }
                 weapon.visualAttacks.Attack1(target);
+                
                 return;
             }
             weapon.visualAttacks.Attack1(hit.point);

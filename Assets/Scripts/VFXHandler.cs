@@ -25,6 +25,15 @@ namespace Project
             
         }
 
+        public void Attack2(float Scale)
+        {
+            Visual = Instantiate(Attack2PS, EffectOrigin.position-Vector3.up, Quaternion.Euler(-90,0,0));
+            Visual.transform.localScale = Scale * Vector3.one;
+            Destroy(Visual,4);
+
+        }
+
+
         private void Update()
         {
 

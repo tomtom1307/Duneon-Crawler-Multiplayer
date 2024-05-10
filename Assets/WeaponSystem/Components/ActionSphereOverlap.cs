@@ -25,10 +25,10 @@ namespace Project
         private void HandleAttackAction()
         {
             ChargePercentage = PA.ChargePercentage;
-       
+            weapon.visualAttacks.Attack2(ChargePercentage);
             //Debug.Log("Handle Attack Action");
             detected = Physics.OverlapSphere(cam.transform.position, data.detectionRadius* ChargePercentage, data.DetectableLayers);
-
+            
             if (detected == null)
             {
                 return;
@@ -37,9 +37,9 @@ namespace Project
             foreach (Collider collider in detected)
             {
                 
-                if(collider.tag != "Head")
+                if (collider.tag != "Head")
                 {
-
+                    
                     OnDetectedColliders?.Invoke(collider);
                 }
                 
