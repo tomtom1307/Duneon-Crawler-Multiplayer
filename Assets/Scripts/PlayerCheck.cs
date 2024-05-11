@@ -14,12 +14,13 @@ namespace Project
         {
             GameObject otherobject = other.gameObject;
             Debug.Log("Player entered room.");
-            if (otherobject.CompareTag("Player") && !playersIn.Contains(otherobject))
+            if (!playersIn.Contains(otherobject))
             {
                 playersIn.Add(otherobject);
             }
             if (playersIn.Count == PlayersNeeded)
             {
+                Debug.Log("Room occupation condition satisfied.");
                 //Close room and start interactions
             }
         }
@@ -27,10 +28,7 @@ namespace Project
         private void OnTriggerExit(Collider other) 
         {
             GameObject otherobject = other.gameObject;
-            if (otherobject.CompareTag("Player") )
-            {
-                playersIn.Remove(otherobject);
-            }
+            playersIn.Remove(otherobject);
         }
     }
 }
