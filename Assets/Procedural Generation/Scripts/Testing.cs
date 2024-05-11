@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
 using UnityEngine.Diagnostics;
+using static UnityEngine.GraphicsBuffer;
+using UnityEditor;
 
 namespace Project
 {
@@ -13,19 +15,18 @@ namespace Project
         public int width;
         public int height;
         public bool ShowGrid;
+        public float VertOffset;
         public Grid grid;
         
         // Start is called before the first frame update
-        void Start()
-        {
-            
-        }
+        
 
         public void GenerateGrid()
         {
-            grid = new Grid(width, height, CellSize, ShowGrid);
+            grid = new Grid(width, height, CellSize, ShowGrid, VertOffset);
         }
 
-        
+
+
     }
 }

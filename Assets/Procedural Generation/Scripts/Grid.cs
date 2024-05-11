@@ -12,18 +12,19 @@ namespace Project
         public int height;
         
         private float cellSize;
+        private float VertOffset;
         int[,] gridArray;
         bool gridImage;
         private TextMesh[,] textvalues;
         public List<Vector2> bounds;
 
-        public Grid(int width, int height, float cellSize, bool GridImage)
+        public Grid(int width, int height, float cellSize, bool GridImage, float VertOffset)
         {
             this.width = width;
             this.height = height;
             this.cellSize = cellSize;
             this.gridImage = GridImage;
-
+            this.VertOffset = VertOffset;
             
 
             //+2 to add boundary around the grid to catch edge cases
@@ -65,7 +66,7 @@ namespace Project
 
         public Vector3 GetWorldPos(int x, int y)
         {
-            return new Vector3(x, 0, y) * cellSize;
+            return new Vector3(x, VertOffset, y) * cellSize;
         }
 
 

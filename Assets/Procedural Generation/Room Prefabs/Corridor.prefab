@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1656391253689652077}
   - component: {fileID: 5105748420973069568}
   - component: {fileID: 3070002475384149146}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 8136887661116614501}
   - component: {fileID: 4999716749659021589}
   - component: {fileID: 5834104586025465956}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 3327509711646506796}
   - component: {fileID: 5306689703158653192}
   - component: {fileID: 1874295553503059330}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 3420824154206914566}
   - component: {fileID: 1046615940884213543}
   - component: {fileID: 6858639626772319701}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +410,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1871535615658479348}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 9089912873824316160}
   - component: {fileID: 4052756883394823363}
   - component: {fileID: 8577416902416087748}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ceiling.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -549,8 +549,7 @@ GameObject:
   - component: {fileID: 2814219366755634281}
   - component: {fileID: 1198456747030840268}
   - component: {fileID: 3982643622857242374}
-  - component: {fileID: 2523968758949717865}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Corridor1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -627,27 +626,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2523968758949717865
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3190181543172560595}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.02, y: 0.019999996, z: 0.02218011}
-  m_Center: {x: 0, y: 0, z: 0.0010900574}
 --- !u!1 &3947062380832692262
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,7 +637,7 @@ GameObject:
   - component: {fileID: 4064899699630014195}
   - component: {fileID: 7239503400171869706}
   - component: {fileID: 4736188819383258479}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -740,7 +718,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3532605840863566321}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -772,7 +750,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6704409527627970656}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -806,7 +784,7 @@ GameObject:
   - component: {fileID: 6899042163028529946}
   - component: {fileID: 624631993188413379}
   - component: {fileID: 5632201717567178656}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -890,7 +868,7 @@ GameObject:
   - component: {fileID: 2532267243980014671}
   - component: {fileID: 8723155568016120221}
   - component: {fileID: 1465779562347777002}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -996,7 +974,7 @@ GameObject:
   - component: {fileID: 3300256554359442411}
   - component: {fileID: 7879095194110260451}
   - component: {fileID: 4540980420088183098}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1087,7 +1065,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &8767618854634293907
@@ -1101,7 +1079,7 @@ GameObject:
   - component: {fileID: 7711298664668822091}
   - component: {fileID: 2270816143631557681}
   - component: {fileID: 806101347902450672}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Corridor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1172,7 +1150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 515344849837045101}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1206,7 +1184,7 @@ GameObject:
   - component: {fileID: 1465779280554368747}
   - component: {fileID: 2364157065409048604}
   - component: {fileID: 461306345298496943}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}

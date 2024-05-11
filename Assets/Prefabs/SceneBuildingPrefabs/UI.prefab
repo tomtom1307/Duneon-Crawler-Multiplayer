@@ -1654,6 +1654,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1263705746547377103}
+  - component: {fileID: 1558040871970137428}
   - component: {fileID: 7913001950549805607}
   m_Layer: 5
   m_Name: Testing NetCode UI
@@ -1684,6 +1685,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1558040871970137428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590927598039635152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1286103723
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 0
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &7913001950549805607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1699,6 +1720,8 @@ MonoBehaviour:
   startHostButton: {fileID: 298696637806070072}
   startClientButton: {fileID: 7450292920292810460}
   PC: {fileID: 0}
+  playerNum:
+    m_InternalValue: 0
 --- !u!1 &1746022897170976328
 GameObject:
   m_ObjectHideFlags: 0
@@ -5407,6 +5430,7 @@ GameObject:
   - component: {fileID: 6293200229370918955}
   - component: {fileID: 7758133820739752323}
   - component: {fileID: 8145911336077223705}
+  - component: {fileID: 1407210737601649434}
   - component: {fileID: 4524856353322509746}
   m_Layer: 5
   m_Name: Canvas
@@ -5500,6 +5524,26 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1407210737601649434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846122962680394502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1805576805
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &4524856353322509746
 MonoBehaviour:
   m_ObjectHideFlags: 0

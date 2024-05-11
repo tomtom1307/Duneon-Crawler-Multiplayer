@@ -1,9 +1,10 @@
 using Project.Weapons;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerUI : MonoBehaviour
+public class PlayerUI : NetworkBehaviour
 {
     public GameObject Inventory;
     public PlayerAttack PA;

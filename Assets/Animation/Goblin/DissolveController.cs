@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.VFX;
 
 namespace Project
 {
-    public class DissolveController : MonoBehaviour
+    public class DissolveController : NetworkBehaviour
     {
         public List<SkinnedMeshRenderer> skinnedMeshRenderers = new List<SkinnedMeshRenderer>();
         public List<Material> materials;
@@ -43,7 +44,8 @@ namespace Project
             
         }
 
-        public void StartDissolve()
+        [ClientRpc]
+        public void StartDissolveClientRpc()
         {
             StartCoroutine(Dissolve());
         }

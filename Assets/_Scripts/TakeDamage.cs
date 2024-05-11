@@ -214,7 +214,7 @@ namespace Project
             {
                 Ded = true;
                 ER.animator.Play("Die", -1, 0);
-                ER.DissolveController.StartDissolve();
+                ER.DissolveController.StartDissolveClientRpc();
                 DisableHealthBarClientRpc();
                 
 
