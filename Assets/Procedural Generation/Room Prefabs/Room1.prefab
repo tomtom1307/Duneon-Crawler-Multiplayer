@@ -5231,6 +5231,7 @@ GameObject:
   - component: {fileID: 745567746609117687}
   - component: {fileID: 8879037854611056185}
   - component: {fileID: 196390493238104077}
+  - component: {fileID: 601244656749372566}
   m_Layer: 0
   m_Name: ColliderBox
   m_TagString: Untagged
@@ -5273,7 +5274,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b22530f8dcd9e4ba67a7a204423228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxcol: {fileID: 0}
+  playersIn: []
+  PlayersNeeded: 0
+--- !u!65 &601244656749372566
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9023619706582627866}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 1024
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9037733180156315474
 GameObject:
   m_ObjectHideFlags: 0
