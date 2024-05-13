@@ -2866,10 +2866,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a8cd39ebce9e44fb34319e19635b4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 100
+  walkSpeed: 180
   sprintSpeed: 180
   climbSpeed: 50
-  crouchSpeed: 90
+  crouchSpeed: 140
   crouchYScale: 0.3
   groundDrag: 1.6
   jumpForce: 620
@@ -2877,7 +2877,7 @@ MonoBehaviour:
   airMultiplier: 0.1
   PlayerMat: {fileID: 0}
   jumpKey: 32
-  sprintKey: 304
+  sprintKey: 0
   forwardKey: 119
   crouchKey: 306
   playerHeight: 1.5
