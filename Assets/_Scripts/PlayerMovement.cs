@@ -50,8 +50,8 @@ public class PlayerMovement: NetworkBehaviour
 
     public Transform orientation;
 
-    float horizontalInput;
-    float verticalInput;
+    public float horizontalInput;
+    public float verticalInput;
 
     Vector3 moveDirection;
 

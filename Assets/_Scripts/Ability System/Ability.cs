@@ -9,8 +9,11 @@ public class Ability : ScriptableObject
     public float coolDownTime;
     public float activeTime;
 
-    public virtual void Activate()
-    {
 
+    
+
+    public virtual void Activate(GameObject parent, out bool fail)
+    {
+        fail = false;
     }
 }

@@ -33,10 +33,10 @@ public class HandleCam : NetworkBehaviour
                 //}
                 PlayerWeapon.SetActive(false);
             }
-            
-            
-            
-           
+
+
+
+            MC.enabled = true;
             PM.SetActive(false);
             
             

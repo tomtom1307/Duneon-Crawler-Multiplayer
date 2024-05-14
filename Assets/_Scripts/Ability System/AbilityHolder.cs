@@ -1,12 +1,15 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AbilityHolder : MonoBehaviour
 {
     public Ability ability;
     float cooldownTime;
     float activeTime;
+    public Image UIFill;
 
     enum AbilityState
     {
@@ -17,6 +20,12 @@ public class AbilityHolder : MonoBehaviour
     AbilityState state = AbilityState.ready;
 
     public KeyCode key;
+    bool Fail;
+    float maxCooldownVal;
+    private void Start()
+    {
+        maxCooldownVal = ability.coolDownTime;
+    }
 
     // Update is called once per frame
     void Update()
@@ -26,9 +35,11 @@ public class AbilityHolder : MonoBehaviour
             case AbilityState.ready:
                 if (Input.GetKeyDown(key))
                 {
-                    ability.Activate();
+                    ability.Activate(gameObject, out Fail);
+                    if (Fail) return;
                     state = AbilityState.active;
                     activeTime = ability.activeTime;
+                    
                 }
                 break;
             case AbilityState.active:
@@ -39,11 +50,14 @@ public class AbilityHolder : MonoBehaviour
                 else
                 {
                     state = AbilityState.cooldown;
+                    UIFill.fillAmount = 
                     cooldownTime = ability.coolDownTime;
                 }
             break;
             case AbilityState.cooldown:
-                if(cooldownTime > 0) {  cooldownTime -= Time.deltaTime; }
+                if(cooldownTime > 0) {  cooldownTime -= Time.deltaTime;
+                    UIFill.fillAmount = 1-(cooldownTime / maxCooldownVal);
+                }
                 else { state = AbilityState.ready; }
             break;
         }

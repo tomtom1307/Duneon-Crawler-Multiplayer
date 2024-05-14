@@ -19,7 +19,7 @@ public class PlayerCam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        camAnim = GetComponent<CamAnimations>();
+        
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -48,6 +48,7 @@ public class PlayerCam : MonoBehaviour
 
     private void OnEnable()
     {
+        camAnim = GetComponent<CamAnimations>();
         camAnim.enabled = true;
     }
 

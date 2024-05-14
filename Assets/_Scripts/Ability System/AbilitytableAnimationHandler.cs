@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Abilitytable : MonoBehaviour
+public class AbilitytableAnimationHandler : MonoBehaviour
 {
     Animator anim;
     private void Start()
