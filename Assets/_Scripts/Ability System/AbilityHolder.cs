@@ -1,10 +1,11 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AbilityHolder : MonoBehaviour
+public class AbilityHolder : NetworkBehaviour
 {
     public Ability ability;
     float cooldownTime;
@@ -24,6 +25,7 @@ public class AbilityHolder : MonoBehaviour
     float maxCooldownVal;
     private void Start()
     {
+       
         maxCooldownVal = ability.coolDownTime;
     }
 

@@ -24,12 +24,20 @@ namespace Project.Weapons
 
 
         public Animator anim;
+        public float Cooldown = 0.2f;
         public GameObject baseGO { get; private set; }
         public AnimationEventHandler eventHandler { get; private set; }
         private int currentAttackCounter;
         public VFXHandler visualAttacks;
         private Timer attackCounterResetTimer;
-
+        private int CurrentAttack;
+        public enum AttackState
+        {
+            ready,
+            active,
+            coolDown
+        }
+        [SerializeField] public AttackState State = AttackState.ready;
 
 
         private void Awake()
@@ -56,31 +64,66 @@ namespace Project.Weapons
         private void ResetAttackCounter() => CurrentAttackCounter = 0;
 
 
-        public void Enter()
-        {
-            visualAttacks = GetComponentInChildren<VFXHandler>();
-            anim.SetBool("active", true);
-            anim.SetInteger("counter", CurrentAttackCounter);
-            attackCounterResetTimer.StopTimer();
 
-            OnEnter?.Invoke();
+
+        public void Enter(int attack)
+        {
+
+            if(State == AttackState.active|| State == AttackState.coolDown)
+            {
+                return;
+            }
+
+            switch (attack)
+            {
+                
+                case (1):
+                {
+                        Cooldown = Data.Attack1Cooldown;
+                        State = AttackState.active;
+                        visualAttacks = GetComponentInChildren<VFXHandler>();
+                        anim.SetBool("active", true);
+                        anim.SetInteger("counter", CurrentAttackCounter);
+                        attackCounterResetTimer.StopTimer();
+
+                        OnEnter?.Invoke();
+                        break;
+                }
+
+                case (2):
+                    {
+                        Cooldown = Data.Attack2Cooldown;
+                        State = AttackState.active;
+                        anim.SetBool("Secondary", true);
+                        anim.SetBool("active", true);
+                        break;
+                    }
+                
+
+            }
+
+            
         }
 
-        public void EnterSecondaryAttack()
-        {
-            anim.SetBool("Secondary", true);
-            anim.SetBool("active", true);
-        }
 
 
         public void Exit()
         {
+            StartCoroutine(cooldown(Cooldown));
             anim.SetBool("active", false);
             anim.SetBool("Secondary", false);
-            anim.SetBool("SecondaryRelease", false);
             CurrentAttackCounter++;
             attackCounterResetTimer.StartTimer();
+
             OnExit?.Invoke();
+        }
+
+        IEnumerator cooldown(float cooldown)
+        {
+            State = AttackState.coolDown;
+            yield return new WaitForSeconds(cooldown);
+            State = AttackState.ready;
+            yield return null;
         }
 
         private void OnEnable()
@@ -102,6 +145,9 @@ namespace Project.Weapons
                 item.enabled = false;
             }
             anim.SetBool("active", false);
+            anim.SetBool("Secondary", false);
+            anim.SetBool("SecondaryRelease", false);
+            State = AttackState.ready;
             attackCounterResetTimer.OntimerDone -= ResetAttackCounter;
             eventHandler.OnFinish -= Exit;
         }

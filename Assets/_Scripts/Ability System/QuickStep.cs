@@ -18,7 +18,7 @@ namespace Project
         {
             
             PlayerMovement movement = parent.GetComponent<PlayerMovement>();
-            if (!movement.grounded)
+            if (!movement.grounded || (movement.verticalInput == 0 && movement.horizontalInput == 0) )
             {
                 fail = true;
                 return;

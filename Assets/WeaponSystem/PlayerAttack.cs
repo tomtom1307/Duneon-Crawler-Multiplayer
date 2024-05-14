@@ -25,35 +25,32 @@ public class PlayerAttack : NetworkBehaviour
         
     }
 
-    void Enter()
-    {
-        
-        weapon.Enter();
-        Attacking = true;
-    }
 
     private void Update()
     {
-        
-        
-        
-        if(Input.GetMouseButton(1))
+        if (weapon.State == WeaponHolder.AttackState.coolDown) return;
+
+        if (Input.GetMouseButtonUp(1))
         {
-            weapon.EnterSecondaryAttack();
+            weapon.anim.SetBool("SecondaryRelease", true);
+            Invoke("ResetCharge", 0.2f);
+        }
+
+        else if (Input.GetMouseButton(1))
+        {
+            weapon.Enter(2);
             ChargePercentage += (Time.deltaTime * ChargeSpeed);
             ChargePercentage = Mathf.Clamp(ChargePercentage, 0, 1);
-            StartCoroutine("Cooldown");
+            //StartCoroutine("Cooldown");
         }
-        else if(Input.GetMouseButtonUp(1))
-        {
-            Invoke("ResetCharge", 0.3f);
-            weapon.anim.SetBool("SecondaryRelease", true);
-        }
-        if (Attacking) return;
+
+        
+        
+        
         else if(Input.GetMouseButtonDown(0))
         {
-            StartCoroutine("Cooldown");
-            Enter();
+            //StartCoroutine("Cooldown");
+            weapon.Enter(1);
         }
         
     }
@@ -61,7 +58,7 @@ public class PlayerAttack : NetworkBehaviour
     public void ResetCharge()
     {
         ChargePercentage = 0;
-
+        weapon.anim.SetBool("SecondaryRelease", false);
     }
 
 

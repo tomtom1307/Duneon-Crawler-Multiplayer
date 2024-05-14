@@ -12,6 +12,8 @@ namespace Project
         [field: SerializeField] public GameObject Model{ get; private set; }
         [field: SerializeField] public Sprite InventorySprite{ get; private set; }
         [field: SerializeField] public SlotTag itemTag { get; private set; }
+        [field: SerializeField] public float Attack1Cooldown { get; private set; }
+        [field: SerializeField] public float Attack2Cooldown { get; private set; }
 
 
         [field: SerializeReference] public List<ComponentData> componentDatas { get; private set; }
