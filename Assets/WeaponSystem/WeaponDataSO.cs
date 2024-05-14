@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,16 @@ namespace Project
         [field: SerializeReference] public List<ComponentData> componentDatas { get; private set; }
 
 
+
         public T GetData<T>()
         {
             return componentDatas.OfType<T>().FirstOrDefault();
+        }
+
+
+        public List<Type> GetAllDependencies()
+        {
+            return componentDatas.Select(component => component.ComponentDependancy).ToList();
         }
 
         public void AddData(ComponentData data)
@@ -30,6 +38,9 @@ namespace Project
             
             componentDatas.Add(data);
         }
+
+
+
 
 
 

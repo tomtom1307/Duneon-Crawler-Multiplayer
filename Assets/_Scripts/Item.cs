@@ -1,3 +1,4 @@
+using Project;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,9 +14,10 @@ public class Item : ScriptableObject
     public Sprite sprite;
     public SlotTag itemTag;
     public Rarity rarity;
-
+    public WeaponDataSO weaponData;
 
     [Header("If the item can be equipped")]
     public GameObject prefab;
+    
 
 }

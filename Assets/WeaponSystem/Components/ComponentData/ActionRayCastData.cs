@@ -9,5 +9,11 @@ namespace Project
         [field: SerializeField] public LayerMask DetectableLayers{ get; private set; }
         [field: SerializeField] public float detectionRadius{ get; private set; }
         private Camera cam;  
+
+        public ActionRayCastData()
+        {
+            ComponentDependancy = typeof(ActionRayCast);
+        }
+
     }
 }

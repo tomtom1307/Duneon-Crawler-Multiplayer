@@ -45,7 +45,6 @@ public class PickUpItem : MonoBehaviour
         Color.red
     };
     Item item;
-    public bool PickupB = true;
     Light pointLight;
     public float total;
     public float randomVal;
@@ -87,8 +86,9 @@ public class PickUpItem : MonoBehaviour
 
     private void InitializeInventoryItem()
     {
-        item = new Item();
+        item = ScriptableObject.CreateInstance<Item>();
         item.name = WeaponData.name;
+        item.weaponData = WeaponData;
         item.sprite = WeaponData.InventorySprite;
         item.itemTag = WeaponData.itemTag;
         item.prefab = WeaponData.Model;
@@ -104,10 +104,8 @@ public class PickUpItem : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         prompt.enabled = true;
-        if (Input.GetKeyDown(PickUpKey)&&PickupB)
+        if (Input.GetKeyDown(PickUpKey))
         {
-
-            PickupB = false;
             Pickup();
         }
     }

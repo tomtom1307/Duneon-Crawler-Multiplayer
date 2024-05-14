@@ -21,6 +21,7 @@ namespace Project
             else
             {
                 TD = collider.GetComponent<TakeDamage>();
+                print(ChargePercentage + "+" + currentAttackData.DamageAmount);
                 TD.DoDamageServerRpc(ChargePercentage * currentAttackData.DamageAmount);
                 if(collider.GetComponent<Rigidbody>() != null)
                 {
@@ -33,24 +34,19 @@ namespace Project
 
         }
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
+            base.Start();
             PA = GetComponent<PlayerAttack>();
             sphereDetect = GetComponent<ActionSphereOverlap>();
-
-        }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-
             sphereDetect.OnDetectedColliders += HandleColliderDetection;
+
         }
 
-        protected override void OnDisable()
+
+        protected override void OnDestroy()
         {
-            base.OnDisable();
+            base.OnDestroy();
 
             sphereDetect.OnDetectedColliders -= HandleColliderDetection;
         }

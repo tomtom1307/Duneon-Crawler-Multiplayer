@@ -8,8 +8,13 @@ namespace Project
     [Serializable]
     public class SphereOverlapData : ComponentData<AttackOverlapSphere>
     {
-        [field: SerializeField] public LayerMask DetectableLayers{ get; private set; }
-        [field: SerializeField] public float detectionRadius{ get; private set; }
-        private Camera cam;  
+        [field: SerializeField] public LayerMask DetectableLayers { get; private set; }
+        [field: SerializeField] public float detectionRadius { get; private set; }
+        private Camera cam;
+
+        public SphereOverlapData()
+        {
+            ComponentDependancy = typeof(ActionSphereOverlap);
+        }
     }
 }

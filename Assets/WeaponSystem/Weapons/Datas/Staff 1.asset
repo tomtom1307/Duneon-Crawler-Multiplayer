@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac5988b9f2e739b4f9e903129079fe36, type: 3}
-  m_Name: Staff
+  m_Name: Staff 1
   m_EditorClassIdentifier: 
   <NumberOfAttacks>k__BackingField: 2
   <Model>k__BackingField: {fileID: 6236249103363093857, guid: cc20fb47e46a9664bb394ea8d6e24bda,
@@ -18,6 +18,8 @@ MonoBehaviour:
   <InventorySprite>k__BackingField: {fileID: 21300000, guid: 6625f37232fac6543a40987f7331ee3b,
     type: 3}
   <itemTag>k__BackingField: 5
+  <Attack1Cooldown>k__BackingField: 0.05
+  <Attack2Cooldown>k__BackingField: 0.4
   <componentDatas>k__BackingField:
   - rid: 1852571019049697289
   - rid: 1852571019049697290
@@ -29,6 +31,7 @@ MonoBehaviour:
     - rid: 1852571019049697289
       type: {class: ActionRayCastData, ns: Project, asm: Assembly-CSharp}
       data:
+        name: ActionRayCastData
         <AttackData>k__BackingField:
         - <Distance>k__BackingField: 30
         - <Distance>k__BackingField: 30
@@ -39,14 +42,16 @@ MonoBehaviour:
     - rid: 1852571019049697290
       type: {class: DamageData, ns: Project, asm: Assembly-CSharp}
       data:
+        name: DamageData
         <AttackData>k__BackingField:
-        - <DamageAmount>k__BackingField: 5
+        - <DamageAmount>k__BackingField: 2
           <KnockBackAmount>k__BackingField: 250
-        - <DamageAmount>k__BackingField: 5
+        - <DamageAmount>k__BackingField: 2
           <KnockBackAmount>k__BackingField: 250
     - rid: 1852571070197661696
       type: {class: SphereOverlapData, ns: Project, asm: Assembly-CSharp}
       data:
+        name: SphereOverlapData
         <AttackData>k__BackingField:
         - <Distance>k__BackingField: 10
         - <Distance>k__BackingField: 10
@@ -57,6 +62,7 @@ MonoBehaviour:
     - rid: 1852571070197661698
       type: {class: SecondaryDamageData, ns: Project, asm: Assembly-CSharp}
       data:
+        name: SecondaryDamageData
         <AttackData>k__BackingField:
         - <DamageAmount>k__BackingField: 15
           <KnockBackAmount>k__BackingField: 1000

@@ -112,12 +112,10 @@ GameObject:
   - component: {fileID: 3932703786218121955}
   - component: {fileID: 9094325716941969133}
   - component: {fileID: 7933067249557868530}
-  - component: {fileID: 1117192464046906947}
-  - component: {fileID: 3193599316881685199}
-  - component: {fileID: 192175712893229210}
   - component: {fileID: 5623351260724698337}
-  - component: {fileID: 5851933013226556710}
   - component: {fileID: 5315767015092318870}
+  - component: {fileID: 8225424130928824906}
+  - component: {fileID: 315796000840505260}
   m_Layer: 8
   m_Name: Hand
   m_TagString: Untagged
@@ -165,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1592143778
+  GlobalObjectIdHash: 38062932
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -185,50 +183,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193890aed4fbe6747ad36b684ca1dd74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Data>k__BackingField: {fileID: 11400000, guid: add5dbee431829242b4b7bb2dba5f28e,
-    type: 2}
   attackCounterResetCooldown: 1
   components: []
   anim: {fileID: 0}
+  Cooldown: 0.2
   visualAttacks: {fileID: 0}
---- !u!114 &1117192464046906947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2866492743846150649}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3572b085789fa864d8f987852c79e2dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3193599316881685199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2866492743846150649}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e752b47a60a305c40be6902cdc5a5e99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Headshot: 0
---- !u!114 &192175712893229210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2866492743846150649}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa2b2f8bb6e23fd43b2c24b411b3d556, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChargePercentage: 0
+  State: 0
 --- !u!114 &5623351260724698337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,20 +206,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   mouseButton: 0
   ChargePercentage: 0
-  ChargeSpeed: 1
---- !u!114 &5851933013226556710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2866492743846150649}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 949133aaec18c974784548212c499271, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChargePercentage: 0
+  ChargeSpeed: 0.7
 --- !u!114 &5315767015092318870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,10 +224,120 @@ MonoBehaviour:
   weaponWalkSwayAmp: 0.009
   weaponWalkSwayFreq: 8.43
   VeloctiyDependence: -0.03
-  AccelDependence: -0.1
+  AccelDependence: 0.04
   LandingEffect: 2
   JumpSnap: 2.76
   PM: {fileID: 0}
+--- !u!82 &8225424130928824906
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2866492743846150649}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &315796000840505260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2866492743846150649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c76b1f082d067224abb3a283c75615da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipList: []
+  CurrentClip: {fileID: 0}
 --- !u!1 &4525765832110694384
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +410,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -494,7 +551,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4800993243918889414}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0297af9b73d85c4d839b49f7192381b, type: 3}
   m_Name: 

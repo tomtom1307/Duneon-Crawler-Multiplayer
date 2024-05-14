@@ -1,3 +1,5 @@
+using Project;
+using Project.Assets.WeaponSystem;
 using Project.Weapons;
 using System;
 using System.Collections;
@@ -24,6 +26,7 @@ public class Inventory : NetworkBehaviour
     [SerializeField] Transform ClientWeaponTransform;
     [SerializeField] HandMult handMult;
     [SerializeField] WeaponHolder WH;
+    [SerializeField] WeaponGenerator WG;
 
     private void Awake()
     {
@@ -32,7 +35,8 @@ public class Inventory : NetworkBehaviour
         handLoc = FindAnyObjectByType<HandStuff>();
         handMult = FindAnyObjectByType<HandMult>();
         ClientWeaponTransform = handLoc.transform.Find("Base");
-        WH = FindAnyObjectByType<WeaponHolder>();
+        //WH = FindAnyObjectByType<WeaponHolder>();
+        
     }
 
     private void Update()
@@ -74,21 +78,18 @@ public class Inventory : NetworkBehaviour
                 
                 if(item ==null)
                 {
-                    WH.enabled = false;
-                        //Destroy(GWM);
+                    WH.enabled = true;
+
+                    WG.RemoveWeapon();
+
                     
-                    
-                    Destroy(GWL);
+                    //Destroy(GWL);
                 }
                 else
                 {
                     WH.enabled = true;
-                    GWL = Instantiate(item.myItem.prefab,ClientWeaponTransform);
+                    WG.GenerateWeapon(item.myItem.weaponData);
                     
-                        //GWM = Instantiate(item.myItem.prefab, handMult.gameObject.transform);
-                    
-                    
-
                 }
                 break;
             case SlotTag.Head:

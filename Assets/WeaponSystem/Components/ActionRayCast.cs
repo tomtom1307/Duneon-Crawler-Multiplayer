@@ -17,6 +17,7 @@ namespace Project
             
             base.Start();
             cam = Camera.main;
+            eventHandler.OnAttackAction += HandleAttackAction;
         }
 
         private void HandleAttackAction()
@@ -53,16 +54,11 @@ namespace Project
         }
 
 
-        protected override void OnEnable()
-        {
-            base.OnEnable();
+ 
 
-            eventHandler.OnAttackAction += HandleAttackAction;
-        }
-
-        protected override void OnDisable()
+        protected override void OnDestroy()
         {
-            base.OnDisable();
+            base.OnDestroy();
 
             eventHandler.OnAttackAction -= HandleAttackAction;
         }

@@ -6,6 +6,9 @@ namespace Project
 {
     public class SecondaryDamageData : ComponentData<SecondaryAttackDamage>
     {
-        
+        public SecondaryDamageData()
+        {
+            ComponentDependancy = typeof(SecondaryAttack);
+        }
     }
 }

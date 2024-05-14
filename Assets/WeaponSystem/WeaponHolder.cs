@@ -10,7 +10,7 @@ namespace Project.Weapons
 {
     public class WeaponHolder : NetworkBehaviour
     {
-        [field: SerializeField] public WeaponDataSO Data { get; private set; }
+        
         [SerializeField] private float attackCounterResetCooldown = 2f;
         public int CurrentAttackCounter
         {
@@ -18,14 +18,15 @@ namespace Project.Weapons
             private set => currentAttackCounter = value >= Data.NumberOfAttacks ? 0  : value;
         }
 
+        [SerializeField] public WeaponDataSO Data;
         [SerializeField] List<WeaponComponent> components;
         public event Action OnExit;
         public event Action OnEnter;
 
 
-        public Animator anim;
-        public float Cooldown = 0.2f;
-        public GameObject baseGO { get; private set; }
+        [HideInInspector] public Animator anim;
+        [HideInInspector] public float Cooldown = 0.2f;
+        [HideInInspector] public GameObject baseGO { get; private set; }
         public AnimationEventHandler eventHandler { get; private set; }
         private int currentAttackCounter;
         public VFXHandler visualAttacks;
@@ -42,7 +43,7 @@ namespace Project.Weapons
 
         private void Awake()
         {
-            components = GetComponents<WeaponComponent>().ToList();
+            //components = GetComponents<WeaponComponent>().ToList();
             
             baseGO = transform.Find("Base").gameObject;
             eventHandler = baseGO.GetComponent<AnimationEventHandler>();
@@ -52,6 +53,12 @@ namespace Project.Weapons
 
 
 
+        }
+
+        public void SetData(WeaponDataSO data)
+        {
+            Data = data;
+            visualAttacks = GetComponentInChildren<VFXHandler>();
         }
 
 
@@ -92,10 +99,12 @@ namespace Project.Weapons
 
                 case (2):
                     {
+                        visualAttacks = GetComponentInChildren<VFXHandler>();
                         Cooldown = Data.Attack2Cooldown;
                         State = AttackState.active;
                         anim.SetBool("Secondary", true);
                         anim.SetBool("active", true);
+                        OnEnter?.Invoke();
                         break;
                     }
                 

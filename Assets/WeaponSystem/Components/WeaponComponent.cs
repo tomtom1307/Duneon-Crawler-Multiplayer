@@ -15,17 +15,21 @@ namespace Project
         //protected AnimationEventHandler eventHandler => weapon.EventHandler;
         protected AnimationEventHandler eventHandler;
 
-        protected virtual void Awake()
+
+        public virtual void Init()
         {
-            weapon = GetComponent<WeaponHolder>();
-            eventHandler = GetComponentInChildren<AnimationEventHandler>();
-            
+
         }
 
         protected virtual void Start()
         {
-            
+            weapon = GetComponent<WeaponHolder>();
+            eventHandler = GetComponentInChildren<AnimationEventHandler>();
+            weapon.OnEnter += HandleEnter;
+
         }
+
+
 
 
 
@@ -41,13 +45,8 @@ namespace Project
         }
 
 
-        protected virtual void OnEnable()
-        {
-            
-            weapon.OnEnter += HandleEnter;
-        }
 
-        protected virtual void OnDisable()
+        protected virtual void OnDestroy()
         {
             weapon.OnEnter -= HandleEnter;
         }
@@ -71,9 +70,9 @@ namespace Project
 
         }
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
+            base.Start();
 
             data = weapon.Data.GetData<T1>();
         }

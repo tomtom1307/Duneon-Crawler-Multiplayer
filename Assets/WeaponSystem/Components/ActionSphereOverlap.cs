@@ -20,11 +20,13 @@ namespace Project
             base.Start();
             PA = GetComponent<PlayerAttack>();
             cam = Camera.main;
+            eventHandler.OnAOEAction += HandleAttackAction;
         }
 
         private void HandleAttackAction()
         {
             ChargePercentage = PA.ChargePercentage;
+            print(weapon.visualAttacks);
             weapon.visualAttacks.Attack2(ChargePercentage);
             //Debug.Log("Handle Attack Action");
             detected = Physics.OverlapSphere(cam.transform.position, data.detectionRadius* ChargePercentage, data.DetectableLayers);
@@ -39,7 +41,7 @@ namespace Project
                 
                 if (collider.tag != "Head")
                 {
-                    
+                    print(collider);
                     OnDetectedColliders?.Invoke(collider);
                 }
                 
@@ -51,16 +53,9 @@ namespace Project
         }
 
 
-        protected override void OnEnable()
+        protected override void OnDestroy()
         {
-            base.OnEnable();
-
-            eventHandler.OnAOEAction += HandleAttackAction;
-        }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
+            base.OnDestroy();
 
             eventHandler.OnAOEAction -= HandleAttackAction;
         }

@@ -43,24 +43,18 @@ namespace Project
             
         }
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
-
+            base.Start();
             rayCast = GetComponent<ActionRayCast>();
-
-        }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-
             rayCast.OnDetectedCollider += HandleColliderDetection;
+
         }
 
-        protected override void OnDisable()
+
+        protected override void OnDestroy()
         {
-            base.OnDisable();
+            base.OnDestroy();
 
             rayCast.OnDetectedCollider -= HandleColliderDetection;
         }

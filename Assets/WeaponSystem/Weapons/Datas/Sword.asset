@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NumberOfAttacks>k__BackingField: 3
   <Model>k__BackingField: {fileID: 0}
+  <InventorySprite>k__BackingField: {fileID: 0}
+  <itemTag>k__BackingField: 0
+  <Attack1Cooldown>k__BackingField: 0
+  <Attack2Cooldown>k__BackingField: 0
   <componentDatas>k__BackingField:
   - rid: 1852571019049697281
   - rid: 1852571019049697282
@@ -23,15 +27,23 @@ MonoBehaviour:
     - rid: 1852571019049697281
       type: {class: DamageData, ns: Project, asm: Assembly-CSharp}
       data:
+        name: DamageData
         <AttackData>k__BackingField:
-        - <Amount>k__BackingField: 3
-        - <Amount>k__BackingField: 3
-        - <Amount>k__BackingField: 5
+        - <DamageAmount>k__BackingField: 0
+          <KnockBackAmount>k__BackingField: 0
+        - <DamageAmount>k__BackingField: 0
+          <KnockBackAmount>k__BackingField: 0
+        - <DamageAmount>k__BackingField: 0
+          <KnockBackAmount>k__BackingField: 0
     - rid: 1852571019049697282
       type: {class: ActionRayCastData, ns: Project, asm: Assembly-CSharp}
       data:
+        name: ActionRayCastData
         <AttackData>k__BackingField:
+        - <Distance>k__BackingField: 10
+        - <Distance>k__BackingField: 10
         - <Distance>k__BackingField: 10
         <DetectableLayers>k__BackingField:
           serializedVersion: 2
           m_Bits: 512
+        <detectionRadius>k__BackingField: 0
