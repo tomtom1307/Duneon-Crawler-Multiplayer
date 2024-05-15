@@ -135,9 +135,11 @@ namespace Project
                     occupied.Add(new Vector2(xPos, yPos));
                 }
 
-                
+               
                 // Get door positions and corridor positions
-                Doors = getDoorPositionswithCorridorStartPositions(roomComp.size, x, y, roomComp.DoorPos, corridors, i);
+                List<Vector2> corridorPos = roomComp.CorridorStartPos;
+
+                Doors = getDoorPositionswithCorridorStartPositions(roomComp.size, x, y, roomComp.DoorPos, corridors, i, corridorPos);
                 
                 //Store door in array
                 foreach (var item in Doors)
@@ -400,7 +402,7 @@ namespace Project
         
 
 
-        public Vector2[] getDoorPositionswithCorridorStartPositions(Vector2 size, int x, int y,List<int> doorArray,List<Vector4>CorridorArray, int roomIndex)
+        public Vector2[] getDoorPositionswithCorridorStartPositions(Vector2 size, int x, int y,List<int> doorArray,List<Vector4>CorridorArray, int roomIndex, List<Vector2> corridorPos)
         {
             Vector2[] arrayofCoords = new Vector2[doorArray.Count];
             float xRange = (((int)size[0] - 1) / 2f);
@@ -423,12 +425,11 @@ namespace Project
                         grid.SetVal(x + j, y + k, 5);
                         if (f == door)
                         {
-                            
+                            Vector2 currentstartcorridor= (1/test.CellSize)*corridorPos[d];
                             Vector2 doorPos = new Vector2(x + j, y + k);
                             arrayofCoords[d] = doorPos;
-                            Vector2 corridorPos = getCorridorStartPositions(doorPos, new Vector2(x, y));
-                            CorridorArray.Add(new Vector4(corridorPos.x,corridorPos.y, roomIndex, 0));
-                            grid.SetVal((int)corridorPos[0], (int)corridorPos[1], 3);
+                            CorridorArray.Add(new Vector4(x+currentstartcorridor.x,y+currentstartcorridor.y, roomIndex, 0));
+                            grid.SetVal(x+(int)currentstartcorridor.x, y+(int)currentstartcorridor.y, 3);
                             d++;
                         }
                     }

@@ -10,6 +10,7 @@ namespace Project
         public GameObject prefab;
         public List<Vector2> ocupied;
         public List<int> DoorPos;
+        public List<Vector2> CorridorStartPos;
         public bool Considered;
 
         
