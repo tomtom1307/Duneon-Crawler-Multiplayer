@@ -25,7 +25,7 @@ namespace Project
         Testing test;
         Vector3 centertingVector;
         public List<GameObject> roomsObj;
-        public List<GameObject> startendroomsObj;
+        public List<GameObject> ObligatoryRoomsObj;
         public GameObject corridorPrefab;
         public List<GameObject> AddedRoomsObj;
         public List<Room> AddedRooms;
@@ -36,6 +36,7 @@ namespace Project
         public List<Vector4> corridors;
         public List<int> connected;
         public List<family> families;
+        public int numberofObligatoryRooms;
         
         int x;
         int y;
@@ -57,7 +58,7 @@ namespace Project
             {
                 occupied.Add(cell);
             }
-            
+            numberofObligatoryRooms = ObligatoryRoomsObj.Count;
             //Room placement
             for (int i = 0; i < numberOfRooms; i++) 
             {
@@ -71,13 +72,13 @@ namespace Project
                     //RNG section
                     x = Mathf.RoundToInt(Random.Range(1, grid.width));
                     y = Mathf.RoundToInt(Random.Range(1, grid.height));
-                    if (i > 0)
+                    if (i > (numberofObligatoryRooms-1))
                     {
                         chosenRoom = roomsObj[Mathf.RoundToInt(Random.Range(0, roomsObj.Count))];
                     } 
                     else
                     {
-                        chosenRoom = startendroomsObj[i];  
+                        chosenRoom = ObligatoryRoomsObj[i];  
                     }
 
                         

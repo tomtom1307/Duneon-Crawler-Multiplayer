@@ -27,13 +27,14 @@ namespace Project
             int n = 0;
             foreach (var item in corridors)
             {
+
                 CorridorRoom go = GOs[n].GetComponent<CorridorRoom>();
-                n++;
+
                 //If dont eat shit keep it
                 Vector2 pos = item;
                 //Check Up
-
                 int wallDirIndex = 0;
+                bool nub = true;
                 foreach (var dir in directions)
                 {
                     //Debug.Log(wallDirIndex);
@@ -43,6 +44,7 @@ namespace Project
                     if (gridVal == 3)
                     {
                         go.DoEmpty(wallDirIndex);
+                        nub = false;
                     }
 
                     else if (gridVal == 10)
@@ -52,13 +54,12 @@ namespace Project
                     
                     wallDirIndex++;
                 }
-
-
-                //Check Down
-
-                //Check Left
-
-                //Check Right
+                if(nub)
+                {
+                    Destroy(GOs[n]);
+                    print("nub destroyed");
+                }
+                n++;
             }
         }
 
