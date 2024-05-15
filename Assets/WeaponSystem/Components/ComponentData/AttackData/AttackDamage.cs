@@ -11,5 +11,13 @@ namespace Project
     {
         [field: SerializeField] public float DamageAmount { get; private set; }
         [field: SerializeField] public float KnockBackAmount { get; private set; }
+
+        public enum DamageType
+        {
+            Magic,
+            Physical
+        }
+
+        [field: SerializeField] public DamageType type;
     }
 }

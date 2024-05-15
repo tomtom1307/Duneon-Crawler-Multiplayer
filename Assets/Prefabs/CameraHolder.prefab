@@ -116,6 +116,8 @@ GameObject:
   - component: {fileID: 5315767015092318870}
   - component: {fileID: 8225424130928824906}
   - component: {fileID: 315796000840505260}
+  - component: {fileID: 809755377459880178}
+  - component: {fileID: 131774013719888515}
   m_Layer: 8
   m_Name: Hand
   m_TagString: Untagged
@@ -184,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCounterResetCooldown: 1
+  Data: {fileID: 0}
   components: []
   anim: {fileID: 0}
   Cooldown: 0.2
@@ -338,6 +341,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clipList: []
   CurrentClip: {fileID: 0}
+--- !u!114 &809755377459880178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2866492743846150649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b6751c7ae9fee46bfccb35ea856fae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 7933067249557868530}
+  data: {fileID: 0}
+  weaponPos: {fileID: 252957066383928183}
+  Generating: 0
+--- !u!114 &131774013719888515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2866492743846150649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00007fc6baad7404298736024f433be4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 0}
+  MagicDamage: 0
+  PhysicalDamage: 0
+  AttackSpeed: 0
+  AttackSpeedScale: 1
+  DamageScale: 1
 --- !u!1 &4525765832110694384
 GameObject:
   m_ObjectHideFlags: 0

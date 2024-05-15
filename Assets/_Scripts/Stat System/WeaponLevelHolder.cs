@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Project
 {
-    public class _Interact : MonoBehaviour
+    public class WeaponLevelHolder : MonoBehaviour
     {
-        public string Prompt;
+        
     }
 }

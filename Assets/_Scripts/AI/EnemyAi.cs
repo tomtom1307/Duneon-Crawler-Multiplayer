@@ -5,12 +5,15 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 namespace Project
 {
     public class EnemyAi : NetworkBehaviour
     {
         public float MaxDetectDistance;
+        public float Damage;
+        public float AttackDistance;
 
         Transform target;
         private EnemyReferences enemyReferences;
@@ -48,7 +51,7 @@ namespace Project
                 if(inRange)
                 {
                     LookAtTarget();
-                    if(!enemyReferences.animator.GetBool("Attacking")) enemyReferences.animator.SetBool("Attacking", true); 
+                    if (!enemyReferences.animator.GetBool("Attacking")) Attack();
 
                 }
                 else
@@ -59,12 +62,36 @@ namespace Project
             }
         }
 
+        private void Attack()
+        {
+            enemyReferences.animator.SetBool("Attacking", true);
+            
+        }
+
+
+        public void AttackAction()
+        {
+            print("AttackAction");
+            RaycastHit hit;
+            Physics.Raycast(transform.position, transform.forward * AttackDistance, out hit, 10);
+
+            PlayerStats ps;
+            if (hit.collider == null) return;
+            hit.collider.gameObject.TryGetComponent<PlayerStats>(out ps);
+
+            if (ps != null) ps.TakeDamage(Damage);
+            
+        }
+
         private void AttackExit()
         {
             enemyReferences.animator.SetBool("Attacking", false);
         }
 
-
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawCube(transform.position + transform.forward * AttackDistance, transform.localScale);
+        }
 
         private Transform DetectPlayer()
         {

@@ -18,6 +18,7 @@ namespace Project
         public Image HealthBar;
         public Canvas HealthCanvas;
         public NetworkVariable<float> _health = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
+        public float xpOnKill;
 
         [Header("Damage Flash")]
         public float flashTime = 1f;

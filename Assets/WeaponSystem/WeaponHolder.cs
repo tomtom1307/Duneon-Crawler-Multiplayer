@@ -12,6 +12,7 @@ namespace Project.Weapons
     {
         
         [SerializeField] private float attackCounterResetCooldown = 2f;
+        public StatManager statManager { get; private set; }
         public int CurrentAttackCounter
         {
             get => currentAttackCounter;
@@ -44,7 +45,7 @@ namespace Project.Weapons
         private void Awake()
         {
             //components = GetComponents<WeaponComponent>().ToList();
-            
+            statManager = GetComponent<StatManager>();
             baseGO = transform.Find("Base").gameObject;
             eventHandler = baseGO.GetComponent<AnimationEventHandler>();
             anim = GetComponentInChildren<Animator>();

@@ -3072,6 +3072,7 @@ GameObject:
   - component: {fileID: 3439054645662996492}
   - component: {fileID: 5541791877822744598}
   - component: {fileID: 7767700700273684900}
+  - component: {fileID: 4320996904134251674}
   m_Layer: 10
   m_Name: Mage
   m_TagString: Player
@@ -3136,7 +3137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 936891590
+  GlobalObjectIdHash: 580854907
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -3286,6 +3287,56 @@ MonoBehaviour:
   ability: {fileID: 11400000, guid: 62d402596ba648844a154c1f5ead31b3, type: 2}
   UIFill: {fileID: 8306469440222961838}
   key: 304
+--- !u!114 &4320996904134251674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9211036698816209711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a212ff6db133f48864223c5caaf6cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xp: 0
+  requiredXP: 0
+  level: 1
+  LevelXPScaling:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 1
+      value: 100
+      inSlope: 1.1464028
+      outSlope: 1.1464028
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.16287622
+    - serializedVersion: 3
+      time: 100
+      value: 20000
+      inSlope: 7.9809275
+      outSlope: 7.9809275
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11393997
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  MaxHealth: 100
+  MaxMana: 100
+  Armor: 0
+  Strength: 3
+  Intelligence: 5
+  Dexterity: 2
+  ChaosPoints: 0
+  Gold: 0
+  SkillPoints: 0
+  health: 0
+  StatManager: {fileID: 0}
 --- !u!1 &9219590606935053950
 GameObject:
   m_ObjectHideFlags: 0

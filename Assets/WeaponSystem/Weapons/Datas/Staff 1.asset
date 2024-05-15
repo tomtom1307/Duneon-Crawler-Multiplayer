@@ -44,10 +44,12 @@ MonoBehaviour:
       data:
         name: DamageData
         <AttackData>k__BackingField:
-        - <DamageAmount>k__BackingField: 2
+        - <DamageAmount>k__BackingField: 100
           <KnockBackAmount>k__BackingField: 250
-        - <DamageAmount>k__BackingField: 2
+          type: 0
+        - <DamageAmount>k__BackingField: 100
           <KnockBackAmount>k__BackingField: 250
+          type: 0
     - rid: 1852571070197661696
       type: {class: SphereOverlapData, ns: Project, asm: Assembly-CSharp}
       data:

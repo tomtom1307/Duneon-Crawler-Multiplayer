@@ -16,6 +16,7 @@ namespace Project
         [field: SerializeField] public float Attack1Cooldown { get; private set; }
         [field: SerializeField] public float Attack2Cooldown { get; private set; }
 
+        
 
         [field: SerializeReference] public List<ComponentData> componentDatas { get; private set; }
 

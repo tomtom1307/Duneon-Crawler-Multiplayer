@@ -25,8 +25,6 @@ MonoBehaviour:
   - rid: 1852571019049697290
   - rid: 1852571070197661696
   - rid: 1852571070197661698
-  <components>k__BackingField:
-  - {fileID: 0}
   references:
     version: 2
     RefIds:
@@ -46,10 +44,12 @@ MonoBehaviour:
       data:
         name: DamageData
         <AttackData>k__BackingField:
-        - <DamageAmount>k__BackingField: 5
+        - <DamageAmount>k__BackingField: 110
           <KnockBackAmount>k__BackingField: 250
-        - <DamageAmount>k__BackingField: 5
+          type: 0
+        - <DamageAmount>k__BackingField: 110
           <KnockBackAmount>k__BackingField: 250
+          type: 0
     - rid: 1852571070197661696
       type: {class: SphereOverlapData, ns: Project, asm: Assembly-CSharp}
       data:
