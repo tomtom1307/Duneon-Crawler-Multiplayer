@@ -640,9 +640,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CellSize: 5
-  width: 40
-  height: 40
-  ShowGrid: 0
+  width: 100
+  height: 100
+  ShowGrid: 1
   VertOffset: -30
 --- !u!114 &1801563521
 MonoBehaviour:
@@ -656,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af308e5c7e93c54d914a51b5a5dc157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfRooms: 20
+  numberOfRooms: 40
   Padding: 1
   MaxAttempts: 100
   roomsObj:
@@ -667,7 +667,7 @@ MonoBehaviour:
   - {fileID: 3097702107386220095, guid: 84fd41d3cc82d3546a69f907c19956d8, type: 3}
   - {fileID: 2374672016853763114, guid: 033974bbb80d9f44fa28d6d7f2140d64, type: 3}
   - {fileID: 2374672016853763114, guid: 1e5fdf981e86f1042bf78395ba9d0088, type: 3}
-  startendroomsObj:
+  ObligatoryRoomsObj:
   - {fileID: 5304486166763116221, guid: d4aae8bdacdbc0844acb9cc3c8025fcc, type: 3}
   corridorPrefab: {fileID: 8767618854634293907, guid: 66a875dd011a44d40a5b3c6267766eda,
     type: 3}
@@ -680,6 +680,7 @@ MonoBehaviour:
   corridors: []
   connected: 
   families: []
+  numberofObligatoryRooms: 0
   CorridorAttempts: 1000
 --- !u!114 &1801563522
 MonoBehaviour:
