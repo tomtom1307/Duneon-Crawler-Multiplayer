@@ -7,7 +7,7 @@ namespace Project
     public abstract class _Interactable : MonoBehaviour
     {
         public string Prompt;
-
+        
 
         public void BaseInteract()
         {

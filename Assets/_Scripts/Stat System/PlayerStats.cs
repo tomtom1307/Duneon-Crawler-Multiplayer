@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Project
 {
@@ -26,9 +27,12 @@ namespace Project
         public int ChaosPoints;
         public int Gold;
         public int SkillPoints; 
-
-
+        
+        [Header("Health and UI")]
         public float health;
+        public float mana;
+        public Image healthBarFill;
+        public Image manaBarFill;
 
         public StatManager StatManager;
 
@@ -55,7 +59,8 @@ namespace Project
 
             //Initialize health
             health = MaxHealth;
-
+            healthBarFill.fillAmount = 1;
+            manaBarFill.fillAmount = 1;
             //Initialize level
             requiredXP = GetRequiredXP(level);
 
@@ -88,8 +93,14 @@ namespace Project
         {
             damage -= Armor;
             damage = Mathf.Clamp(damage, 0, MaxHealth - 1);
+            
 
             health -= damage;
+            healthBarFill.fillAmount = health/MaxHealth;
+            //HealthBar Animations
+            //DamageSounds
+            //
+
             if (health <= 0)
             {
                 //Enter Reiviable state
@@ -97,6 +108,8 @@ namespace Project
                 // if the input is given at the right time the revive timer increases slightly to buy time for teammates to revive you
             }
         }
+
+        
 
 
         //Handle Levels and XP

@@ -5,17 +5,16 @@ using TMPro;
 using UnityEngine;
 
 
-public class PickUpItem : MonoBehaviour
+public class PickUpItem : _Interactable
 {
     [SerializeField] Inventory inventory;
     public WeaponDataSO WeaponData;
-    public TextMeshProUGUI prompt;
     public KeyCode PickUpKey = KeyCode.F;
     public Color ItemColor;
     ParticleSystem ps;
     public Transform ModelPos;
     public string Rarity;
-
+    
 
 
 
@@ -51,8 +50,8 @@ public class PickUpItem : MonoBehaviour
     int index;
     private void Start()
     {
+        Prompt = "Press F to pick up item";
         
-        prompt.enabled = false;
         GetObjComponents();
         InitializeInventoryItem();
         GameObject displayModel = Instantiate(WeaponData.Model,ModelPos);
@@ -84,6 +83,8 @@ public class PickUpItem : MonoBehaviour
 
     }
 
+    
+
     private void InitializeInventoryItem()
     {
         item = ScriptableObject.CreateInstance<Item>();
@@ -101,29 +102,16 @@ public class PickUpItem : MonoBehaviour
         pointLight = GetComponent<Light>();
     }
 
-    private void OnTriggerStay(Collider other)
+
+
+
+
+    protected override void Interact()
     {
-        prompt.enabled = true;
-        if (Input.GetKeyDown(PickUpKey))
-        {
-            Pickup();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        prompt.enabled = false;
-    }
-
-
-    public void Pickup()
-    {
-
-        inventory.SpawnInventoryItem(Raritycolor[index],item);
+        inventory.SpawnInventoryItem(Raritycolor[index], item);
 
         Destroy(gameObject);
-        
-        
+        base.Interact();
     }
 
 }
