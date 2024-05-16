@@ -5795,6 +5795,7 @@ MonoBehaviour:
   MagicDamage: 0
   PhysicalDamage: 0
   AttackSpeed: 0
+  headShotXP: 3
   AttackSpeedScale: 1
   DamageScale: 1
 --- !u!114 &669868762
@@ -6148,7 +6149,12 @@ PrefabInstance:
     - target: {fileID: 1585723320464847743, guid: b11cd06c5c84f31499991f7d84a48cbf,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7648466502925864498, guid: b11cd06c5c84f31499991f7d84a48cbf,
+        type: 3}
+      propertyPath: NetworkConfig.ConnectionApproval
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9093194592916345096, guid: b11cd06c5c84f31499991f7d84a48cbf,
         type: 3}
@@ -12090,6 +12096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a02ce5398cd264ca26b4d8c633f272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStats: []
   PlayerPrefab: {fileID: 3749474820241796372, guid: 9537d9c6c98e571418f1588421b222c3,
     type: 3}
 --- !u!1001 &1534725481
@@ -12568,6 +12575,11 @@ PrefabInstance:
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1286103723
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590927598039635152, guid: 30da89b77fe6028428d7b139b2eac728,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2142562759439772510, guid: 30da89b77fe6028428d7b139b2eac728,
         type: 3}
@@ -18932,13 +18944,13 @@ SceneRoots:
   - {fileID: 1841086348}
   - {fileID: 413736968}
   - {fileID: 920283891}
-  - {fileID: 1894228612}
   - {fileID: 2062048508}
+  - {fileID: 5234632057673923168}
+  - {fileID: 1878272195}
+  - {fileID: 1534725481}
+  - {fileID: 1894228612}
   - {fileID: 1074825868}
   - {fileID: 123996936}
   - {fileID: 796479637}
   - {fileID: 739960342}
   - {fileID: 1803040017}
-  - {fileID: 1878272195}
-  - {fileID: 1534725481}
-  - {fileID: 5234632057673923168}

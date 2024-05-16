@@ -25,14 +25,18 @@ public class AbilityHolder : NetworkBehaviour
     float maxCooldownVal;
     private void Start()
     {
-       
+        
         maxCooldownVal = ability.coolDownTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch(state)
+        if (!IsLocalPlayer)
+        {
+            return;
+        }
+        switch (state)
         {
             case AbilityState.ready:
                 if (Input.GetKeyDown(key))

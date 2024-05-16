@@ -71,7 +71,6 @@ namespace Project
 
         public void AttackAction()
         {
-            print("AttackAction");
             RaycastHit hit;
             Physics.Raycast(transform.position, transform.forward * AttackDistance, out hit, 10);
 

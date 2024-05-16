@@ -21,7 +21,7 @@ namespace Project
             {
                 print("Head");
                 TD = collider.GetComponentInParent<TakeDamage>();
-                weapon.statManager.GiveXP(5);
+                weapon.statManager.GiveXP(weapon.statManager.headShotXP);
                 
                 TD.DoDamageServerRpc(StatMult * currentAttackData.DamageAmount, true);
                 TD.DisableNavMeshServerRpc();

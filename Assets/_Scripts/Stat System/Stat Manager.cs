@@ -14,6 +14,7 @@ namespace Project
         public float AttackSpeed;
 
         [Header("Scaling")]
+        public int headShotXP;
         public float AttackSpeedScale;
         public float DamageScale;
         // Start is called before the first frame update

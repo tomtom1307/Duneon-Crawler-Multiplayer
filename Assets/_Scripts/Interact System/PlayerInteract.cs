@@ -13,13 +13,14 @@ namespace Project
         [SerializeField] LayerMask WhatIsinteractble;
         [SerializeField]private float distance = 3f;
         public TextMeshProUGUI text;
+        public GameObject HUD;
         
         // Start is called before the first frame update
         void Start()
         {
             if (!IsOwner)
             {
-                Destroy(this);
+                Destroy(HUD);
                 return;
             }
             cam = Camera.main;
@@ -28,6 +29,11 @@ namespace Project
         // Update is called once per frame
         void Update()
         {
+            if (!IsOwner)
+            {
+                
+                return;
+            }
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit,distance,WhatIsinteractble))

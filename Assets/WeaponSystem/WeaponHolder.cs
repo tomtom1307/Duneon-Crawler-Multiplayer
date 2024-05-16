@@ -56,6 +56,7 @@ namespace Project.Weapons
 
         }
 
+
         public void SetData(WeaponDataSO data)
         {
             Data = data;
@@ -77,7 +78,7 @@ namespace Project.Weapons
         public void Enter(int attack)
         {
 
-            if(State == AttackState.active|| State == AttackState.coolDown)
+            if(State == AttackState.active|| State == AttackState.coolDown )
             {
                 return;
             }
@@ -87,6 +88,13 @@ namespace Project.Weapons
                 
                 case (1):
                 {
+                        if(Data.Attack1Type == DamageType.Magic)
+                        {
+                            if (!statManager.stats.DoMagicAttack(Data.Attack1ManaUse))
+                            {
+                                return;
+                            }
+                        }
                         Cooldown = Data.Attack1Cooldown;
                         State = AttackState.active;
                         visualAttacks = GetComponentInChildren<VFXHandler>();
@@ -99,15 +107,18 @@ namespace Project.Weapons
                 }
 
                 case (2):
-                    {
+                {
+                        
+    
                         visualAttacks = GetComponentInChildren<VFXHandler>();
-                        Cooldown = Data.Attack2Cooldown;
-                        State = AttackState.active;
-                        anim.SetBool("Secondary", true);
-                        anim.SetBool("active", true);
-                        OnEnter?.Invoke();
-                        break;
-                    }
+                    Cooldown = Data.Attack2Cooldown;
+                    State = AttackState.active;
+                    anim.SetBool("Secondary", true);
+                    anim.SetBool("active", true);
+
+                    OnEnter?.Invoke();
+                    break;
+                }
                 
 
             }

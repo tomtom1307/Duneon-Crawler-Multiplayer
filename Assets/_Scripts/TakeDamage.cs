@@ -17,8 +17,8 @@ namespace Project
         public float MaxHealth = 100000;
         public Image HealthBar;
         public Canvas HealthCanvas;
-        public NetworkVariable<float> _health = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
-        public float xpOnKill;
+        [SerializeField]public NetworkVariable<float> _health = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
+        public int xpOnKill;
 
         [Header("Damage Flash")]
         public float flashTime = 1f;
@@ -217,7 +217,7 @@ namespace Project
                 ER.animator.Play("Die", -1, 0);
                 ER.DissolveController.StartDissolveClientRpc();
                 DisableHealthBarClientRpc();
-                
+                GameManager.instance.AwardXPServerRpc(xpOnKill);
 
                
                 Destroy(ER.navMeshAgent);

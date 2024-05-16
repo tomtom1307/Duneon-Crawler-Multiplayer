@@ -6,6 +6,13 @@ using UnityEngine;
 
 namespace Project
 {
+    public enum DamageType
+    {
+        Magic,
+        Physical
+    }
+
+
     [CreateAssetMenu(menuName = "newWeaponData")]
     public class WeaponDataSO : ScriptableObject
     {
@@ -15,6 +22,10 @@ namespace Project
         [field: SerializeField] public SlotTag itemTag { get; private set; }
         [field: SerializeField] public float Attack1Cooldown { get; private set; }
         [field: SerializeField] public float Attack2Cooldown { get; private set; }
+        [field: SerializeField] public float Attack1ManaUse { get; private set; }
+        [field: SerializeField] public float Attack2ManaUse { get; private set; }
+        [field: SerializeField] public DamageType Attack1Type { get; private set; }
+        [field: SerializeField] public DamageType Attack2Type { get; private set; }
 
         
 

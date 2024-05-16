@@ -8,10 +8,10 @@ public class HandleCam : NetworkBehaviour
 {
     public Transform orientation;
     public Transform Headposition;
-    public MoveCam MC;
-    public PlayerCam PC;
+    [HideInInspector]public MoveCam MC;
+    [HideInInspector] public PlayerCam PC;
     public GameObject PM;
-    public GameObject Hand;
+    [HideInInspector] public GameObject Hand;
     public GameObject PlayerWeapon;
     public int PlayerWeaponLayerMask;
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace Project
@@ -29,11 +30,11 @@ namespace Project
         public int SkillPoints; 
         
         [Header("Health and UI")]
-        public float health;
-        public float mana;
+        [SerializeField] public NetworkVariable<float> _health = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
+        [SerializeField] public NetworkVariable<float> _mana = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
         public Image healthBarFill;
         public Image manaBarFill;
-
+        public float manaRegen;
         public StatManager StatManager;
 
         private void Awake()
@@ -46,10 +47,9 @@ namespace Project
         //Initialization
         private void Start()
         {
-            if (!IsOwner)
+            if (!IsLocalPlayer)
             {
-   
-                Destroy(this);
+                return;
             }
             //Find StatManager
             StatManager = FindAnyObjectByType<StatManager>();
@@ -58,8 +58,9 @@ namespace Project
             StatManager.InitDamageVals();
 
             //Initialize health
-            health = MaxHealth;
+            _health.Value = MaxHealth;
             healthBarFill.fillAmount = 1;
+            _mana.Value = MaxMana;
             manaBarFill.fillAmount = 1;
             //Initialize level
             requiredXP = GetRequiredXP(level);
@@ -77,7 +78,33 @@ namespace Project
         }
 
 
+        private void Update()
+        {
+            _mana.Value += manaRegen*Time.deltaTime;
+            manaBarFill.fillAmount = _mana.Value / MaxMana;
+        }
+
+
         //Handle Damage stuff
+        public bool DoMagicAttack(float manaUse,bool ChangeMana = true)
+        {
+            if(manaUse > _mana.Value)
+            {
+                //Handle Feedback
+                return false;
+            }
+            if (ChangeMana)
+            {
+                _mana.Value -= manaUse;
+                manaBarFill.fillAmount = _mana.Value / MaxHealth;
+            }
+            
+            return true;
+        }
+
+
+
+
         [ContextMenu("Test Shit")]
         public void RefreshStats()
         {
@@ -88,26 +115,29 @@ namespace Project
         //Handle Health
 
 
-        
+
         public void TakeDamage(float damage)
         {
+            if (!IsLocalPlayer) return;
             damage -= Armor;
             damage = Mathf.Clamp(damage, 0, MaxHealth - 1);
-            
 
-            health -= damage;
-            healthBarFill.fillAmount = health/MaxHealth;
+            
+            _health.Value -= damage;
+            healthBarFill.fillAmount = _health.Value / MaxHealth;
+
             //HealthBar Animations
             //DamageSounds
-            //
+            //Camera effects
 
-            if (health <= 0)
+            if (_health.Value <= 0)
             {
                 //Enter Reiviable state
                 // in revivable state to fight for you life Create a bar that has a marker that bounces left and right and 
                 // if the input is given at the right time the revive timer increases slightly to buy time for teammates to revive you
             }
         }
+
 
         
 
@@ -117,7 +147,7 @@ namespace Project
 
         public int GetRequiredXP(int level)
         {
-
+            
             int requiredXP = (int)LevelXPScaling.Evaluate(level);
             return requiredXP;
         }
@@ -135,7 +165,9 @@ namespace Project
 
         public void AddXp(int xpToAdd)
         {
-            if(xpToAdd > requiredXP)
+            print("XP added!!!!");
+            if(!IsLocalPlayer) return;
+            if(xpToAdd >= requiredXP)
             {
                 xpToAdd -= requiredXP;
                 LevelUp();
@@ -144,6 +176,16 @@ namespace Project
             xp += xpToAdd;
             DisplayStatsUI.Singleton.UpdateXPBar(xp, requiredXP);
         }
+
+        [ClientRpc]
+        public void AddXpClientRpc(int xpToAdd)
+        {
+            AddXp(xpToAdd);
+        }
+
+       
+
+
 
     }
 }
