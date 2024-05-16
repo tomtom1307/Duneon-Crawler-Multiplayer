@@ -33,7 +33,7 @@ namespace Project
             }
 
             else manaUse = weapon.Data.Attack2ManaUse;
-            print(ChargePercentage);
+
 
             if (collider.tag == "Head")
             {
@@ -43,7 +43,7 @@ namespace Project
             {
                 weapon.statManager.stats.DoMagicAttack( manaUse * ChargePercentage * StatMult);
                 TD = collider.GetComponent<TakeDamage>();
-                print(ChargePercentage + "+" + currentAttackData.DamageAmount);
+                print("ManaUsed:"+ manaUse);
                 TD.DoDamageServerRpc(ChargePercentage * currentAttackData.DamageAmount * StatMult);
                 if(collider.GetComponent<Rigidbody>() != null)
                 {

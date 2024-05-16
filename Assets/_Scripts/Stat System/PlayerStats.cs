@@ -81,6 +81,7 @@ namespace Project
         private void Update()
         {
             _mana.Value += manaRegen*Time.deltaTime;
+            _mana.Value = Mathf.Clamp(_mana.Value, 0, MaxMana);
             manaBarFill.fillAmount = _mana.Value / MaxMana;
         }
 

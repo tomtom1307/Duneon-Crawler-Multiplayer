@@ -41,7 +41,6 @@ namespace Project
                 
                 if (collider.tag != "Head")
                 {
-                    print(collider);
                     OnDetectedColliders?.Invoke(collider);
                 }
                 
