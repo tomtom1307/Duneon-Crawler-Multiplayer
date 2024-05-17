@@ -5798,18 +5798,23 @@ MonoBehaviour:
   headShotXP: 3
   AttackSpeedScale: 1
   DamageScale: 1
---- !u!114 &669868762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 123331419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6107d15946f09ac4ba07220791fea512, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  weaponInstance:
+    weaponData: {fileID: 0}
+    level: 0
+    xp: 0
+    xpScaling:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    requiredXP: 0
+    rarityIndex: 0
+    rarity: 
+    currentMagicDamageBonus: 0
+    currentPhysicalDamageBonus: 0
+    rarityDamageBonus: []
+    rarities: []
 --- !u!114 &669912482 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5434015587878197848, guid: 30da89b77fe6028428d7b139b2eac728,
@@ -6027,6 +6032,23 @@ MonoBehaviour:
   ItemColor: {r: 0, g: 0, b: 0, a: 0}
   ModelPos: {fileID: 1202670454}
   Rarity: 
+  WI:
+    weaponData: {fileID: 0}
+    level: 0
+    xp: 0
+    xpScaling:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    requiredXP: 0
+    rarityIndex: 0
+    rarity: 
+    currentMagicDamageBonus: 0
+    currentPhysicalDamageBonus: 0
+    rarityDamageBonus: []
+    rarities: []
   table:
   - 700
   - 200
@@ -6045,8 +6067,10 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 1, a: 1}
   - {r: 1, g: 0, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
+  item: {fileID: 0}
   total: 0
   randomVal: 0
+  index: 0
 --- !u!114 &725211874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6089,7 +6113,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.954835, y: 3.3409367, z: 2.077435}
+  m_Size: {x: 0.61297894, y: 3.3409367, z: 0.94014573}
   m_Center: {x: 0, y: 0.9010377, z: 0}
 --- !u!23 &725211876
 MeshRenderer:
@@ -6149,7 +6173,7 @@ PrefabInstance:
     - target: {fileID: 1585723320464847743, guid: b11cd06c5c84f31499991f7d84a48cbf,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7648466502925864498, guid: b11cd06c5c84f31499991f7d84a48cbf,
         type: 3}
@@ -12579,7 +12603,7 @@ PrefabInstance:
     - target: {fileID: 1590927598039635152, guid: 30da89b77fe6028428d7b139b2eac728,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2142562759439772510, guid: 30da89b77fe6028428d7b139b2eac728,
         type: 3}
@@ -13832,12 +13856,29 @@ MonoBehaviour:
   ItemColor: {r: 0, g: 0, b: 0, a: 0}
   ModelPos: {fileID: 397959262}
   Rarity: 
+  WI:
+    weaponData: {fileID: 0}
+    level: 0
+    xp: 0
+    xpScaling:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    requiredXP: 0
+    rarityIndex: 0
+    rarity: 
+    currentMagicDamageBonus: 0
+    currentPhysicalDamageBonus: 0
+    rarityDamageBonus: []
+    rarities: []
   table:
   - 700
   - 200
-  - 70
-  - 29
-  - 1
+  - 80
+  - 15
+  - 5
   rarity:
   - Common
   - Uncommon
@@ -13850,8 +13891,10 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 1, a: 1}
   - {r: 1, g: 0, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
+  item: {fileID: 0}
   total: 0
   randomVal: 0
+  index: 0
 --- !u!198 &4230452399305753912
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -18661,10 +18704,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 669868761}
-    - targetCorrespondingSourceObject: {fileID: 2866492743846150649, guid: e7848a2b43e2dab458db3b93ebb81616,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 669868762}
   m_SourcePrefab: {fileID: 100100000, guid: e7848a2b43e2dab458db3b93ebb81616, type: 3}
 --- !u!199 &5245081227182293305
 ParticleSystemRenderer:
@@ -18801,8 +18840,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.954835, y: 3.1232686, z: 2.077435}
-  m_Center: {x: 0, y: 0.79220366, z: 0}
+  m_Size: {x: 0.61297894, y: 3.3409367, z: 0.94014573}
+  m_Center: {x: 0, y: 0.9010377, z: 0}
 --- !u!108 &7295071260939527110
 Light:
   m_ObjectHideFlags: 0

@@ -11,19 +11,18 @@ namespace Project
         
         private void HandleColliderDetection(Collider collider)
         {
-            float StatMult;
+            bool isMagic;
             
 
-            if (currentAttackData.type == AttackDamage.DamageType.Magic) StatMult = weapon.statManager.MagicDamage;
-            else StatMult = weapon.statManager.PhysicalDamage;
-            StatMult = StatMult / 100;
+            if (currentAttackData.type == AttackDamage.DamageType.Magic) isMagic = true;
+            else isMagic = false;
             if (collider.tag == "Head")
             {
                 print("Head");
                 TD = collider.GetComponentInParent<TakeDamage>();
                 weapon.statManager.GiveXP(weapon.statManager.headShotXP);
                 
-                TD.DoDamageServerRpc(StatMult * currentAttackData.DamageAmount, true);
+                TD.DoDamageServerRpc(weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic), true);
                 TD.DisableNavMeshServerRpc();
                 if (collider.GetComponent<Rigidbody>() != null)
                 {
@@ -35,7 +34,7 @@ namespace Project
             else
             {
                 TD =collider.GetComponent<TakeDamage>();
-                TD.DoDamageServerRpc(StatMult * currentAttackData.DamageAmount);
+                TD.DoDamageServerRpc(weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
                 
                 TD.DisableNavMeshServerRpc();
                 if (collider.GetComponent<Rigidbody>() != null)

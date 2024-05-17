@@ -79,7 +79,6 @@ public class Inventory : NetworkBehaviour
                 if(item ==null)
                 {
                     WH.enabled = true;
-
                     WG.RemoveWeapon();
 
                     
@@ -89,7 +88,8 @@ public class Inventory : NetworkBehaviour
                 {
                     WH.enabled = true;
                     WG.GenerateWeapon(item.myItem.weaponData);
-                    
+                    WH.statManager.weaponInstance = item.myItem.weaponInstance; 
+
                 }
                 break;
             case SlotTag.Head:

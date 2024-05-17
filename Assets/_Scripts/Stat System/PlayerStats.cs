@@ -158,7 +158,9 @@ namespace Project
             level++;
             SkillPoints++;
             DisplayStatsUI.Singleton.UpdateUIStat(level, DisplayStatsUI.Singleton.LevelVal);
-            
+            MaxHealth += 10;
+            MaxMana += 10;
+            manaRegen += 0.2f;
             requiredXP = GetRequiredXP(level);
             xp = 0;
             DisplayStatsUI.Singleton.UpdateXPBar(xp, requiredXP);

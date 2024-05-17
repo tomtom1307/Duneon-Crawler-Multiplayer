@@ -14,7 +14,7 @@ public class PickUpItem : _Interactable
     ParticleSystem ps;
     public Transform ModelPos;
     public string Rarity;
-    
+    [SerializeField] WeaponInstance WI;
 
 
 
@@ -43,17 +43,19 @@ public class PickUpItem : _Interactable
         Color.magenta,
         Color.red
     };
-    Item item;
+
+
+    public Item item;
     Light pointLight;
     public float total;
     public float randomVal;
-    int index;
+    public int index;
     private void Start()
     {
         Prompt = "Press F to pick up item";
         
         GetObjComponents();
-        InitializeInventoryItem();
+        
         GameObject displayModel = Instantiate(WeaponData.Model,ModelPos);
         displayModel.transform.localRotation = Quaternion.Euler(new Vector3(0,0,0));
 
@@ -72,14 +74,14 @@ public class PickUpItem : _Interactable
                 index = i ; break;
             }
             else randomVal -= table[i];
-        } 
-            
+        }
+        InitializeInventoryItem();
         ItemColor = Raritycolor[index];
         pointLight.color = Raritycolor[index];
         ps.startColor = Raritycolor[index];
 
         Rarity = rarity[index];
-
+     
 
     }
 
@@ -93,6 +95,8 @@ public class PickUpItem : _Interactable
         item.sprite = WeaponData.InventorySprite;
         item.itemTag = WeaponData.itemTag;
         item.prefab = WeaponData.Model;
+        item.weaponInstance = new WeaponInstance(WeaponData, index);
+        WI = new WeaponInstance(WeaponData, index);
     }
 
 
