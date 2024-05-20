@@ -13,26 +13,16 @@ namespace Project
 
         private void HandleColliderDetection(Collider collider)
         {
-            float manaUse;
             
+            bool isMagic;
 
-            float StatMult;
 
-            if (weapon.Data.Attack1Type == DamageType.Magic) StatMult = weapon.statManager.MagicDamage/100;
-
-            else StatMult = weapon.statManager.PhysicalDamage;
+            if (weapon.Data.Attack2Type == DamageType.Magic) isMagic = true;
+            else isMagic = false;
 
             ChargePercentage = PA.ChargePercentage;
 
-            if (!weapon.statManager.stats.DoMagicAttack(weapon.Data.Attack2ManaUse,false))
-            {
-                print("Using All mana");
-                
-                manaUse = weapon.statManager.stats._mana.Value;
-                ChargePercentage = manaUse / weapon.Data.Attack2ManaUse;
-            }
-
-            else manaUse = weapon.Data.Attack2ManaUse;
+            
 
 
             if (collider.tag == "Head")
@@ -41,10 +31,9 @@ namespace Project
             }
             else
             {
-                weapon.statManager.stats.DoMagicAttack( manaUse * ChargePercentage * StatMult);
+                
                 TD = collider.GetComponent<TakeDamage>();
-                print("ManaUsed:"+ manaUse);
-                TD.DoDamageServerRpc(ChargePercentage * currentAttackData.DamageAmount * StatMult);
+                TD.DoDamageServerRpc(ChargePercentage * weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
                 if(collider.GetComponent<Rigidbody>() != null)
                 {
                     TD.DisableNavMeshServerRpc();

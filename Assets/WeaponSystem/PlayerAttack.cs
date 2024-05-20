@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Project.Weapons;
 using Unity.Netcode;
+using Project;
 
 
 public class PlayerAttack : NetworkBehaviour
@@ -51,6 +52,7 @@ public class PlayerAttack : NetworkBehaviour
         {
             //StartCoroutine("Cooldown");
             weapon.Enter(1);
+            
         }
         
     }

@@ -39,11 +39,13 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         public void AwardXPServerRpc(int xp) 
         {
-            GiveMana(15);
+            print("Award on Kill");
+            GiveMana(50);
             foreach (var stats in playerStats)
             {
                 print("Added Xp");
                 stats.AddXpClientRpc(xp);
+                stats.AddGoldClientRpc(5);
                 
             }
             
@@ -54,7 +56,7 @@ namespace Project
         {
             foreach (var stats in playerStats)
             {
-                stats._mana.Value += 15;
+                stats._mana.Value += mana;
             }
         }
 

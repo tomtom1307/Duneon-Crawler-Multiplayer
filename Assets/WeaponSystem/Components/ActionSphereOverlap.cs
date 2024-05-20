@@ -25,12 +25,24 @@ namespace Project
 
         private void HandleAttackAction()
         {
+            float manaUse;
+            if (!weapon.statManager.stats.DoMagicAttack(weapon.Data.Attack2ManaUse, false))
+            {
+                print("Using All mana");
+
+                manaUse = weapon.statManager.stats._mana.Value;
+                ChargePercentage = manaUse / weapon.Data.Attack2ManaUse;
+            }
+
+            else manaUse = weapon.Data.Attack2ManaUse;
             ChargePercentage = PA.ChargePercentage;
             print(weapon.visualAttacks);
             weapon.visualAttacks.Attack2(ChargePercentage);
             //Debug.Log("Handle Attack Action");
             detected = Physics.OverlapSphere(cam.transform.position, data.detectionRadius* ChargePercentage, data.DetectableLayers);
-            
+            weapon.statManager.stats.DoMagicAttack(manaUse * ChargePercentage);
+
+
             if (detected == null)
             {
                 return;

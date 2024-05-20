@@ -16,13 +16,14 @@ namespace Project
         {
             
             base.Start();
+            
             cam = Camera.main;
             eventHandler.OnAttackAction += HandleAttackAction;
         }
 
         private void HandleAttackAction()
         {
-            
+            //weapon._soundSource.PlaySound(weapon._soundSource.clip[0], 0.4f);
             Ray ray = new Ray(cam.transform.forward, cam.transform.position);
             RaycastHit hit;
             //Debug.Log("Handle Attack Action");

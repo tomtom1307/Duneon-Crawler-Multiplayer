@@ -18,6 +18,8 @@ namespace Project
             else isMagic = false;
             if (collider.tag == "Head")
             {
+                weapon._soundSource.PlaySound(weapon._soundSource.clip[1], 2f);
+                weapon.statManager.GiveWeaponXP(5, weapon.statManager.weaponXPscaling);
                 print("Head");
                 TD = collider.GetComponentInParent<TakeDamage>();
                 weapon.statManager.GiveXP(weapon.statManager.headShotXP);
@@ -33,6 +35,7 @@ namespace Project
             }
             else
             {
+                weapon.statManager.GiveWeaponXP(3, weapon.statManager.weaponXPscaling);
                 TD =collider.GetComponent<TakeDamage>();
                 TD.DoDamageServerRpc(weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
                 

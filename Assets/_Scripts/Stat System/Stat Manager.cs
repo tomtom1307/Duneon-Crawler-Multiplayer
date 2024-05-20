@@ -12,7 +12,7 @@ namespace Project
         public float MagicDamage;
         public float PhysicalDamage;
         public float AttackSpeed;
-
+        public AnimationCurve weaponXPscaling;
         [Header("Scaling")]
         public int headShotXP;
         public float AttackSpeedScale;
@@ -78,9 +78,9 @@ namespace Project
             stats.AddXp(amount);
         }
 
-        public void GiveWeaponXP(int amount)
+        public void GiveWeaponXP(int amount, AnimationCurve Scaling)
         {
-            weaponInstance.AddWeaponXpClient(amount);
+            weaponInstance.AddWeaponXp(amount,Scaling);
         }
     }
 }

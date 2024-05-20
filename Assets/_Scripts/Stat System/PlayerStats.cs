@@ -158,6 +158,7 @@ namespace Project
             level++;
             SkillPoints++;
             DisplayStatsUI.Singleton.UpdateUIStat(level, DisplayStatsUI.Singleton.LevelVal);
+            DisplayStatsUI.Singleton.ChangeSkillPoints(SkillPoints);
             MaxHealth += 10;
             MaxMana += 10;
             manaRegen += 0.2f;
@@ -186,7 +187,15 @@ namespace Project
             AddXp(xpToAdd);
         }
 
-       
+
+        [ClientRpc]
+        public void AddGoldClientRpc(int goldToAdd)
+        {
+            Gold += goldToAdd;
+            DisplayStatsUI.Singleton.ChangeGoldValue(Gold);
+        }
+
+
 
 
 

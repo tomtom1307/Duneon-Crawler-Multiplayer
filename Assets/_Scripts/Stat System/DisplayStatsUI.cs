@@ -17,6 +17,8 @@ namespace Project
         public TextMeshProUGUI DexVal;
         public Image XPbar;
         public TextMeshProUGUI XPText;
+        public TextMeshProUGUI GoldText;
+        public TextMeshProUGUI SkillPointsText;
 
 
         private void Start()
@@ -34,6 +36,16 @@ namespace Project
         public void UpdateUIStat(int wantedVal, TextMeshProUGUI text)
         {
             text.text = wantedVal.ToString();
+        }
+
+        public void ChangeGoldValue(int val)
+        {
+            UpdateUIStat(val, GoldText);
+        }
+
+        public void ChangeSkillPoints(int val)
+        {
+            UpdateUIStat(val, SkillPointsText);
         }
 
     }

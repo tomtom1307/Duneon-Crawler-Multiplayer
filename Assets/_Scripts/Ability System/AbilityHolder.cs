@@ -25,7 +25,7 @@ public class AbilityHolder : NetworkBehaviour
     float maxCooldownVal;
     private void Start()
     {
-        
+
         maxCooldownVal = ability.coolDownTime;
     }
 
@@ -43,7 +43,10 @@ public class AbilityHolder : NetworkBehaviour
                 {
                     ability.Activate(gameObject, out Fail);
                     if (Fail) return;
+                    
                     state = AbilityState.active;
+
+
                     activeTime = ability.activeTime;
                     
                 }

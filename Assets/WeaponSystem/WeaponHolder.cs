@@ -33,6 +33,7 @@ namespace Project.Weapons
         public VFXHandler visualAttacks;
         private Timer attackCounterResetTimer;
         private int CurrentAttack;
+        public PlayerSoundSource _soundSource;
         public enum AttackState
         {
             ready,
@@ -56,6 +57,10 @@ namespace Project.Weapons
 
         }
 
+        private void Start()
+        {
+            _soundSource = GetComponentInChildren<PlayerSoundSource>();
+        }
 
         public void SetData(WeaponDataSO data)
         {

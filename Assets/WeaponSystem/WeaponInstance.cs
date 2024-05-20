@@ -12,12 +12,14 @@ namespace Project
         public WeaponDataSO weaponData;
         public int level;
         public int xp;
-        public AnimationCurve xpScaling;
+
         public int requiredXP;
         public int rarityIndex;
         public string rarity;
-        
+        float levelDamageBonus = 4;
+
         // Add properties that might change with leveling
+
         public float currentMagicDamageBonus;
         public float currentPhysicalDamageBonus;
 
@@ -51,36 +53,38 @@ namespace Project
             float RarityDamageBonus = rarityDamageBonus[rarityIndex];
 
             float RarityDamageBonusLowerBound;
-            if (rarityIndex == 0) RarityDamageBonusLowerBound = 100;
+            if (rarityIndex == 0) RarityDamageBonusLowerBound = 0;
             else RarityDamageBonusLowerBound = rarityDamageBonus[rarityIndex-1];
 
-            currentPhysicalDamageBonus = UnityEngine.Random.Range(RarityDamageBonusLowerBound,RarityDamageBonus);
-            currentMagicDamageBonus = UnityEngine.Random.Range(RarityDamageBonusLowerBound, RarityDamageBonus);
+            currentPhysicalDamageBonus = UnityEngine.Random.Range(RarityDamageBonusLowerBound,RarityDamageBonus) + levelDamageBonus;
+            currentMagicDamageBonus = UnityEngine.Random.Range(RarityDamageBonusLowerBound, RarityDamageBonus) + levelDamageBonus;
         }
 
 
-        public int GetRequiredXP(int level)
+        public int GetRequiredXP(int level, AnimationCurve scaling)
         {
-            int requiredXP = (int)xpScaling.Evaluate(level);
+            int requiredXP = (int)scaling.Evaluate(level);
             return requiredXP;
         }
 
-        public void LevelUp()
+        public void LevelUp(AnimationCurve scaling)
         {
             level++;
-            requiredXP = GetRequiredXP(level);
+            currentMagicDamageBonus += levelDamageBonus * (level-1);
+            currentPhysicalDamageBonus += levelDamageBonus * (level-1);
+            requiredXP = GetRequiredXP(level, scaling);
             xp = 0;
 
         }
 
-        public void AddWeaponXp(int xpToAdd)
+        public void AddWeaponXp(int xpToAdd, AnimationCurve scaling)
         {
             Debug.Log("weapon XP added!!!!");
             
             if (xpToAdd >= requiredXP)
             {
                 xpToAdd -= requiredXP;
-                LevelUp();
+                LevelUp(scaling);
             }
             requiredXP -= xpToAdd;
             xp += xpToAdd;
@@ -88,10 +92,7 @@ namespace Project
         }
 
 
-        public void AddWeaponXpClient(int xpToAdd)
-        {
-            AddWeaponXp(xpToAdd);
-        }
+        
 
     }
 }
