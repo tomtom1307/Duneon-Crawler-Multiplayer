@@ -19,7 +19,7 @@ namespace Project
         // Update is called once per frame
         void Update()
         {
-
+            if (movement.rb.velocity.magnitude < 0.2f) return;
             transform.rotation = Quaternion.LookRotation(-movement.rb.velocity) * Quaternion.Euler(new Vector3(90, 0, 0));
 
             if (movement.rb.velocity.magnitude > VelocityThreshold)

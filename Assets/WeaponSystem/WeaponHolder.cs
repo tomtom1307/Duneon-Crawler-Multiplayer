@@ -114,8 +114,8 @@ namespace Project.Weapons
                 case (2):
                 {
                         
-    
-                        visualAttacks = GetComponentInChildren<VFXHandler>();
+                    
+                    visualAttacks = GetComponentInChildren<VFXHandler>();
                     Cooldown = Data.Attack2Cooldown;
                     State = AttackState.active;
                     anim.SetBool("Secondary", true);

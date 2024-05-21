@@ -139,6 +139,7 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         public void KnockBackServerRpc(Vector3 playerPos, float KnockBack = 5)
         {
+            if(SkinnedMesh) rb.isKinematic = false;
             Vector3 dir = transform.position - playerPos;
             rb.AddForce(dir.normalized*KnockBack, ForceMode.Force);
         }
@@ -199,6 +200,7 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         public void EnableNavMeshServerRpc()
         {
+            rb.isKinematic = true;
             ER.navMeshAgent.enabled = true;
             ER.animator.applyRootMotion = true;
             

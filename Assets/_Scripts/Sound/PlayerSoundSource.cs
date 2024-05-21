@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 namespace Project
 {
     public class PlayerSoundSource : SourceSoundManager
@@ -18,13 +20,7 @@ namespace Project
         }
 
 
-        private enum SoundType
-        {
-            Attack1,
-            Attack2,
-            Hit,
-            Jump
-        }
+        
 
         
 

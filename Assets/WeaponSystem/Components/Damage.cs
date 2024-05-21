@@ -18,7 +18,7 @@ namespace Project
             else isMagic = false;
             if (collider.tag == "Head")
             {
-                weapon._soundSource.PlaySound(weapon._soundSource.clip[1], 2f);
+                weapon._soundSource.PlaySound(SourceSoundManager.SoundType.HeadShotDink, 2f);
                 weapon.statManager.GiveWeaponXP(5, weapon.statManager.weaponXPscaling);
                 print("Head");
                 TD = collider.GetComponentInParent<TakeDamage>();
