@@ -2,6 +2,7 @@ using Project.Assets._Scripts.Stat_System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -77,10 +78,25 @@ namespace Project
 
         }
 
+        [ClientRpc]
+        public void AddManaClientRpc(float Amount)
+        {
+            if(!IsLocalPlayer) return;
+            _mana.Value += Amount;
+        }
+
 
         private void Update()
         {
-            _mana.Value += manaRegen*Time.deltaTime;
+            
+            RegenManaClientRpc();
+        }
+
+        [ClientRpc]
+        public void RegenManaClientRpc()
+        {
+            if (!IsLocalPlayer) return;
+            _mana.Value += manaRegen * Time.deltaTime;
             _mana.Value = Mathf.Clamp(_mana.Value, 0, MaxMana);
             manaBarFill.fillAmount = _mana.Value / MaxMana;
         }
@@ -89,7 +105,7 @@ namespace Project
         //Handle Damage stuff
         public bool DoMagicAttack(float manaUse,bool ChangeMana = true)
         {
-            if(manaUse > _mana.Value)
+            if (manaUse > _mana.Value)
             {
                 //Handle Feedback
                 return false;

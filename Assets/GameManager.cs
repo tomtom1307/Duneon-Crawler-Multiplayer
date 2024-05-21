@@ -51,12 +51,12 @@ namespace Project
             
         }
 
-
+       
         public void GiveMana(float mana)
         {
             foreach (var stats in playerStats)
             {
-                stats._mana.Value += mana;
+                stats.AddManaClientRpc(mana);
             }
         }
 
