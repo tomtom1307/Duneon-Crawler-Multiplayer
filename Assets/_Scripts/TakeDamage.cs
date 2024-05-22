@@ -6,20 +6,21 @@ using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace Project
 {
     public class TakeDamage : NetworkBehaviour
     {
-        
+
         [Header("Health")]
         public float Health;
         public float MaxHealth = 100000;
         public Image HealthBar;
         public Canvas HealthCanvas;
-        [SerializeField]public NetworkVariable<float> _health = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
+        [SerializeField] public NetworkVariable<float> _health = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
         public int xpOnKill;
-
+        public bool Floating;
         [Header("Damage Flash")]
         public float flashTime = 1f;
         public KeyCode DebugButton;
@@ -37,21 +38,21 @@ namespace Project
         Camera cam;
         Rigidbody rb;
         public List<Collider> colliders;
-        
+
 
         private void Start()
         {
-            
-            
+
+
             Ded = false;
             rb = GetComponent<Rigidbody>();
-            if(GetComponent<EnemyReferences>() != null )
+            if (GetComponent<EnemyReferences>() != null)
             {
                 ER = GetComponent<EnemyReferences>();
             }
-            
-            
-            if(SkinnedMesh)
+
+
+            if (SkinnedMesh)
             {
                 SkinmeshRenderer = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
                 origColors = SkinmeshRenderer.materials;
@@ -65,7 +66,7 @@ namespace Project
                 whites = meshRenderer.materials;
             }
             cam = Camera.main;
-            
+
             for (int i = 0; i < origColors.Length; i++)
             {
                 whites[i] = white;
@@ -83,7 +84,7 @@ namespace Project
 
         }
 
-        
+
 
 
 
@@ -95,7 +96,7 @@ namespace Project
 
             //_health.Value = Health;
             FaceUIToPlayer();
-            
+
         }
 
 
@@ -104,11 +105,11 @@ namespace Project
         {
             if (headshot) Damage *= 2;
             _health.Value -= Damage;
-            
-                
-            
+
+
+
             HandleLocalVisualsClientRpc(Damage, headshot);
-            
+
         }
 
 
@@ -119,8 +120,8 @@ namespace Project
         {
 
             HealthBar.fillAmount = _health.Value / MaxHealth;
-            
-            
+
+
             DamageFlash();
             GenerateDamageNumber(Damage, headshot);
         }
@@ -128,27 +129,27 @@ namespace Project
         [ClientRpc]
         void DisableHealthBarClientRpc()
         {
-            
+
 
             HealthCanvas.enabled = false;
             ER.AI.enabled = false;
 
-            
+
         }
 
         [ServerRpc(RequireOwnership = false)]
         public void KnockBackServerRpc(Vector3 playerPos, float KnockBack = 5)
         {
-            if(SkinnedMesh) rb.isKinematic = false;
+            if (SkinnedMesh) rb.isKinematic = false;
             Vector3 dir = transform.position - playerPos;
-            rb.AddForce(dir.normalized*KnockBack, ForceMode.Force);
+            rb.AddForce(dir.normalized * KnockBack, ForceMode.Force);
         }
 
 
         void GenerateDamageNumber(float dam, bool headshot = false)
         {
             DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
-            Color color  = headshot ? HeadshotColor : NormalColor;
+            Color color = headshot ? HeadshotColor : NormalColor;
             //indicator.SetDamageColor(color); 
 
 
@@ -187,15 +188,49 @@ namespace Project
             if (SkinnedMesh)
             {
                 SkinmeshRenderer.SetMaterials(origColors.ToList());
-                
+
             }
             else
             {
                 meshRenderer.SetMaterials(origColors.ToList());
             }
-            
-            
+
+
         }
+
+        float floatHeight;
+        [ServerRpc(RequireOwnership = false)]
+        public void FloatAttackRecieveServerRpc(float Height, float Duration)
+        {
+            Floating = true;
+            floatHeight = Height;
+            rb.isKinematic = true;
+            transform.DOMove(Height* Vector3.up + transform.position, 0.5f);
+            if (SkinnedMesh)
+            {
+                ER.navMeshAgent.enabled = false;
+                ER.animator.applyRootMotion = false;
+                ER.animator.Play("Floating", -1, 0);
+            }
+            print("Floating!");
+            Invoke("EndFloatingEffectServerRpc", Duration);
+            
+            
+            
+
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        private void EndFloatingEffectServerRpc()
+        {
+            transform.DOMove(-floatHeight * Vector3.up + transform.position, 0.5f);
+            rb.isKinematic = false;
+            ER.animator.applyRootMotion = true;
+            ER.animator.Play("Movement");
+            Invoke("EnableNavMeshServerRpc", 0.5f);
+            Floating = false;
+        }
+
 
         [ServerRpc(RequireOwnership = false)]
         public void EnableNavMeshServerRpc()
@@ -209,7 +244,7 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         public void DisableNavMeshServerRpc()
         {
-            if (!SkinnedMesh || Ded) return;
+            if (!SkinnedMesh || Ded || Floating) return;
 
             
 

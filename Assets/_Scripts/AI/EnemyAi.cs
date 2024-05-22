@@ -118,6 +118,9 @@ namespace Project
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.2f);
         }
 
+        
+
+
         private void UpdatePath()
         {
             if(Time.time >= pathUpdateDeadline)
