@@ -24,17 +24,31 @@ namespace Project
 
         public AudioSource audioSource;
         public SoundList[] clips;
-        public virtual void PlaySound(SoundType sound, float volume)
+        public virtual void PlaySound(SoundType sound, float volume, bool looping = false)
         {
             AudioClip[] _clips = clips[(int)sound].Sounds;
             AudioClip randomClip = _clips[UnityEngine.Random.Range(0, _clips.Length)];
 
-
-            audioSource.PlayOneShot(randomClip, volume);
+            if(looping )
+            {
+                audioSource.loop = true;
+                audioSource.clip = randomClip;
+                audioSource.volume = volume;
+                audioSource.Play();
+            }
+            else
+            {
+                audioSource.loop = false;
+                audioSource.clip = null;
+                audioSource.PlayOneShot(randomClip, volume);
+            }
+            
+            
         }
 
         public virtual void StopSound() 
         {
+            audioSource.clip = null;
             audioSource.Stop();
         }
 

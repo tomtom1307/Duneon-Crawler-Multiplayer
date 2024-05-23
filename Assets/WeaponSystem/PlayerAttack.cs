@@ -16,7 +16,7 @@ public class PlayerAttack : NetworkBehaviour
     public int mouseButton;
     public float ChargePercentage;
     public float ChargeSpeed = 3f;
-
+    bool fullyCharged;
     private void Awake()
     {
         cam = Camera.main;
@@ -46,12 +46,14 @@ public class PlayerAttack : NetworkBehaviour
             if (!(weapon.State == WeaponHolder.AttackState.active))
             {
                 weapon._soundSource.PlaySound(SourceSoundManager.SoundType.Attack2Charge, 0.5f);
+                fullyCharged = false;
             }
             weapon.Enter(2);
-            if(ChargePercentage == 1)
+            
+            if(ChargePercentage == 1 && !fullyCharged)
             {
-                
-                weapon._soundSource.PlaySound(SourceSoundManager.SoundType.Attack2Charge, 0.5f);
+                fullyCharged = true;
+                weapon._soundSource.PlaySound(SourceSoundManager.SoundType.Attack2Charge, 0.5f, true);
             }
             ChargePercentage += (Time.deltaTime * ChargeSpeed);
             ChargePercentage = Mathf.Clamp(ChargePercentage, 0, 1);

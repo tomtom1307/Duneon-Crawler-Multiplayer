@@ -127,7 +127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6398913854408437718}
-  - component: {fileID: 6544223881884041702}
+  - component: {fileID: -6827007031309217127}
   m_Layer: 8
   m_Name: Wizard Staff(Clone)
   m_TagString: Untagged
@@ -152,7 +152,7 @@ Transform:
   - {fileID: 8350831834292564513}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -68.842, z: 0}
---- !u!114 &6544223881884041702
+--- !u!114 &-6827007031309217127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,19 +161,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6236249103363093857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9b4a7d4ae69e484ab9e698e463ed53b, type: 3}
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Attack1PS: {fileID: 3994689893600592814, guid: 7b09c813fd530774fa7483777d00bd69,
-    type: 3}
-  EffectOrigin: {fileID: 8350831834292564513}
-  Speed: 20
-  Attack2PS: {fileID: 5234310766512725819, guid: 7ee0828c82628484f87e29d20e82a029,
-    type: 3}
-  onTouch:
-    serializedVersion: 2
-    m_Bits: 65
-  Distance: 0
+  GlobalObjectIdHash: 1809555393
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &7064686442716764926
 GameObject:
   m_ObjectHideFlags: 0

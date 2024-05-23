@@ -37,7 +37,7 @@ namespace Project
             else manaUse = weapon.Data.Attack2ManaUse;
             ChargePercentage = PA.ChargePercentage;
             print(weapon.visualAttacks);
-            weapon.visualAttacks.Attack2(ChargePercentage);
+            weapon.visualAttacks.AOEServerRpc(ChargePercentage);
             //Debug.Log("Handle Attack Action");
             detected = Physics.OverlapSphere(cam.transform.position, data.detectionRadius* ChargePercentage, data.DetectableLayers);
             weapon.statManager.stats.DoMagicAttack(manaUse * ChargePercentage);

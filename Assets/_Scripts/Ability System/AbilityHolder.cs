@@ -1,7 +1,10 @@
 
+using Project;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +14,7 @@ public class AbilityHolder : NetworkBehaviour
     float cooldownTime;
     float activeTime;
     public Image UIFill;
-
+    PlayerActionManager actionManager;
     enum AbilityState
     {
         ready,
@@ -25,7 +28,7 @@ public class AbilityHolder : NetworkBehaviour
     float maxCooldownVal;
     private void Start()
     {
-
+        actionManager = GetComponent<PlayerActionManager>();
         maxCooldownVal = ability.coolDownTime;
     }
 
@@ -43,7 +46,7 @@ public class AbilityHolder : NetworkBehaviour
                 {
                     ability.Activate(gameObject, out Fail);
                     if (Fail) return;
-                    
+                    actionManager.OnAbility(ability.name);
                     state = AbilityState.active;
 
 
@@ -73,5 +76,9 @@ public class AbilityHolder : NetworkBehaviour
 
 
         
+
+
     }
+
+    
 }

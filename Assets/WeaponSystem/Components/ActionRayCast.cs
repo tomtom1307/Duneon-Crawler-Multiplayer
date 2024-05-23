@@ -33,16 +33,17 @@ namespace Project
             if (detected == null)
             {
                 var target = cam.transform.position + cam.transform.forward * currentAttackData.Distance;
+                print(weapon.visualAttacks);
                 Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, currentAttackData.Distance, weapon.visualAttacks.onTouch);
                 if(hit.point != new Vector3(0,0,0))
                 {
                     target = hit.point;
                 }
-                weapon.visualAttacks.Attack1(target);
+                weapon.visualAttacks.FakeProjectileServerRpc(target);
                 
                 return;
             }
-            weapon.visualAttacks.Attack1(hit.point);
+            weapon.visualAttacks.FakeProjectileServerRpc(hit.point);
             OnDetectedCollider?.Invoke(detected);
             if (detected.tag == "Head")
             {

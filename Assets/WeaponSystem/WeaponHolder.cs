@@ -65,8 +65,7 @@ namespace Project.Weapons
         public void SetData(WeaponDataSO data)
         {
             Data = data;
-            visualAttacks = GetComponentInChildren<VFXHandler>();
-        }
+         }
 
 
         private void Update()
@@ -102,7 +101,7 @@ namespace Project.Weapons
                         }
                         Cooldown = Data.Attack1Cooldown;
                         State = AttackState.active;
-                        visualAttacks = GetComponentInChildren<VFXHandler>();
+                        
                         anim.SetBool("active", true);
                         anim.SetInteger("counter", CurrentAttackCounter);
                         attackCounterResetTimer.StopTimer();
@@ -115,7 +114,7 @@ namespace Project.Weapons
                 {
                         
                     
-                    visualAttacks = GetComponentInChildren<VFXHandler>();
+
                     Cooldown = Data.Attack2Cooldown;
                     State = AttackState.active;
                     anim.SetBool("Secondary", true);
@@ -131,6 +130,17 @@ namespace Project.Weapons
             
         }
 
+        public void DoAttackScreenShake()
+        {
+            CamShake CS = Camera.main.GetComponent<CamShake>();
+            CS.StartShake(CS.onAttack);
+        }
+
+        public void DoAOEScreenShake()
+        {
+            CamShake CS = Camera.main.GetComponent<CamShake>();
+            CS.StartShake(CS.onAOE);
+        }
 
 
         public void Exit()
@@ -160,6 +170,8 @@ namespace Project.Weapons
                 item.enabled = true;
             }
             eventHandler.OnFinish += Exit;
+            eventHandler.OnAttackAction += DoAttackScreenShake;
+            eventHandler.OnAOEAction += DoAOEScreenShake;
             attackCounterResetTimer.OntimerDone += ResetAttackCounter;
         }
 
@@ -175,6 +187,8 @@ namespace Project.Weapons
             anim.SetBool("SecondaryRelease", false);
             State = AttackState.ready;
             attackCounterResetTimer.OntimerDone -= ResetAttackCounter;
+            eventHandler.OnAttackAction -= DoAttackScreenShake;
+            eventHandler.OnAOEAction -= DoAOEScreenShake;
             eventHandler.OnFinish -= Exit;
         }
     }

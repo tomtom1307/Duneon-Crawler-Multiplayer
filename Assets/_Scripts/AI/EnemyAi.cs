@@ -23,12 +23,12 @@ namespace Project
         Rigidbody rb;
         public Transform headTarget;
 
-        private void Awake()
+        public virtual void Awake()
         {
             enemyReferences = GetComponent<EnemyReferences>();
         }
 
-        private void Start()
+        public virtual void Start()
         {
             attackDistance = enemyReferences.navMeshAgent.stoppingDistance + 1;
             List<Object> list = FindObjectsOfType(typeof(PlayerMovement)).ToList();
@@ -36,12 +36,13 @@ namespace Project
             {
                 playerlist.Add(item.GameObject().transform);
             }
-
+            
             rb = GetComponent<Rigidbody>();
+            rb.isKinematic = true;
         }
 
 
-        private void Update()
+        public virtual void Update()
         {
             enemyReferences.animator.SetFloat("Speed", enemyReferences.navMeshAgent.velocity.magnitude/enemyReferences.navMeshAgent.speed);
             target = DetectPlayer();
@@ -62,37 +63,43 @@ namespace Project
             }
         }
 
-        private void Attack()
+        public virtual void Attack()
         {
             enemyReferences.animator.SetBool("Attacking", true);
             
         }
 
 
-        public void AttackAction()
+        public virtual void AttackAction()
         {
-            RaycastHit hit;
-            Physics.Raycast(transform.position, transform.forward * AttackDistance, out hit, 10);
+            PlayerStats ps = null;
+            
+            Collider[] hits = Physics.OverlapBox(transform.position, new Vector3(10,10,10), Quaternion.identity, 10);
+            
+            foreach (var hit in hits)
+            {
+                if (hit.GetComponent<Collider>() == null) return;
+                hit.GetComponent<Collider>().gameObject.TryGetComponent<PlayerStats>(out ps);
+                if (ps != null) ps.TakeDamage(Damage);
+            }
+            
+            
 
-            PlayerStats ps;
-            if (hit.collider == null) return;
-            hit.collider.gameObject.TryGetComponent<PlayerStats>(out ps);
-
-            if (ps != null) ps.TakeDamage(Damage);
+            
             
         }
 
-        private void AttackExit()
+        public virtual void AttackExit()
         {
             enemyReferences.animator.SetBool("Attacking", false);
         }
 
-        private void OnDrawGizmos()
+        public virtual void OnDrawGizmos()
         {
             Gizmos.DrawCube(transform.position + transform.forward * AttackDistance, transform.localScale);
         }
 
-        private Transform DetectPlayer()
+        public virtual Transform DetectPlayer()
         {
             float MinDist = MaxDetectDistance;
             Transform target = null;
@@ -110,7 +117,7 @@ namespace Project
 
         }
 
-        private void LookAtTarget()
+        public virtual void LookAtTarget()
         {
             Vector3 lookPos = target.position - transform.position;
             lookPos.y = 0;
@@ -118,10 +125,10 @@ namespace Project
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.2f);
         }
 
-        
 
 
-        private void UpdatePath()
+
+        public virtual void UpdatePath()
         {
             if(Time.time >= pathUpdateDeadline)
             {

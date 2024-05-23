@@ -24,8 +24,9 @@ namespace Project
             GetPlayerStats();
         }
 
-
         
+
+
         public void GetPlayerStats()
         {
             playerStats.Clear();
@@ -51,7 +52,30 @@ namespace Project
             
         }
 
-       
+        GameObject SpawnObj;
+        public void TriggerSpawn(GameObject Go, Vector3 pos, Quaternion rot, Vector3 finalPos)
+        {
+            SpawnObj = Go;  
+            SpawnObjectServerRpc(pos, rot, finalPos);
+        }
+
+
+
+        [ServerRpc(RequireOwnership =false)]
+        public void SpawnObjectServerRpc(Vector3 pos, Quaternion rot, Vector3 finalPos)
+        {
+            var SpawnedObj = Instantiate(SpawnObj, pos, rot);
+            NetworkObject NO = SpawnedObj.GetComponent<NetworkObject>();
+            NO.Spawn();
+            MoveToTarget MT;
+            if(SpawnedObj.TryGetComponent<MoveToTarget>(out MT))
+            {
+                MT.target = finalPos;
+            }
+            Invoke("NO.Despawn", 5);
+        }
+
+
         public void GiveMana(float mana)
         {
             foreach (var stats in playerStats)
@@ -61,6 +85,7 @@ namespace Project
         }
 
 
+       
         public override void OnNetworkSpawn()
         {
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadeventCompleted;

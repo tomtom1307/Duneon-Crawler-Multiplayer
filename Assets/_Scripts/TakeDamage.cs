@@ -202,6 +202,7 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         public void FloatAttackRecieveServerRpc(float Height, float Duration)
         {
+            CancelInvoke("EnableNavMeshServerRpc");
             Floating = true;
             floatHeight = Height;
             rb.isKinematic = true;
@@ -223,7 +224,9 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         private void EndFloatingEffectServerRpc()
         {
-            transform.DOMove(-floatHeight * Vector3.up + transform.position, 0.5f);
+            transform.DOMove(-floatHeight * Vector3.up + transform.position, 0.2f);
+            DoDamageServerRpc(1);
+            ER.animator.Play("Hit", -1, 0f);
             rb.isKinematic = false;
             ER.animator.applyRootMotion = true;
             ER.animator.Play("Movement");
@@ -244,19 +247,27 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         public void DisableNavMeshServerRpc()
         {
-            if (!SkinnedMesh || Ded || Floating) return;
+            if (!SkinnedMesh || Ded) return;
 
-            
 
-            if (_health.Value <= 0 )
+
+
+            if (_health.Value <= 0)
             {
                 Ded = true;
-                ER.animator.Play("Die", -1, 0);
+                if (Floating)
+                {
+                    transform.DOMove(-floatHeight * Vector3.up + transform.position, 0.1f);
+                    ER.animator.Play("FallingDeath", -1, 0);
+                    CancelInvoke("EndFloatingEffectServerRpc");
+                }
+                else ER.animator.Play("Die", -1, 0);
+
                 ER.DissolveController.StartDissolveClientRpc();
                 DisableHealthBarClientRpc();
                 GameManager.instance.AwardXPServerRpc(xpOnKill);
 
-               
+
                 Destroy(ER.navMeshAgent);
                 CancelInvoke("EnableNavMeshServerRpc");
                 Invoke("Delete", 4);
@@ -268,9 +279,10 @@ namespace Project
                 Destroy(rb);
 
             }
+            else if (Floating) return;
             else
             {
-                
+
                 ER.navMeshAgent.enabled = false;
                 ER.animator.Play("Hit", -1, 0f);
                 ER.animator.applyRootMotion = false;

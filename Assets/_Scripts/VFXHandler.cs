@@ -1,10 +1,12 @@
+using Project.Weapons;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Project
 {
-    public class VFXHandler : MonoBehaviour
+    public class VFXHandler : NetworkBehaviour
     {
         public GameObject Attack1PS;
         public Transform EffectOrigin;
@@ -13,24 +15,41 @@ namespace Project
         public LayerMask onTouch;
         Transform target; 
         public float Distance;
+        
         GameObject Visual;
-        public void Attack1(Vector3 EndPos)
-        {
-            Visual = Instantiate(Attack1PS, EffectOrigin.position, Quaternion.identity);
-            MoveToTarget MT = Visual.GetComponent<MoveToTarget>();
-            MT.speed = Speed;
-            MT.target = EndPos;
-            
 
-            
+        private void Start()
+        {
+            if (!IsOwner) return;
+            Camera.main.GetComponentInChildren<WeaponHolder>().visualAttacks = this;
+            print(Camera.main.GetComponentInChildren<WeaponHolder>().visualAttacks);
         }
 
-        public void Attack2(float Scale)
-        {
-            Visual = Instantiate(Attack2PS, EffectOrigin.position-Vector3.up, Quaternion.Euler(-90,0,0));
-            Visual.transform.localScale = Scale * Vector3.one;
-            Destroy(Visual,4);
 
+        [ServerRpc]
+        public void FakeProjectileServerRpc(Vector3 EndPos)
+        {
+            print("FakeProj");
+            GameObject visual = Instantiate(Attack1PS, transform.position-Vector3.down*0.2f, Quaternion.identity);
+            visual.GetComponent<NetworkObject>().Spawn();
+            visual.GetComponent<MoveToTarget>().target = EndPos;
+            StartCoroutine(Delete(visual));
+        }
+
+        [ServerRpc]
+        public void AOEServerRpc(float Scale)
+        {
+            print("AOE");
+            GameObject visual = Instantiate(Attack2PS, transform.position, Quaternion.identity);
+            visual.GetComponent<NetworkObject>().Spawn();
+            StartCoroutine(Delete(visual));
+        }
+
+        IEnumerator Delete(GameObject GO)
+        {
+            yield return new WaitForSeconds(5);
+            GO.GetComponent<NetworkObject>().Despawn();
+            Destroy(GO,1);
         }
 
 
