@@ -14,11 +14,12 @@ namespace Project
         public float MaxDetectDistance;
         public float Damage;
         public float AttackDistance;
-
+        public EnemySpawner Spawner;
         Transform target;
         private EnemyReferences enemyReferences;
         private float attackDistance;
         private float pathUpdateDeadline;
+        
         public List<Transform> playerlist;
         Rigidbody rb;
         public Transform headTarget;
@@ -136,6 +137,15 @@ namespace Project
                 enemyReferences.navMeshAgent.SetDestination(target.position);
             }
         }
+
+        public virtual void OnDeathTellSpawner()
+        {
+            if(Spawner != null)
+            {
+                Spawner.EnemiesLeft -= 1;
+            }
+        }
+
 
     }
 }

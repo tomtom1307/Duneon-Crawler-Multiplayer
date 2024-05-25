@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Project
 {
-    public interface IDamageable 
+    public class Goblin : Enemy
     {
-        void Damage(float amount);
+        
     }
 }

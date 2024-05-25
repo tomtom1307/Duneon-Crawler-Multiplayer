@@ -33,24 +33,19 @@ namespace Project
             GameObject visual = Instantiate(Attack1PS, transform.position-Vector3.down*0.2f, Quaternion.identity);
             visual.GetComponent<NetworkObject>().Spawn();
             visual.GetComponent<MoveToTarget>().target = EndPos;
-            StartCoroutine(Delete(visual));
         }
 
         [ServerRpc]
         public void AOEServerRpc(float Scale)
         {
             print("AOE");
-            GameObject visual = Instantiate(Attack2PS, transform.position, Quaternion.identity);
+            GameObject visual = Instantiate(Attack2PS, transform.position-Vector3.up*0.4f, Quaternion.Euler(new Vector3(-90,0,0)));
+            visual.transform.localScale = Scale* Vector3.one;
             visual.GetComponent<NetworkObject>().Spawn();
-            StartCoroutine(Delete(visual));
+
         }
 
-        IEnumerator Delete(GameObject GO)
-        {
-            yield return new WaitForSeconds(5);
-            GO.GetComponent<NetworkObject>().Despawn();
-            Destroy(GO,1);
-        }
+
 
 
         private void Update()

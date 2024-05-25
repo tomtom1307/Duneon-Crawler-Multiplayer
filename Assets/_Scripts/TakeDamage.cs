@@ -255,6 +255,7 @@ namespace Project
             if (_health.Value <= 0)
             {
                 Ded = true;
+                ER.AI.OnDeathTellSpawner();
                 if (Floating)
                 {
                     transform.DOMove(-floatHeight * Vector3.up + transform.position, 0.1f);

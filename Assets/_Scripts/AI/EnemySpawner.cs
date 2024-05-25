@@ -8,16 +8,19 @@ namespace Project
     public class EnemySpawner : NetworkBehaviour
     {
         public List<GameObject> enemyPrefabs;
+        public BoxCollider Bounds;
         public float SpawnDelay;
         public float SpawnRange;
-        float counter = 0;
+        public float counter = 0;
+        public float EnemiesLeft;
         public float spawnAmount = 1;
         bool Spawned = false;
-        bool Active = false;   
+        public bool Active = false;
+        public bool AllEnemiesKilled;
         // Start is called before the first frame update
         void Start()
         {
-            
+            Bounds = GetComponent<BoxCollider>();
         }
 
         // Update is called once per frame
@@ -25,36 +28,38 @@ namespace Project
         {
             
             if (!Active || !IsHost) return;
-            if(!Spawned && counter <= spawnAmount)
+            if(!Spawned && counter < spawnAmount)
             {
                 counter++;
+                EnemiesLeft++;
                 Spawned = true;
-                float Randomx = Random.Range(-SpawnRange, SpawnRange);
-                float Randomz = Random.Range(-SpawnRange, SpawnRange);
-                StartCoroutine(SpawnEnemy(Randomx, Randomz));
+                StartCoroutine(SpawnEnemy());
             }
-                
+            if (EnemiesLeft == 0 && Active)
+            {
+                AllEnemiesKilled = true;
+            }
+
         }
-        private void OnTriggerEnter(Collider other)
-        {
-            Active = true;
-        }
+        
 
         
         
-        private IEnumerator SpawnEnemy(float Randomx, float Randomz)
+        private IEnumerator SpawnEnemy()
         {
             yield return new WaitForSeconds(SpawnDelay);
             Spawned = false;
-            SpawnEnemyServerRpc(Randomx,Randomz);
+            SpawnEnemyServerRpc();
 
         }
 
         [ServerRpc]
-        public void SpawnEnemyServerRpc(float Randomx, float Randomz)
+        public void SpawnEnemyServerRpc()
         {
-            Vector3 RandSpawnPos = new Vector3(transform.position.x + Randomx, transform.position.y, transform.position.z + Randomz);
+            Vector3 range = Bounds.size;
+            Vector3 RandSpawnPos =  transform.position+ new Vector3(Random.Range(-range.x, range.x), 0, Random.Range(-range.z, range.z));
             var Instance = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], RandSpawnPos, Quaternion.identity);
+            //Instance.GetComponent<EnemyAi>().Spawner = this;
             var InstanceNetworkObj = Instance.GetComponent<NetworkObject>();
             InstanceNetworkObj.Spawn();
         }

@@ -35,6 +35,7 @@ namespace Project
                 }
                 
                 
+                
             
             }
         }
@@ -49,12 +50,14 @@ namespace Project
         }
 
 
+        
         IEnumerator Delete(GameObject GO)
         {
             yield return new WaitForSeconds(5);
             GO.GetComponent<NetworkObject>().Despawn();
-            Destroy(GO, 1);
+            
             Destroy(this.gameObject);
+
         }
 
     }
