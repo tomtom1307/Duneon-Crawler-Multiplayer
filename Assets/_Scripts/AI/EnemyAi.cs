@@ -81,7 +81,7 @@ namespace Project
             {
                 if (hit.GetComponent<Collider>() == null) return;
                 hit.GetComponent<Collider>().gameObject.TryGetComponent<PlayerStats>(out ps);
-                if (ps != null) ps.TakeDamage(Damage);
+                if (ps != null) ps.TakeDamage(Damage,transform.position);
             }
             
             

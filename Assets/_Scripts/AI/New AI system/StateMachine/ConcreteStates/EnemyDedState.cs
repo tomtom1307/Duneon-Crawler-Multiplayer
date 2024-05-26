@@ -1,18 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Project
 {
-    public class EnemyIdleState : EnemyState
+    public class EnemyDedState : EnemyState
     {
-        
-
-
-
-        
-        public EnemyIdleState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
+        public EnemyDedState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
         {
         }
 
@@ -24,11 +18,9 @@ namespace Project
         public override void EnterState()
         {
             base.EnterState();
-
+            enemy.Die();
             
-
         }
-
 
         public override void ExitState()
         {
@@ -37,17 +29,12 @@ namespace Project
 
         public override void FrameUpdate()
         {
-            
             base.FrameUpdate();
-            
-
         }
 
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
         }
-
-        
     }
 }

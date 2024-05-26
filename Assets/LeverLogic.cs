@@ -20,6 +20,7 @@ namespace Project
             base.Interact();
             anim.SetBool("Flip", true);
             EST.DoSomething();
+
             Destroy(this);
         }
     }

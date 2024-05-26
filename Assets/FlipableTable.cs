@@ -17,6 +17,7 @@ namespace Project
         {
             base.Interact();
             anim.SetBool("Flip", true);
+
             Destroy(this);
         }
     }

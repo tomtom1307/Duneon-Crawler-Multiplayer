@@ -7,7 +7,7 @@ namespace Project
     public class SecondaryAttack : WeaponComponent<SecondaryDamageData, SecondaryAttackDamage>
     {
         private ActionSphereOverlap sphereDetect;
-        TakeDamage TD;
+        Enemy TD;
         public float ChargePercentage;
         PlayerAttack PA;
 
@@ -32,7 +32,7 @@ namespace Project
             else
             {
                 
-                TD = collider.GetComponent<TakeDamage>();
+                TD = collider.GetComponent<Enemy>();
                 TD.DoDamageServerRpc(ChargePercentage * weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
                 if(collider.GetComponent<Rigidbody>() != null)
                 {

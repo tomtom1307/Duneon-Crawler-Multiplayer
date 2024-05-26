@@ -3112,12 +3112,28 @@ MonoBehaviour:
   <maxDetectDist>k__BackingField: 100
   <AttackDistance>k__BackingField: 3
   <lungeDistance>k__BackingField: 1
-  <TimeBetweenAttacks>k__BackingField: 4
+  <TimeBetweenAttacks>k__BackingField: 2
+  <AttackDamage>k__BackingField: 4
+  HealthBar: {fileID: 6302920174425496141}
+  <xpOnKill>k__BackingField: 5
+  <whatisPlayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 1024
+  colliders:
+  - {fileID: 3266458929852925726}
+  HealthCanvas: {fileID: 2629491045470020135}
   playerlist: []
   target: {fileID: 0}
   aggression: 0.5
+  <HeadshotColor>k__BackingField: {r: 1, g: 0.40392157, b: 0.40392157, a: 1}
+  <NormalColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
   RandomMovementRange: 5
   RandomMovementSpeed: 1
+  damageText: {fileID: 5493454748374447997, guid: 328779aff6d65a54ea955ca4a033948f,
+    type: 3}
+  Floating: 0
+  floatHeight: 0
+  Spawner: {fileID: 0}
 --- !u!114 &501037904413537466
 MonoBehaviour:
   m_ObjectHideFlags: 0

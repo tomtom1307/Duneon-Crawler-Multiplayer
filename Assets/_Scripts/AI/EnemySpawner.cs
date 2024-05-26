@@ -59,7 +59,9 @@ namespace Project
             Vector3 range = Bounds.size;
             Vector3 RandSpawnPos =  transform.position+ new Vector3(Random.Range(-range.x, range.x), 0, Random.Range(-range.z, range.z));
             var Instance = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], RandSpawnPos, Quaternion.identity);
-            //Instance.GetComponent<EnemyAi>().Spawner = this;
+            Enemy En = Instance.GetComponent<Enemy>();
+            En.Spawner = this;
+            En.aggression = Mathf.Clamp(0.1f * spawnAmount, 0, 1);
             var InstanceNetworkObj = Instance.GetComponent<NetworkObject>();
             InstanceNetworkObj.Spawn();
         }

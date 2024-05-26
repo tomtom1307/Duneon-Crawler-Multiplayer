@@ -21,8 +21,9 @@ namespace Project
         {
             base.EnterState();
             enemy.target = enemy.DetectPlayer();
+            enemy.animator.SetBool("Attacking", false);
             _targetPos = enemy.target.position;
-            enemy.navMesh.stoppingDistance = enemy.AttackDistance;
+            enemy.navMesh.stoppingDistance = enemy.AttackDistance*0.8f;
         }
 
         public override void ExitState()

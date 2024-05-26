@@ -29,6 +29,7 @@ public class PlayerCam : MonoBehaviour
 
     private void Update()
     {
+        
         float mouseX = Input.GetAxisRaw("Mouse X") * sensitivity;
         float mouseY = Input.GetAxisRaw("Mouse Y") * sensitivity;
 
@@ -38,6 +39,7 @@ public class PlayerCam : MonoBehaviour
         xRot = Mathf.Clamp(xRot, -90f, 90f);
 
         camHolder.rotation = Quaternion.Euler(xRot, yRot, 0);
+        if (orientation == null) return;
         orientation.rotation = Quaternion.Euler(0, yRot, 0);
     }
 

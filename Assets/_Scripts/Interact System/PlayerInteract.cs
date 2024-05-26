@@ -47,6 +47,7 @@ namespace Project
                     if (Input.GetKeyDown(KeyCode.F))
                     {
                         interactable.BaseInteract();
+                        text.text = "";
                     }
                 }
             }

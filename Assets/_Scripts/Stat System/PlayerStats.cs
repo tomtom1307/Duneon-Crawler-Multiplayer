@@ -28,8 +28,12 @@ namespace Project
         [Header("Currency")]
         public int ChaosPoints;
         public int Gold;
-        public int SkillPoints; 
-        
+        public int SkillPoints;
+
+        [Header("Damage Visuals")]
+        public CamShake CS;
+        public DamageArrowUI DamageArrow;
+
         [Header("Health and UI")]
         [SerializeField] public NetworkVariable<float> _health = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
         [SerializeField] public NetworkVariable<float> _mana = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
@@ -37,6 +41,8 @@ namespace Project
         public Image manaBarFill;
         public float manaRegen;
         public StatManager StatManager;
+
+        
 
         private void Awake()
         {
@@ -75,7 +81,9 @@ namespace Project
             DisplayStatsUI.Singleton.UpdateUIStat((int)Dexterity, DisplayStatsUI.Singleton.DexVal);
             DisplayStatsUI.Singleton.UpdateXPBar(xp, requiredXP);
 
-
+            //Get CamShake Component
+            CS = Camera.main.GetComponent<CamShake>();
+            //DamageArrow component
         }
 
         [ClientRpc]
@@ -133,8 +141,15 @@ namespace Project
 
 
 
-        public void TakeDamage(float damage)
-        {
+        public void TakeDamage(float damage, Vector3 damageOrigin)
+        {   
+            if(IsOwner)
+            {
+                CS.StartShake(CS.onHit);
+                HandleDamageArrowShit(damageOrigin);
+            }
+            
+            print("Called");
             if (!IsLocalPlayer) return;
             damage -= Armor;
             damage = Mathf.Clamp(damage, 0, MaxHealth - 1);
@@ -156,7 +171,13 @@ namespace Project
         }
 
 
-        
+        public void HandleDamageArrowShit(Vector3 damageOrigin)
+        {
+            DamageArrow.DamageLocation = damageOrigin;
+            GameObject GO = Instantiate(DamageArrow.gameObject, DamageArrow.transform.position, DamageArrow.transform.rotation, DamageArrow.transform.parent);
+            GO.SetActive(true);
+            Destroy(GO, 6);
+        }
 
 
         //Handle Levels and XP

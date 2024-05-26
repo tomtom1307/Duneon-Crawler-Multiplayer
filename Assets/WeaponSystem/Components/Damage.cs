@@ -7,7 +7,7 @@ namespace Project
     public class Damage : WeaponComponent<DamageData, AttackDamage>
     {
         private ActionRayCast rayCast;
-        TakeDamage TD;
+        Enemy TD;
         
         private void HandleColliderDetection(Collider collider)
         {
@@ -21,7 +21,7 @@ namespace Project
                 weapon._soundSource.PlaySound(SourceSoundManager.SoundType.HeadShotDink, 2f);
                 weapon.statManager.GiveWeaponXP(5, weapon.statManager.weaponXPscaling);
                 print("Head");
-                TD = collider.GetComponentInParent<TakeDamage>();
+                TD = collider.GetComponentInParent<Enemy>();
                 weapon.statManager.GiveXP(weapon.statManager.headShotXP);
                 
                 TD.DoDamageServerRpc(weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic), true);
@@ -36,7 +36,7 @@ namespace Project
             else
             {
                 weapon.statManager.GiveWeaponXP(3, weapon.statManager.weaponXPscaling);
-                TD =collider.GetComponent<TakeDamage>();
+                TD =collider.GetComponent<Enemy>();
                 TD.DoDamageServerRpc(weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
                 
                 TD.DisableNavMeshServerRpc();

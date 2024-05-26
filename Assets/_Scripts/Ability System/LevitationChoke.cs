@@ -25,11 +25,11 @@ namespace Project
             base.Activate(parent, out fail);
 
             List<Collider> EnemiesFound = Physics.OverlapSphere(parent.transform.position, Range, whatIsEnemy).ToList();
-            TakeDamage TD;
+            Enemy TD;
             foreach (Collider c in EnemiesFound)
             {
                 
-                if(c.gameObject.TryGetComponent<TakeDamage>(out TD))
+                if(c.gameObject.TryGetComponent<Enemy>(out TD))
                 {
                     TD.FloatAttackRecieveServerRpc(Height, activeTime);
                 }
