@@ -80,6 +80,8 @@ namespace Project
                 Debug.Log("Back To Chasing");
             }
 
+
+            //TODO BEFORE ATTACKING CHECK BETWEEN PLAYER AND THIS ENEMY FOR ANY OTHER ENEMIES IF TRUE THEN REPOSITION!!!!!!
             if(_timer > (timeBetweenAttacks - Mathf.Clamp((enemy.aggression),0.1f,1))&& !repositioning && !attacking) 
             {
                 attacking = true;
