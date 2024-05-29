@@ -18,7 +18,7 @@ namespace Project
         public NetworkVariable<float> CurrentHealth { get; set; } = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
         [field: SerializeField] public float maxDetectDist { get; set; } = 100f;
         [field: SerializeField] public float AttackDistance { get; set; } = 4f;
-        [field: SerializeField] public float lungeDistance { get; set; } = 4f;
+
         [field: SerializeField] public float TimeBetweenAttacks { get; set; } = 4f;
         [field: SerializeField] public float AttackDamage { get; set; } = 4f;
         [field: SerializeField] public Image  HealthBar;
@@ -62,8 +62,27 @@ namespace Project
 
         #endregion
 
+        #region ScriptableObject Variables
+
+        [SerializeField] private EnemyChaseSOBase EnemyChaseBase;
+        [SerializeField] private EnemyAttackSOBase EnemyAttackBase;
+
+
+        public EnemyChaseSOBase EnemyChaseInstance { get; set; }
+        public EnemyAttackSOBase EnemyAttackInstance { get; set; }
+
+
+
+        #endregion
+
+
+
         private void Awake()
         {
+            EnemyChaseInstance = Instantiate(EnemyChaseBase);
+            EnemyAttackInstance = Instantiate(EnemyAttackBase);
+
+
             //Contruct StateMachine
             StateMachine = new EnemyStateMachine();
 
@@ -94,6 +113,9 @@ namespace Project
             }
 
             //Initialize StateMachine
+            EnemyChaseInstance.Initialize(gameObject, this);
+            EnemyAttackInstance.Initialize(gameObject, this);
+
             StateMachine.Initialize(ChaseState);
 
             //Final Setup shit
@@ -119,6 +141,7 @@ namespace Project
             CurrentHealth.Value -= Damage;
             aggression += 0.05f;
             HandleLocalVisualsClientRpc(Damage, headshot);
+            
 
         }
 
@@ -162,7 +185,7 @@ namespace Project
             animator.Play("Hit", -1, 0f);
             rb.isKinematic = false;
             animator.applyRootMotion = true;
-            animator.Play("Movement");
+            //animator.Play("Movement");
             Invoke("EnableNavMeshServerRpc", 0.5f);
             Floating = false;
         }

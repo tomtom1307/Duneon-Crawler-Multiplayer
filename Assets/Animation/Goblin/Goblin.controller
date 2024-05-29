@@ -177,7 +177,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Goblin Sword attack
-  m_Speed: 1
+  m_Speed: 1.25
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7995664473183813425}
@@ -717,8 +717,8 @@ BlendTree:
     m_Motion: {fileID: -203655887218126122, guid: ba3c38df0e5492b44ace423339612f29,
       type: 3}
     m_Threshold: 1
-    m_Position: {x: 0, y: 1}
-    m_TimeScale: 0.7
+    m_Position: {x: 0, y: 5}
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Speed
     m_Mirror: 0
@@ -726,7 +726,39 @@ BlendTree:
     m_Motion: {fileID: -203655887218126122, guid: 659a13d185c957141b0ff961ee844fcb,
       type: 3}
     m_Threshold: 2
-    m_Position: {x: 0, y: -1}
+    m_Position: {x: 0, y: -3}
+    m_TimeScale: 2
+    m_CycleOffset: 0
+    m_DirectBlendParameter: SpeedX
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: 4ca42b287191bee4e8aec31001dd5aee, type: 2}
+    m_Threshold: 3
+    m_Position: {x: -5, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: SpeedX
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: 4ca42b287191bee4e8aec31001dd5aee, type: 2}
+    m_Threshold: 4
+    m_Position: {x: -5, y: 5}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: SpeedX
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: 08a07aa0048c6844789d7c29241997f2, type: 2}
+    m_Threshold: 5
+    m_Position: {x: 5, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: SpeedX
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: 08a07aa0048c6844789d7c29241997f2, type: 2}
+    m_Threshold: 6
+    m_Position: {x: 5, y: 5}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: SpeedX
@@ -734,7 +766,7 @@ BlendTree:
   m_BlendParameter: SpeedX
   m_BlendParameterY: SpeedY
   m_MinThreshold: 0
-  m_MaxThreshold: 2
+  m_MaxThreshold: 6
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 2

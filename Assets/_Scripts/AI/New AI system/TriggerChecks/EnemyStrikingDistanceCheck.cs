@@ -41,7 +41,7 @@ namespace Project
             }
             
 
-            else
+            else if(distance > enemy.AttackDistance+1)
             {
                 timer += Time.deltaTime;
                 if(timer > 1 - enemy.aggression)

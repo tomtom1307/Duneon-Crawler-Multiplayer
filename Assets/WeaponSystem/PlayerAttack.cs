@@ -29,6 +29,8 @@ public class PlayerAttack : NetworkBehaviour
 
     private void Update()
     {
+
+
         if (weapon.State == WeaponHolder.AttackState.coolDown) return;
 
         if (Input.GetMouseButtonUp(1))

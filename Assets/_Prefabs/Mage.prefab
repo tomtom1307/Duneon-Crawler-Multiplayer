@@ -9205,7 +9205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 936891590
+  GlobalObjectIdHash: 580854907
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -9255,9 +9255,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a8cd39ebce9e44fb34319e19635b4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 0
   walkSpeed: 150
   sprintSpeed: 180
   climbSpeed: 50
+  speedReductionWhenAttacking: 0.7
   crouchSpeed: 100
   crouchYScale: 0.3
   groundDrag: 2
@@ -9275,6 +9277,7 @@ MonoBehaviour:
     m_Bits: 64
   grounded: 0
   climbing: 0
+  attacking: 0
   landed: 0
   relLandingVel: 0
   maxSlopeAngle: 30
@@ -9284,6 +9287,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   state: 0
   MC: {fileID: 0}
+  AttackVelocity: 0
+  WeaponManager: {fileID: 0}
   SphereRadius: 0.25
 --- !u!114 &2328573120343629083
 MonoBehaviour:

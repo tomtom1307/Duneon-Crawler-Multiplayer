@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.Netcode;
+using Project.Weapons;
 
 public class PlayerMovement: NetworkBehaviour
 {
     [Header("Movement")]
-    private float moveSpeed;
+    [SerializeField]private float moveSpeed;
     public float walkSpeed;
     public float sprintSpeed;
     public float climbSpeed;
+    public float speedReductionWhenAttacking;
+    private float attackMoveMultiplier;
 
 
     [Header("Crouching")]
@@ -40,6 +43,7 @@ public class PlayerMovement: NetworkBehaviour
     public LayerMask whatIsGround;
     public bool grounded;
     public bool climbing;
+    public bool attacking;
     public bool landed;
     public float relLandingVel;
     bool exitingslope;
@@ -59,7 +63,8 @@ public class PlayerMovement: NetworkBehaviour
 
     public MovementState state;
     public MoveCam MC;
-
+    public float AttackVelocity;
+    public WeaponHolder WeaponManager;
     Animator ani;
 
 
@@ -69,7 +74,7 @@ public class PlayerMovement: NetworkBehaviour
         sprinting,
         air,
         crouching,
-        climbing
+        climbing,
     }
 
     private void AnimHandler()
@@ -113,11 +118,8 @@ public class PlayerMovement: NetworkBehaviour
             
             moveSpeed = sprintSpeed;
         }
-        else if (rb.velocity.magnitude < 0.5f)
-        {
-            
 
-        }
+
         //Walking
         else if(grounded)
         {
@@ -125,8 +127,9 @@ public class PlayerMovement: NetworkBehaviour
             
             state = MovementState.walking;
             
-            moveSpeed = walkSpeed;
+            moveSpeed = walkSpeed*attackMoveMultiplier;
         }
+        
         //Idle
         
         //Air
@@ -161,6 +164,7 @@ public class PlayerMovement: NetworkBehaviour
         ani = GetComponentInChildren<Animator>();
         moveSpeed = walkSpeed;
         readyToJump = true;
+        WeaponManager = Camera.main.GetComponentInChildren<WeaponHolder>();
     }
 
     public float SphereRadius;
@@ -222,10 +226,23 @@ public class PlayerMovement: NetworkBehaviour
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
 
         }
+
+        if (WeaponManager.anim.GetBool("Secondary"))
+        {
+            attacking = true;
+            attackMoveMultiplier = speedReductionWhenAttacking;
+        }
+        else
+        {
+            attackMoveMultiplier = 1;
+            attacking = false;
+        }
+        
     }
 
     private void MovePlayer()
     {
+
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 

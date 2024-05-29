@@ -1,6 +1,7 @@
 using Project;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -44,6 +45,8 @@ public class PickUpItem : _Interactable
         Color.red
     };
 
+    public List<GameObject> RarityEffects;
+
 
     public Item item;
     Light pointLight;
@@ -57,6 +60,13 @@ public class PickUpItem : _Interactable
         GetObjComponents();
         
         GameObject displayModel = Instantiate(WeaponData.Model,ModelPos);
+        displayModel.layer = 0;
+        List<MeshRenderer> MRS = displayModel.GetComponentsInChildren<MeshRenderer>().ToList();
+        foreach (var item in MRS)
+        {
+            item.gameObject.layer = 0;
+        }
+        
         displayModel.transform.localRotation = Quaternion.Euler(new Vector3(0,0,0));
 
         //Calculate total value of table
@@ -76,9 +86,8 @@ public class PickUpItem : _Interactable
             else randomVal -= table[i];
         }
         InitializeInventoryItem();
+        GameObject VFX = Instantiate(RarityEffects[index], transform);
         ItemColor = Raritycolor[index];
-        pointLight.color = Raritycolor[index];
-        ps.startColor = Raritycolor[index];
 
         Rarity = rarity[index];
      

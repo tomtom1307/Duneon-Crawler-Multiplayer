@@ -23,7 +23,7 @@ namespace Project.Weapons
         [SerializeField] List<WeaponComponent> components;
         public event Action OnExit;
         public event Action OnEnter;
-
+        public float VelocityReduction;
 
         [HideInInspector] public Animator anim;
         [HideInInspector] public float Cooldown = 0.2f;
@@ -32,6 +32,7 @@ namespace Project.Weapons
         private int currentAttackCounter;
         public VFXHandler visualAttacks;
         private Timer attackCounterResetTimer;
+
         private int CurrentAttack;
         public PlayerSoundSource _soundSource;
         public enum AttackState
@@ -60,11 +61,13 @@ namespace Project.Weapons
         private void Start()
         {
             _soundSource = GetComponentInChildren<PlayerSoundSource>();
+            
         }
 
         public void SetData(WeaponDataSO data)
         {
             Data = data;
+            
          }
 
 
@@ -112,10 +115,11 @@ namespace Project.Weapons
 
                 case (2):
                 {
-                        
-                    
+
+
 
                     Cooldown = Data.Attack2Cooldown;
+                    
                     State = AttackState.active;
                     anim.SetBool("Secondary", true);
                     anim.SetBool("active", true);

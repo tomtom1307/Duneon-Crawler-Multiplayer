@@ -30,6 +30,10 @@ namespace Project
         public void GetPlayerStats()
         {
             playerStats.Clear();
+            if (!IsServer)
+            {
+                return;
+            }
             var connectedClients = NetworkManager.Singleton.ConnectedClientsList;
             foreach (var client in connectedClients)
             {

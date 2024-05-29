@@ -2865,7 +2865,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.45
   m_Speed: 6
-  m_Acceleration: 5
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 400
   m_StoppingDistance: 0
@@ -2911,7 +2911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3117921090
+  GlobalObjectIdHash: 1165096993
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -3110,9 +3110,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 100
   <maxDetectDist>k__BackingField: 100
-  <AttackDistance>k__BackingField: 3
-  <lungeDistance>k__BackingField: 1.15
-  <TimeBetweenAttacks>k__BackingField: 2
+  <AttackDistance>k__BackingField: 2
+  <TimeBetweenAttacks>k__BackingField: 4
   <AttackDamage>k__BackingField: 10
   HealthBar: {fileID: 6302920174425496141}
   <xpOnKill>k__BackingField: 5
@@ -3131,6 +3130,8 @@ MonoBehaviour:
   RandomMovementSpeed: 1
   damageText: {fileID: 5493454748374447997, guid: 328779aff6d65a54ea955ca4a033948f,
     type: 3}
+  EnemyChaseBase: {fileID: 11400000, guid: 99068733950e50b4e8bb60548885e283, type: 2}
+  EnemyAttackBase: {fileID: 11400000, guid: ed781e9e9d60b354d99a8820648108d5, type: 2}
   Floating: 0
   floatHeight: 0
   Spawner: {fileID: 0}
