@@ -21,7 +21,7 @@ namespace Project
 
         public virtual void DoEnterLogic()
         {
-
+            enemy.Attacking = false;
         }
 
         public virtual void DoExitLogic()

@@ -12,7 +12,7 @@ namespace Project
         private float timer;
 
 
-        private void Awake()
+        private void Start()
         {
             enemy = GetComponent<Enemy>();
             
@@ -24,16 +24,10 @@ namespace Project
             if (!IsOwner) return;
             float distance = Vector3.Distance(enemy.target.position, transform.position) ;
             
-            if(distance < enemy.AttackDistance / 2)
-            {
-                enemy.SetRetreatDistanceBool(true);
-                //print("TooClose!");
-                timer = 0;
-            }
 
             
             
-            else if (distance < enemy.AttackDistance)
+            if (distance < enemy.AttackDistance)
             {
                 enemy.SetStrikingDistanceBool(true);
                 //print("InRange");

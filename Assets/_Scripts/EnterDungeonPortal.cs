@@ -9,6 +9,7 @@ namespace Project
     {
         private void OnTriggerEnter(Collider other)
         {
+            
             EnterDungeonServerRpc();
         }
 

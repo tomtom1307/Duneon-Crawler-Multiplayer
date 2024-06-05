@@ -18,6 +18,7 @@ namespace Project
         public NetworkVariable<float> CurrentHealth { get; set; } = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
         [field: SerializeField] public float maxDetectDist { get; set; } = 100f;
         [field: SerializeField] public float AttackDistance { get; set; } = 4f;
+        [field: SerializeField] public float MeleeAttackRange { get; set; } = 0.7f;
 
         [field: SerializeField] public float TimeBetweenAttacks { get; set; } = 4f;
         [field: SerializeField] public float AttackDamage { get; set; } = 4f;
@@ -52,13 +53,11 @@ namespace Project
 
         public float RandomMovementRange = 5f;
         public float RandomMovementSpeed = 1f;
-
+        public GameObject SpawnedObj;
         //VFX Stuff
-
-
         SkinnedMeshRenderer SkinmeshRenderer;
         [field: SerializeField] public GameObject damageText;
-
+        public bool Attacking;
 
         #endregion
 
@@ -102,7 +101,8 @@ namespace Project
             //Get References
             rb = GetComponent<Rigidbody>(); 
             navMesh = GetComponent<NavMeshAgent>();
-            
+            navMesh.avoidancePriority = Random.Range(0, 50);
+
             animator = GetComponent<Animator>();
 
             //Find Players in lobby
@@ -166,9 +166,10 @@ namespace Project
             Floating = true;
             floatHeight = Height;
             rb.isKinematic = true;
+            navMesh.enabled = false;
             transform.DOMove(Height * Vector3.up + transform.position, 0.5f);
             
-            navMesh.enabled = false;
+            
             animator.applyRootMotion = false;
             animator.Play("Floating", -1, 0);
 
@@ -334,7 +335,7 @@ namespace Project
 
             RaycastHit hit;
            
-            Physics.SphereCast(transform.position+0.5f*Vector3.up, 0.2f, transform.forward, out hit, 0.7f, whatisPlayer);
+            Physics.SphereCast(transform.position+0.5f*Vector3.up, 0.2f, transform.forward, out hit, MeleeAttackRange, whatisPlayer);
             if (hit.collider != null)
             {
 
@@ -342,6 +343,40 @@ namespace Project
             }
 
 
+        }
+
+        public void SpawnObj(GameObject spawnObj)
+        {
+            SpawnedObj = spawnObj;
+            SpawnObjServerRpc();
+        }
+
+
+        [ServerRpc(RequireOwnership = false)]
+        public void SpawnObjServerRpc()
+        {
+            Vector3 DirVec = -(transform.position - target.position).normalized;
+            var projectile = Instantiate(SpawnedObj,transform.position + transform.forward+0.2f*Vector3.up,Quaternion.identity);
+            projectile.GetComponent<Projectile>().Direction = DirVec;
+            Destroy(projectile,5);
+        }
+
+
+        public bool CheckLOS(out Vector3 opposingDirection)
+        {
+            RaycastHit hit;
+
+            Physics.SphereCast(transform.position + 0.5f * Vector3.up, 0.6f, transform.forward, out hit, MeleeAttackRange);
+            opposingDirection = Vector3.zero;
+            if (hit.collider==null) return true;
+            if (hit.collider.gameObject.layer == gameObject.layer)
+            {
+                print("Enemy in the way");
+                opposingDirection = (transform.position - hit.collider.transform.position).normalized;
+                return false;
+            }
+            
+            return true;
         }
 
 
@@ -355,7 +390,7 @@ namespace Project
         
         public virtual void AttackExit()
         {
-
+            Attacking = false;
             animator.SetBool("Attacking", false);
         }
 
@@ -430,7 +465,8 @@ namespace Project
             CallHit,
             FinishedAttacking,
             EnemyDamaged,
-            PlayFootStepSound
+            PlayFootStepSound,
+            SpawnProjectile
         }
 
 

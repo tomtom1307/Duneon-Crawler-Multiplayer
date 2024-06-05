@@ -17,7 +17,7 @@ namespace Project
 
         public override void Activate(GameObject parent, out bool fail)
         {
-            if(parent.GetComponent<PlayerStats>()._mana.Value < ManaUse)
+            if (parent.GetComponent<PlayerStats>()._mana.Value < ManaUse)
             {
                 fail = true;
                 return;
@@ -26,10 +26,11 @@ namespace Project
 
             List<Collider> EnemiesFound = Physics.OverlapSphere(parent.transform.position, Range, whatIsEnemy).ToList();
             Enemy TD;
+            parent.GetComponent<PlayerStats>()._mana.Value -= ManaUse;
             foreach (Collider c in EnemiesFound)
             {
-                
-                if(c.gameObject.TryGetComponent<Enemy>(out TD))
+
+                if (c.gameObject.TryGetComponent<Enemy>(out TD))
                 {
                     TD.FloatAttackRecieveServerRpc(Height, activeTime);
                 }

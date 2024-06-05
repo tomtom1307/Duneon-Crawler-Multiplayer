@@ -19,10 +19,11 @@ namespace Project
         public override void DoEnterLogic()
         {
             base.DoEnterLogic();
-            Debug.Log(enemy);
+            Debug.Log("Chasing");
             enemy.target = enemy.DetectPlayer();
             enemy.animator.SetBool("Attacking", false);
-            _targetPos = enemy.target.position + enemy.AttackDistance * (enemy.transform.position - enemy.target.position).normalized;
+            Vector3 randomPos = new Vector3(Random.Range(-1f,1f),0, Random.Range(-1f, 1f)).normalized;
+            _targetPos = enemy.target.position +  enemy.AttackDistance * (randomPos + enemy.transform.position - enemy.target.position).normalized;
         }
 
         public override void DoExitLogic()
@@ -40,6 +41,11 @@ namespace Project
         public override void Initialize(GameObject gameObject, Enemy enemy)
         {
             base.Initialize(gameObject, enemy);
+        }
+
+        public bool SetBool(bool value)
+        {
+            return value;
         }
 
         public override void ResetValues()

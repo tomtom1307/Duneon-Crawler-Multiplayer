@@ -39,6 +39,9 @@ MonoBehaviour:
     - model: {fileID: 8926484042661614656}
       id: 0
       isStickyNote: 0
+    - model: {fileID: 8926484042661614808}
+      id: 2
+      isStickyNote: 0
   - title: Flash
     position:
       serializedVersion: 2
@@ -382,7 +385,8 @@ MonoBehaviour:
       m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
   m_Direction: 0
-  m_LinkedSlots: []
+  m_LinkedSlots:
+  - {fileID: 8926484042661614809}
 --- !u!114 &8926484042661614614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6366,6 +6370,13 @@ MonoBehaviour:
     position: {x: 2517.5999, y: 1599.2001}
     expandedSlots: []
     expanded: 0
+  - m_Id: 2
+    linkedSlots:
+    - outputSlot: {fileID: 8926484042661614809}
+      inputSlot: {fileID: 8926484042661614613}
+    position: {x: 673.2, y: 819.2}
+    expandedSlots: []
+    expanded: 0
 --- !u!114 &8926484042661614809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6406,6 +6417,7 @@ MonoBehaviour:
   m_LinkedSlots:
   - {fileID: 8926484042661614788}
   - {fileID: 8926484042661614981}
+  - {fileID: 8926484042661614613}
 --- !u!114 &8926484042661614810
 MonoBehaviour:
   m_ObjectHideFlags: 0

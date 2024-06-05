@@ -61,9 +61,11 @@ namespace Project
             var Instance = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], RandSpawnPos, Quaternion.identity);
             Enemy En = Instance.GetComponent<Enemy>();
             En.Spawner = this;
+            
             En.aggression = Mathf.Clamp(0.1f * spawnAmount, 0, 1);
             var InstanceNetworkObj = Instance.GetComponent<NetworkObject>();
             InstanceNetworkObj.Spawn();
+            
         }
 
 

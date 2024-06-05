@@ -22,7 +22,7 @@ namespace Project
         public override void EnterState()
         {
             base.EnterState();
-
+            
             enemy.EnemyChaseInstance.DoEnterLogic();
         }
 

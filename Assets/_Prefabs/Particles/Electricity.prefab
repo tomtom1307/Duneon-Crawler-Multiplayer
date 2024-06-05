@@ -61,7 +61,13 @@ VisualEffect:
     m_Vector3f:
       m_Array: []
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 6.4905663, y: 0.5265926, z: 3.586643, w: 1}
+        m_Name: Flash
+        m_Overridden: 1
+      - m_Value: {x: 1.0060831, y: 13.298086, z: 15.235006, w: 1}
+        m_Name: Lightning
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
@@ -237,6 +243,7 @@ MonoBehaviour:
   speed: 0
   onDestroySpawn: {fileID: 5125635176976004437, guid: 58d5af2ebcdbda54c830802a35599a17,
     type: 3}
+  Flag: 0
 --- !u!114 &5813002849686236906
 MonoBehaviour:
   m_ObjectHideFlags: 0
