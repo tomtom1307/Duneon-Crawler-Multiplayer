@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Melee
   description: 
-  coolDownTime: 0.5
+  coolDownTime: 0.2
   activeTime: 0.2
   Damage: 10
-  Range: 2
+  Range: 1.2
+  KnockBack: 5
+  DetectionRadius: 1
   Speed: 1
   whatIsEnemy:
     serializedVersion: 2
