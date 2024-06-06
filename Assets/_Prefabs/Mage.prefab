@@ -9330,6 +9330,7 @@ GameObject:
   - component: {fileID: 2399017115677456736}
   - component: {fileID: 2321408594484804605}
   - component: {fileID: 1995681776689086504}
+  - component: {fileID: 3849479021292416335}
   m_Layer: 10
   m_Name: Mage
   m_TagString: Player
@@ -9817,6 +9818,18 @@ MonoBehaviour:
   ability: {fileID: 11400000, guid: 8eb501d6312982549bc29ec411cfe37a, type: 2}
   UIFill: {fileID: 2644207035962683296}
   key: 120
+--- !u!114 &3849479021292416335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9211036698816209711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2467a634403ece48bf5f77bce9d8ae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9219590606935053950
 GameObject:
   m_ObjectHideFlags: 0

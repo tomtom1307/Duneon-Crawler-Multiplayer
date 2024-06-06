@@ -164,7 +164,7 @@ public class PlayerMovement: NetworkBehaviour
         ani = GetComponentInChildren<Animator>();
         moveSpeed = walkSpeed;
         readyToJump = true;
-        WeaponManager = Camera.main.GetComponentInChildren<WeaponHolder>();
+        WeaponManager = GameObject.Find("Main Camera").GetComponentInChildren<WeaponHolder>();
     }
 
     public float SphereRadius;

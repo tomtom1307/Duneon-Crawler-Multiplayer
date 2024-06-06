@@ -23,7 +23,7 @@ namespace Project
                 Destroy(HUD);
                 return;
             }
-            cam = Camera.main;
+            cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         }
 
         // Update is called once per frame

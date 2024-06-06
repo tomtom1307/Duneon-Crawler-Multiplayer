@@ -355,7 +355,7 @@ MonoBehaviour:
   attackCounterResetCooldown: 1
   Data: {fileID: 0}
   components: []
-  VelocityReduction: 0
+  VelocityReduction: 1
   anim: {fileID: 0}
   Cooldown: 0.2
   visualAttacks: {fileID: 0}
@@ -641,7 +641,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 631
+    m_Bits: 4727
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -674,7 +674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
+  m_RequiresDepthTextureOption: 1
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras:
@@ -758,28 +758,28 @@ MonoBehaviour:
     rotationPercent: 0
   onHit:
     angle: 0
-    strenght: 0
-    speed: 0
-    duration: 0
-    NoisePercent: 0
-    DampedPercent: 0
-    rotationPercent: 0
+    strenght: 0.1
+    speed: 5
+    duration: 0.6
+    NoisePercent: 0.47
+    DampedPercent: 0.796
+    rotationPercent: 0.26
   onAttack:
     angle: 0
-    strenght: 0
-    speed: 0
-    duration: 0
-    NoisePercent: 0
-    DampedPercent: 0
+    strenght: 0.01
+    speed: 5
+    duration: 0.2
+    NoisePercent: 0.32
+    DampedPercent: 0.69
     rotationPercent: 0
   onAOE:
     angle: 0
-    strenght: 0
-    speed: 0
-    duration: 0
-    NoisePercent: 0
-    DampedPercent: 0
-    rotationPercent: 0
+    strenght: 0.2
+    speed: 5
+    duration: 1
+    NoisePercent: 0.47
+    DampedPercent: 0.59
+    rotationPercent: 0.26
 --- !u!1 &4800993243918889414
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,6 +790,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5305731970440251891}
   - component: {fileID: 9047525759149920523}
+  - component: {fileID: 7531318135252745992}
   m_Layer: 0
   m_Name: CameraHolder
   m_TagString: Untagged
@@ -826,6 +827,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPos: {fileID: 0}
+--- !u!114 &7531318135252745992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4800993243918889414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2467a634403ece48bf5f77bce9d8ae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5898866929869850984
 GameObject:
   m_ObjectHideFlags: 0
@@ -2602,6 +2615,7 @@ MonoBehaviour:
   playerActionManager: {fileID: 0}
   abilityNames:
   - LevitationChoke
+  - Melee
 --- !u!4 &2329996174977425908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -5594962799342830873, guid: e401977bd4109754695b83fe3fe4b393,
@@ -2931,6 +2945,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 238d9353e07ca1f408676d6333b8911d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

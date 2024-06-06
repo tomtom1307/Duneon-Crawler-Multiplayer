@@ -12,8 +12,7 @@ namespace Project
 
         private void Start()
         {
-            
-            camPos = Camera.main.transform.Find("HeadFollow").transform;
+            camPos = GameObject.Find("Main Camera").transform;
 
 
         }

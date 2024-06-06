@@ -13,6 +13,7 @@ namespace Project
         public static GameManager instance;
         public List<PlayerStats> playerStats = new List<PlayerStats>();
         [SerializeField] private Transform PlayerPrefab;
+        public bool initialized = false;
 
         private void Start()
         {
@@ -98,13 +99,23 @@ namespace Project
 
         private void SceneManager_OnLoadeventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
         {
+            
             print("Welcome!");
-            foreach (ulong clientID in NetworkManager.Singleton.ConnectedClientsIds)
+            if(!initialized)
             {
-                Transform playerTransform = Instantiate(PlayerPrefab);
-                playerStats.Add(playerTransform.gameObject.GetComponent<PlayerStats>());
-                playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientID, true);
+                initialized = true;
+                foreach (ulong clientID in NetworkManager.Singleton.ConnectedClientsIds)
+                {
+                    Transform playerTransform = Instantiate(PlayerPrefab);
+                    playerStats.Add(playerTransform.gameObject.GetComponent<PlayerStats>());
+                    playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientID, true);
+                }
             }
+            else
+            {
+                GameObject.Find("SpawnManager").GetComponent<PlayerSpawner>().enabled=true;
+            }
+            
         }
     }
 }
