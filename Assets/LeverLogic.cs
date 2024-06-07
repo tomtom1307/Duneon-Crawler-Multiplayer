@@ -7,11 +7,12 @@ namespace Project
     public class LeverLogic : _Interactable
     {
         Animator anim;
-        EnemySpawnTrap EST;
+        [HideInInspector] public EnemySpawnTrap EST;
+        [HideInInspector] public int Channel;
+
         private void Start()
         {
             anim = GetComponent<Animator>();
-            EST = GetComponentInParent<EnemySpawnTrap>();
         }
 
 
@@ -19,7 +20,7 @@ namespace Project
         {
             base.Interact();
             anim.SetBool("Flip", true);
-            EST.DoSomething();
+            EST.OnActivate(Channel);
 
             Destroy(this);
         }

@@ -6,15 +6,15 @@ namespace Project
 {
     public abstract class Director : MonoBehaviour
     {
-        public virtual void DoSomething()
+        public virtual void OnActivate(int Channel = 0)
         {
-
+            
         }
 
 
         public virtual void OnCompleted()
         {
-
+            
         }
     }
 }
