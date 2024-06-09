@@ -19,22 +19,27 @@ namespace Project
             base.Activate(parent, out fail);
 
             RaycastHit hit;
-            Debug.Log(Physics.SphereCast(Camera.main.transform.position, DetectionRadius, Camera.main.transform.forward, out hit, Range, whatIsEnemy));
-            if(Physics.SphereCast(Camera.main.transform.position, DetectionRadius, Camera.main.transform.forward, out hit, Range, whatIsEnemy))
+            
+            if(Physics.SphereCast(Camera.main.transform.position-DetectionRadius * Camera.main.transform.forward, DetectionRadius,Camera.main.transform.forward, out hit, Range+ DetectionRadius, whatIsEnemy))
             {
+                Debug.Log("Melee!");
                 Enemy TD;
                 fail = false;
-                if (hit.collider.gameObject.TryGetComponent<Enemy>(out TD))
+                if (hit.collider.tag == "Head")
                 {
+                    TD = hit.collider.GetComponentInParent<Enemy>();
 
+                }
+                else hit.collider.gameObject.TryGetComponent<Enemy>(out TD);
+
+                if(TD != null)
+                {
                     TD.DoDamageServerRpc(Damage);
                     TD.DisableNavMeshServerRpc();
-                    if (hit.collider.GetComponent<Rigidbody>() != null)
-                    {
+                    TD.KnockBackServerRpc(Camera.main.transform.position, KnockBack);
 
-                        TD.KnockBackServerRpc(Camera.main.transform.position, KnockBack);
-                    }
                 }
+                
             }
 
 

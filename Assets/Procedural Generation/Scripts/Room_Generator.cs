@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -70,11 +71,11 @@ namespace Project
                 while (attempts <= MaxAttempts)
                 {
                     //RNG section
-                    x = Mathf.RoundToInt(Random.Range(1, grid.width));
-                    y = Mathf.RoundToInt(Random.Range(1, grid.height));
+                    x = Mathf.RoundToInt(UnityEngine.Random.Range(1, grid.width));
+                    y = Mathf.RoundToInt(UnityEngine.Random.Range(1, grid.height));
                     if (i > (numberofObligatoryRooms-1))
                     {
-                        chosenRoom = roomsObj[Mathf.RoundToInt(Random.Range(0, roomsObj.Count))];
+                        chosenRoom = roomsObj[Mathf.RoundToInt(UnityEngine.Random.Range(0, roomsObj.Count))];
                     } 
                     else
                     {
@@ -242,7 +243,7 @@ namespace Project
             }
 
             CWH.TILECHECKK(corridors, coridorGO, grid);
-
+            gameObject.GetComponent<FloorMerging>().CombineFloorColliders(coridorGO);
             
         }
 
@@ -274,6 +275,7 @@ namespace Project
             foreach (var item in path)
             {
                 grid.SetVal((int)item.x, (int)item.y, 3);
+                if (DoesXYExist(corridors, item.x, item.y)) continue;
                 GameObject cor = Instantiate(corridorPrefab, grid.GetWorldPos((int)item[0], (int)item[1]) + centertingVector, Quaternion.identity);
                 coridorGO.Add(cor);
                 corridors.Add(new Vector4(item.x, item.y, roomNumber, 0));
@@ -282,6 +284,21 @@ namespace Project
             
 
         }
+
+
+
+        bool DoesXYExist(List<Vector4> vectors, float x, float y)
+        {
+            foreach (var vector in vectors)
+            {
+                if (vector.x == x && vector.y == y)
+                {
+                    return true; // (x, y) pair found in the list
+                }
+            }
+            return false; // (x, y) pair not found in the list
+        }
+
 
         public float CorridorAttempts;
         public List<Vector2> FindPath(Vector2 start, Vector2 stop)
@@ -329,7 +346,7 @@ namespace Project
                     {
                         Vector2 initialDir = checkDir;
                         List<int> pm = new List<int>{ -1, 1 };
-                        checkDir = new Vector2( dirVec.y * pm[Random.Range(0,pm.Count)], dirVec.x * pm[Random.Range(0, pm.Count)]).normalized;
+                        checkDir = new Vector2( dirVec.y * pm[UnityEngine.Random.Range(0,pm.Count)], dirVec.x * pm[UnityEngine.Random.Range(0, pm.Count)]).normalized;
                         
                         Obstacle = true;
                         obstacles.Add(nextTile);
