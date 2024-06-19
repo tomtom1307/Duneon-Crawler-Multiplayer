@@ -22,8 +22,10 @@ namespace Project
 
             if (type == Enemy.AnimationTriggerType.FinishedAttacking)
             {
+                Debug.Log("FinishedAttacking");
                 enemy.Attacking = false;
                 enemy.animator.SetBool("Attacking", false);
+                _timer = 0;
                 if (enemy.aggression < 0.8)
                 {
                     Reposition();
@@ -35,13 +37,14 @@ namespace Project
             }
             else if (type == Enemy.AnimationTriggerType.SpawnProjectile)
             {
-                enemy.SpawnObj(Projectile);
+                enemy.SpawnObj(Projectile, enemy.ProjectileSpawnPos.position);
             }
 
         }
 
         public override void DoEnterLogic()
         {
+            timeBetweenAttacks = enemy.TimeBetweenAttacks;
             Debug.Log("Attacking");
             base.DoEnterLogic();
         }
@@ -79,8 +82,9 @@ namespace Project
             }
 
 
-            if (_timer > (timeBetweenAttacks - Mathf.Clamp((enemy.aggression), 0.1f, 1)) && !enemy.Attacking)
+            if (_timer > (timeBetweenAttacks - Mathf.Clamp((enemy.aggression), 0.1f, 1)) && !enemy.Attacking && enemy.navMesh.isActiveAndEnabled)
             {
+                _timer = 0;
                 enemy.navMesh.SetDestination(transform.position);
                 enemy.animator.SetBool("Attacking", true);
                 enemy.Attacking = true;
@@ -108,11 +112,16 @@ namespace Project
         public override void ResetValues()
         {
             base.ResetValues();
+            enemy.animator.SetBool("Attacking", false);
         }
 
         public void Reposition()
         {
-            if (enemy.Attacking) return;
+            if (enemy.Attacking)
+            {
+                enemy.navMesh.SetDestination(transform.position);
+                return;
+            } 
             Debug.Log("Repositioning");
             repositioning = true;
             OffsetVector = RandomPosAroundPlayer(enemy.AttackDistance);

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Project
 {
-    public class TempararyLife : MonoBehaviour
+    public class TempararyLife : NetworkBehaviour
     {
         public float LifeTime;
         NetworkObject NO;
@@ -16,13 +16,14 @@ namespace Project
             {
                 Invoke("DespawnThingyServerRpc", LifeTime);
             }
-            Destroy(gameObject, LifeTime);
+            
         }
 
 
-        [ServerRpc]
+        [ServerRpc(RequireOwnership = false)]
         public void DespawnThingyServerRpc()
         {
+            Destroy(gameObject);
             NO.Despawn();
         }
 

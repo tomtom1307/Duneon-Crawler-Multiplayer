@@ -148,7 +148,7 @@ namespace Project
                 HandleDamageArrowShit(damageOrigin);
             }
             
-            print("Called");
+            
             if (!IsLocalPlayer) return;
             damage -= Armor;
             damage = Mathf.Clamp(damage, 0, MaxHealth - 1);

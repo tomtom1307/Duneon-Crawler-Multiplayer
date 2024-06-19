@@ -23,7 +23,10 @@ namespace Project
             ChargePercentage = PA.ChargePercentage;
 
             
-
+            if(collider.tag == "Projectile")
+            {
+                return;
+            }
 
             if (collider.tag == "Head")
             {
@@ -33,6 +36,11 @@ namespace Project
             {
                 
                 TD = collider.GetComponent<Enemy>();
+                if(TD == null)
+                {
+                    TD = collider.GetComponentInParent<Enemy>();           
+                    
+                }
                 TD.DoDamageServerRpc(ChargePercentage * weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
                 if(collider.GetComponent<Rigidbody>() != null)
                 {

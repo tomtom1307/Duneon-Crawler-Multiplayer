@@ -20,9 +20,9 @@ namespace Project
         {
             base.Interact();
             anim.SetBool("Flip", true);
-            EST.OnActivate(Channel);
+            EST.OnActivateServerRpc(Channel);
 
-            Destroy(this);
+            this.enabled = false;
         }
     }
 }

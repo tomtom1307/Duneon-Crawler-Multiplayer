@@ -21,8 +21,9 @@ namespace Project
             {
                 instance = this;
             }
-            
-            GetPlayerStats();
+
+            //Check Players connected
+            Invoke("GetPlayerStats",3f);
         }
 
         

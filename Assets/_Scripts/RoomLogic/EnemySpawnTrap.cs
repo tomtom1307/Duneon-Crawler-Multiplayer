@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
-using static UnityEditor.Progress;
 
 namespace Project
 {
-    public class EnemySpawnTrap : Director
+    public class EnemySpawnTrap : NetworkBehaviour
     {
         public EnemySpawner spawner;
         public DoorLogic[] activatables;
@@ -23,8 +22,8 @@ namespace Project
             }
         }
 
-
-        public override void OnActivate(int Channel)
+        [ServerRpc(RequireOwnership = false)]
+        public void OnActivateServerRpc(int Channel)
         {
             foreach (var item in activatables)
             {
@@ -40,11 +39,17 @@ namespace Project
         {
             if (spawner.AllEnemiesKilled == true)
             {
-                OnCompleted();
+                OnCompletedServerRpc();
             }
         }
 
         private void OnTriggerEnter(Collider other)
+        {
+            TriggerServerRpc();
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void TriggerServerRpc()
         {
             print("Triggered");
             //Put Condition for players inside run 
@@ -59,7 +64,8 @@ namespace Project
         }
 
 
-        public override void OnCompleted()
+        [ServerRpc(RequireOwnership =false)]
+        public void OnCompletedServerRpc()
         {
 
             foreach (var item in activatables)
@@ -73,6 +79,7 @@ namespace Project
             
         }
 
+        
 
         public void OpenDoor(Animator anim)
         {

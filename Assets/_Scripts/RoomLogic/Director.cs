@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Project
 {
-    public abstract class Director : MonoBehaviour
+    public abstract class Director : NetworkBehaviour
     {
-        public virtual void OnActivate(int Channel = 0)
+        [ServerRpc(RequireOwnership = false)]
+        public virtual void OnActivateServerRpc(int Channel = 0)
         {
             
         }
 
-
-        public virtual void OnCompleted()
+        [ServerRpc(RequireOwnership = false)]
+        public virtual void OnCompletedServerRpc()
         {
             
         }

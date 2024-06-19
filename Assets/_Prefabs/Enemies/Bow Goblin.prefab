@@ -282,7 +282,7 @@ SkinnedMeshRenderer:
   - {fileID: 2100000, guid: 7279dca43c1e1d44abdefc87c56600b5, type: 2}
   - {fileID: 2100000, guid: 70c0e8de57f370b4b967b57d4be0e4fa, type: 2}
   - {fileID: -6629797300637803691, guid: a7b3bf44245a92344951626672587b21, type: 3}
-  - {fileID: 9185737683893222716, guid: a7b3bf44245a92344951626672587b21, type: 3}
+  - {fileID: 2100000, guid: a32f020ecdd89244e96415a7b2278cc0, type: 2}
   - {fileID: -876546973899608171, guid: a7b3bf44245a92344951626672587b21, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -1120,7 +1120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.26981127, b: 0.26981127, a: 1}
+  m_Color: {r: 0.6075471, g: 0.2235314, b: 0.2235314, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1257,7 +1257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3250942, g: 1, b: 0.035848916, a: 1}
+  m_Color: {r: 0.76761246, g: 0.98490566, b: 0.45156989, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2963,11 +2963,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 178f560f2eb10574aa4f9187ee902915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StaticEnemy: 0
+  DamageToStagger: 0
   <MaxHealth>k__BackingField: 30
   <maxDetectDist>k__BackingField: 100
   <AttackDistance>k__BackingField: 10
   <MeleeAttackRange>k__BackingField: 0.7
-  <TimeBetweenAttacks>k__BackingField: 7
+  <TimeBetweenAttacks>k__BackingField: 3
   <AttackDamage>k__BackingField: 5
   HealthBar: {fileID: 6302920174425496141}
   <xpOnKill>k__BackingField: 5
@@ -2977,6 +2979,7 @@ MonoBehaviour:
   colliders:
   - {fileID: 3266458929852925726}
   HealthCanvas: {fileID: 2629491045470020135}
+  ProjectileSpawnPos: {fileID: 3526178019583415930}
   playerlist: []
   target: {fileID: 0}
   aggression: 0.5
@@ -3529,6 +3532,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: BowAndArrow
       objectReference: {fileID: 0}
+    - target: {fileID: 8417361359673230750, guid: 45b8bc2cea2e37241a47aa0a4b6745e6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d4bd5f110c644204faade2f28ab12044, type: 2}
+    - target: {fileID: 8417361359673230750, guid: 45b8bc2cea2e37241a47aa0a4b6745e6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: a5cf0ff2a2df3f54ca8d97f37e12a9d3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

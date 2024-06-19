@@ -16,7 +16,19 @@ namespace Project
 
             if (currentAttackData.type == AttackDamage.DamageType.Magic) isMagic = true;
             else isMagic = false;
-            if (collider.tag == "Head")
+
+            if(collider.tag == "Damageable")
+            {
+                DamageableThing DT = collider.GetComponent<DamageableThing>();
+                DT.TakeDamageServerRpc(weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
+            }
+
+            else if(collider.tag == "Projectile")
+            {
+                return;
+            }
+
+            else if (collider.tag == "Head")
             {
                 weapon._soundSource.PlaySound(SourceSoundManager.SoundType.HeadShotDink, 2f);
                 weapon.statManager.GiveWeaponXP(5, weapon.statManager.weaponXPscaling);
@@ -25,7 +37,12 @@ namespace Project
                 weapon.statManager.GiveXP(weapon.statManager.headShotXP);
                 
                 TD.DoDamageServerRpc(weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic), true);
-                TD.DisableNavMeshServerRpc();
+
+                if (!TD.StaticEnemy)
+                {
+                    TD.DisableNavMeshServerRpc();
+                }
+                
                 if (collider.GetComponent<Rigidbody>() != null)
                 {
                     
@@ -37,9 +54,18 @@ namespace Project
             {
                 weapon.statManager.GiveWeaponXP(3, weapon.statManager.weaponXPscaling);
                 TD =collider.GetComponent<Enemy>();
+                if(TD == null)
+                {
+                    TD = collider.GetComponentInParent<Enemy>();    
+                }
                 TD.DoDamageServerRpc(weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
-                
-                TD.DisableNavMeshServerRpc();
+
+                if (!TD.StaticEnemy)
+                {
+                    TD.DisableNavMeshServerRpc();
+                }
+
+
                 if (collider.GetComponent<Rigidbody>() != null)
                 {
                     

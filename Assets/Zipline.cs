@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.XR;
 
 namespace Project
 {
-    public class Zipline : MonoBehaviour
+    public class Zipline : NetworkBehaviour
     {
         public LineRenderer LR;
         public Transform PointA;

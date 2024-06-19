@@ -4944,6 +4944,7 @@ GameObject:
   - component: {fileID: 7700629911961708208}
   - component: {fileID: 3773936632370905851}
   - component: {fileID: 2456846889399109615}
+  - component: {fileID: 4884250979787109499}
   - component: {fileID: 6306444905510937771}
   - component: {fileID: 7295071261115709662}
   - component: {fileID: 5292614618088663309}
@@ -4983,15 +4984,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b270702b5abbba498eaf5960d4130ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Prompt: 
   inventory: {fileID: 0}
-  item: {fileID: 11400000, guid: 57a46dcb584501b448f18a7e91e90853, type: 2}
-  prompt: {fileID: 7850838682585359734}
+  WeaponData: {fileID: 0}
   PickUpKey: 102
   ItemColor: {r: 0, g: 0, b: 0, a: 0}
-  ps: {fileID: 0}
+  ModelPos: {fileID: 0}
   Rarity: 
-  ItemModel: {fileID: 6776914503316896880, guid: 9cd5feb0af12f5f488242c5f756cb0e6,
-    type: 3}
+  WI:
+    weaponData: {fileID: 0}
+    level: 0
+    xp: 0
+    requiredXP: 0
+    rarityIndex: 0
+    rarity: 
+    currentMagicDamageBonus: 0
+    currentPhysicalDamageBonus: 0
+    rarityDamageBonus: []
+    rarities: []
   table:
   - 700
   - 200
@@ -5010,9 +5020,11 @@ MonoBehaviour:
   - {r: 0.4163972, g: 0.4163972, b: 0.8792453, a: 1}
   - {r: 0.6981132, g: 0.32007825, b: 0.6981132, a: 1}
   - {r: 0.8037735, g: 0.31999278, b: 0.31999278, a: 1}
-  PickupB: 1
+  RarityEffects: []
+  item: {fileID: 11400000, guid: 57a46dcb584501b448f18a7e91e90853, type: 2}
   total: 0
   randomVal: 0
+  index: 0
 --- !u!23 &2456846889399109615
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5055,6 +5067,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4884250979787109499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7296971471295734867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1903814800
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!65 &6306444905510937771
 BoxCollider:
   m_ObjectHideFlags: 0

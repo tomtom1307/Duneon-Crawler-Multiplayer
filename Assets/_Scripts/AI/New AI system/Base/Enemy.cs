@@ -14,6 +14,8 @@ namespace Project
     public class Enemy : NetworkBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckable
     {
         #region Definitions
+        public bool StaticEnemy;
+        public float DamageToStagger;
         [field: SerializeField] public float MaxHealth { get; set; } = 100f;
         public NetworkVariable<float> CurrentHealth { get; set; } = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
         [field: SerializeField] public float maxDetectDist { get; set; } = 100f;
@@ -30,7 +32,7 @@ namespace Project
 
         public List<Collider> colliders;
         public Canvas HealthCanvas;
-
+        public Transform ProjectileSpawnPos;
         public Animator animator { get; set; }
         
         public List<Transform> playerlist;
@@ -70,7 +72,7 @@ namespace Project
         public EnemyChaseSOBase EnemyChaseInstance { get; set; }
         public EnemyAttackSOBase EnemyAttackInstance { get; set; }
 
-
+        MeshRenderer MR;
 
         #endregion
 
@@ -95,13 +97,20 @@ namespace Project
 
         private void Start()
         {
-            
+            if (IsOwner)
+            {
+                CurrentHealth.Value = MaxHealth;
+            }
             //Set MaxHealth
-            CurrentHealth.Value = MaxHealth;
+            
             //Get References
-            rb = GetComponent<Rigidbody>(); 
-            navMesh = GetComponent<NavMeshAgent>();
-            navMesh.avoidancePriority = Random.Range(0, 50);
+            rb = GetComponent<Rigidbody>();
+            if (!StaticEnemy)
+            {
+                navMesh = GetComponent<NavMeshAgent>();
+                navMesh.avoidancePriority = Random.Range(0, 50);
+                rb.isKinematic = true;
+            }
 
             animator = GetComponent<Animator>();
 
@@ -112,24 +121,39 @@ namespace Project
                 playerlist.Add(item.GameObject().transform);
             }
 
+
+
+            //Final Setup shit
+            InitializeStateMachine();
+            
+            dissolve = GetComponent<DissolveController>();
+            //
+            if (!StaticEnemy)
+            {
+                SkinmeshRenderer = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+                if (SkinmeshRenderer == null)
+                {
+                    Debug.LogError("This Script Does not support non static enemy types without a skinnedMeshRenderer");
+                }
+                origColors = SkinmeshRenderer.materials;
+                whites = SkinmeshRenderer.materials;
+            }
+            else
+            {
+                MR = gameObject.GetComponentInChildren<MeshRenderer>();
+                origColors = MR.materials;
+                whites = MR.materials;
+            }
+            
+        }
+
+        public virtual void InitializeStateMachine()
+        {
             //Initialize StateMachine
             EnemyChaseInstance.Initialize(gameObject, this);
             EnemyAttackInstance.Initialize(gameObject, this);
 
             StateMachine.Initialize(ChaseState);
-
-            //Final Setup shit
-            rb.isKinematic = true;
-            dissolve = GetComponent<DissolveController>();
-            //
-            SkinmeshRenderer = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-            if (SkinmeshRenderer == null)
-            {
-                Debug.LogError("This Script Does not support enemy types without a skinnedMeshRenderer");
-                Destroy(this);
-            }
-            origColors = SkinmeshRenderer.materials;
-            whites = SkinmeshRenderer.materials;
         }
         
         #region Health/Networking
@@ -139,6 +163,13 @@ namespace Project
         {
             if (headshot) Damage *= 2;
             CurrentHealth.Value -= Damage;
+            if (StaticEnemy)
+            {
+                if (CurrentHealth.Value<= 0)
+                {
+                    Die();
+                }
+            }
             aggression += 0.05f;
             HandleLocalVisualsClientRpc(Damage, headshot);
             
@@ -162,6 +193,7 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         public void FloatAttackRecieveServerRpc(float Height, float Duration)
         {
+            if (StaticEnemy) return;
             CancelInvoke("EnableNavMeshServerRpc");
             Floating = true;
             floatHeight = Height;
@@ -181,6 +213,7 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         private void EndFloatingEffectServerRpc()
         {
+            if (StaticEnemy) return;
             transform.DOMove(-floatHeight * Vector3.up + transform.position, 0.2f);
             DoDamageServerRpc(1);
             animator.Play("Hit", -1, 0f);
@@ -194,6 +227,7 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         public void DisableNavMeshServerRpc()
         {
+            if (StaticEnemy) return;
             if (CurrentHealth.Value <= 0)
             {
 
@@ -215,38 +249,51 @@ namespace Project
 
         public void Die()
         {
-            Destroy(navMesh);
-            //TODO IMPLIMENT DED STATE
-            OnDeathTellSpawner();
-            if (Floating)
-            {
-                transform.DOMove(-floatHeight * Vector3.up + transform.position, 0.1f);
-                animator.Play("FallingDeath", -1, 0);
-                CancelInvoke("EndFloatingEffectServerRpc");
-            }
-            else animator.Play("Die", -1, 0);
-
-            dissolve.StartDissolveClientRpc();
-            DisableHealthBarClientRpc();
             GameManager.instance.AwardXPServerRpc(xpOnKill);
-
-
-
-            CancelInvoke("EnableNavMeshServerRpc");
-            Invoke("Delete", 4);
-            foreach (var item in colliders)
+            OnDeathTellSpawner();
+            DisableHealthBarClientRpc();
+            if (!StaticEnemy)
             {
-                item.enabled = false;
+                Destroy(navMesh);
+                CancelInvoke("EnableNavMeshServerRpc");
+
+                if (Floating)
+                {
+                    transform.DOMove(-floatHeight * Vector3.up + transform.position, 0.1f);
+                    animator.Play("FallingDeath", -1, 0);
+                    CancelInvoke("EndFloatingEffectServerRpc");
+                }
+                else animator.Play("Die", -1, 0);
+
+                dissolve.StartDissolveClientRpc();
+                
+                
+
+
+
+
+                //Invoke("Delete", 4);
+                foreach (var item in colliders)
+                {
+                    item.enabled = false;
+                }
+                Destroy(GetComponent<NetworkRigidbody>());
+                Destroy(rb);
+                Destroy(gameObject, 5);
             }
-            Destroy(GetComponent<NetworkRigidbody>());
-            Destroy(rb);
-            Destroy(gameObject, 5);
+            else
+            {
+                Destroy(gameObject);
+                
+            }
+
 
         }
 
         [ServerRpc(RequireOwnership = false)]
         public void EnableNavMeshServerRpc()
         {
+            if (StaticEnemy) return;
             rb.isKinematic = true;
             navMesh.enabled = true;
             animator.applyRootMotion = true;
@@ -306,9 +353,15 @@ namespace Project
 
         void FlashStart()
         {
-
-            SkinmeshRenderer.SetMaterials(whites.ToList());
-
+            if (StaticEnemy)
+            {
+                MR.SetMaterials(whites.ToList());
+            }
+            else
+            {
+                SkinmeshRenderer.SetMaterials(whites.ToList());
+            }
+            
 
 
             Invoke("FlashEnd", flashTime);
@@ -316,7 +369,15 @@ namespace Project
 
         void FlashEnd()
         {
-            SkinmeshRenderer.SetMaterials(origColors.ToList());
+            if (StaticEnemy)
+            {
+                MR.SetMaterials(origColors.ToList());
+            }
+            else
+            {
+                SkinmeshRenderer.SetMaterials(origColors.ToList());
+            }
+            
         }
 
         #endregion
@@ -345,19 +406,23 @@ namespace Project
 
         }
 
-        public void SpawnObj(GameObject spawnObj)
+        public void SpawnObj(GameObject spawnObj,Vector3 Pos)
         {
+
             SpawnedObj = spawnObj;
-            SpawnObjServerRpc();
+            SpawnObjServerRpc(Pos);
         }
 
 
         [ServerRpc(RequireOwnership = false)]
-        public void SpawnObjServerRpc()
+        public void SpawnObjServerRpc(Vector3 Pos)
         {
+            
             Vector3 DirVec = -(transform.position - target.position).normalized;
-            var projectile = Instantiate(SpawnedObj,transform.position + transform.forward+0.2f*Vector3.up,Quaternion.identity);
+            var projectile = Instantiate(SpawnedObj, Pos ,Quaternion.identity);
+            projectile.GetComponent<NetworkObject>().Spawn();
             projectile.GetComponent<Projectile>().Direction = DirVec;
+            
             Destroy(projectile,5);
         }
 
@@ -371,7 +436,7 @@ namespace Project
             if (hit.collider==null) return true;
             if (hit.collider.gameObject.layer == gameObject.layer)
             {
-                print("Enemy in the way");
+                
                 opposingDirection = (transform.position - hit.collider.transform.position).normalized;
                 return false;
             }
@@ -383,6 +448,7 @@ namespace Project
         public void MoveEnemy(Vector3 targetPosition)
         {
             if (!navMesh.enabled) return;
+            
             navMesh.SetDestination(targetPosition);
         }
 
@@ -404,14 +470,18 @@ namespace Project
         }
 
 
-        private void Update()
+        public virtual void Update()
         {
             if(!IsOwner) return;
-            Debug.DrawRay(transform.position + 0.5f * Vector3.up, transform.forward * 2f);
-            StateMachine.currentState.FrameUpdate();
-            if (navMesh == null) return;
-            animator.SetFloat("SpeedX", Vector3.Dot(navMesh.velocity, transform.right));
-            animator.SetFloat("SpeedY", Vector3.Dot(navMesh.velocity, transform.forward));
+            if (!StaticEnemy)
+            {
+                Debug.DrawRay(transform.position + 0.5f * Vector3.up, transform.forward * 2f);
+                StateMachine.currentState.FrameUpdate();
+                if (navMesh == null) return;
+                animator.SetFloat("SpeedX", Vector3.Dot(navMesh.velocity, transform.right));
+                animator.SetFloat("SpeedY", Vector3.Dot(navMesh.velocity, transform.forward));
+            }
+            
         }
 
         private void FixedUpdate()
@@ -422,6 +492,7 @@ namespace Project
 
         public Transform DetectPlayer()
         {
+            print("Detecting Player...");
             float MinDist = maxDetectDist;
             Transform target = null;
             foreach (var item in playerlist)
@@ -446,6 +517,7 @@ namespace Project
             if (!IsOwner) return;
             StateMachine.currentState.AnimationTriggerEvent(triggerType);
         }
+
 
         public void SetStrikingDistanceBool(bool isStriking)
         {

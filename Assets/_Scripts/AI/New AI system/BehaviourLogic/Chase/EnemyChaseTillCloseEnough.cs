@@ -14,12 +14,18 @@ namespace Project
         public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType type)
         {
             base.DoAnimationTriggerEventLogic(type);
+            if (type == Enemy.AnimationTriggerType.FinishedAttacking)
+            {
+                enemy.Attacking = false;
+                enemy.animator.SetBool("Attacking", false);
+
+            }
         }
 
         public override void DoEnterLogic()
         {
             base.DoEnterLogic();
-            Debug.Log("Chasing");
+            Debug.Log("Chasing Enter Logic");
             enemy.target = enemy.DetectPlayer();
             enemy.animator.SetBool("Attacking", false);
             Vector3 randomPos = new Vector3(Random.Range(-1f,1f),0, Random.Range(-1f, 1f)).normalized;

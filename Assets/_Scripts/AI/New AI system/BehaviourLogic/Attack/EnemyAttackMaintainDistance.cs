@@ -43,7 +43,7 @@ namespace Project
 
         public override void DoEnterLogic()
         {
-            Debug.Log("Attacking");
+            //Debug.Log("Attacking");
             base.DoEnterLogic();
         }
 
@@ -68,7 +68,7 @@ namespace Project
             if (!enemy.IsWithinStrikingDistance)
             {
                 enemy.StateMachine.ChangeState(enemy.ChaseState);
-                Debug.Log("Back To Chasing");
+                //Debug.Log("Back To Chasing");
             }
 
 
@@ -85,7 +85,7 @@ namespace Project
                 if (!enemy.navMesh.enabled) return;
                 enemy.Attacking = true;
                 _timer = 0;
-                Debug.Log("Attacking");
+                //Debug.Log("Attacking");
                 Vector3 dir = enemy.target.position - enemy.transform.position;
                 dir = dir.normalized * lungeDistance;
                 dir.y = 0;
@@ -103,7 +103,7 @@ namespace Project
             {
                 if (Vector3.Distance(DesiredPosition, enemy.transform.position) < 0.6f)
                 {
-                    Debug.Log("FinishedRepositioning");
+                    //Debug.Log("FinishedRepositioning");
                     repositioning = false;
                 }
             }
@@ -122,7 +122,7 @@ namespace Project
         public void Reposition()
         {
             if (enemy.Attacking) return;
-            Debug.Log("Repositioning");
+            //Debug.Log("Repositioning");
             repositioning = true;
             OffsetVector = RandomPosAroundPlayer(enemy.AttackDistance);
 
@@ -132,7 +132,7 @@ namespace Project
         {
             if (enemy.Attacking) return;
             Dir = Dir.normalized;
-            Debug.Log("Repositioning");
+            //Debug.Log("Repositioning");
             repositioning = true;
             OffsetVector = preferedPositionToPlayer(enemy.AttackDistance, Dir);
 
