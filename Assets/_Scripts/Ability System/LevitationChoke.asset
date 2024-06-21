@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: LevitationChoke
   m_EditorClassIdentifier: 
   name: LevitationChoke
-  description: Lifts enemies and damages over time
+  description: Lifts enemies and slams them into the ground
   coolDownTime: 5
   activeTime: 2
+  AssignedSound: 8
   Height: 0.77
   Range: 20
   ManaUse: 2
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 512
+  HitSound: 9

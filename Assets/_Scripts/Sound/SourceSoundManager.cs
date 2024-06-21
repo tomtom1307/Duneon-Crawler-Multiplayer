@@ -8,7 +8,7 @@ namespace Project
 {
 
     [RequireComponent(typeof(AudioSource)), ExecuteInEditMode]
-    public abstract class SourceSoundManager : NetworkBehaviour
+    public abstract class SourceSoundManager : MonoBehaviour
     {
         public enum SoundType
         {
@@ -18,7 +18,11 @@ namespace Project
             Attack2Release,
             HeadShotDink,
             Hit,
-            Jump
+            Jump,
+            Dash,
+            LevitationAttack,
+            LevitationHit,
+            FootStep
         }
 
 

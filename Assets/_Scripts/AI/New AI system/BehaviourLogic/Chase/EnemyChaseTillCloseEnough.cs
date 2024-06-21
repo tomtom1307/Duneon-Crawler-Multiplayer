@@ -30,18 +30,31 @@ namespace Project
             enemy.animator.SetBool("Attacking", false);
             Vector3 randomPos = new Vector3(Random.Range(-1f,1f),0, Random.Range(-1f, 1f)).normalized;
             _targetPos = enemy.target.position +  enemy.AttackDistance * (randomPos + enemy.transform.position - enemy.target.position).normalized;
+            enemy.MoveEnemy(_targetPos);
         }
 
         public override void DoExitLogic()
         {
+            enemy.MoveEnemy(transform.position);
             base.DoExitLogic();
         }
 
+
+        float Timer;
+        float RecalcPath = 0.6f;
+
         public override void DoFrameUpdateLogic()
         {
+            Timer += Time.deltaTime;
             base.DoFrameUpdateLogic();
-            _targetPos = enemy.target.position;
-            enemy.MoveEnemy(_targetPos);
+            Vector3 randomPos = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+            _targetPos = enemy.target.position + enemy.AttackDistance * (randomPos + enemy.transform.position - enemy.target.position).normalized;
+            if (Timer > RecalcPath)
+            {
+                Timer = 0;
+                enemy.MoveEnemy(_targetPos);
+            }
+            
         }
 
         public override void Initialize(GameObject gameObject, Enemy enemy)

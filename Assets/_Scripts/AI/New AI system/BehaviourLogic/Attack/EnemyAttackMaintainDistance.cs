@@ -29,10 +29,7 @@ namespace Project
             {
                 enemy.Attacking = false;
                 enemy.animator.SetBool("Attacking", false);
-                if (enemy.aggression < 0.8)
-                {
-                    Reposition();
-                }
+                Reposition();
             }
             else if (type == Enemy.AnimationTriggerType.CallHit)
             {
@@ -44,7 +41,10 @@ namespace Project
         public override void DoEnterLogic()
         {
             //Debug.Log("Attacking");
+            //enemy.navMesh.velocity = Vector3.zero;
             base.DoEnterLogic();
+            Reposition();
+           
         }
 
         public override void DoExitLogic()
@@ -53,7 +53,8 @@ namespace Project
         }
 
         Vector3 preference;
-
+        float RecalcPath = 0.6f;
+        float pathTimer;
         public override void DoFrameUpdateLogic()
         {
             base.DoFrameUpdateLogic();
@@ -65,11 +66,6 @@ namespace Project
             enemy.LookAtTarget();
             _timer += Time.deltaTime;
 
-            if (!enemy.IsWithinStrikingDistance)
-            {
-                enemy.StateMachine.ChangeState(enemy.ChaseState);
-                //Debug.Log("Back To Chasing");
-            }
 
 
             //CHECK BETWEEN PLAYER AND THIS ENEMY FOR ANY OTHER ENEMIES IF TRUE THEN REPOSITION!!!!!!
@@ -80,33 +76,38 @@ namespace Project
             }
 
 
-            if (_timer > (timeBetweenAttacks - Mathf.Clamp((enemy.aggression), 0.1f, 1)) && !enemy.Attacking)
+            if (_timer > (timeBetweenAttacks) && !enemy.Attacking)
             {
                 if (!enemy.navMesh.enabled) return;
                 enemy.Attacking = true;
-                _timer = 0;
+                _timer = Random.Range(0f,2f);
                 //Debug.Log("Attacking");
                 Vector3 dir = enemy.target.position - enemy.transform.position;
-                dir = dir.normalized * lungeDistance;
+                if(dir.magnitude > lungeDistance)
+                {
+                    dir = lungeDistance*dir.normalized;
+                }
+                //dir = dir.normalized * lungeDistance;
                 dir.y = 0;
                 enemy.animator.SetBool("Attacking", true);
                 
                 enemy.navMesh.SetDestination(enemy.transform.position + lungeDistance * dir);
-                enemy.transform.DOMove(enemy.transform.position + lungeDistance * dir, 0.35f);
+                enemy.transform.DOMove(enemy.transform.position + 0.8f * dir, 0.2f);
 
-
+                
             }
 
 
 
             else if (repositioning)
             {
-                if (Vector3.Distance(DesiredPosition, enemy.transform.position) < 0.6f)
+                if (Vector3.Distance(DesiredPosition, enemy.transform.position) < 0.1f)
                 {
                     //Debug.Log("FinishedRepositioning");
                     repositioning = false;
                 }
             }
+
         }
 
         public override void Initialize(GameObject gameObject, Enemy enemy)
@@ -143,7 +144,7 @@ namespace Project
         public Vector3 RandomPosAroundPlayer(float Radius)
         {
             //THIS NEEDS WORK
-            Vector3 directionWithRandom = Random.Range(-1f,1f) * enemy.transform.right - enemy.transform.forward;
+            Vector3 directionWithRandom = Mathf.Sign(Random.Range(-1f,1f))* enemy.transform.right - enemy.transform.forward;
             Vector3 randomVec = new Vector3(directionWithRandom.x, 0, directionWithRandom.z).normalized;
             return Radius * randomVec;
         }

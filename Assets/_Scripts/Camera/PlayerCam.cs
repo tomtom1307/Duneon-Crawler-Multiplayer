@@ -11,6 +11,7 @@ public class PlayerCam : MonoBehaviour
     public float sensitivity;
     public Transform orientation;
     CamAnimations camAnim;
+    Footsteps footsteps;
     public Transform camHolder;
 
     float xRot;
@@ -19,7 +20,7 @@ public class PlayerCam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        camAnim = GetComponent<CamAnimations>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -46,12 +47,14 @@ public class PlayerCam : MonoBehaviour
     private void OnDisable()
     {
         camAnim.enabled = false;
+
     }
 
     private void OnEnable()
     {
-        camAnim = GetComponent<CamAnimations>();
+
         camAnim.enabled = true;
+
     }
 
 }

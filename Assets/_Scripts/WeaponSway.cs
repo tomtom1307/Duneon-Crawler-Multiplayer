@@ -64,6 +64,7 @@ namespace Project
                 else landedMult = 1;
 
                 targetPos = initPos +  landedMult*PM.rb.velocity.magnitude * weaponWalkSwayAmp  * new Vector3(Mathf.Sin(weaponWalkSwayFreq * Time.time), -landedMult*Mathf.Abs(Mathf.Sin(weaponWalkSwayFreq* Time.time)),0) +  (1-landedMult)*AccelDependence * PM.relLandingVel  * new Vector3(0, 1, 0); ;
+                
 
                 
             }

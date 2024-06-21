@@ -39,6 +39,11 @@ namespace Project
             cs.StartShake(cs.onAOE);
         }
 
+        public void PlayerSound(SourceSoundManager.SoundType soundType)
+        {
+            PlayerSoundSource.Instance.PlaySound(soundType, 1);
+        }
+
         private void OnEnable()
         {
             playerActionManager.OnAbilityused += StartAnimation;

@@ -68,7 +68,8 @@ namespace Project
         [SerializeField] private EnemyChaseSOBase EnemyChaseBase;
         [SerializeField] private EnemyAttackSOBase EnemyAttackBase;
 
-
+        public int ChoasCoresOnDeath;
+        public GameObject ChaosCores;
         public EnemyChaseSOBase EnemyChaseInstance { get; set; }
         public EnemyAttackSOBase EnemyAttackInstance { get; set; }
 
@@ -201,7 +202,6 @@ namespace Project
             navMesh.enabled = false;
             transform.DOMove(Height * Vector3.up + transform.position, 0.5f);
             
-            
             animator.applyRootMotion = false;
             animator.Play("Floating", -1, 0);
 
@@ -214,9 +214,11 @@ namespace Project
         private void EndFloatingEffectServerRpc()
         {
             if (StaticEnemy) return;
+            PlayerSoundSource.Instance.PlaySound(SourceSoundManager.SoundType.LevitationHit,0.7f);
             transform.DOMove(-floatHeight * Vector3.up + transform.position, 0.2f);
             DoDamageServerRpc(1);
             animator.Play("Hit", -1, 0f);
+            
             rb.isKinematic = false;
             animator.applyRootMotion = true;
             //animator.Play("Movement");
@@ -252,6 +254,10 @@ namespace Project
             GameManager.instance.AwardXPServerRpc(xpOnKill);
             OnDeathTellSpawner();
             DisableHealthBarClientRpc();
+            for (int i = 0; i < ChoasCoresOnDeath; i++)
+            {
+                Instantiate(ChaosCores, transform.position + 0.5f*new Vector3(Random.Range(-1f,1f),0.5f,Random.Range(-1f,1f)).normalized, Quaternion.identity);
+            }
             if (!StaticEnemy)
             {
                 Destroy(navMesh);

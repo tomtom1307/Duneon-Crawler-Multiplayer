@@ -15,6 +15,7 @@ public class AbilityHolder : NetworkBehaviour
     float activeTime;
     public Image UIFill;
     PlayerActionManager actionManager;
+    
     enum AbilityState
     {
         ready,
@@ -31,7 +32,7 @@ public class AbilityHolder : NetworkBehaviour
         actionManager = GetComponent<PlayerActionManager>();
         maxCooldownVal = ability.coolDownTime;
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -47,6 +48,16 @@ public class AbilityHolder : NetworkBehaviour
                     ability.Activate(gameObject, out Fail);
                     if (Fail) return;
                     actionManager.OnAbility(ability.name);
+                    // Ensure the singleton instance is not null before using it
+                    if (PlayerSoundSource.Instance != null)
+                    {
+                        PlayerSoundSource.Instance.PlaySound(ability.AssignedSound, 1);
+                    }
+                    else
+                    {
+                        Debug.LogError("PlayerSoundSource.Instance is null!");
+                    }
+
                     state = AbilityState.active;
 
 

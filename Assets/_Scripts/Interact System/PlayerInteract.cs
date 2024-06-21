@@ -46,7 +46,7 @@ namespace Project
 
                     if (Input.GetKeyDown(KeyCode.F))
                     {
-                        interactable.BaseInteract();
+                        interactable.BaseInteract(this.gameObject);
                         text.text = "";
                     }
                 }

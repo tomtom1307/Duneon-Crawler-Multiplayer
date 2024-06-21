@@ -12,6 +12,7 @@ namespace Project
         public WeaponDataSO weaponData;
         public int level;
         public int xp;
+        public float ChaosBonus;
 
         public int requiredXP;
         public int rarityIndex;

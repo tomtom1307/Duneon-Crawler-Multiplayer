@@ -12,17 +12,25 @@ namespace Project
 
         private void Awake()
         {
-            if (!IsOwner)
+            Debug.Log("PlayerSoundSource Awake called");
+
+            Debug.Log("Instance is:", Instance);
+            if (Instance == null)
             {
-                return;
+                Instance = this;
+                Debug.Log("PlayerSoundSource Instance set");
             }
-            Instance = this;
+            else
+            {
+                Destroy(gameObject);
+                Debug.Log("Duplicate PlayerSoundSource destroyed");
+            }
         }
-
-
-        
-
-        
-
     }
+
+
+
+
+
 }
+

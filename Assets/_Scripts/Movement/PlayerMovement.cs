@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Unity.Netcode;
 using Project.Weapons;
+using Project;
 
 public class PlayerMovement: NetworkBehaviour
 {
@@ -30,7 +31,7 @@ public class PlayerMovement: NetworkBehaviour
     public float airMultiplier;
     bool readyToJump;
     public PhysicMaterial PlayerMat;
-
+    public PlayerStats PS;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -116,7 +117,7 @@ public class PlayerMovement: NetworkBehaviour
            
             state = MovementState.sprinting;
             
-            moveSpeed = sprintSpeed;
+            moveSpeed = (+PS.Agility/20+1)*sprintSpeed;
         }
 
 
@@ -127,7 +128,7 @@ public class PlayerMovement: NetworkBehaviour
             
             state = MovementState.walking;
             
-            moveSpeed = walkSpeed*attackMoveMultiplier;
+            moveSpeed = (PS.Agility / 10 + 1) * walkSpeed *attackMoveMultiplier;
         }
         
         //Idle
@@ -160,6 +161,7 @@ public class PlayerMovement: NetworkBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        PS = GetComponent<PlayerStats>();
         startYScale = transform.localScale.y;
         ani = GetComponentInChildren<Animator>();
         moveSpeed = walkSpeed;

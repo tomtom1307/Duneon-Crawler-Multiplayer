@@ -14,6 +14,7 @@ namespace Project
         public float SpawnRange;
         public float counter = 0;
         public float EnemiesLeft;
+        public bool InfiniteWaves;
         public float AmountSpawned;
         public float TotalEnemies;
         public Enemies[] enemies;
@@ -66,6 +67,11 @@ namespace Project
             if (EnemiesLeft == 0 && Active)
             {
                 AllEnemiesKilled = true;
+                if (InfiniteWaves)
+                {
+                    AmountSpawned = 0;
+                    TotalEnemies += 5;
+                }
             }
 
         }

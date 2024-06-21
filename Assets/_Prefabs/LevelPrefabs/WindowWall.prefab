@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2559880520985444822}
   - component: {fileID: 27834080646892217}
   - component: {fileID: 9125580244893394385}
-  - component: {fileID: 3878555955216579670}
   m_Layer: 0
   m_Name: WindowWall
   m_TagString: Untagged
@@ -150,24 +149,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.19, y: 0.86721313, z: 2.26}
   m_Center: {x: 0, y: -0.0000001450565, z: 8.91}
---- !u!65 &3878555955216579670
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4106410707058229956}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.19, y: 0.86721313, z: 0.5}
-  m_Center: {x: 0, y: -0.0000001450565, z: 0.57}

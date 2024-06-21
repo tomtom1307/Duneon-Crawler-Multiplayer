@@ -14,6 +14,8 @@ namespace Project
         public float ManaUse;
         public LayerMask whatIsEnemy;
         PlayerMovement PM;
+        public PlayerSoundSource.SoundType HitSound;
+        int Counter = 0;
 
         public override void Activate(GameObject parent, out bool fail)
         {
@@ -23,15 +25,19 @@ namespace Project
                 return;
             }
             base.Activate(parent, out fail);
-
+            
             List<Collider> EnemiesFound = Physics.OverlapSphere(parent.transform.position, Range, whatIsEnemy).ToList();
             Enemy TD;
             parent.GetComponent<PlayerStats>()._mana.Value -= ManaUse;
+            Counter = 0;
             foreach (Collider c in EnemiesFound)
             {
 
                 if (c.gameObject.TryGetComponent<Enemy>(out TD))
                 {
+                    
+                    Counter++;
+                    
                     TD.FloatAttackRecieveServerRpc(Height, activeTime);
                 }
 

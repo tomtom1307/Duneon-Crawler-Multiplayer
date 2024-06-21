@@ -8,10 +8,15 @@ namespace Project
     public abstract class _Interactable : NetworkBehaviour
     {
         public string Prompt;
-        
+        public GameObject interacter;
 
-        public void BaseInteract()
+        public void BaseInteract(GameObject GO = null)
         {
+            if(GO != null)
+            {
+                interacter = GO;
+            }
+            
             Interact();
         }
 

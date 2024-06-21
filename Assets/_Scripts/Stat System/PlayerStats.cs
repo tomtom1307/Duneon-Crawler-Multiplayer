@@ -1,6 +1,7 @@
 using Project.Assets._Scripts.Stat_System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,12 +22,22 @@ namespace Project
         public float MaxHealth;
         public float MaxMana;
         public float Armor;
+        public float Agility;
         public float Strength;
         public float Intelligence;
         public float Dexterity;
 
+        [Header("Chaos Stats")]
+        public float ChaosHealth;
+        public float ChaosMana;
+        public float ChaosAgility;
+        public float ChaosStrength;
+        public float ChaosIntelligence;
+        public float ChaosDexterity;
+
+
         [Header("Currency")]
-        public int ChaosPoints;
+        public int ChaosCores;
         public int Gold;
         public int SkillPoints;
 
@@ -39,6 +50,7 @@ namespace Project
         [SerializeField] public NetworkVariable<float> _mana = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
         public Image healthBarFill;
         public Image manaBarFill;
+        public TextMeshProUGUI ChaosCoreCountUI;
         public float manaRegen;
         public StatManager StatManager;
 
@@ -79,6 +91,7 @@ namespace Project
             DisplayStatsUI.Singleton.UpdateUIStat((int)Intelligence, DisplayStatsUI.Singleton.IntelligenceVal);
             DisplayStatsUI.Singleton.UpdateUIStat((int)Dexterity, DisplayStatsUI.Singleton.DexVal);
             DisplayStatsUI.Singleton.UpdateXPBar(xp, requiredXP);
+            ChaosCoreCountUI.text = $"{ChaosCores}";
 
             //Get CamShake Component
             CS = Camera.main.GetComponent<CamShake>();
@@ -156,7 +169,7 @@ namespace Project
             
             _health.Value -= damage;
             healthBarFill.fillAmount = _health.Value / MaxHealth;
-
+            PlayerSoundSource.Instance.PlaySound(SourceSoundManager.SoundType.Hit, 0.7f);
             //HealthBar Animations
             //DamageSounds
             //Camera effects

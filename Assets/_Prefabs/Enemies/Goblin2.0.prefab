@@ -2911,7 +2911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1165096993
+  GlobalObjectIdHash: 3117921090
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -3112,7 +3112,7 @@ MonoBehaviour:
   DamageToStagger: 0
   <MaxHealth>k__BackingField: 40
   <maxDetectDist>k__BackingField: 100
-  <AttackDistance>k__BackingField: 2
+  <AttackDistance>k__BackingField: 3
   <MeleeAttackRange>k__BackingField: 0.7
   <TimeBetweenAttacks>k__BackingField: 4
   <AttackDamage>k__BackingField: 10
@@ -3124,6 +3124,7 @@ MonoBehaviour:
   colliders:
   - {fileID: 3266458929852925726}
   HealthCanvas: {fileID: 2629491045470020135}
+  ProjectileSpawnPos: {fileID: 0}
   playerlist: []
   target: {fileID: 0}
   aggression: 0.5
@@ -3137,6 +3138,9 @@ MonoBehaviour:
   Attacking: 0
   EnemyChaseBase: {fileID: 11400000, guid: 99068733950e50b4e8bb60548885e283, type: 2}
   EnemyAttackBase: {fileID: 11400000, guid: ed781e9e9d60b354d99a8820648108d5, type: 2}
+  ChoasCoresOnDeath: 1
+  ChaosCores: {fileID: 5463404818829652139, guid: 0e3116f6437caf74686034388df2a5c2,
+    type: 3}
   Floating: 0
   floatHeight: 0
   Spawner: {fileID: 0}

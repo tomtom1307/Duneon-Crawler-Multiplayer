@@ -17,7 +17,12 @@ namespace Project
         public int headShotXP;
         public float AttackSpeedScale;
         public float DamageScale;
+        public float ChaosBonus = 0;
         float physicalBonus = 0;
+        int rarityIndex = 0;
+
+        float[] ChaosBonusRarityMultiplier;
+
         float magicBonus = 0;
         // Start is called before the first frame update
 
@@ -36,6 +41,8 @@ namespace Project
             {
                 physicalBonus = weaponInstance.currentPhysicalDamageBonus;
                 magicBonus = weaponInstance.currentMagicDamageBonus;
+                ChaosBonus = weaponInstance.ChaosBonus;
+                rarityIndex = weaponInstance.rarityIndex;
             }
             else
             {
@@ -62,8 +69,8 @@ namespace Project
                 magicBonus = 0;
             }
             print(magicBonus);
-            MagicDamage = stats.Intelligence * (BaseWeaponDamage + magicBonus) / 100;
-            PhysicalDamage = stats.Strength * (BaseWeaponDamage + physicalBonus)/ 100;
+            MagicDamage = stats.Intelligence * (BaseWeaponDamage + magicBonus +  ChaosBonus) / 100;
+            PhysicalDamage = stats.Strength * (BaseWeaponDamage + physicalBonus + ChaosBonus)/ 100;
             AttackSpeed = stats.Dexterity * AttackSpeedScale;
 
             if(Magic) return MagicDamage;
