@@ -9669,7 +9669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 936891590
+  GlobalObjectIdHash: 580854907
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -9720,17 +9720,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
-  walkSpeed: 120
-  sprintSpeed: 120
+  walkSpeed: 200
+  sprintSpeed: 200
   climbSpeed: 50
   speedReductionWhenAttacking: 0.7
   crouchSpeed: 100
   crouchYScale: 0.3
-  groundDrag: 2
+  groundDrag: 4
   jumpForce: 620
   jumpCooldown: 0.2
   airMultiplier: 0.1
   PlayerMat: {fileID: 0}
+  PS: {fileID: 0}
   jumpKey: 32
   sprintKey: 0
   forwardKey: 119
@@ -9860,9 +9861,16 @@ MonoBehaviour:
   MaxHealth: 100
   MaxMana: 100
   Armor: 0
+  Agility: 0
   Strength: 3
   Intelligence: 5
   Dexterity: 2
+  ChaosHealth: 0
+  ChaosMana: 0
+  ChaosAgility: 0
+  ChaosStrength: 0
+  ChaosIntelligence: 0
+  ChaosDexterity: 0
   ChaosCores: 0
   Gold: 0
   SkillPoints: 0

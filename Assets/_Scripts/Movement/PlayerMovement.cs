@@ -117,7 +117,7 @@ public class PlayerMovement: NetworkBehaviour
            
             state = MovementState.sprinting;
             
-            moveSpeed = (+PS.Agility/20+1)*sprintSpeed;
+            moveSpeed = (PS.ChaosAgility/20+PS.Agility/20+1)*sprintSpeed;
         }
 
 
@@ -128,7 +128,7 @@ public class PlayerMovement: NetworkBehaviour
             
             state = MovementState.walking;
             
-            moveSpeed = (PS.Agility / 10 + 1) * walkSpeed *attackMoveMultiplier;
+            moveSpeed = (PS.ChaosAgility / 20 + PS.Agility / 20 + 1) * walkSpeed *attackMoveMultiplier;
         }
         
         //Idle
@@ -203,6 +203,8 @@ public class PlayerMovement: NetworkBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
+        
+
         // when to jump
         if(Input.GetKeyDown(jumpKey) && readyToJump && grounded)
         {
@@ -255,7 +257,15 @@ public class PlayerMovement: NetworkBehaviour
 
         // on ground
         if(grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            if (Vector3.Dot(moveDirection, rb.velocity)<0)
+            {
+                rb.AddForce(moveDirection.normalized * moveSpeed * 20f, ForceMode.Force);
+            }
+            else
+            {
+                rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            }
+            
 
         // in air
         else if(!grounded)
