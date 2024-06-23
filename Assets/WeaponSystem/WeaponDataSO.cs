@@ -27,7 +27,7 @@ namespace Project
         [field: SerializeField] public DamageType Attack1Type { get; private set; }
         [field: SerializeField] public DamageType Attack2Type { get; private set; }
 
-        
+        [field: SerializeField] public float AttackSpeed { get; private set; }
 
         [field: SerializeReference] public List<ComponentData> componentDatas { get; private set; }
 

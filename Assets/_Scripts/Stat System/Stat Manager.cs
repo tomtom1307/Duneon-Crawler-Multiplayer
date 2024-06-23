@@ -52,11 +52,12 @@ namespace Project
             print(magicBonus);
             MagicDamage = stats.Intelligence * magicBonus/100;
             PhysicalDamage = stats.Strength *  physicalBonus/100;
-            AttackSpeed = stats.Dexterity * AttackSpeedScale;
+            AttackSpeed = ((stats.ChaosDexterity + stats.Dexterity) / 30 + 1);
         }
 
         public float GetDamageVal(float BaseWeaponDamage,bool Magic = false)
         {
+            AttackSpeed = ((stats.ChaosDexterity+stats.Dexterity)/ 30 + 1);
             if (stats == null) return 1;
             if (weaponInstance != null)
             {
@@ -71,7 +72,7 @@ namespace Project
             print(magicBonus);
             MagicDamage = stats.Intelligence * (BaseWeaponDamage + magicBonus +  ChaosBonus) / 100;
             PhysicalDamage = stats.Strength * (BaseWeaponDamage + physicalBonus + ChaosBonus)/ 100;
-            AttackSpeed = stats.Dexterity * AttackSpeedScale;
+            
 
             if(Magic) return MagicDamage;
             return PhysicalDamage;

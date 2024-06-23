@@ -16,6 +16,7 @@ namespace Project
         #region Definitions
         public bool StaticEnemy;
         public float DamageToStagger;
+        public float DamageReduction = 1;
         [field: SerializeField] public float MaxHealth { get; set; } = 100f;
         public NetworkVariable<float> CurrentHealth { get; set; } = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
         [field: SerializeField] public float maxDetectDist { get; set; } = 100f;
@@ -163,7 +164,8 @@ namespace Project
         public void DoDamageServerRpc(float Damage, bool headshot = false)
         {
             if (headshot) Damage *= 2;
-            CurrentHealth.Value -= Damage;
+            Damage = Damage * DamageReduction;
+            CurrentHealth.Value -= (Damage);
             if (StaticEnemy)
             {
                 if (CurrentHealth.Value<= 0)

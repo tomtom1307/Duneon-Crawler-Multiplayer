@@ -65,7 +65,7 @@ public class PlayerAttack : NetworkBehaviour
         
         
         
-        else if(Input.GetMouseButtonDown(0))
+        else if(Input.GetMouseButton(0))
         {
             //StartCoroutine("Cooldown");
             weapon.Enter(1);

@@ -84,7 +84,7 @@ namespace Project.Weapons
 
         public void Enter(int attack)
         {
-
+            anim.SetFloat("AttackSpeed", statManager.AttackSpeed);
             if(State == AttackState.active|| State == AttackState.coolDown )
             {
                 return;

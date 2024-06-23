@@ -11,7 +11,7 @@ namespace Project
     {
         public Material[] origColors { get; set; }
         public Material[] whites { get; set; }
-        public NetworkVariable<float> CurrentHealth { get; set; } = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
+        [SerializeField] public NetworkVariable<float> CurrentHealth = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
 
         [field: SerializeField] public Image HealthBar;
         [field: SerializeField] public Canvas HealthBarCanvas;
@@ -20,20 +20,18 @@ namespace Project
         [field: SerializeField] public float MaxHealth { get; set; } = 100f;
         MeshRenderer MR;
         private float flashTime = 0.1f;
-
+        public bool ded;
         
 
 
         private void Start()
         {
+            ded = false;
             MR = gameObject.GetComponentInChildren<MeshRenderer>();
             origColors = MR.materials;
             whites = MR.materials;
-
-            if (IsOwner)
-            {
-                CurrentHealth.Value = MaxHealth;
-            }
+            CurrentHealth.Value = MaxHealth;
+           
 
         }
 
@@ -44,7 +42,8 @@ namespace Project
             CurrentHealth.Value -= Damage;
             if(CurrentHealth.Value <= 0)
             {
-                Destroy(gameObject);
+                ded = true;
+                Destroy(gameObject,1f);
             }
             HandleLocalVisualsClientRpc(Damage);
         }

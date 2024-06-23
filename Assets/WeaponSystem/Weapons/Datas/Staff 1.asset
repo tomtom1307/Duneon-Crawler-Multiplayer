@@ -24,6 +24,7 @@ MonoBehaviour:
   <Attack2ManaUse>k__BackingField: 30
   <Attack1Type>k__BackingField: 0
   <Attack2Type>k__BackingField: 0
+  <AttackSpeed>k__BackingField: 0
   <componentDatas>k__BackingField:
   - rid: 1852571019049697289
   - rid: 1852571019049697290
@@ -43,7 +44,7 @@ MonoBehaviour:
         <DetectableLayers>k__BackingField:
           serializedVersion: 2
           m_Bits: 512
-        <detectionRadius>k__BackingField: 0.2
+        <detectionRadius>k__BackingField: 0.06
     - rid: 1852571019049697290
       type: {class: DamageData, ns: Project, asm: Assembly-CSharp}
       data:
