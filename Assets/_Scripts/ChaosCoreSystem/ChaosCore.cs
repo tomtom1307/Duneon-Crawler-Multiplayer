@@ -18,6 +18,7 @@ namespace Project
                 {
                     PS.ChaosCores += 1;
                     PS.ChaosCoreCountUI.text = $"{PS.ChaosCores}";
+                    PlayerSoundSource.Instance.PlaySound(SourceSoundManager.SoundType.PickupSound, 0.7f);
                     Destroy(gameObject);
                 }
             }

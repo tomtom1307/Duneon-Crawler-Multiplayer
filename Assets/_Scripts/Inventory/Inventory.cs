@@ -8,7 +8,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Inventory : NetworkBehaviour
+public class Inventory : MonoBehaviour
 {
     public static Inventory Singleton;
     public static InventoryItem carriedItem;
@@ -27,6 +27,7 @@ public class Inventory : NetworkBehaviour
     [SerializeField] HandMult handMult;
     [SerializeField] WeaponHolder WH;
     [SerializeField] WeaponGenerator WG;
+    PlayerAttack PA;
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class Inventory : NetworkBehaviour
         Singleton = this;
         handLoc = FindAnyObjectByType<HandStuff>();
         handMult = FindAnyObjectByType<HandMult>();
+        PA = handLoc.gameObject.GetComponent<PlayerAttack>(); 
         ClientWeaponTransform = handLoc.transform.Find("Base");
         //WH = FindAnyObjectByType<WeaponHolder>();
         
@@ -66,7 +68,7 @@ public class Inventory : NetworkBehaviour
         
     }
 
-
+    public bool Active;
 
 
     public void EquipEquipment(SlotTag tag, InventoryItem item = null)
@@ -78,7 +80,9 @@ public class Inventory : NetworkBehaviour
                 
                 if(item ==null)
                 {
-                    WH.enabled = true;
+                    Active = false;
+                    WH.enabled = false;
+                    PA.enabled = false;
                     WG.RemoveWeapon();
 
                     
@@ -86,6 +90,9 @@ public class Inventory : NetworkBehaviour
                 }
                 else
                 {
+                    Active = true;
+                    
+                    PA.enabled = true;
                     WH.enabled = true;
                     WG.GenerateWeapon(item.myItem.weaponData);
                     WH.statManager.weaponInstance = item.myItem.weaponInstance; 

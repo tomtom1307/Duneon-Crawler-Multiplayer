@@ -52,8 +52,11 @@ public class PlayerCam : MonoBehaviour
 
     private void OnEnable()
     {
-
-        camAnim.enabled = true;
+        if(camAnim != null)
+        {
+            camAnim.enabled = true;
+        }
+        
 
     }
 

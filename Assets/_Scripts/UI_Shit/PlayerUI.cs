@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerUI : NetworkBehaviour
+public class PlayerUI : MonoBehaviour
 {
     public GameObject Inventory;
     public PlayerAttack PA;
@@ -28,7 +28,11 @@ public class PlayerUI : NetworkBehaviour
         
         if (Input.GetKeyDown(InventoryKey) || Input.GetKeyDown(KeyCode.Escape)) { 
             Active = !Active;
-            PA.enabled = !Active;
+            if (Inventory.GetComponent<Inventory>().Active)
+            {
+                PA.enabled = !Active;
+            }
+            
             Inventory.SetActive(Active);
             Pc.enabled = !Active;
             if(Active)

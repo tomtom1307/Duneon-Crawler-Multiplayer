@@ -12,6 +12,7 @@ namespace Project
         public float Height;
         public float Range;
         public float ManaUse;
+        public float Damage;
         public LayerMask whatIsEnemy;
         PlayerMovement PM;
         public PlayerSoundSource.SoundType HitSound;
@@ -37,8 +38,8 @@ namespace Project
                 {
                     
                     Counter++;
-                    
-                    TD.FloatAttackRecieveServerRpc(Height, activeTime);
+
+                    TD.FloatAttackRecieveServerRpc(Height, activeTime, Damage);
                 }
 
             }

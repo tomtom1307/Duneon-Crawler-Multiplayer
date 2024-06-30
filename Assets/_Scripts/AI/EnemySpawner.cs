@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -17,6 +18,8 @@ namespace Project
         public bool InfiniteWaves;
         public float AmountSpawned;
         public float TotalEnemies;
+        public int NumberOfRounds;
+        public int CurrentRound;
         public Enemies[] enemies;
         public GameObject currentSpawn;
         public float spawnAmount = 1;
@@ -26,26 +29,40 @@ namespace Project
         // Start is called before the first frame update
         void Start()
         {
+            CurrentRound = 1;
             Bounds = GetComponent<BoxCollider>();
-            foreach(var Enemy in enemies)
-            {
-                TotalEnemies += Enemy.Amount;
-            }
+            NumberOfRounds = FindTotalNumberOfRounds();
+            TotalEnemies = CalculateTotalNumberOfEnemies(1);
         }
 
         // Update is called once per frame
         void Update()
         {
-            
+            if (EnemiesLeft == 0 && CurrentRound == NumberOfRounds)
+            {
+                AllEnemiesKilled = true;
+                if (InfiniteWaves)
+                {
+                    AmountSpawned = 0;
+                    TotalEnemies += 5;
+                }
+            }
+
             if (!Active || !IsHost) return;
 
             foreach (var enemy in enemies)
             {
                 if (AmountSpawned >= TotalEnemies) break;
                 counter = 0;
-                
+
+                if (!enemy.Rounds.Contains(CurrentRound))
+                {
+                    continue;
+                }
+
                 while (counter < enemy.Amount)
                 {
+                    
                     counter++;
                     AmountSpawned++;
                     EnemiesLeft++;
@@ -61,26 +78,50 @@ namespace Project
                     StartCoroutine(SpawnEnemy(enemy.RandomSpawn, pos, enemy.Prefab));
                 }
             }
+            
 
 
 
-            if (EnemiesLeft == 0 && Active)
-            {
-                AllEnemiesKilled = true;
-                if (InfiniteWaves)
-                {
-                    AmountSpawned = 0;
-                    TotalEnemies += 5;
-                }
-            }
+            
 
         }
         
 
-        
+        public int FindTotalNumberOfRounds()
+        {
+            int totalNumberOfRounds = 0;
+            int i = 0;
+            while (totalNumberOfRounds + 5 > i)
+            {
+                foreach (var Enemy in enemies)
+                {
+                    if (!Enemy.Rounds.Contains(i)) continue;
+                    totalNumberOfRounds = i;
+
+                    
+                }
+                i++;
+            }
+
+
+            return totalNumberOfRounds;
+        }
+
+        public int CalculateTotalNumberOfEnemies(int round)
+        {
+            int EN = 0;
+            foreach (var Enemy in enemies)
+            {
+                if (!Enemy.Rounds.Contains(round)) continue;
+                EN += Enemy.Amount;
+
+            }
+            return EN;
+        }
         
         private IEnumerator SpawnEnemy(bool Random, Transform Position, GameObject prefab)
         {
+
             yield return new WaitForSeconds(SpawnDelay);
             Spawned = false;
             currentSpawn = prefab;
@@ -90,7 +131,7 @@ namespace Project
             }
             else
             {
-                SpawnEnemyWithPositionServerRpc(Position.position, Position.localRotation);
+                SpawnEnemyWithPositionServerRpc(Position.position, Position.rotation);
             }
             
 
@@ -112,6 +153,17 @@ namespace Project
             
         }
 
+        public void TriggerNextRound()
+        {
+            AmountSpawned = 0;
+            
+            CurrentRound += 1;
+            TotalEnemies = CalculateTotalNumberOfEnemies(CurrentRound);
+            Active = true;
+            
+        }
+
+
         [ServerRpc]
         public void SpawnEnemyWithPositionServerRpc(Vector3 pos, Quaternion rot)
         {
@@ -132,6 +184,7 @@ namespace Project
             public GameObject Prefab;
             public int Amount;
             public bool RandomSpawn;
+            public int[] Rounds;
             public List<Transform> Position;
         }
 

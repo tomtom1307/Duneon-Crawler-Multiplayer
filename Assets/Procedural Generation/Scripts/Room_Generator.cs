@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static Unity.Burst.Intrinsics.X86;
-using static UnityEditor.Progress;
+
 
 namespace Project
 {
-    public class Room_Generator : MonoBehaviour
+    public class Room_Generator : NetworkBehaviour
     {
         [Header("Conditions")]
         public int numberOfRooms;
@@ -38,7 +39,7 @@ namespace Project
         public List<int> connected;
         public List<family> families;
         public int numberofObligatoryRooms;
-        
+        public NetworkObject CurrentNO;
         int x;
         int y;
         GameObject chosenRoom;
@@ -116,6 +117,9 @@ namespace Project
                 Vector3 pos = grid.GetWorldPos(x, y)+ centertingVector ;
                 //Instantiate room prefab
                 GameObject room = Instantiate(chosenRoom, pos, Quaternion.identity);
+
+                CurrentNO = room.GetComponent<NetworkObject>();
+                SpawnRoomServerRpc();
                 //Get Room Component of instantiated room
                 Room roomComp = room.GetComponent<Room>();
                 //Get Door positions
@@ -150,6 +154,9 @@ namespace Project
                 FinalnumberOfRooms = i;
                 
             }
+
+            //Reinitialize Centering vector to avoid offset corridors
+            centertingVector = test.CellSize/2*new Vector3(1,0,1);
 
             numberOfRooms = FinalnumberOfRooms + 1;
             
@@ -264,6 +271,12 @@ namespace Project
             }
             roomFam = null;
             return false;
+        }
+
+        [ServerRpc]
+        public void SpawnRoomServerRpc()
+        {
+            CurrentNO.Spawn();
         }
 
 

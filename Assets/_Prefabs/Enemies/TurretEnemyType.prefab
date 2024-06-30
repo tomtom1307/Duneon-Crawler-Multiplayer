@@ -145,6 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StaticEnemy: 1
   DamageToStagger: 0
+  DamageReduction: 1
   <MaxHealth>k__BackingField: 15
   <maxDetectDist>k__BackingField: 100
   <AttackDistance>k__BackingField: 15
@@ -592,12 +593,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af8f848cc6b63c4383a2d85981efc9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentHealth:
+    m_InternalValue: 0
   HealthBar: {fileID: 8839513359062141985}
   HealthBarCanvas: {fileID: 4281020482155967724}
   <NormalColor>k__BackingField: {r: 0.5018867, g: 0.5018867, b: 0.5018867, a: 1}
   damageText: {fileID: 5493454748374447997, guid: 328779aff6d65a54ea955ca4a033948f,
     type: 3}
   <MaxHealth>k__BackingField: 50
+  ded: 0
 --- !u!1 &2511503892147858471
 GameObject:
   m_ObjectHideFlags: 0

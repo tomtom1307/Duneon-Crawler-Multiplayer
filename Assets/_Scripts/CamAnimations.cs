@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Project
 {
@@ -9,6 +10,12 @@ namespace Project
         public float MaxRotationAngle = 2f;
         public float smooth = 1f;
         public PlayerMovement PM;
+
+        private void Start()
+        {
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+
         private void Update()
         {
 
@@ -25,7 +32,7 @@ namespace Project
 
 
 
-            float DirChangeCheck = Vector3.Dot(PM.rb.velocity, transform.right);
+            float DirChangeCheck = Vector3.Dot(PM.rb.velocity, PM.orientation.right);
             transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0, 0, Mathf.Clamp(-6*DirChangeCheck* PM.rb.velocity.magnitude/PM.sprintSpeed,-MaxRotationAngle, MaxRotationAngle)), Time.deltaTime* smooth);
 
         }

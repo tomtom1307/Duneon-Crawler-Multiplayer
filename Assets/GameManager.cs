@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Project
 
         private void Start()
         {
+            DontDestroyOnLoad(gameObject);
             if (instance==null)
             {
                 instance = this;
@@ -94,6 +96,7 @@ namespace Project
        
         public override void OnNetworkSpawn()
         {
+            print("SpawnedGameManager");
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadeventCompleted;
 
         }
@@ -107,6 +110,7 @@ namespace Project
                 initialized = true;
                 foreach (ulong clientID in NetworkManager.Singleton.ConnectedClientsIds)
                 {
+                    
                     Transform playerTransform = Instantiate(PlayerPrefab);
                     playerStats.Add(playerTransform.gameObject.GetComponent<PlayerStats>());
                     playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientID, true);

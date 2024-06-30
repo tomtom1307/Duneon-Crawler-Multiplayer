@@ -22,7 +22,8 @@ namespace Project
             Dash,
             LevitationAttack,
             LevitationHit,
-            FootStep
+            FootStep,
+            PickupSound
         }
 
 

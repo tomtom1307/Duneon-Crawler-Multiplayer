@@ -11,6 +11,7 @@ namespace Project
         public EnemySpawner spawner;
         public DoorLogic[] activatables;
         public Levers[] activators;
+        public ChaosHeart CH;
 
 
         private void Start()

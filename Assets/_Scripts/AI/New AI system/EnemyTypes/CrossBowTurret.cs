@@ -16,7 +16,7 @@ namespace Project
             EnemyAttackInstance.Initialize(gameObject, this);
 
             StateMachine.Initialize(AttackState);
-            initDir = Barrel.forward;
+           initDir = Barrel.forward;
             
         }
 

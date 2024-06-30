@@ -85,6 +85,7 @@ public class PickUpItem : _Interactable
             }
             else randomVal -= table[i];
         }
+        inventory = Inventory.Singleton;
         InitializeInventoryItem();
         GameObject VFX = Instantiate(RarityEffects[index], transform);
         ItemColor = Raritycolor[index];

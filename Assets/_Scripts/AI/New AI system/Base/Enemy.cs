@@ -17,6 +17,7 @@ namespace Project
         public bool StaticEnemy;
         public float DamageToStagger;
         public float DamageReduction = 1;
+        
         [field: SerializeField] public float MaxHealth { get; set; } = 100f;
         public NetworkVariable<float> CurrentHealth { get; set; } = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
         [field: SerializeField] public float maxDetectDist { get; set; } = 100f;
@@ -39,7 +40,6 @@ namespace Project
         public List<Transform> playerlist;
         [HideInInspector] public Transform target;
         public float aggression = 0.5f;
-
         public EnemyStateMachine StateMachine { get; set; }
         public EnemyIdleState IdleState { get; set; }
         public EnemyChaseState ChaseState { get; set; }
@@ -82,6 +82,7 @@ namespace Project
 
         private void Awake()
         {
+            ArmorBuff = false;
             EnemyChaseInstance = Instantiate(EnemyChaseBase);
             EnemyAttackInstance = Instantiate(EnemyAttackBase);
 
@@ -96,6 +97,29 @@ namespace Project
             AttackState = new EnemyAttackState(this, StateMachine);
             DedState = new EnemyDedState(this, StateMachine);
         }
+
+        public bool ArmorBuff = false;
+        public GameObject armorBuffVFX;
+        public void AddArmorBuff(GameObject vfx)
+        {
+            if (!ArmorBuff)
+            {
+                armorBuffVFX = Instantiate(vfx, transform);
+            }
+            ArmorBuff = true;
+            
+        }
+
+        public void RemoveArmorBuff()
+        {
+            if (ArmorBuff)
+            {
+                Destroy(armorBuffVFX);
+            }
+            ArmorBuff = false;
+
+        }
+
 
         private void Start()
         {
@@ -193,17 +217,20 @@ namespace Project
         [HideInInspector] public bool Floating;
         [HideInInspector] public float floatHeight;
 
+        float floatattackDamage;
+
         [ServerRpc(RequireOwnership = false)]
-        public void FloatAttackRecieveServerRpc(float Height, float Duration)
+        public void FloatAttackRecieveServerRpc(float Height, float Duration, float Damage)
         {
             if (StaticEnemy) return;
+
             CancelInvoke("EnableNavMeshServerRpc");
             Floating = true;
             floatHeight = Height;
             rb.isKinematic = true;
             navMesh.enabled = false;
             transform.DOMove(Height * Vector3.up + transform.position, 0.5f);
-            
+            floatattackDamage = Damage;
             animator.applyRootMotion = false;
             animator.Play("Floating", -1, 0);
 
@@ -218,7 +245,7 @@ namespace Project
             if (StaticEnemy) return;
             PlayerSoundSource.Instance.PlaySound(SourceSoundManager.SoundType.LevitationHit,0.7f);
             transform.DOMove(-floatHeight * Vector3.up + transform.position, 0.2f);
-            DoDamageServerRpc(1);
+            DoDamageServerRpc(floatattackDamage);
             animator.Play("Hit", -1, 0f);
             
             rb.isKinematic = false;
