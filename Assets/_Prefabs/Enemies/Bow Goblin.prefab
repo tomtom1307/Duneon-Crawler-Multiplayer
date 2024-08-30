@@ -2529,7 +2529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 455322805
+  GlobalObjectIdHash: 2636356181
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -2740,7 +2740,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StaticEnemy: 0
   DamageToStagger: 0
-  <MaxHealth>k__BackingField: 30
+  DamageReduction: 1
+  <MaxHealth>k__BackingField: 8
   <maxDetectDist>k__BackingField: 100
   <AttackDistance>k__BackingField: 10
   <MeleeAttackRange>k__BackingField: 0.7
@@ -2771,6 +2772,8 @@ MonoBehaviour:
   ChoasCoresOnDeath: 1
   ChaosCores: {fileID: 5463404818829652139, guid: 0e3116f6437caf74686034388df2a5c2,
     type: 3}
+  ArmorBuff: 0
+  armorBuffVFX: {fileID: 0}
   Floating: 0
   floatHeight: 0
   Spawner: {fileID: 0}
