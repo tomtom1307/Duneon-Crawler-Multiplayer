@@ -38,7 +38,7 @@ namespace Project
 
         private void Update()
         {
-            if (spawner.AllEnemiesKilled == true)
+            if (spawner.AllEnemiesKilled == true && CH.DT.ded)
             {
                 OnCompletedServerRpc();
             }
