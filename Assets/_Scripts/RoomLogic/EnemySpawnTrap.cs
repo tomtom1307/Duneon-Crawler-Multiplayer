@@ -11,11 +11,15 @@ namespace Project
         public EnemySpawner spawner;
         public DoorLogic[] activatables;
         public Levers[] activators;
-        public ChaosHeart CH;
+        public Trigger[] triggers;
+        public GameObject Wall;
+
 
 
         private void Start()
         {
+
+
             foreach (var Lever in activators)
             {
                 Lever.lever.EST = this;
@@ -38,9 +42,18 @@ namespace Project
 
         private void Update()
         {
-            if (spawner.AllEnemiesKilled == true && CH.DT.ded)
+
+            //I think this logic needs to be moved to it's own script but Ill do that later
+            if (spawner.Active && triggers[0].TF == true)
             {
-                OnCompletedServerRpc();
+                triggers[0].TF = false;
+                Debug.Log("Section 1 of Room 1 completed");
+                //Destroy Obstacle Flesh wall
+                Destroy(Wall);
+
+
+                //Opens The Entrance Doors 
+                    //OnCompletedServerRpc();
             }
         }
 
@@ -105,6 +118,14 @@ namespace Project
         public string Name;
         public LeverLogic lever;
         public int Channel;
+    }
+
+
+    [Serializable]
+    public struct Trigger
+    {
+        public string name;
+        public bool TF;
     }
 
 

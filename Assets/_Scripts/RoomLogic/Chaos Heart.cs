@@ -15,7 +15,8 @@ namespace Project
         public EnemySpawner spawner;
         public bool Trigger = false;
         public Color HealthbarColor;
-        
+        public EnemySpawnTrap EST;
+
         private void Start()
         {
             DT = GetComponent<DamageableThing>();
@@ -32,6 +33,10 @@ namespace Project
 
                 //Do The Roar
                 spawner.TriggerNextRound();
+            }
+            if (DT.ded)
+            {
+                EST.triggers[0].TF = true;
             }
         }
 
