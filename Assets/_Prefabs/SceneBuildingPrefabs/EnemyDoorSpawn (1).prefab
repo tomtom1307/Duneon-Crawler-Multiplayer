@@ -560,9 +560,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4904548266353026708}
+  - component: {fileID: -7578200375094579798}
   - component: {fileID: 1735428320319278497}
   - component: {fileID: 1786057543563623823}
-  - component: {fileID: -7578200375094579798}
   m_Layer: 8
   m_Name: EnemyDoorSpawn (1)
   m_TagString: Untagged
@@ -590,6 +590,26 @@ Transform:
   - {fileID: 369819432309610909}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -0.006, z: 0}
+--- !u!114 &-7578200375094579798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2907277820086078797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3428856232
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &1735428320319278497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,6 +643,8 @@ MonoBehaviour:
   - Name: Lever2
     lever: {fileID: 1351916551100115967}
     Channel: 1
+  triggers: []
+  Wall: {fileID: 0}
 --- !u!65 &1786057543563623823
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -644,26 +666,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.6, y: 6.22, z: 49.43}
   m_Center: {x: 6.11, y: -2.65, z: -21.61}
---- !u!114 &-7578200375094579798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2907277820086078797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!1 &2930801317074710658
 GameObject:
   m_ObjectHideFlags: 0
