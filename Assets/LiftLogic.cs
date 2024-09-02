@@ -71,7 +71,7 @@ namespace Project
             foreach (var player in rb)
             {
                 player.transform.position = new Vector3(player.transform.position.x, transform.position.y + maintainPlayerHeight, player.transform.position.z);
-                //player.isKinematic = true;
+                player.isKinematic = true;
             }
 
         }
@@ -83,7 +83,7 @@ namespace Project
             foreach (var player in rb)
             {
                 
-                //player.isKinematic = false;
+                player.isKinematic = false;
                 
             }
             rb.Clear();

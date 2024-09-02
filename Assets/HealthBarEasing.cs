@@ -12,6 +12,10 @@ namespace Project
         public Image health;
         public Image easing;
         public float Smoothness;
+        public float DelayTime = 0.25f;
+
+        float timer;
+
         void Start()
         {
         
@@ -20,7 +24,19 @@ namespace Project
         // Update is called once per frame
         void Update()
         {
+
+            if(health.fillAmount != easing.fillAmount && timer < DelayTime)
+            {
+                timer += Time.deltaTime;
+                return;
+            }
+            
             easing.fillAmount = Mathf.Lerp(easing.fillAmount, health.fillAmount, Smoothness);
+
+            if(easing.fillAmount - health.fillAmount < 0.001f)
+            {
+                timer = 0;
+            }
         }
     }
 }
