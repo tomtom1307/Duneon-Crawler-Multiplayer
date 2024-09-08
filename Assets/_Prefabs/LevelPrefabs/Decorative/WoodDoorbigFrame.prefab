@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4482429925304730249
+--- !u!1 &586141051409741748
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4207882516280156027}
-  - component: {fileID: 4002018071082467465}
-  - component: {fileID: 8525992596329644001}
-  - component: {fileID: 1876529616625961662}
+  - component: {fileID: 1802455559649797159}
+  - component: {fileID: 523174665747568477}
+  - component: {fileID: 3352389125649266254}
   m_Layer: 0
-  m_Name: Floor Tile
+  m_Name: WoodDoorbigFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4207882516280156027
+--- !u!4 &1802455559649797159
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4482429925304730249}
+  m_GameObject: {fileID: 586141051409741748}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.00006781518, z: 1, w: 0}
-  m_LocalPosition: {x: 0.55187225, y: 0, z: 8.661456}
-  m_LocalScale: {x: 2.5, y: 0.1, z: 2.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 67.46312, y: -4.699692, z: -89.229996}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -0.008, y: 0, z: 180}
---- !u!33 &4002018071082467465
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!33 &523174665747568477
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4482429925304730249}
-  m_Mesh: {fileID: -1550514412580984892, guid: 66bb33411ba8efc4b84eb6b57bae8629, type: 3}
---- !u!23 &8525992596329644001
+  m_GameObject: {fileID: 586141051409741748}
+  m_Mesh: {fileID: -5258676621925965644, guid: d43a41290494f284b945305393f59802, type: 3}
+--- !u!23 &3352389125649266254
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4482429925304730249}
+  m_GameObject: {fileID: 586141051409741748}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -62,7 +61,25 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1916a875e3232904281dbdd846eef5af, type: 2}
+  - {fileID: -4973734387028869240, guid: d43a41290494f284b945305393f59802, type: 3}
+  - {fileID: -7172155112123806973, guid: d43a41290494f284b945305393f59802, type: 3}
+  - {fileID: 0}
+  - {fileID: -4973734387028869240, guid: d43a41290494f284b945305393f59802, type: 3}
+  - {fileID: -7172155112123806973, guid: d43a41290494f284b945305393f59802, type: 3}
+  - {fileID: 0}
+  - {fileID: -7238608322629146716, guid: 6b596fd27fb4fcd489149ac301fda285, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,24 +101,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1876529616625961662
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4482429925304730249}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 1.9999996, z: 2.0000026}
-  m_Center: {x: 0, y: 0, z: 0}
