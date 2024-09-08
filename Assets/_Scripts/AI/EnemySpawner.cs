@@ -53,13 +53,13 @@ namespace Project
             foreach (var enemy in enemies)
             {
                 if (AmountSpawned >= TotalEnemies) break;
-                counter = 0;
+                
 
                 if (!enemy.Rounds.Contains(CurrentRound))
                 {
                     continue;
                 }
-
+                counter = 0;
                 while (counter < enemy.Amount)
                 {
                     
@@ -78,15 +78,14 @@ namespace Project
                     StartCoroutine(SpawnEnemy(enemy.RandomSpawn, pos, enemy.Prefab));
                 }
             }
-            
 
-
-
-            
 
         }
         
-
+        public void TriggerSpawner(bool startorstop)
+        {
+            RoomActions.SpawnerUpdate(this,startorstop);
+        }
         public int FindTotalNumberOfRounds()
         {
             int totalNumberOfRounds = 0;
@@ -98,7 +97,7 @@ namespace Project
                     if (!Enemy.Rounds.Contains(i)) continue;
                     totalNumberOfRounds = i;
 
-                    
+
                 }
                 i++;
             }
@@ -187,9 +186,6 @@ namespace Project
             public int[] Rounds;
             public List<Transform> Position;
         }
-
-
-
 
     }
 }
