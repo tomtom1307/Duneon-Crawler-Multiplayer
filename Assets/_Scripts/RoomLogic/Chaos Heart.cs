@@ -14,9 +14,10 @@ namespace Project
         [SerializeField] public LayerMask WhatisPlayer;
         public EnemySpawner spawner;
         public bool Trigger = false;
+        public Animator TentacleAnim;
         public Color HealthbarColor;
         public EnemySpawnTrap EST;
-
+        
         private void Start()
         {
             DT = GetComponent<DamageableThing>();
@@ -32,6 +33,8 @@ namespace Project
 
 
                 //Do The Roar
+                DT.Invincible = true;
+                TentacleAnim.SetTrigger("Protect");
                 spawner.TriggerNextRound();
             }
             if (DT.ded)
