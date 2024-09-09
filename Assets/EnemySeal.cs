@@ -8,14 +8,15 @@ namespace Project
     public class EnemySeal : NetworkBehaviour
     
     {
-        public EnemySpawner[] enemySpawners;
         public int spawnersActive=0;
-        public bool Open=true;
+        private bool Open;
         public Animator anim;
 
         private void OnEnable()
         {
             RoomActions.SpawnerUpdate += ManageDoors;
+            anim.SetBool("Open",true);
+            Open = true;
         }
         private void OnDisable() 
         {
@@ -25,10 +26,13 @@ namespace Project
 
         public void ManageDoors(EnemySpawner enemySpawner, bool start)
         {
+            Debug.Log("Action listened :)");
             if(enemySpawner.transform.parent.gameObject.transform.parent.gameObject == this.transform.parent.gameObject) //checks if action came from the same MainHall
             {
+                Debug.Log("Main Hall verified");
                 if(start)
                 {
+                    Debug.Log("Active spawner registered");
                     spawnersActive += 1;
                 }
                 else
@@ -38,12 +42,13 @@ namespace Project
 
                 if(spawnersActive != 0 && Open)
                 {
-                    Open = false;
+                    anim.SetBool("Open",false);
                 }
                 else if(spawnersActive == 0 && !Open)
                 {
-                    Open = true;
+                    anim.SetBool("Open",true);
                 }
+                Open = anim.GetBool("Open");
             }
         }
     }

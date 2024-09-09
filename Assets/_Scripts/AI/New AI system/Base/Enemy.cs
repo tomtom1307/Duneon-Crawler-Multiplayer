@@ -234,7 +234,7 @@ namespace Project
             animator.applyRootMotion = false;
             animator.Play("Floating", -1, 0);
 
-            print("Floating!");
+            //print("Floating!");
             Invoke("EndFloatingEffectServerRpc", Duration);
 
         }
@@ -527,7 +527,7 @@ namespace Project
 
         public Transform DetectPlayer()
         {
-            print("Detecting Player...");
+            //print("Detecting Player...");
             float MinDist = maxDetectDist;
             Transform target = null;
             foreach (var item in playerlist)

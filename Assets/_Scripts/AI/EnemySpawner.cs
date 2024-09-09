@@ -46,6 +46,10 @@ namespace Project
                     AmountSpawned = 0;
                     TotalEnemies += 5;
                 }
+                else
+                {
+                    SpawnerEnd();
+                }
             }
 
             if (!Active || !IsHost) return;
@@ -82,9 +86,9 @@ namespace Project
 
         }
         
-        public void TriggerSpawner(bool startorstop)
+        public void SpawnerEnd()
         {
-            RoomActions.SpawnerUpdate(this,startorstop);
+            RoomActions.SpawnerUpdate(this,false);
         }
         public int FindTotalNumberOfRounds()
         {
@@ -139,7 +143,7 @@ namespace Project
         [ServerRpc]
         public void SpawnEnemyServerRpc()
         {
-            Vector3 range = Bounds.size;
+            Vector3 range = 0.5f*Bounds.size;
             Vector3 RandSpawnPos =  transform.position+ new Vector3(UnityEngine.Random.Range(-range.x, range.x), 0, UnityEngine.Random.Range(-range.z, range.z));
             var Instance = Instantiate(currentSpawn, RandSpawnPos, Quaternion.identity);
             Enemy En = Instance.GetComponent<Enemy>();
