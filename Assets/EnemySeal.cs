@@ -11,7 +11,7 @@ namespace Project
         public EnemySpawner[] enemySpawners;
         public int spawnersActive=0;
         public bool Open=true;
-        Animator anim;
+        public Animator anim;
 
         private void OnEnable()
         {
@@ -25,7 +25,7 @@ namespace Project
 
         public void ManageDoors(EnemySpawner enemySpawner, bool start)
         {
-            if(enemySpawner.transform.parent.GameObject.transform.parent.gameObject == this.transform.parent.gameObject) //checks if action came from the same MainHall
+            if(enemySpawner.transform.parent.gameObject.transform.parent.gameObject == this.transform.parent.gameObject) //checks if action came from the same MainHall
             {
                 if(start)
                 {
@@ -35,7 +35,7 @@ namespace Project
                 {
                     spawnersActive -= 1;
                 }
-                
+
                 if(spawnersActive != 0 && Open)
                 {
                     Open = false;
