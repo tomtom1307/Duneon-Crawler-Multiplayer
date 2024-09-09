@@ -21,11 +21,12 @@ namespace Project
         MeshRenderer MR;
         private float flashTime = 0.1f;
         public bool ded;
-        
+        public bool Invincible;
 
 
         private void Start()
         {
+            Invincible = false;
             ded = false;
             MR = gameObject.GetComponentInChildren<MeshRenderer>();
             origColors = MR.materials;
@@ -39,6 +40,7 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         public void TakeDamageServerRpc(float Damage)
         {
+            if (Invincible) return;
             CurrentHealth.Value -= Damage;
             if(CurrentHealth.Value <= 0)
             {
