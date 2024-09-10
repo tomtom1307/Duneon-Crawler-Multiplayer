@@ -26,6 +26,7 @@ namespace Project
         bool Spawned = false;
         public bool Active = false;
         public bool AllEnemiesKilled;
+        public bool AutoRoundTrigger;
         // Start is called before the first frame update
         void Start()
         {
@@ -38,6 +39,7 @@ namespace Project
         // Update is called once per frame
         void Update()
         {
+            if (!Active || !IsHost) return;
             if (EnemiesLeft == 0 && CurrentRound == NumberOfRounds)
             {
                 AllEnemiesKilled = true;
@@ -48,12 +50,13 @@ namespace Project
                 }
                 else
                 {
+                    Active=false;
                     SpawnerEnd();
                 }
             }
 
-            if (!Active || !IsHost) return;
-
+            
+            if (AutoRoundTrigger && EnemiesLeft == 0 && CurrentRound < NumberOfRounds) TriggerNextRound();
             foreach (var enemy in enemies)
             {
                 if (AmountSpawned >= TotalEnemies) break;

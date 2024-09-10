@@ -16,14 +16,6 @@ namespace Project
         {
             anim = GetComponent<Animator>();
         }
-
-        void Update()
-        {
-            if (roomSpawner.Active && roomSpawner.CurrentRound<roomSpawner.NumberOfRounds && roomSpawner.EnemiesLeft==0)
-            {
-                roomSpawner.TriggerNextRound(); //DOESNT FUCKING WORK BECAUSE BARRACK DOOR LOGIC CLASS DESTROYS ITSELF
-            }
-        }
         protected override void Interact()
         {
             base.Interact();

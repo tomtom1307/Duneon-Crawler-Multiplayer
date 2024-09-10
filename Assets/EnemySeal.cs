@@ -37,18 +37,19 @@ namespace Project
                 }
                 else
                 {
+                    Debug.Log("Spawner deactivated");
                     spawnersActive -= 1;
                 }
 
                 if(spawnersActive != 0 && Open)
                 {
-                    anim.SetBool("Open",false);
+                    Open = false;
                 }
                 else if(spawnersActive == 0 && !Open)
                 {
-                    anim.SetBool("Open",true);
+                    Open= true;
                 }
-                Open = anim.GetBool("Open");
+                anim.SetBool("Open", Open);
             }
         }
     }
