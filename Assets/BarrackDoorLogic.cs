@@ -21,7 +21,8 @@ namespace Project
             base.Interact();
             anim.SetBool("Open", true);
             if(triggerspawn) {BarrackSpawnServerRpc();}
-            Destroy(this);
+            Prompt = "";
+            //Destroy(this);
         }
 
         [ServerRpc(RequireOwnership=false)]
