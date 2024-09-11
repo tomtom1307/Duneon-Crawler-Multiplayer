@@ -40,23 +40,10 @@ namespace Project
         void Update()
         {
             if (!Active || !IsHost) return;
-            if (EnemiesLeft == 0 && CurrentRound == NumberOfRounds)
-            {
-                AllEnemiesKilled = true;
-                if (InfiniteWaves)
-                {
-                    AmountSpawned = 0;
-                    TotalEnemies += 5;
-                }
-                else
-                {
-                    Active=false;
-                    SpawnerEnd();
-                }
-            }
+            
 
             
-            if (AutoRoundTrigger && EnemiesLeft == 0 && CurrentRound < NumberOfRounds) TriggerNextRound();
+            
             foreach (var enemy in enemies)
             {
                 if (AmountSpawned >= TotalEnemies) break;
@@ -85,6 +72,21 @@ namespace Project
                     StartCoroutine(SpawnEnemy(enemy.RandomSpawn, pos, enemy.Prefab));
                 }
             }
+            if (EnemiesLeft == 0 && CurrentRound == NumberOfRounds)
+            {
+                AllEnemiesKilled = true;
+                if (InfiniteWaves)
+                {
+                    AmountSpawned = 0;
+                    TotalEnemies += 5;
+                }
+                else
+                {
+                    Active=false;
+                    SpawnerEnd();
+                }
+            }
+            if (AutoRoundTrigger && EnemiesLeft == 0 && CurrentRound < NumberOfRounds) TriggerNextRound();
 
 
         }
