@@ -57,6 +57,7 @@ namespace Project
         public float RandomMovementRange = 5f;
         public float RandomMovementSpeed = 1f;
         public GameObject SpawnedObj;
+        public float RotateSpeed;
         //VFX Stuff
         SkinnedMeshRenderer SkinmeshRenderer;
         [field: SerializeField] public GameObject damageText;
@@ -501,7 +502,7 @@ namespace Project
             Vector3 lookPos = target.position - transform.position;
             lookPos.y = 0;
             Quaternion rotation = Quaternion.LookRotation(lookPos);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.2f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime*RotateSpeed);
         }
 
 
@@ -523,6 +524,11 @@ namespace Project
         {
             if(!IsOwner) return;
             StateMachine.currentState.PhysicsUpdate();
+        }
+
+        private void LateUpdate()
+        {
+            LookAtTarget();
         }
 
         public Transform DetectPlayer()

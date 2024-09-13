@@ -47,11 +47,13 @@ namespace Project
             base.DoEnterLogic();
             _timer = enemy.TimeBetweenAttacks;
             Reposition();
+            enemy.navMesh.updateRotation = false;
            
         }
 
         public override void DoExitLogic()
         {
+            enemy.navMesh.updateRotation = true;
             base.DoExitLogic();
         }
 
