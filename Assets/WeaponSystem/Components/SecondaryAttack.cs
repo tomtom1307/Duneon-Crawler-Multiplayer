@@ -38,8 +38,8 @@ namespace Project
                 TD = collider.GetComponent<Enemy>();
                 if(TD == null)
                 {
-                    TD = collider.GetComponentInParent<Enemy>();           
-                    
+                    TD = collider.GetComponentInParent<Enemy>();
+                    if (TD == null) return;
                 }
                 TD.DoDamageServerRpc(ChargePercentage * weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
                 if(collider.GetComponent<Rigidbody>() != null)
