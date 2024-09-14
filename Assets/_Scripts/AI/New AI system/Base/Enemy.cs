@@ -528,7 +528,10 @@ namespace Project
 
         private void LateUpdate()
         {
-            LookAtTarget();
+            if(target != null)
+            {
+                LookAtTarget();
+            }
         }
 
         public Transform DetectPlayer()
