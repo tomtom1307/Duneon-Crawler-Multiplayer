@@ -20126,6 +20126,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire
       objectReference: {fileID: 0}
+    - target: {fileID: 6080581778825283206, guid: a52ed02f27d959546a0b3cf73fcbd88d,
+        type: 3}
+      propertyPath: simulationSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6080581778825283206, guid: a52ed02f27d959546a0b3cf73fcbd88d,
+        type: 3}
+      propertyPath: LightsModule.ratio
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6080581778825283206, guid: a52ed02f27d959546a0b3cf73fcbd88d,
+        type: 3}
+      propertyPath: LightsModule.maxLights
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6080581778825283206, guid: a52ed02f27d959546a0b3cf73fcbd88d,
+        type: 3}
+      propertyPath: LightsModule.rangeCurve.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6080581778825283206, guid: a52ed02f27d959546a0b3cf73fcbd88d,
+        type: 3}
+      propertyPath: LightsModule.intensityCurve.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6080581778825283206, guid: a52ed02f27d959546a0b3cf73fcbd88d,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.24731688
+      objectReference: {fileID: 0}
     - target: {fileID: 8171947250978897872, guid: a52ed02f27d959546a0b3cf73fcbd88d,
         type: 3}
       propertyPath: m_LocalPosition.x

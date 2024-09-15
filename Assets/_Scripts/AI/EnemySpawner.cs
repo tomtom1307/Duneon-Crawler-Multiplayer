@@ -149,7 +149,7 @@ namespace Project
         public void SpawnEnemyServerRpc()
         {
             Vector3 range = 0.5f*Bounds.size;
-            Vector3 RandSpawnPos =  transform.position+ new Vector3(UnityEngine.Random.Range(-range.x, range.x), 0, UnityEngine.Random.Range(-range.z, range.z));
+            Vector3 RandSpawnPos =  transform.position+ new Vector3(UnityEngine.Random.Range(-range.z, range.z), 0, UnityEngine.Random.Range(-range.x, range.x));
             var Instance = Instantiate(currentSpawn, RandSpawnPos, Quaternion.identity);
             Enemy En = Instance.GetComponent<Enemy>();
             En.Spawner = this;
