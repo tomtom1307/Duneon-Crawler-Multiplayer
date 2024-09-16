@@ -23,7 +23,10 @@ namespace Project
             LevitationAttack,
             LevitationHit,
             FootStep,
-            PickupSound
+            PickupSound,
+            WhiteCrystalPickup,
+            GoldPickupSound,
+            ClothesRustle
         }
 
 

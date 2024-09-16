@@ -93,6 +93,12 @@ namespace Project
             indicator.SetDamageText(Mathf.RoundToInt(dam), color);
         }
 
+        public void ToggleInvincibility(bool toggle)
+        {
+            Invincible = toggle;
+            HealthBarCanvas.enabled = !toggle;
+        }
+
 
     }
 }

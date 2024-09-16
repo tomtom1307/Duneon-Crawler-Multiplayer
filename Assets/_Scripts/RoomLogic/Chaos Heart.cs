@@ -17,6 +17,7 @@ namespace Project
         public Animator TentacleAnim;
         public Color HealthbarColor;
         public EnemySpawnTrap EST;
+        public ChaosHeartRoomFallingChandalier CHChandalier;
         
         private void Start()
         {
@@ -33,7 +34,8 @@ namespace Project
 
 
                 //Do The Roar
-                DT.Invincible = true;
+                CHChandalier.DT.ToggleInvincibility(false);
+                DT.ToggleInvincibility(true);
                 TentacleAnim.SetTrigger("Protect");
                 spawner.TriggerNextRound();
             }

@@ -7,8 +7,8 @@ namespace Project
 {
     public abstract class _Interactable : NetworkBehaviour
     {
-        public string Prompt;
-        public GameObject interacter;
+        public string Prompt = "[F]";
+        [HideInInspector] public GameObject interacter;
 
         public void BaseInteract(GameObject GO = null)
         {

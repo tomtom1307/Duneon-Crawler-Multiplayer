@@ -19,6 +19,11 @@ namespace Project
         public TextMeshProUGUI XPText;
         public TextMeshProUGUI GoldText;
         public TextMeshProUGUI SkillPointsText;
+        public TextMeshProUGUI WhiteCrystal;
+        public TextMeshProUGUI GreenCrystal;
+        public TextMeshProUGUI BlueCrystal;
+        public TextMeshProUGUI PurpleCrystal;
+        public TextMeshProUGUI OrangeCrystal;
 
 
         private void Start()

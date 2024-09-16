@@ -12,6 +12,16 @@ namespace Project
 {
     public class PlayerStats : NetworkBehaviour
     {
+        public enum CrystalType
+        {
+            white,
+            green,
+            blue,
+            purple,
+            orange
+        }
+
+    
         [Header("Levels")]
         public int xp;
         public int requiredXP;
@@ -40,6 +50,9 @@ namespace Project
         public int ChaosCores;
         public int Gold;
         public int SkillPoints;
+
+        [Header("Upgrade Crystals")]
+        private Dictionary<CrystalType, int> crystalCounts = new Dictionary<CrystalType, int>();
 
         [Header("Damage Visuals")]
         public CamShake CS;
@@ -96,6 +109,13 @@ namespace Project
             //Get CamShake Component
             CS = Camera.main.GetComponent<CamShake>();
             //DamageArrow component
+
+            // Initialize the crystal counts (all starting from 0)
+            foreach (CrystalType type in System.Enum.GetValues(typeof(CrystalType)))
+            {
+                crystalCounts[type] = 0;
+            }
+
         }
 
         [ClientRpc]
@@ -215,6 +235,53 @@ namespace Project
             xp = 0;
             DisplayStatsUI.Singleton.UpdateXPBar(xp, requiredXP);
         }
+
+        #region CrystalHandling
+        public void SetCrystalCount(CrystalType type, int count)
+        {
+            if (crystalCounts.ContainsKey(type))
+            {
+                crystalCounts[type] = count;
+                
+                Debug.Log($"Set {type} crystal count to {count}");
+            }
+            UpdateCrystalUI();
+        }
+
+        // Method to increment the number of crystals for a specific type
+        public void AddCrystals(CrystalType type, int amount)
+        {
+            if (crystalCounts.ContainsKey(type))
+            {
+                crystalCounts[type] += amount;
+                Debug.Log($"Added {amount} {type} crystals. New count: {crystalCounts[type]}");
+            }
+            UpdateCrystalUI();
+        }
+
+        public int GetCrystalCount(CrystalType type)
+        {
+            if (crystalCounts.ContainsKey(type))
+            {
+                return crystalCounts[type];
+            }
+
+            return 0;
+        }
+
+
+        private void UpdateCrystalUI()
+        {
+            DisplayStatsUI.Singleton.WhiteCrystal.text = GetCrystalCount(CrystalType.white).ToString();
+            DisplayStatsUI.Singleton.GreenCrystal.text = GetCrystalCount(CrystalType.green).ToString();
+            DisplayStatsUI.Singleton.BlueCrystal.text = GetCrystalCount(CrystalType.blue).ToString();
+            DisplayStatsUI.Singleton.PurpleCrystal.text = GetCrystalCount(CrystalType.purple).ToString();
+            DisplayStatsUI.Singleton.OrangeCrystal.text = GetCrystalCount(CrystalType.orange).ToString();
+         
+        }
+
+        #endregion
+
 
         public void AddXp(int xpToAdd)
         {

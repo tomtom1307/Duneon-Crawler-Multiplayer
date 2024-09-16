@@ -315,6 +315,7 @@ namespace Project
                 }
                 Destroy(GetComponent<NetworkRigidbody>());
                 Destroy(rb);
+
                 Destroy(gameObject, 5);
             }
             else
