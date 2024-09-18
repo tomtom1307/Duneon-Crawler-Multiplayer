@@ -18,7 +18,7 @@ namespace Project
         public Color HealthbarColor;
         public EnemySpawnTrap EST;
         public ChaosHeartRoomFallingChandalier CHChandalier;
-        
+        public GameObject Fleshwall;
         private void Start()
         {
             DT = GetComponent<DamageableThing>();
@@ -41,7 +41,8 @@ namespace Project
             }
             if (DT.ded)
             {
-                EST.triggers[0].TF = true;
+                Fleshwall.SetActive(false);
+                
             }
         }
 

@@ -44,7 +44,7 @@ namespace Project
                 {
                     text.text = interactable.Prompt;
 
-                    if (Input.GetKeyDown(KeyCode.F))
+                    if (Input.GetKeyDown(KeyCode.F) || Input.GetKey(KeyCode.F))
                     {
                         interactable.BaseInteract(this.gameObject);
                         text.text = "";

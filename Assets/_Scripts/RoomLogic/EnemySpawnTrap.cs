@@ -43,18 +43,7 @@ namespace Project
         private void Update()
         {
 
-            //I think this logic needs to be moved to it's own script but Ill do that later
-            if (spawner.Active && triggers[0].TF == true)
-            {
-                triggers[0].TF = false;
-                Debug.Log("Section 1 of Room 1 completed");
-                //Destroy Obstacle Flesh wall
-                Destroy(Wall);
-
-
-                //Opens The Entrance Doors 
-                    //OnCompletedServerRpc();
-            }
+            
         }
 
         private void OnTriggerEnter(Collider other)
