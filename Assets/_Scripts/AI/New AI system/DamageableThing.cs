@@ -26,7 +26,7 @@ namespace Project
 
         private void Start()
         {
-            Invincible = false;
+            
             ded = false;
             MR = gameObject.GetComponentInChildren<MeshRenderer>();
             origColors = MR.materials;

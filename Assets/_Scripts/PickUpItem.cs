@@ -55,7 +55,7 @@ public class PickUpItem : _Interactable
     public int index;
     private void Start()
     {
-        Prompt = "Press F to pick up item";
+        
         
         GetObjComponents();
         

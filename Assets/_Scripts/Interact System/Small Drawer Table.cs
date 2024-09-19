@@ -18,6 +18,7 @@ namespace Project
         {
             base.Interact();
             anim.SetBool("Open", true);
+            Prompt = "";
         }
 
         public struct Loot
