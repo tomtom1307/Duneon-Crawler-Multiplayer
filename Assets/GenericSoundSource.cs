@@ -8,7 +8,7 @@ namespace Project
     [RequireComponent(typeof(AudioSource)), ExecuteInEditMode]
     public class GenericSoundSource : MonoBehaviour
     {
-       
+       // ADD NEW SOUND TYPES HERE FOR ARRAY TO CHANGE IN INSPECTOR
         public enum GenSoundType
         {
               BreakSound,
@@ -21,7 +21,7 @@ namespace Project
         }
 
 
-        public AudioSource audioSource;
+        [HideInInspector] public AudioSource audioSource;
         public SoundList[] clips;
         public virtual void PlaySound(GenSoundType sound, float volume, bool looping = false)
         {

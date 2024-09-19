@@ -7,7 +7,7 @@ using DG.Tweening;
 
 namespace Project
 {
-    public class Vase : MonoBehaviour
+    public class Vase : LootGenerator
     {
         [SerializeField] GameObject BrokenVase;
         DamageableThing DT;
@@ -30,6 +30,14 @@ namespace Project
 
         private void Break()
         {
+            //Handle Loot Generation
+            //Note That Generate Loot and SpawnLoot are stored in the inherited class LootGenerator
+            GameObject loot = GenerateLoot();
+            if(loot != null) { 
+                SpawnLoot(loot, transform);
+            }
+
+
             Broken = true;
             //Pick and Spawn In Whatever Loot possibilities are available 
 
@@ -42,8 +50,13 @@ namespace Project
             Rigidbody[] rbs = broken.GetComponentsInChildren<Rigidbody>();
             foreach (var rb in rbs)
             {
+                //Give each peice of smashed a force
                 rb.AddExplosionForce(BreakForce, transform.position, 1);
+
+                //Handle scaling before destroying so theres no sudden dissapearing parts 
                 DOTween.Sequence().SetDelay(1.5f).Append(rb.transform.DOScale(Vector3.zero, 0.3f));
+
+
                 Destroy(rb.gameObject, 2);
                 
             }
