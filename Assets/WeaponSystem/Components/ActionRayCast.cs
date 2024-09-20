@@ -33,9 +33,8 @@ namespace Project
             if (detected == null)
             {
                 var target = cam.transform.position + cam.transform.forward * currentAttackData.Distance;
-                print(weapon.visualAttacks);
-                Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, currentAttackData.Distance, weapon.visualAttacks.onTouch);
-                if(hit.point != new Vector3(0,0,0))
+                
+                if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, currentAttackData.Distance, weapon.visualAttacks.onTouch))
                 {
                     target = hit.point;
                 }

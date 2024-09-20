@@ -11,6 +11,7 @@ namespace Project
 
         public int minamount = 2;
         public int maxamount = 50;
+        public bool AutoPickup;
         private int amount;
         private void Start()
         {
@@ -26,5 +27,16 @@ namespace Project
             PlayerSoundSource.Instance.PlaySound(SourceSoundManager.SoundType.GoldPickupSound, 1);
             PlayerSoundSource.Instance.PlaySound(SourceSoundManager.SoundType.ClothesRustle, 0.5f);
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.layer == 10 && AutoPickup)
+            {
+                interacter = other.gameObject;
+                Interact();
+            }
+
+        }
+
     }
 }

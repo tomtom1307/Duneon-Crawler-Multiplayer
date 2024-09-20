@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    public InventoryItem myItem {  get;  set; }
+    public InventoryItem myItem { get;  set; }
 
     public SlotTag myTag;
 
@@ -37,7 +37,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         print("SlotMouseUp");
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            
+            if (Inventory.carriedItem == null) return;
             if (myTag != SlotTag.None && Inventory.carriedItem.myItem.itemTag != myTag)
             {
                 Inventory.carriedItem.activeSlot.SetItem(Inventory.carriedItem);

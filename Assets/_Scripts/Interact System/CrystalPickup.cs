@@ -7,6 +7,7 @@ namespace Project
     public class CrystalPickup : _Interactable
     {
         private PlayerStats PS;
+        public bool AutoPickup;
         private StatManager WS;
         public PlayerStats.CrystalType CrystalType;
 
@@ -19,6 +20,17 @@ namespace Project
             Destroy(this.gameObject);
             PlayerSoundSource.Instance.PlaySound(SourceSoundManager.SoundType.WhiteCrystalPickup, 1);
             PlayerSoundSource.Instance.PlaySound(SourceSoundManager.SoundType.ClothesRustle, 0.5f);
+        }
+
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.layer == 10 && AutoPickup)
+            {
+                interacter = other.gameObject;
+                Interact();
+            }
+
         }
     }
 }

@@ -14,19 +14,20 @@ namespace Project
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
+            
         }
 
         Vector3 dir;
         private void Start()
         {
-            dir = (target - transform.position).normalized
+            dir = (target - transform.position).normalized;
         }
 
         public void Update()
         {
-            transform.position = Vector3.Lerp(transform.position, 40*dir, speed*Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, transform.position+40 * dir, speed*Time.deltaTime);
             
-            if (Vector3.Distance(transform.position, target) < 1 ) 
+            if (Vector3.Dot(target-transform.position, dir) < 0) 
             {
                 
                 if(onDestroySpawn!= null && !Flag)

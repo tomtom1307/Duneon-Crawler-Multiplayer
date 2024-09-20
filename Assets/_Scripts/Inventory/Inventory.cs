@@ -12,11 +12,14 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory Singleton;
     public static InventoryItem carriedItem;
+    public List<InventorySlot> WeaponSlots;
+
 
     [SerializeField] InventorySlot[] inventorySlots;
 
     [SerializeField] Transform draggablesTransform;
     [SerializeField] InventoryItem itemPrefab;
+    
 
     GameObject GWL;
     GameObject GWM;
@@ -31,7 +34,7 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
-        
+        Active = false;
         Singleton = this;
         handLoc = FindAnyObjectByType<HandStuff>();
         GWL = handLoc.GetComponentInChildren<AbilityEventHandler>().gameObject;
@@ -109,7 +112,10 @@ public class Inventory : MonoBehaviour
                 {
                     Active = true;
                     GWL.SetActive(true);
-                    PA.enabled = true;
+                    if (!PA.enabled)
+                    {
+                        PA.enabled = false;
+                    }
                     WH.enabled = true;
                     WG.GenerateWeapon(item.myItem.weaponData);
                     WH.statManager.weaponInstance = item.myItem.weaponInstance; 

@@ -2,6 +2,7 @@ using Project;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -42,13 +43,25 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerClickHa
         Debug.Log("Held Button");
         if (eventData.button == PointerEventData.InputButton.Left)
         {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                Debug.Log("shiftClick");
+                InventorySlot Slot = Inventory.Singleton.WeaponSlots.FirstOrDefault(n => n.myItem == null);
+                if(Slot != null)
+                {
+                    Slot.SetItem(this);
+                    
+                }
+                return;
+
+            }
             Inventory.Singleton.SetCarriedItem(this);
         }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        
+        /*
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             Debug.Log("Released Button");
@@ -57,5 +70,7 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerClickHa
 
 
         }
+        */
+
     }
 }
