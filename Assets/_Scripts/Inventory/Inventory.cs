@@ -34,6 +34,7 @@ public class Inventory : MonoBehaviour
         
         Singleton = this;
         handLoc = FindAnyObjectByType<HandStuff>();
+        GWL = handLoc.GetComponentInChildren<AbilityEventHandler>().gameObject;
         handMult = FindAnyObjectByType<HandMult>();
         PA = handLoc.gameObject.GetComponent<PlayerAttack>(); 
         ClientWeaponTransform = handLoc.transform.Find("Base");
@@ -55,16 +56,30 @@ public class Inventory : MonoBehaviour
     {
         if(carriedItem != null)
         {
-            if (item.activeSlot.myTag != SlotTag.None && item.activeSlot.myTag != carriedItem.myItem.itemTag) return;
+            if (item.activeSlot.myTag != SlotTag.None && item.activeSlot.myTag != carriedItem.myItem.itemTag) 
             item.activeSlot.SetItem(carriedItem);
         }
+
+
+
 
         if (item.activeSlot.myTag != SlotTag.None)
         { EquipEquipment(item.activeSlot.myTag, null); }
             
+
+
         carriedItem = item;
         carriedItem.canvasGroup.blocksRaycasts = false;
+        carriedItem.canvasGroup.interactable = false;
         item.transform.SetParent(draggablesTransform);
+        
+    }
+
+
+
+
+    public void AutoEquip()
+    {
         
     }
 
@@ -81,6 +96,7 @@ public class Inventory : MonoBehaviour
                 if(item ==null)
                 {
                     Active = false;
+                    GWL.SetActive(false);
                     WH.enabled = false;
                     PA.enabled = false;
                     WG.RemoveWeapon();
@@ -88,10 +104,11 @@ public class Inventory : MonoBehaviour
                     
                     //Destroy(GWL);
                 }
+                
                 else
                 {
                     Active = true;
-                    
+                    GWL.SetActive(true);
                     PA.enabled = true;
                     WH.enabled = true;
                     WG.GenerateWeapon(item.myItem.weaponData);

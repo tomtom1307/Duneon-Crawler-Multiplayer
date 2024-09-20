@@ -3,28 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour, IPointerClickHandler
+public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public InventoryItem myItem {  get;  set; }
 
     public SlotTag myTag;
 
-   public void OnPointerClick(PointerEventData eventData)
-    {
-
-        if (eventData.button== PointerEventData.InputButton.Left)
-        {
-            if (Inventory.carriedItem == null) return;
-            if (myTag != SlotTag.None && Inventory.carriedItem.myItem.itemTag != myTag) return;
-            SetItem(Inventory.carriedItem);
-        }
-    }
+   
 
     public void SetItem(InventoryItem item)
     {
         Inventory.carriedItem = null;
 
         item.activeSlot.myItem = null;
+
 
         myItem = item;
         myItem.activeSlot = this;
@@ -40,4 +32,37 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
 
     }
 
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        print("SlotMouseUp");
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            
+            if (myTag != SlotTag.None && Inventory.carriedItem.myItem.itemTag != myTag)
+            {
+                Inventory.carriedItem.activeSlot.SetItem(Inventory.carriedItem);
+                return;
+            }
+            SetItem(Inventory.carriedItem);
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            if (Inventory.carriedItem == null) return;
+            if (myTag != SlotTag.None && Inventory.carriedItem.myItem.itemTag != myTag)
+            {
+                Inventory.carriedItem.activeSlot.SetItem(Inventory.carriedItem);
+                return;
+            }
+            SetItem(Inventory.carriedItem);
+        }
+    }
 }

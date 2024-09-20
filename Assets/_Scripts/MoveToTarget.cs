@@ -16,10 +16,15 @@ namespace Project
             base.OnNetworkSpawn();
         }
 
+        Vector3 dir;
+        private void Start()
+        {
+            dir = (target - transform.position).normalized
+        }
 
         public void Update()
         {
-            transform.position = Vector3.Lerp(transform.position, target, 0.2f);
+            transform.position = Vector3.Lerp(transform.position, 40*dir, speed*Time.deltaTime);
             
             if (Vector3.Distance(transform.position, target) < 1 ) 
             {

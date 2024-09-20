@@ -7,14 +7,17 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [Serializable]
-public class InventoryItem : MonoBehaviour, IPointerClickHandler
+public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerClickHandler
 {
     public Image itemIcon;
     [SerializeField] public Item myItem;
     public CanvasGroup canvasGroup {  get; private set; }
 
+
+    public SlotTag myTag;
     
     public InventorySlot activeSlot { get; set; }
+
     
     void Awake()
     {
@@ -30,17 +33,29 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
         myItem = item;
         itemIcon.sprite = item.sprite;
         itemIcon.color = rarity;
-        
+        myTag = item.itemTag;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
 
-        if(eventData.button == PointerEventData.InputButton.Left)
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Debug.Log("Held Button");
+        if (eventData.button == PointerEventData.InputButton.Left)
         {
             Inventory.Singleton.SetCarriedItem(this);
         }
     }
 
-    
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            Debug.Log("Released Button");
+            if (Inventory.carriedItem == null) return;
+            activeSlot.SetItem(this);
+
+
+        }
+    }
 }

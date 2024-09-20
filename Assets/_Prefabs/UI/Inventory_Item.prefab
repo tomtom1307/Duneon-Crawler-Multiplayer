@@ -29,7 +29,7 @@ RectTransform:
   m_GameObject: {fileID: 8593088689491158372}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.08671461, y: 0.7779914, z: 0.6027577}
+  m_LocalScale: {x: 0.09671461, y: 1.1, z: 0.6027577}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,6 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
+  myItem: {fileID: 0}
+  myTag: 0
 --- !u!222 &8214738520267956488
 CanvasRenderer:
   m_ObjectHideFlags: 0
