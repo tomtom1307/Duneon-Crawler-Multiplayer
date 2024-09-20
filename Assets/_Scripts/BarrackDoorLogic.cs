@@ -28,8 +28,11 @@ namespace Project
         [ServerRpc(RequireOwnership=false)]
         void BarrackSpawnServerRpc()
         {
-            TriggerSpawner();
-            roomSpawner.Active = true;
+            if (!roomSpawner.Active)
+            {
+                TriggerSpawner();
+                roomSpawner.Active = true;
+            }
         }
         public void TriggerSpawner()
         {

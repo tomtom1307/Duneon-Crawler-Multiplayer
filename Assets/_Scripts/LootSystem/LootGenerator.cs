@@ -42,7 +42,7 @@ namespace Project
 
 
             //Generate random number (101 bc Range is exclusive)
-            int rng = UnityEngine.Random.Range(0, 101);
+            float rng = UnityEngine.Random.Range(0, 101);
 
             //make list to store all possible items
             List<LootItem> possibleItems = new List<LootItem>();
@@ -103,7 +103,7 @@ namespace Project
 
             GameObject lootitem = Instantiate(loot_prefab, pos, rot);
             //Animate Up and down movement
-            
+            lootitem.GetComponent<_Interactable>();
             if (LootVFX)
             {
                 SpawnVFX(lootitem.transform);
@@ -118,6 +118,7 @@ namespace Project
             item.transform.DOLocalMove(transform.position+Vector3.up*0.1f, 2).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
             VFX.transform.localScale *= 10;
             VFX.GetComponentInChildren<VisualEffect>().playRate = 4;
+
         }
     }
 
