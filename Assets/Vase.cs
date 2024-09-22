@@ -15,8 +15,9 @@ namespace Project
         GenericSoundSource SoundSource;
         bool Broken;
 
-        private void Start()
+        public override void Start()
         {
+            base.Start();
             DT = GetComponent<DamageableThing>();
             SoundSource = GetComponent<GenericSoundSource>();
         }

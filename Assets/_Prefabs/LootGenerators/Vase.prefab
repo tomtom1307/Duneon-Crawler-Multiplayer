@@ -105,20 +105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prompt: '[F]'
   interacter: {fileID: 0}
-  lootTable:
-  - Name: Coins
-    VFXColor: 0
-    dropChance: 100
-    prefab: {fileID: 4428799709971615966, guid: 04d2b4191b910c74f8e6b3725f28b9f5,
-      type: 3}
-  - Name: White Crystal
-    VFXColor: 0
-    dropChance: 50
-    prefab: {fileID: 4785511559705066431, guid: b49080570f4e09e4eba0c843d4c57b42,
-      type: 3}
+  lootTable: {fileID: 11400000, guid: d1d9712583b39a64daaddb7dc7eb310b, type: 2}
   LootVFX: 1
-  whiteVFXPrefab: {fileID: 5512775761213915690, guid: 7c35b082e4c6a0f439c59c9e68c2d825,
-    type: 3}
   BrokenVase: {fileID: 3501722584489586024, guid: 5396acca42383364296e6332aca3e7f1,
     type: 3}
   BreakForce: 10
@@ -134,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1584718677
+  GlobalObjectIdHash: 3677343210
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
