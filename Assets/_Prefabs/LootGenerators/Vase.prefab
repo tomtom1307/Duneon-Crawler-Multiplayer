@@ -35,7 +35,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: -0, y: 0.45, z: 0}
-  m_LocalScale: {x: 43.59513, y: 43.595123, z: 43.595123}
+  m_LocalScale: {x: 43.59513, y: 43.59512, z: 43.59512}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6927590152380734573}
@@ -103,6 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51a0db083b0be340a776ecba4337b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Prompt: '[F]'
+  interacter: {fileID: 0}
   lootTable:
   - Name: Coins
     VFXColor: 0
@@ -132,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3677343210
+  GlobalObjectIdHash: 1584718677
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
