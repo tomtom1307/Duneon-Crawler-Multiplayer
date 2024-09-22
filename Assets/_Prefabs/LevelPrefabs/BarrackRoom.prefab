@@ -1642,6 +1642,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6792314004178197265}
+  - component: {fileID: 6617813344038960761}
   - component: {fileID: 8085733300598993188}
   - component: {fileID: 718812288611276067}
   m_Layer: 11
@@ -1666,6 +1667,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2901029763229253512}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6617813344038960761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442194404097680710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &8085733300598993188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1695,15 +1716,7 @@ MonoBehaviour:
     Amount: 1
     RandomSpawn: 1
     Rounds: 0100000002000000
-    Position:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    Position: []
   - name: SwordGoblins
     Prefab: {fileID: 7553112160091963360, guid: b182f5c33858e244da3e14a07c8c9ba5,
       type: 3}

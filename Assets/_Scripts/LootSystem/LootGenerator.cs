@@ -7,7 +7,7 @@ using UnityEngine.VFX;
 
 namespace Project
 {
-    public class LootGenerator : MonoBehaviour
+    public class LootGenerator : _Interactable
     {
         //List to store all possible loot options with their respective drop chance
         public List<LootItem> lootTable;
@@ -74,8 +74,9 @@ namespace Project
 
 
         //Handle Spawning given a transform 
-        public virtual void SpawnLoot(GameObject loot_prefab, Transform target, bool Inherit_Rotation = false)
+        public virtual void SpawnLoot(GameObject loot_prefab, Transform target, bool Inherit_Rotation = false, bool aschild = false)
         {
+            GameObject LootItem;
             Quaternion rot;
             if (Inherit_Rotation)
             {
@@ -86,8 +87,15 @@ namespace Project
 
             
 
+            if(aschild)
+            {
+                LootItem = Instantiate(loot_prefab, target);
+            }
+            else
+            {
+                LootItem = Instantiate(loot_prefab, target.position, rot);
+            }
 
-            GameObject LootItem = Instantiate(loot_prefab, target.position, rot);
             
             if (LootVFX)
             {

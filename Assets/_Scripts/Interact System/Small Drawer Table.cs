@@ -4,11 +4,13 @@ using UnityEngine;
 
 namespace Project
 {
-    public class SmallDrawerTable : _Interactable
+    public class SmallDrawerTable : LootGenerator
     {
         Animator anim;
         public List<Transform> LootPositions;
         LootGenerator LootGenerator;
+        bool opened = false;
+    
 
         // Start is called before the first frame update
         void Start()
@@ -19,14 +21,18 @@ namespace Project
 
         protected override void Interact()
         {
-            base.Interact();
-            anim.SetBool("Open", true);
-            foreach (Transform t in LootPositions)
+            if(!opened)
             {
-                
+                opened = true;
+                foreach(Transform loottransform in LootPositions)
+                {
+                    GameObject loot = GenerateLoot();
+                    if(loot != null) {SpawnLoot(loot, loottransform, aschild: true);}
+                }
+                base.Interact();  
+                anim.SetBool("Open", true);
+                Prompt = "";
             }
-
-            Prompt = "";
         }
 
         
