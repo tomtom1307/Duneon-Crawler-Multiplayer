@@ -17,7 +17,7 @@ namespace Project
         {
             base.Start();
             anim = GetComponent<Animator>();
-            LootGenerator = GetComponent<LootGenerator>();
+            
         }
 
         protected override void Interact()
