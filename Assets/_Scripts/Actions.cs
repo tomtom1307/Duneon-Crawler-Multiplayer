@@ -5,8 +5,9 @@ using System;
 
 namespace Project
 {
-    public static class RoomActions
+    public static class Actions
     {
         public static Action<EnemySpawner, bool> SpawnerUpdate;
+        public static Action PlayerStart;
     }
 }

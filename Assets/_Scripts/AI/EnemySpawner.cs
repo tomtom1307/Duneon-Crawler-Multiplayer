@@ -93,7 +93,7 @@ namespace Project
         
         public void SpawnerEnd()
         {
-            RoomActions.SpawnerUpdate(this,false);
+            Actions.SpawnerUpdate(this,false);
         }
         public int FindTotalNumberOfRounds()
         {

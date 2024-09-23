@@ -14,13 +14,13 @@ namespace Project
 
         private void OnEnable()
         {
-            RoomActions.SpawnerUpdate += ManageDoors;
+            Actions.SpawnerUpdate += ManageDoors;
             anim.SetBool("Open",true);
             Open = true;
         }
         private void OnDisable() 
         {
-            RoomActions.SpawnerUpdate -= ManageDoors;
+            Actions.SpawnerUpdate -= ManageDoors;
         }
 
 
