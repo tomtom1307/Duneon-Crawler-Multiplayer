@@ -19,7 +19,10 @@ namespace Project
         [field: SerializeField] public GameObject damageText;
         [field: SerializeField] public float MaxHealth { get; set; } = 100f;
         MeshRenderer MR;
+        public bool DoesNotDestroy;
+        public GameObject DestroyVisual;
         private float flashTime = 0.1f;
+        public float TimeLeftAfterDeath;
         public bool ded;
         public bool Invincible;
 
@@ -45,7 +48,15 @@ namespace Project
             if(CurrentHealth.Value <= 0)
             {
                 ded = true;
-                Destroy(gameObject,1f);
+                if (DoesNotDestroy)
+                {
+                    Destroy(DestroyVisual);
+                }
+                else
+                {
+                    Destroy(gameObject, TimeLeftAfterDeath);
+                }
+                
             }
             HandleLocalVisualsClientRpc(Damage);
         }
