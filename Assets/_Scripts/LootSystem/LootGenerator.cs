@@ -149,7 +149,7 @@ namespace Project
         public void SpawnVFX(Transform item)
         {
             var VFX = Instantiate(GetVFXPrefab(color), item);
-            item.transform.DOLocalMove(transform.position+Vector3.up*0.1f, 2).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
+            item.transform.DOMove(item.transform.position+Vector3.up*0.1f, 2).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
             VFX.transform.localScale *= 10;
             VFX.GetComponentInChildren<VisualEffect>().playRate = 4;
 
