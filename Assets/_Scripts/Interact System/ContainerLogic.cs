@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace Project
 {
-    public class SmallDrawerTable : LootGenerator
+    public class ContainerLogic : LootGenerator
     {
         Animator anim;
+        public bool LootAsChild;
         public List<Transform> LootPositions;
-        LootGenerator LootGenerator;
         bool opened = false;
+        
     
 
         // Start is called before the first frame update
@@ -28,7 +29,7 @@ namespace Project
                 foreach(Transform loottransform in LootPositions)
                 {
                     GameObject loot = GenerateLoot();
-                    if(loot != null) {SpawnLoot(loot, loottransform, aschild: true);}
+                    if(loot != null) {SpawnLoot(loot, loottransform, aschild: LootAsChild);}
                 }
                 base.Interact();  
                 anim.SetBool("Open", true);

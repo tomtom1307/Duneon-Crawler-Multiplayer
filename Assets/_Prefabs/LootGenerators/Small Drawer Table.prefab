@@ -339,10 +339,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5f11ccfbc916e48a8595506cbe5971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prompt: Press F to interact
+  Prompt: '[F]'
   interacter: {fileID: 0}
   lootTable: {fileID: 11400000, guid: 78263170a7d2cf8419b30921e108263c, type: 2}
   LootVFX: 0
+  LootAsChild: 1
   LootPositions:
   - {fileID: 6566538327330746491}
   - {fileID: 5120977784570023520}

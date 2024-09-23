@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Project
 {
-    public class Chest1 : MonoBehaviour
+    public class Chest1 : LootGenerator
     {
         // Start is called before the first frame update
         void Start()

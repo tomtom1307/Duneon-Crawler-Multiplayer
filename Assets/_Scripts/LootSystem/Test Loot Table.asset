@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e2b1ddf7ffdc143bcc341c51af4bcc, type: 3}
+  m_Name: Test Loot Table
+  m_EditorClassIdentifier: 
+  List:
+  - Name: Coins
+    VFXColor: 0
+    dropChance: 100
+    prefab: {fileID: 4428799709971615966, guid: 04d2b4191b910c74f8e6b3725f28b9f5,
+      type: 3}
+  - Name: White Crystal
+    VFXColor: 0
+    dropChance: 0
+    prefab: {fileID: 4785511559705066431, guid: b49080570f4e09e4eba0c843d4c57b42,
+      type: 3}
+  - Name: Green Crystal
+    VFXColor: 1
+    dropChance: 0
+    prefab: {fileID: 3095986540407736980, guid: 1a1d8fd5e99879a48aeb440b1aa147fc,
+      type: 3}
+  - Name: Blue Crystal
+    VFXColor: 2
+    dropChance: 0
+    prefab: {fileID: 123306320380369573, guid: 1948caa28077e2a46bc72e9bac02e224, type: 3}
+  - Name: Purple Crystal
+    VFXColor: 3
+    dropChance: 0
+    prefab: {fileID: 1777977500711247554, guid: 7d42a83e06b352a4b9e670d47701eb89,
+      type: 3}
+  - Name: Orange Crystal
+    VFXColor: 4
+    dropChance: 0
+    prefab: {fileID: 8547660119546260135, guid: 3f0d89a0d52913045a02a00533803e4f,
+      type: 3}
+  whiteVFXPrefab: {fileID: 5512775761213915690, guid: 7c35b082e4c6a0f439c59c9e68c2d825,
+    type: 3}
+  greenVFXPrefab: {fileID: 2767786330348810712, guid: f3a00e464601e3642ab839dce1de1111,
+    type: 3}
+  blueVFXPrefab: {fileID: 3685898602467266929, guid: a8c8ad9a9df0932488c7e8b63bfca5ed,
+    type: 3}
+  purpleVFXPrefab: {fileID: 8819972815149073299, guid: 65b0429b80702bd4aabb159eb188d9b3,
+    type: 3}
+  orangeVFXPrefab: {fileID: 4277118276417544126, guid: 6daa8319e2a913a478a4cfd42aebd4cb,
+    type: 3}
