@@ -36,7 +36,7 @@ namespace Project
         }
         public void TriggerSpawner()
         {
-            RoomActions.SpawnerUpdate(roomSpawner,true);
+            Actions.SpawnerUpdate(roomSpawner,true);
         }
     }
 }
