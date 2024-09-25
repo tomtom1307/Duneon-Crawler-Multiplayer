@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: OpeningBarricade1
+  m_Name: OpeningBarricade3
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0.000009361432, y: 8.965687, z: 4.992961}
+        value: {x: 0.000009361432, y: 5.81, z: 4.992961}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -28,26 +28,26 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.6166667
-        value: {x: 0.00006123464, y: 8.965687, z: 6.9702635}
-        inSlope: {x: 0.00009500465, y: 0, z: 8.953823}
-        outSlope: {x: 0.00009500465, y: 0, z: 8.953823}
+        time: 0.56666666
+        value: {x: 0.000054809287, y: 5.81, z: 6.462001}
+        inSlope: {x: 0.00010047294, y: 0, z: 6.6522555}
+        outSlope: {x: 0.00010047294, y: 0, z: 6.6522555}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.8833333
-        value: {x: 0.00007572784, y: 8.965687, z: 16.1}
-        inSlope: {x: 0, y: 0, z: 1.0828491}
-        outSlope: {x: 0, y: 0, z: 1.0828491}
+        value: {x: 0.0000736808, y: 5.81, z: 15.7}
+        inSlope: {x: 0, y: 0, z: 1.3620892}
+        outSlope: {x: 0, y: 0, z: 1.3620892}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 1.1333333
-        value: {x: 0.00007572784, y: 8.965687, z: 16.239868}
+        value: {x: 0.0000736808, y: 5.81, z: 15.892962}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -57,7 +57,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: GateBarricades/Barricade1.005
+    path: GateBarricades/Barricade1.003
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves: []
@@ -69,7 +69,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 2516441675
+      path: 2090762110
       attribute: 1
       script: {fileID: 0}
       typeID: 4
@@ -114,7 +114,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.8833333
-        value: 0.00007572784
+        value: 0.0000736808
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -123,7 +123,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.1333333
-        value: 0.00007572784
+        value: 0.0000736808
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -134,7 +134,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: GateBarricades/Barricade1.005
+    path: GateBarricades/Barricade1.003
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -144,7 +144,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 8.965687
+        value: 5.81
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -153,7 +153,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.8833333
-        value: 8.965687
+        value: 5.81
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -162,7 +162,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.1333333
-        value: 8.965687
+        value: 5.81
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -173,7 +173,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: GateBarricades/Barricade1.005
+    path: GateBarricades/Barricade1.003
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -191,26 +191,26 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.6166667
-        value: 6.9702635
-        inSlope: 8.953823
-        outSlope: 8.953823
+        time: 0.56666666
+        value: 6.462001
+        inSlope: 6.6522555
+        outSlope: 6.6522555
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.8833333
-        value: 16.1
-        inSlope: 1.0828491
-        outSlope: 1.0828491
+        value: 15.7
+        inSlope: 1.3620892
+        outSlope: 1.3620892
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.1333333
-        value: 16.239868
+        value: 15.892962
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -221,7 +221,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: GateBarricades/Barricade1.005
+    path: GateBarricades/Barricade1.003
     classID: 4
     script: {fileID: 0}
     flags: 0

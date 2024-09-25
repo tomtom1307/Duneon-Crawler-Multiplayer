@@ -10,7 +10,7 @@ namespace Project
         public GameObject Projectile;
         private float _timer;
 
-        private float timeBetweenAttacks = 2f;
+        public float timeBetweenAttacks = 2f;
         bool repositioning = false;
         Vector3 DesiredPosition;
         Vector3 OffsetVector;
@@ -24,7 +24,6 @@ namespace Project
         public override void DoEnterLogic()
         {
             _timer = Random.Range(0f, 2f);
-            timeBetweenAttacks = enemy.TimeBetweenAttacks;
             Debug.Log("Attacking");
             base.DoEnterLogic();
         }

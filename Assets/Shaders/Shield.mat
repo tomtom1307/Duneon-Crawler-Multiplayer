@@ -33,7 +33,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _Alpha_Clip
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -67,15 +67,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha_Clip: 0.4
-    - _Distortion: 6.3
+    - _Alpha_Clip: 0.08
+    - _Distortion: 0.64
     - _FresnelPower: 0.87
-    - _NoiseScale: 9.58
+    - _NoiseScale: 1.93
     - _NoiseSpeed: 0.52
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Transparency: 0.35
     m_Colors:
-    - _Color: {r: 2.7954397, g: 0, b: 0, a: 1}
+    - _Color: {r: 3.9533494, g: 0, b: 0, a: 1}
     - _NoiseDir: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

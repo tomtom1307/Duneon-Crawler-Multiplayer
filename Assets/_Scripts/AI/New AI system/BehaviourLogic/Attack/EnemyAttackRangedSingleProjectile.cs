@@ -11,7 +11,7 @@ namespace Project
         public GameObject Projectile;
         private float _timer;
 
-        private float timeBetweenAttacks = 2f;
+        public float timeBetweenAttacks = 2f;
         bool repositioning = false;
         Vector3 DesiredPosition;
         Vector3 OffsetVector;
@@ -26,10 +26,7 @@ namespace Project
                 enemy.Attacking = false;
                 enemy.animator.SetBool("Attacking", false);
                 _timer = 0;
-                if (enemy.aggression < 0.8)
-                {
-                    Reposition();
-                }
+                Reposition();
             }
             else if (type == Enemy.AnimationTriggerType.CallHit)
             {
@@ -44,7 +41,7 @@ namespace Project
 
         public override void DoEnterLogic()
         {
-            timeBetweenAttacks = enemy.TimeBetweenAttacks;
+           
             Debug.Log("Attacking");
             base.DoEnterLogic();
         }
