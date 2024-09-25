@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Project
 {
-    public class ChaosHeartDetection : MonoBehaviour
+    public class ChaosHeartDetection : NetworkBehaviour
     {
 
         ChaosHeart CH;
@@ -17,12 +18,24 @@ namespace Project
 
         private void OnTriggerEnter(Collider other)
         {
-            
+            if (IsLocalPlayer) return;
             if(other.gameObject.tag == "Player")
             {
                 RoomProgressBar RPB = other.GetComponentInChildren<RoomProgressBar>();
 
                 RPB.EnableProgressBar(RoomProgressBar.ProgressType.Health, "Chaos Heart", CH.HealthbarColor);
+
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (IsLocalPlayer) return;
+            if (other.gameObject.tag == "Player")
+            {
+                RoomProgressBar RPB = other.GetComponentInChildren<RoomProgressBar>();
+
+                RPB.DisableProgressBar();
 
             }
         }

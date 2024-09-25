@@ -20,9 +20,8 @@ namespace Project
         public float TotalEnemies;
         public int NumberOfRounds;
         public int CurrentRound;
-        public Enemies[] enemies;
+        public List<Enemies> enemies;
         public GameObject currentSpawn;
-        public float spawnAmount = 1;
         bool Spawned = false;
         public bool Active = false;
         public bool AllEnemiesKilled;
@@ -30,6 +29,7 @@ namespace Project
         // Start is called before the first frame update
         void Start()
         {
+            Actions.Initialize();
             CurrentRound = 1;
             Bounds = GetComponent<BoxCollider>();
             NumberOfRounds = FindTotalNumberOfRounds();
@@ -93,8 +93,22 @@ namespace Project
         
         public void SpawnerEnd()
         {
-            Actions.SpawnerUpdate(this,false);
+            print(Actions.SpawnerUpdate);
+            if(Actions.SpawnerUpdate != null)
+            {
+                Actions.SpawnerUpdate(this, false);
+            }
+            
+            
         }
+
+
+        public void StartSpawner()
+        {
+            Active = true;
+            Actions.SpawnerStarted();
+        }
+
         public int FindTotalNumberOfRounds()
         {
             int totalNumberOfRounds = 0;
@@ -155,7 +169,6 @@ namespace Project
             En.Spawner = this;
             
             
-            //En.aggression = Mathf.Clamp(0.1f * spawnAmount, 0, 1);
             var InstanceNetworkObj = Instance.GetComponent<NetworkObject>();
             InstanceNetworkObj.Spawn();
             
@@ -179,7 +192,6 @@ namespace Project
             var Instance = Instantiate(currentSpawn, pos, rot);
             Enemy En = Instance.GetComponent<Enemy>();
             En.Spawner = this;
-            //En.aggression = Mathf.Clamp(0.1f * spawnAmount, 0, 1);
             var InstanceNetworkObj = Instance.GetComponent<NetworkObject>();
             InstanceNetworkObj.Spawn();
 
@@ -194,6 +206,17 @@ namespace Project
             public bool RandomSpawn;
             public int[] Rounds;
             public List<Transform> Position;
+            
+
+            public Enemies(string name, GameObject prefab, int amount, bool randomSpawn, int[] rounds, List<Transform> position)
+            {
+                this.name = name;
+                Prefab = prefab;
+                Amount = amount;
+                RandomSpawn = randomSpawn;
+                Rounds = rounds;
+                Position = position;
+            }
         }
 
     }

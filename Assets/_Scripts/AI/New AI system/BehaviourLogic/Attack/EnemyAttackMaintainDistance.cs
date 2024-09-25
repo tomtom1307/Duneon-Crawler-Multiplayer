@@ -45,7 +45,7 @@ namespace Project
             //Debug.Log("Attacking");
             //enemy.navMesh.velocity = Vector3.zero;
             base.DoEnterLogic();
-            _timer = enemy.TimeBetweenAttacks;
+            _timer = timeBetweenAttacks;
             Reposition();
             enemy.navMesh.updateRotation = false;
            

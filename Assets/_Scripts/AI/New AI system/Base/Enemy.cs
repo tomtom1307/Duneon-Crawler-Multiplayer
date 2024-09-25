@@ -15,16 +15,15 @@ namespace Project
     {
         #region Definitions
         public bool StaticEnemy;
-        public float DamageToStagger;
-        public float DamageReduction = 1;
+        [HideInInspector] public float DamageReduction = 1;
         
         [field: SerializeField] public float MaxHealth { get; set; } = 100f;
         public NetworkVariable<float> CurrentHealth { get; set; } = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
         [field: SerializeField] public float maxDetectDist { get; set; } = 100f;
         [field: SerializeField] public float AttackDistance { get; set; } = 4f;
-        [field: SerializeField] public float MeleeAttackRange { get; set; } = 0.7f;
+        [field: SerializeField] public float MeleeRaycastRange { get; set; } = 0.7f;
 
-        [field: SerializeField] public float TimeBetweenAttacks { get; set; } = 4f;
+      
         [field: SerializeField] public float AttackDamage { get; set; } = 4f;
         [field: SerializeField] public Image  HealthBar;
         [field: SerializeField] public int xpOnKill { get; set; }
@@ -37,9 +36,9 @@ namespace Project
         public Transform ProjectileSpawnPos;
         public Animator animator { get; set; }
         
-        public List<Transform> playerlist;
+        [HideInInspector]public List<Transform> playerlist;
         [HideInInspector] public Transform target;
-        public float aggression = 0.5f;
+        [HideInInspector] public float aggression = 0.5f;
         public EnemyStateMachine StateMachine { get; set; }
         public EnemyIdleState IdleState { get; set; }
         public EnemyChaseState ChaseState { get; set; }
@@ -47,17 +46,16 @@ namespace Project
         public EnemyDedState DedState{ get; set; }
         public bool IsWithinStrikingDistance { get; set; }
         public bool PlayerIsTooClose { get; set; }
-        [field: SerializeField] public Color HeadshotColor { get; set; }
-        [field: SerializeField] public Color NormalColor { get; set; }
+        [field: SerializeField] public Color HeadshotColor = Color.HSVToRGB(0,7.6f,1.00f);
+        [field: SerializeField] public Color NormalColor = Color.HSVToRGB(0, 0, 1.00f);
         public Material[] origColors { get; set; }
         public Material[] whites { get; set; }
         public float flashTime { get; set; } = 1f;
         public DissolveController dissolve { get; set; }
 
-        public float RandomMovementRange = 5f;
-        public float RandomMovementSpeed = 1f;
+        
         public GameObject SpawnedObj;
-        public float RotateSpeed;
+        public float RotateSpeed = 100f;
         //VFX Stuff
         SkinnedMeshRenderer SkinmeshRenderer;
         [field: SerializeField] public GameObject damageText;
@@ -99,8 +97,8 @@ namespace Project
             DedState = new EnemyDedState(this, StateMachine);
         }
 
-        public bool ArmorBuff = false;
-        public GameObject armorBuffVFX;
+        [HideInInspector] public bool ArmorBuff = false;
+        [HideInInspector] public GameObject armorBuffVFX;
         public void AddArmorBuff(GameObject vfx)
         {
             if (!ArmorBuff)
@@ -433,7 +431,7 @@ namespace Project
 
             RaycastHit hit;
            
-            Physics.SphereCast(transform.position+0.5f*Vector3.up, 0.2f, transform.forward, out hit, MeleeAttackRange, whatisPlayer);
+            Physics.SphereCast(transform.position+0.5f*Vector3.up, 0.2f, transform.forward, out hit, MeleeRaycastRange, whatisPlayer);
             if (hit.collider != null)
             {
 
@@ -468,7 +466,7 @@ namespace Project
         {
             RaycastHit hit;
 
-            Physics.SphereCast(transform.position + 0.5f * Vector3.up, 0.6f, transform.forward, out hit, MeleeAttackRange);
+            Physics.SphereCast(transform.position + 0.5f * Vector3.up, 0.6f, transform.forward, out hit, MeleeRaycastRange);
             opposingDirection = Vector3.zero;
             if (hit.collider==null) return true;
             if (hit.collider.gameObject.layer == gameObject.layer)

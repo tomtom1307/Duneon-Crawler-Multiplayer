@@ -20,8 +20,7 @@ namespace Project
 
         // VFX Damage effects
         //Text Vars
-        public Color HeadshotColor { get; set; }
-        public Color NormalColor { get; set; }
+        
 
         //Flash Vars
 
