@@ -230,13 +230,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StaticEnemy: 1
-  DamageToStagger: 0
   DamageReduction: 1
   <MaxHealth>k__BackingField: 15
   <maxDetectDist>k__BackingField: 100
   <AttackDistance>k__BackingField: 15
-  <MeleeAttackRange>k__BackingField: 0.7
-  <TimeBetweenAttacks>k__BackingField: 4
+  <MeleeRaycastRange>k__BackingField: 0.7
   <AttackDamage>k__BackingField: 10
   HealthBar: {fileID: 3560509288981106834}
   <xpOnKill>k__BackingField: 0
@@ -249,10 +247,8 @@ MonoBehaviour:
   playerlist: []
   target: {fileID: 0}
   aggression: 0.5
-  <HeadshotColor>k__BackingField: {r: 1, g: 0.590459, b: 0.36037737, a: 1}
-  <NormalColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
-  RandomMovementRange: 5
-  RandomMovementSpeed: 1
+  HeadshotColor: {r: 1, g: -6.6, b: -6.6, a: 1}
+  NormalColor: {r: 1, g: 1, b: 1, a: 1}
   SpawnedObj: {fileID: 0}
   RotateSpeed: 0
   damageText: {fileID: 5493454748374447997, guid: 328779aff6d65a54ea955ca4a033948f,
@@ -707,8 +703,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.27, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.29, z: 0}
+  m_Size: {x: 1.27, y: 0.48810008, z: 1}
+  m_Center: {x: 0, y: 0.54594994, z: 0}
 --- !u!1 &2138435565731479060
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,8 +734,8 @@ Transform:
   m_GameObject: {fileID: 2138435565731479060}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.171, z: 1.066}
-  m_LocalScale: {x: 1.0734757, y: 0.20478506, z: 0.20885159}
+  m_LocalPosition: {x: 0, y: 0.25, z: 1.066}
+  m_LocalScale: {x: 0.8235169, y: 0.20478506, z: 0.20885159}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 444152587374017273}
@@ -814,8 +810,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0129743, y: 8.675246, z: 0.99999976}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.3258111, y: 8.675246, z: 0.99999976}
+  m_Center: {x: -0.1564175, y: 1.3521068e-15, z: 0}
 --- !u!114 &6052084487519265812
 MonoBehaviour:
   m_ObjectHideFlags: 0

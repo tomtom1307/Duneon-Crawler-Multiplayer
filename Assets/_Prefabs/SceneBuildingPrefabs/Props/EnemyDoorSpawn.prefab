@@ -582,9 +582,9 @@ MonoBehaviour:
     - {fileID: 5285694278664699369}
     - {fileID: 3188087376383335432}
   currentSpawn: {fileID: 0}
-  spawnAmount: 6
   Active: 0
   AllEnemiesKilled: 0
+  AutoRoundTrigger: 0
 --- !u!65 &7074165131566958600
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -646,6 +646,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8122862901440264258}
+  - component: {fileID: 2391903147124797625}
   - component: {fileID: 3224360389533356919}
   - component: {fileID: 3198428418843960153}
   m_Layer: 8
@@ -675,6 +676,26 @@ Transform:
   - {fileID: 3570119463001425739}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 179.994, z: 0}
+--- !u!114 &2391903147124797625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086004086664795035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &3224360389533356919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,6 +729,8 @@ MonoBehaviour:
   - Name: Lever2
     lever: {fileID: 2767664954570601769}
     Channel: 1
+  triggers: []
+  Wall: {fileID: 0}
 --- !u!65 &3198428418843960153
 BoxCollider:
   m_ObjectHideFlags: 0

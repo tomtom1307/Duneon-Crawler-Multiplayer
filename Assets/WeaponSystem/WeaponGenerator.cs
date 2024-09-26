@@ -35,21 +35,46 @@ namespace Project.Assets.WeaponSystem
             weaponStats.ChangeStats(inst);
             print("generating Weapon");
             weapon.SetData(data);
+            if (ModelInstance != null)
+            {
+                Destroy(ModelInstance);
+            }
             SpawnVisual(weaponPos,data.model);
-            
 
             ComponentDependencies.Clear();
             ComponentsAlreadyOn.Clear();
-            
+            ComponentDependencies.Clear();
+
             ComponentDependencies = data.GetAllDependencies();
 
             foreach (var dependancy in ComponentDependencies)
             {
-                var component = gameObject.AddComponent(dependancy) as WeaponComponent;
+                if(ComponentsAdded.FirstOrDefault(component => component.GetType() == dependancy))
+                {
+                    continue;
+                }
+
+                var weaponComponent = ComponentsAlreadyOn.FirstOrDefault(component => component.GetType() == dependancy);
+
+                if(weaponComponent == null)
+                {
+                    weaponComponent = gameObject.AddComponent(dependancy) as WeaponComponent;
+                }
+
+                ComponentsAdded.Add(weaponComponent);
+
             }
+
+            var componentsToRemove = ComponentsAlreadyOn.Except(ComponentsAdded);
+
+            foreach (var item in componentsToRemove)
+            {
+                Destroy(item);
+            }
+
             Generating = false;
         }
-        public void RemoveWeapon(WeaponInstance inst = null)
+        public void RemoveWeapon()
         {
             
             print("Removing Weapon");
@@ -59,17 +84,11 @@ namespace Project.Assets.WeaponSystem
                 Destroy(item);
             }
             Destroy(ModelInstance);
-            if (inst != null)
-            {
-                GenerateWeapon(inst);
-                
-            }
         }
 
         public void SwapWeapon(WeaponInstance inst)
         {
             print("Swapping Weapon");
-            RemoveWeapon();
             GenerateWeapon(inst);
 
         }

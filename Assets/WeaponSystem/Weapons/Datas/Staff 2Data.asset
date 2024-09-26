@@ -23,9 +23,7 @@ MonoBehaviour:
   <componentDatas>k__BackingField:
   - rid: 1852571019049697289
   - rid: 1852571019049697290
-  - rid: 1852571070197661696
-  - rid: 1852571070197661698
-  model: {fileID: 0}
+  model: {fileID: 6236249103363093857, guid: cc20fb47e46a9664bb394ea8d6e24bda, type: 3}
   references:
     version: 2
     RefIds:
@@ -51,23 +49,3 @@ MonoBehaviour:
         - <DamageAmount>k__BackingField: 0
           <KnockBackAmount>k__BackingField: 250
           type: 0
-    - rid: 1852571070197661696
-      type: {class: SphereOverlapData, ns: Project, asm: Assembly-CSharp}
-      data:
-        name: SphereOverlapData
-        <AttackData>k__BackingField:
-        - <Distance>k__BackingField: 10
-        - <Distance>k__BackingField: 10
-        <DetectableLayers>k__BackingField:
-          serializedVersion: 2
-          m_Bits: 512
-        <detectionRadius>k__BackingField: 10
-    - rid: 1852571070197661698
-      type: {class: SecondaryDamageData, ns: Project, asm: Assembly-CSharp}
-      data:
-        name: SecondaryDamageData
-        <AttackData>k__BackingField:
-        - <DamageAmount>k__BackingField: 15
-          <KnockBackAmount>k__BackingField: 1000
-        - <DamageAmount>k__BackingField: 15
-          <KnockBackAmount>k__BackingField: 1000

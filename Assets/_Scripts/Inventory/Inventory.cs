@@ -139,8 +139,11 @@ public class Inventory : MonoBehaviour
                 //Swap the items
                 else if (swap)
                 {
+                    Active = false;
+                    WH.enabled = false;
                     WG.SwapWeapon(item.myItem.weaponInstance);
-
+                    Active = true;
+                    WH.enabled = true;
                 }
                 
                 //Equip
