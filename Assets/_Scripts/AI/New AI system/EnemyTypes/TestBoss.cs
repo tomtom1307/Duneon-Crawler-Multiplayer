@@ -15,17 +15,35 @@ namespace Project
             switch (currentPhase)
             {
                 case(1):
-                    CheckPhaseCondition(1);
-                    transform.DOScale(1.5f * transform.localScale, 1f);
+                    if (CheckPhaseCondition(1))
+                    {
+                        currentPhase++;
+
+
+                        AttackDamage *= 1.5f;
+                        transform.DOScale(1.5f * transform.localScale, 1f);
+                    }
+                    
                     
                     break;
                 case(2):
-                    CheckPhaseCondition(2);
-                    transform.DOScale(1.5f * transform.localScale, 1f);
+                    if (CheckPhaseCondition(2))
+                    {
+                        currentPhase++;
+
+                        AttackDamage *= 1.5f;
+                        transform.DOScale(1.5f * transform.localScale, 1f);
+                    }
                     break;
-                case(3):
-                    CheckPhaseCondition(3);
-                    transform.DOScale(1.5f * transform.localScale, 1f);
+                case (3):
+                    if (CheckPhaseCondition(3))
+                    {
+                        currentPhase++;
+
+                        DamageReduction = 0.1f;
+                        AttackDamage *= 1.5f;
+                        transform.DOScale(1.5f * transform.localScale, 1f);
+                    }
                     break;
             }
 

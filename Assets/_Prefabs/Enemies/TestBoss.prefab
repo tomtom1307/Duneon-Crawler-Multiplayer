@@ -2456,9 +2456,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StaticEnemy: 0
   DamageReduction: 1
-  <MaxHealth>k__BackingField: 100
+  MaxStaggerHealth: 100
+  <MaxHealth>k__BackingField: 150
   <maxDetectDist>k__BackingField: 100
-  <AttackDistance>k__BackingField: 4
+  <AttackDistance>k__BackingField: 10
   <MeleeRaycastRange>k__BackingField: 0.7
   <AttackDamage>k__BackingField: 4
   HealthBar: {fileID: 7193110400829022960}
@@ -2492,7 +2493,7 @@ MonoBehaviour:
   floatHeight: 0
   Spawner: {fileID: 0}
   currentPhase: 0
-  PhaseTriggerHealthValues:
+  PhaseTriggerHealthPercentage:
   - 75
   - 50
   - 25
@@ -2533,7 +2534,7 @@ Animator:
   m_GameObject: {fileID: 7553112160091963360}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e90926ccf9c922e49b7fe3761cc1cc10, type: 3}
-  m_Controller: {fileID: 9100000, guid: b658ca4e1540b4b438452d9af2ed0acc, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9ec0be856bbd35b4fb6d07a12445f0af, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

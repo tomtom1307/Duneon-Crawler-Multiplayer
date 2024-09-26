@@ -16,7 +16,10 @@ namespace Project
         #region Definitions
         public bool StaticEnemy;
         [HideInInspector] public float DamageReduction = 1;
-        
+
+        public float MaxStaggerHealth;
+        public NetworkVariable<float> CurrentStaggerHealth { get; set; } = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
+
         [field: SerializeField] public float MaxHealth { get; set; } = 100f;
         public NetworkVariable<float> CurrentHealth { get; set; } = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
         [field: SerializeField] public float maxDetectDist { get; set; } = 100f;
@@ -75,6 +78,10 @@ namespace Project
 
         MeshRenderer MR;
 
+        private float staggerRegenSpeed;
+        bool StaggerRegen = false;
+
+
         #endregion
 
 
@@ -122,9 +129,11 @@ namespace Project
 
         public virtual void Start()
         {
+            
             if (IsOwner)
             {
                 CurrentHealth.Value = MaxHealth;
+                CurrentStaggerHealth.Value = MaxStaggerHealth;
             }
             //Set MaxHealth
             
@@ -138,6 +147,7 @@ namespace Project
             }
 
             animator = GetComponent<Animator>();
+
 
             //Find Players in lobby
             List<Object> list = FindObjectsOfType(typeof(PlayerMovement)).ToList();
@@ -197,6 +207,9 @@ namespace Project
             if (headshot) Damage *= 2;
             Damage = Damage * DamageReduction;
             CurrentHealth.Value -= (Damage);
+
+            
+
             if (StaticEnemy)
             {
                 if (CurrentHealth.Value<= 0)
@@ -204,6 +217,28 @@ namespace Project
                     Die();
                 }
             }
+
+
+
+            else
+            {
+                if (CurrentHealth.Value <= 0)
+                {
+                    StateMachine.ChangeState(DedState);
+                    DisableNavMeshServerRpc();
+                    return;
+                }
+
+                CurrentStaggerHealth.Value -= (Damage);
+
+                if (CurrentStaggerHealth.Value < 0)
+                {
+                    DisableNavMeshServerRpc();
+                    CurrentStaggerHealth.Value = MaxStaggerHealth;
+                    animator.Play("Hit", -1, 0f);
+                }
+            }
+
             OnDamage();
             aggression += 0.05f;
             HandleLocalVisualsClientRpc(Damage, headshot);
@@ -211,7 +246,12 @@ namespace Project
 
         }
 
+        
 
+        public void RegenStaggerHealth()
+        {
+            StaggerRegen = true;
+        }
 
         [ServerRpc(RequireOwnership = false)]
         public void KnockBackServerRpc(Vector3 playerPos, float KnockBack = 5)
@@ -254,7 +294,7 @@ namespace Project
             PlayerSoundSource.Instance.PlaySound(SourceSoundManager.SoundType.LevitationHit,0.7f);
             transform.DOMove(-floatHeight * Vector3.up + transform.position, 0.2f);
             DoDamageServerRpc(floatattackDamage);
-            animator.Play("Hit", -1, 0f);
+            
             
             rb.isKinematic = false;
             animator.applyRootMotion = true;
@@ -267,19 +307,18 @@ namespace Project
         public void DisableNavMeshServerRpc()
         {
             if (StaticEnemy) return;
-            if (CurrentHealth.Value <= 0)
-            {
-
-                StateMachine.ChangeState(DedState);
-
-
-            }
+            
             else if (Floating) return;
+
+            else if(StateMachine.currentState == DedState)
+            {
+                return;
+            }
             else
             {
 
                 navMesh.enabled = false;
-                animator.Play("Hit", -1, 0f);
+                //animator.Play("Hit", -1, 0f);
                 animator.applyRootMotion = false;
                 Invoke("EnableNavMeshServerRpc", 1f);
             }
@@ -351,6 +390,10 @@ namespace Project
         }
 
         [HideInInspector] public EnemySpawner Spawner;
+
+
+        
+
         public virtual void OnDeathTellSpawner()
         {
             if (Spawner != null)
@@ -524,6 +567,12 @@ namespace Project
                 if (navMesh == null) return;
                 animator.SetFloat("SpeedX", Vector3.Dot(navMesh.velocity, transform.right));
                 animator.SetFloat("SpeedY", Vector3.Dot(navMesh.velocity, transform.forward));
+
+                if(StaggerRegen && CurrentStaggerHealth.Value < MaxStaggerHealth)
+                {
+                    CurrentStaggerHealth.Value += staggerRegenSpeed*Time.deltaTime;       
+                        
+                }
             }
             
         }

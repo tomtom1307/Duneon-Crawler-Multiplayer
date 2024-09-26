@@ -17,8 +17,8 @@ namespace Project
         }
 
 
-        // Health percentage 
-        public float[] PhaseTriggerHealthValues;
+        // Health percentage to trigger next phase 
+        public float[] PhaseTriggerHealthPercentage;
 
         public override void AttackExit()
         {
@@ -37,7 +37,7 @@ namespace Project
 
         public virtual bool CheckPhaseCondition(int phase)
         {
-            if(CurrentHealth.Value <= PhaseTriggerHealthValues[phase - 1])
+            if(CurrentHealth.Value <= 0.01f * PhaseTriggerHealthPercentage[phase - 1] * MaxHealth)
             {
                 return true;
             }
