@@ -12,12 +12,14 @@ namespace Project
         public enum GenSoundType
         {
               BreakSound,
-              DoorOpen
+              DoorOpen,
+              Elevator,
+              KeySlotting
         }
 
         private void Start()
         {
-            
+            audioSource = GetComponent<AudioSource>();
         }
 
 

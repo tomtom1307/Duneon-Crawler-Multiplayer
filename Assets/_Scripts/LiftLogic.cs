@@ -68,6 +68,7 @@ namespace Project
 
         private void ParentPlayers()
         {
+            //Start Playing Sound
             foreach (var player in rb)
             {
                 player.transform.position = new Vector3(player.transform.position.x, transform.position.y + maintainPlayerHeight, player.transform.position.z);
@@ -78,6 +79,9 @@ namespace Project
 
         private void UnParentPlayers()
         {
+            //Stop Playing Sound
+
+
             Moving = false;
             if (rb.Count == 0) return;
             foreach (var player in rb)
