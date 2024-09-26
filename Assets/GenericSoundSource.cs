@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,6 +24,8 @@ namespace Project
         }
 
 
+
+
         [HideInInspector] public AudioSource audioSource;
         public SoundList[] clips;
         public virtual void PlaySound(GenSoundType sound, float volume, bool looping = false)
@@ -39,12 +42,23 @@ namespace Project
             }
             else
             {
+                audioSource.volume = volume;
                 audioSource.loop = false;
                 audioSource.clip = null;
                 audioSource.PlayOneShot(randomClip, volume);
             }
 
 
+        }
+
+        public void FadeSound(float stopVol,float timeBetween)
+        {
+            float startVol = audioSource.volume;
+            DOVirtual.Float(startVol, stopVol, timeBetween, val =>
+            {
+
+                audioSource.volume = val;
+            });
         }
 
         public virtual void StopSound()

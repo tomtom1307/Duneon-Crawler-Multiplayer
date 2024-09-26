@@ -17,8 +17,10 @@ namespace Project
         List<Rigidbody> rb;
         public bool Moving = false;
         public bool LiftReady;
+        GenericSoundSource soundSource;
         private void Start()
         {
+            soundSource = GetComponent<GenericSoundSource>();
             LiftReady = true;
             StartPos.transform.parent = null;
             EndPos.transform.parent = null;
@@ -34,7 +36,7 @@ namespace Project
 
             if (Moving) return;
             Moving = true;
-
+            soundSource.PlaySound(GenericSoundSource.GenSoundType.Elevator, 0.4f);
             anim.SetFloat("UpDown", -1 * anim.GetFloat("UpDown"));
             DOTween.Sequence().SetDelay(0.6f).Append(transform.DOMoveY(TargetY, 1 / Speed).SetEase(Ease.InOutSine).OnComplete(UnParentPlayers));
             
@@ -69,6 +71,8 @@ namespace Project
         private void ParentPlayers()
         {
             //Start Playing Sound
+            
+
             foreach (var player in rb)
             {
                 player.transform.position = new Vector3(player.transform.position.x, transform.position.y + maintainPlayerHeight, player.transform.position.z);
@@ -80,7 +84,7 @@ namespace Project
         private void UnParentPlayers()
         {
             //Stop Playing Sound
-
+            
 
             Moving = false;
             if (rb.Count == 0) return;
@@ -91,6 +95,11 @@ namespace Project
                 
             }
             rb.Clear();
+
+            soundSource.FadeSound(0, 0.3f);
+            
+            soundSource.StopSound();
+
             DOTween.Sequence().SetDelay(2).OnComplete(() => ResetLift());
 
 
