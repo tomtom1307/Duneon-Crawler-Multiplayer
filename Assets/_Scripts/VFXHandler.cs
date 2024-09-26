@@ -29,7 +29,7 @@ namespace Project
         [ServerRpc]
         public void FakeProjectileServerRpc(Vector3 EndPos)
         {
-            print("FakeProj");
+
             GameObject visual = Instantiate(Attack1PS, transform.position-Vector3.down*0.2f, Quaternion.identity);
             visual.GetComponent<NetworkObject>().Spawn();
             visual.GetComponent<MoveToTarget>().target = EndPos;
@@ -38,7 +38,6 @@ namespace Project
         [ServerRpc]
         public void AOEServerRpc(float Scale)
         {
-            print("AOE");
             GameObject visual = Instantiate(Attack2PS, transform.position-Vector3.up*0.4f, Quaternion.Euler(new Vector3(-90,0,0)));
             visual.transform.localScale = Scale* Vector3.one;
             visual.GetComponent<NetworkObject>().Spawn();

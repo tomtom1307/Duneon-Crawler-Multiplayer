@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Project;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,19 +9,23 @@ using UnityEngine;
 
 public class PickUpItem : _Interactable
 {
-    [SerializeField] Inventory inventory;
-    public WeaponDataSO WeaponData;
-    public KeyCode PickUpKey = KeyCode.F;
-    public Color ItemColor;
-    ParticleSystem ps;
+    
+    public Item itemSO;
     public Transform ModelPos;
-    public string Rarity;
-    [SerializeField] WeaponInstance WI;
+
+    
+
+    ParticleSystem ps;
+
+    
+    
 
 
+    //Table and rarity stuff
 
     public float[] table = 
-    { 700, //Common 
+    { 
+      700, //Common 
       200, //Uncommon
       70,  //Rare
       29,  //Very Rare
@@ -47,26 +52,41 @@ public class PickUpItem : _Interactable
 
     public List<GameObject> RarityEffects;
 
-
-    public Item item;
+    [HideInInspector] public string Rarity;
+    [HideInInspector] Color ItemColor;
+    Inventory inventory;
+    [HideInInspector] public Item item;
     Light pointLight;
-    public float total;
-    public float randomVal;
-    public int index;
+    [HideInInspector] public float total;
+    [HideInInspector] public float randomVal;
+    [HideInInspector] public int index;
+
+
+    //For Weapons 
+    [SerializeField] WeaponInstance WI;
+
+
     private void Start()
     {
         
-        
+        //Retrieve the Particle system and other reqs
         GetObjComponents();
         
-        GameObject displayModel = Instantiate(WeaponData.Model,ModelPos);
+
+        //Spawn the display model 
+        GameObject displayModel = Instantiate(itemSO.model, ModelPos);
+        displayModel.transform.DOMove(displayModel.transform.position + Vector3.up * 0.1f, 2).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
+        //Make non interactable
         displayModel.layer = 0;
+
+        //Do the same for subsequent meshes 
         List<MeshRenderer> MRS = displayModel.GetComponentsInChildren<MeshRenderer>().ToList();
         foreach (var item in MRS)
         {
             item.gameObject.layer = 0;
         }
         
+        //Set rotatin 
         displayModel.transform.localRotation = Quaternion.Euler(new Vector3(0,0,0));
 
         //Calculate total value of table
@@ -81,33 +101,63 @@ public class PickUpItem : _Interactable
         {
             if (randomVal <= table[i])
             {
+                //Establish the correct index 
                 index = i ; break;
             }
             else randomVal -= table[i];
         }
-        inventory = Inventory.Singleton;
-        InitializeInventoryItem();
-        GameObject VFX = Instantiate(RarityEffects[index], transform);
-        ItemColor = Raritycolor[index];
 
+        //Retrieve inventory 
+        inventory = Inventory.Singleton;
+
+        //Initialize it as an inventory Item
+        InitializeInventoryItem();
+
+        //Spawn VFX
+        GameObject VFX = Instantiate(RarityEffects[index], transform);
+
+        //Set the item color
+        ItemColor = Raritycolor[index];
+        //Set the Rarity 
         Rarity = rarity[index];
      
 
     }
 
     
-
+    //Setting all the values for the instanced ItemSO
     private void InitializeInventoryItem()
     {
         item = ScriptableObject.CreateInstance<Item>();
-        item.name = WeaponData.name;
-        item.weaponData = WeaponData;
-        item.sprite = WeaponData.InventorySprite;
-        item.itemTag = WeaponData.itemTag;
-        item.prefab = WeaponData.Model;
-        item.weaponInstance = new WeaponInstance(WeaponData, index);
-        WI = new WeaponInstance(WeaponData, index);
-    }
+        item.name = itemSO.name;
+        item.inventorySprite = itemSO.inventorySprite;
+        item.itemTag = itemSO.itemTag;
+        item.model = itemSO.model;
+
+
+        //Check itemTag for special initialization conditions
+        switch(item.itemTag)
+        {
+            //For Weapons
+            case SlotTag.Weapon:
+            {
+                    
+                    item.weaponData = itemSO.weaponData;
+                    item.weaponData.model = item.model;
+                    WI = new WeaponInstance(itemSO.weaponData, index);
+                    item.weaponInstance = WI;
+                    
+                    break;
+            }
+            //For head armor
+            case SlotTag.Head:
+            {
+                break;
+            }
+        }
+
+        
+        }
 
 
     private void GetObjComponents()
@@ -119,13 +169,17 @@ public class PickUpItem : _Interactable
 
 
 
-
+    //Interact function
     protected override void Interact()
     {
+        //Spawn into the inventory 
         inventory.SpawnInventoryItem(Raritycolor[index], item);
 
+        //Destroy the visuals 
         Destroy(gameObject);
         base.Interact();
     }
+
+    
 
 }

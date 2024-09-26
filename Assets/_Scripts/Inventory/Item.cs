@@ -10,14 +10,18 @@ public enum Rarity { Common, Uncommon, Rare, Very_Rare, Legendary}
 
 public class Item : ScriptableObject
 {
-    public Sprite sprite;
+    public Sprite inventorySprite;
     public SlotTag itemTag;
     public Rarity rarity;
+
+
+    [Header("Weapon")]
+    // If SlotTag == Weapon
     public WeaponDataSO weaponData;
-    public WeaponInstance weaponInstance;
+    [HideInInspector] public WeaponInstance weaponInstance;
 
     [Header("If the item can be equipped")]
-    public GameObject prefab;
+    public GameObject model;
     
 
 }

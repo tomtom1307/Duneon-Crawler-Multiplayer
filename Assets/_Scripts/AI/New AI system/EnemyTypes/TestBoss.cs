@@ -16,6 +16,11 @@ namespace Project
             base.InitializeStateMachine();
         }
 
+        public override void OnDamage()
+        {
+            base.OnDamage();
+        }
+
         public override void OnDeathTellSpawner()
         {
             base.OnDeathTellSpawner();

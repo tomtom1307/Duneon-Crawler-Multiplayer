@@ -12,6 +12,7 @@ namespace Project.Assets.WeaponSystem
         [SerializeField] private WeaponHolder weapon;
         [SerializeField] private WeaponDataSO data;
         [SerializeField] private Transform weaponPos;
+        [SerializeField] private StatManager weaponStats;
 
         private List<WeaponComponent> ComponentsAlreadyOn = new List<WeaponComponent>();
         private List<WeaponComponent> ComponentsAdded = new List<WeaponComponent>();
@@ -21,23 +22,22 @@ namespace Project.Assets.WeaponSystem
 
         private void Start()
         {
-            //GenerateWeapon(data);
+            weaponStats = GetComponent<StatManager>();
         }
 
-        [ContextMenu("TextGenerate")]
-        private void TestGeneration()
-        {
-            GenerateWeapon(data);
-        }
+        
 
         public bool Generating;
-        public void GenerateWeapon(WeaponDataSO data)
+        public void GenerateWeapon(WeaponInstance inst)
         {
+            data = inst.weaponData;
             Generating = true;
+            weaponStats.ChangeStats(inst);
             print("generating Weapon");
             weapon.SetData(data);
-            SpawnVisual(weaponPos,data.Model);
+            SpawnVisual(weaponPos,data.model);
             
+
             ComponentDependencies.Clear();
             ComponentsAlreadyOn.Clear();
             
@@ -49,8 +49,9 @@ namespace Project.Assets.WeaponSystem
             }
             Generating = false;
         }
-        public void RemoveWeapon()
+        public void RemoveWeapon(WeaponInstance inst = null)
         {
+            
             print("Removing Weapon");
             ComponentsAlreadyOn = GetComponents<WeaponComponent>().ToList();
             foreach (var item in ComponentsAlreadyOn)
@@ -58,6 +59,19 @@ namespace Project.Assets.WeaponSystem
                 Destroy(item);
             }
             Destroy(ModelInstance);
+            if (inst != null)
+            {
+                GenerateWeapon(inst);
+                
+            }
+        }
+
+        public void SwapWeapon(WeaponInstance inst)
+        {
+            print("Swapping Weapon");
+            RemoveWeapon();
+            GenerateWeapon(inst);
+
         }
 
 

@@ -32,7 +32,7 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerClickHa
         activeSlot = parent;
         activeSlot.myItem = this;
         myItem = item;
-        itemIcon.sprite = item.sprite;
+        itemIcon.sprite = item.inventorySprite;
         itemIcon.color = rarity;
         myTag = item.itemTag;
     }

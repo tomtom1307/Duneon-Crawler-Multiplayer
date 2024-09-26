@@ -180,8 +180,16 @@ namespace Project
 
             StateMachine.Initialize(ChaseState);
         }
-        
+
         #region Health/Networking
+
+
+        //So That can check for boss phase changes.
+        public virtual void OnDamage()
+        {
+            
+            
+        }
 
         [ServerRpc(RequireOwnership = false)]
         public void DoDamageServerRpc(float Damage, bool headshot = false)
@@ -196,6 +204,7 @@ namespace Project
                     Die();
                 }
             }
+            OnDamage();
             aggression += 0.05f;
             HandleLocalVisualsClientRpc(Damage, headshot);
             
