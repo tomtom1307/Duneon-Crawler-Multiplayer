@@ -120,7 +120,7 @@ namespace Project
         }
 
 
-        private void Start()
+        public virtual void Start()
         {
             if (IsOwner)
             {

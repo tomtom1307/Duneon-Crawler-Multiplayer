@@ -6,8 +6,19 @@ namespace Project
 {
     public class Boss : Enemy
     {
-        public int phase;
-        public Vector2[] HealthValues;
+        //
+        public int currentPhase;
+
+        public override void Start()
+        {
+            base.Start();
+            currentPhase = 1;
+
+        }
+
+
+        // Health percentage 
+        public float[] PhaseTriggerHealthValues;
 
         public override void AttackExit()
         {
@@ -22,6 +33,15 @@ namespace Project
         public override void OnDamage()
         {
             base.OnDamage();
+        }
+
+        public virtual bool CheckPhaseCondition(int phase)
+        {
+            if(CurrentHealth.Value <= PhaseTriggerHealthValues[phase - 1])
+            {
+                return true;
+            }
+            return false;
         }
 
         public override void OnDeathTellSpawner()
