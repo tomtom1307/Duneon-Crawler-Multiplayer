@@ -7,45 +7,44 @@ namespace Project
 {
     public class TestBoss : Boss
     {
-        
+
+        public override void Phase2()
+        {
+            base.Phase2();
+            currentPhase++;
+
+
+            AttackDamage *= 1.5f;
+            transform.DOScale(1.5f * transform.localScale, 1f);
+        }
+
+        public override void Phase3()
+        {
+            base.Phase3();
+            currentPhase++;
+
+
+            AttackDamage *= 1.5f;
+            transform.DOScale(1.5f * transform.localScale, 1f);
+        }
+
+        public override void Phase4()
+        {
+            base.Phase4();
+            currentPhase++;
+
+            DamageReduction = 0.3f;
+            AttackDamage *= 1.5f;
+            transform.DOScale(1.5f * transform.localScale, 1f);
+        }
+
+
+
 
         public override void OnDamage()
         {
             base.OnDamage();
-            switch (currentPhase)
-            {
-                case(1):
-                    if (CheckPhaseCondition(1))
-                    {
-                        currentPhase++;
-
-
-                        AttackDamage *= 1.5f;
-                        transform.DOScale(1.5f * transform.localScale, 1f);
-                    }
-                    
-                    
-                    break;
-                case(2):
-                    if (CheckPhaseCondition(2))
-                    {
-                        currentPhase++;
-
-                        AttackDamage *= 1.5f;
-                        transform.DOScale(1.5f * transform.localScale, 1f);
-                    }
-                    break;
-                case (3):
-                    if (CheckPhaseCondition(3))
-                    {
-                        currentPhase++;
-
-                        DamageReduction = 0.1f;
-                        AttackDamage *= 1.5f;
-                        transform.DOScale(1.5f * transform.localScale, 1f);
-                    }
-                    break;
-            }
+            
 
 
 

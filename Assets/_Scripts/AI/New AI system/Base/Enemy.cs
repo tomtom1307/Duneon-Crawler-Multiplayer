@@ -298,7 +298,7 @@ namespace Project
             
             rb.isKinematic = false;
             animator.applyRootMotion = true;
-            //animator.Play("Movement");
+            animator.Play("Hit", -1, 0);
             Invoke("EnableNavMeshServerRpc", 0.5f);
             Floating = false;
         }

@@ -38,5 +38,11 @@ namespace Project
                 timer = 0;
             }
         }
+
+
+        public void ResetEasing()
+        {
+            easing.fillAmount = 1;
+        }
     }
 }

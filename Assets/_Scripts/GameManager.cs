@@ -14,6 +14,9 @@ namespace Project
         public static GameManager instance;
         public List<PlayerStats> playerStats = new List<PlayerStats>();
         [SerializeField] private Transform PlayerPrefab;
+
+        public GameObject SpawnEffect;
+        public static float SpawnDelay = 1.5f;
         public bool initialized = false;
 
         private void Start()
@@ -29,6 +32,8 @@ namespace Project
         }
 
         
+
+
 
 
         public void GetPlayerStats()
@@ -63,10 +68,17 @@ namespace Project
         GameObject SpawnObj;
         public void TriggerSpawn(GameObject Go, Vector3 pos, Quaternion rot, Vector3 finalPos)
         {
+            print("Spawned");
             SpawnObj = Go;  
             SpawnObjectServerRpc(pos, rot, finalPos);
         }
 
+
+        public void DoSpawnEffect(Vector3 pos,  Quaternion rot)
+        {
+            SpawnObj = SpawnEffect;
+            SpawnObjectServerRpc(pos, rot, pos);
+        }
 
 
         [ServerRpc(RequireOwnership =false)]
@@ -74,13 +86,21 @@ namespace Project
         {
             var SpawnedObj = Instantiate(SpawnObj, pos, rot);
             NetworkObject NO = SpawnedObj.GetComponent<NetworkObject>();
-            NO.Spawn();
+            if(NO != null) { NO.Spawn();
+                Invoke("NO.Despawn", 5);
+            }
+            else
+            {
+                Destroy(SpawnedObj,5);
+            }
+
+            
             MoveToTarget MT;
             if(SpawnedObj.TryGetComponent<MoveToTarget>(out MT))
             {
                 MT.target = finalPos;
             }
-            Invoke("NO.Despawn", 5);
+            
         }
 
 

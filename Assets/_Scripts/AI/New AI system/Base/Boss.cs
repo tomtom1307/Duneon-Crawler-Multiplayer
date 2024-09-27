@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,9 +31,55 @@ namespace Project
             base.InitializeStateMachine();
         }
 
+        public virtual void Phase1()
+        {
+            
+        }
+
+
+        public virtual void Phase2()
+        {
+            
+        }
+
+        public virtual void Phase3()
+        {
+            
+        }
+        public virtual void Phase4()
+        {
+            
+        }
+        public virtual void Phase5()
+        {
+            
+        }
+
+
         public override void OnDamage()
         {
             base.OnDamage();
+            switch (currentPhase)
+            {
+                case (1):
+                    if (CheckPhaseCondition(1))
+                    {
+                        Phase2();
+                    }
+                    break;
+                case (2):
+                    if (CheckPhaseCondition(2))
+                    {
+                        Phase3();
+                    }
+                    break;
+                case (3):
+                    if (CheckPhaseCondition(3))
+                    {
+                        Phase4();
+                    }
+                    break;
+            }
         }
 
         public virtual bool CheckPhaseCondition(int phase)

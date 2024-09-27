@@ -19,6 +19,9 @@ namespace Project
         public EnemySpawnTrap EST;
         public ChaosHeartRoomFallingChandalier CHChandalier;
         public GameObject Fleshwall;
+
+        
+
         private void Start()
         {
             DT = GetComponent<DamageableThing>();

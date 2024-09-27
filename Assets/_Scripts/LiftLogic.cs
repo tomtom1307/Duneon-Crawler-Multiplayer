@@ -95,10 +95,11 @@ namespace Project
                 
             }
             rb.Clear();
-
-            soundSource.FadeSound(0, 0.3f);
-            
             soundSource.StopSound();
+            soundSource.PlaySound(GenericSoundSource.GenSoundType.ElevatorStop, 0.5f);
+            
+            
+            
 
             DOTween.Sequence().SetDelay(2).OnComplete(() => ResetLift());
 

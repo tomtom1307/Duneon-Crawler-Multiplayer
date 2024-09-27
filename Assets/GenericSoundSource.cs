@@ -15,7 +15,9 @@ namespace Project
               BreakSound,
               DoorOpen,
               Elevator,
-              KeySlotting
+              ElevatorStop,
+              KeySlotting,
+              
         }
 
         private void Start()
@@ -31,6 +33,7 @@ namespace Project
         public virtual void PlaySound(GenSoundType sound, float volume, bool looping = false)
         {
             AudioClip[] _clips = clips[(int)sound].Sounds;
+            if (_clips.Length == 0) return;
             AudioClip randomClip = _clips[UnityEngine.Random.Range(0, _clips.Length)];
 
             if (looping)

@@ -10,6 +10,7 @@ namespace Project
 
         ChaosHeart CH;
         public GameObject Player;
+        RoomProgressBar RPB;
         
         private void Start()
         {
@@ -21,7 +22,7 @@ namespace Project
             if (IsLocalPlayer) return;
             if(other.gameObject.tag == "Player")
             {
-                RoomProgressBar RPB = other.GetComponentInChildren<RoomProgressBar>();
+                RPB = other.GetComponentInChildren<RoomProgressBar>();
 
                 RPB.EnableProgressBar(RoomProgressBar.ProgressType.Health, "Chaos Heart", CH.HealthbarColor);
 
@@ -33,9 +34,10 @@ namespace Project
             if (IsLocalPlayer) return;
             if (other.gameObject.tag == "Player")
             {
-                RoomProgressBar RPB = other.GetComponentInChildren<RoomProgressBar>();
+                
 
                 RPB.DisableProgressBar();
+                RPB = null;
 
             }
         }
@@ -43,24 +45,19 @@ namespace Project
 
         private void OnTriggerStay(Collider other)
         {
-
-            if (other.gameObject.tag == "Player")
+            
+            if(RPB != null)
             {
-                
-                RoomProgressBar RPB = other.GetComponentInChildren<RoomProgressBar>();
-                RPB.UpdateValue(CH.DT.CurrentHealth.Value/CH.DT.MaxHealth);
-                if (CH.DT.ded)
-                {
-                    RPB.DisableProgressBar();
-                }
-
+                RPB.UpdateValue(CH.DT.CurrentHealth.Value / CH.DT.MaxHealth);
             }
 
             Enemy enemy;
             if (other.TryGetComponent<Enemy>(out enemy))
             {
+
                 if (CH.DT.ded)
                 {
+                    RPB.DisableProgressBar();
                     enemy.DamageReduction = 1;
                     enemy.RemoveArmorBuff();
 
