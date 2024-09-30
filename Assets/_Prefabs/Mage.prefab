@@ -10070,6 +10070,7 @@ GameObject:
   - component: {fileID: 2321408594484804605}
   - component: {fileID: 1995681776689086504}
   - component: {fileID: 3849479021292416335}
+  - component: {fileID: 321253326310683013}
   m_Layer: 10
   m_Name: Mage
   m_TagString: Player
@@ -10134,7 +10135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 936891590
+  GlobalObjectIdHash: 580854907
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -10578,6 +10579,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2467a634403ece48bf5f77bce9d8ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &321253326310683013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9211036698816209711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391797acfd49acb4ba59d1000c06632c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxLedgeHeight: 0.5
+  MantleSpeed: 3
+  mantling: 0
 --- !u!1 &9219590606935053950
 GameObject:
   m_ObjectHideFlags: 0

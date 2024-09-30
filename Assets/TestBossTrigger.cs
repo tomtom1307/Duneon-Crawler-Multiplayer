@@ -44,12 +44,10 @@ namespace Project
         {
             //Subscribe to when the spawner is complete
             Actions.SpawnerUpdate += HandleSpawner;
-            Actions.SpawnerUpdate += HandleSpawner;
         }
 
         private void OnDisable()
         {
-            Actions.SpawnerUpdate -= HandleSpawner;
             Actions.SpawnerUpdate -= HandleSpawner;
         }
 
@@ -63,19 +61,12 @@ namespace Project
             }
             if (other.gameObject.tag == "Player")
             {
-                
+                //Enable ProgressBar
                 RPB = other.GetComponentInChildren<RoomProgressBar>();
                 if (enemy == null) return;
                 RPB.EnableProgressBar(RoomProgressBar.ProgressType.Health, BossName, Color.red);
             }
-            //Enable ProgressBar
             
-            
-
-            
-
-
-
         }
 
         private void OnTriggerExit(Collider other)
@@ -91,13 +82,11 @@ namespace Project
 
         private void OnTriggerStay(Collider other)
         {
-            
             if (other.gameObject.tag == "Player")
             {
                 RPB = other.GetComponentInChildren<RoomProgressBar>();
                 
             }
-
             if(enemy != null)
             {
                 RPB.UpdateValue(enemy.CurrentHealth.Value / MaxHealth);
@@ -106,7 +95,6 @@ namespace Project
             {
                 enemy = other.GetComponent<Boss>();
             }
-            
         }
 
         public void DisableHealthBar()
@@ -114,28 +102,26 @@ namespace Project
             if (RPB == null) return;
             RPB.DisableProgressBar();
         }
-
-
         public void EnableHealthBar()
         {
             if (RPB == null) return;
             RPB.EnableProgressBar(RoomProgressBar.ProgressType.Health, BossName, Color.red);
         }
-
         public void HandleSpawner(EnemySpawner ES, bool isActive)
         {
             if(ES == spawner)
             {
-
                 if(isActive)
                 {
                     EnableHealthBar();
                 }
-
                 if(!isActive)
-                RPB.UpdateValue(0 / MaxHealth);
-                print("Boss Defeated!");
-                Invoke("DisableHealthBar", 1.5f);
+                {
+                    RPB.UpdateValue(0 / MaxHealth);
+                    print("Boss Defeated!");
+                    Invoke("DisableHealthBar", 1.5f);
+                }
+                
             }
             
         }
