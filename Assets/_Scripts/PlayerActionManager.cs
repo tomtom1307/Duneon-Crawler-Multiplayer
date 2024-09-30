@@ -12,7 +12,12 @@ namespace Project
 
 
         public event Action<string> OnAbilityused;
-        public void OnAbility(string name) => OnAbilityused?.Invoke(name);
+        public void OnAbility(string name)
+        {
+            
+            OnAbilityused?.Invoke(name);
+
+        }
 
         private void Start()
         {

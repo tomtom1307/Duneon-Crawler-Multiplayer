@@ -1,6 +1,8 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Project
 {
@@ -10,24 +12,42 @@ namespace Project
         Camera cam;
         PlayerMovement playerMovement;
         Climbing climb;
+        PlayerActionManager actionManager;
+        AbilityEventHandler animEventHandler;
 
         Vector3 enterVel; 
         Rigidbody rb;
         Vector3 LedgePos;
+        Vector3 StartPos;
+        Vector3 climbPos;
         public float MaxLedgeHeight;
         public float MantleSpeed;
+        public float DistanceFromTransformToFeet;
+        public CapsuleCollider col;
+        public float vaultSpeed;
+        public float vaultHeight;
+        bool vault;
         public bool mantling;
+        public GameObject lastWall;
+        private float _mantleSpeed;
+        public float slowClimbForce;
+        public float forwardLerpFactor;
         private void Start()
         {
+            col = GetComponent<CapsuleCollider>();
             climb = GetComponent<Climbing>();
             playerMovement = GetComponent<PlayerMovement>();
             cam = GetComponent<HandleCam>().PC.GetComponent<Camera>();
+            actionManager = GetComponent<PlayerActionManager>();
+            animEventHandler = cam.GetComponentInChildren<AbilityEventHandler>();
             rb = GetComponent<Rigidbody>();
         }
 
 
         private void OnCollisionEnter(Collision collision)
         {
+            if (collision.collider.gameObject == lastWall) return;
+            
             Vector3 normal = collision.GetContact(0).normal;
             Vector3 horForward = cam.transform.forward;
             horForward.y = 0; 
@@ -40,7 +60,8 @@ namespace Project
                 {
                     ledgeAvailable = false;
                 }
-                if (ledgeAvailable)
+                //Need to check if space is pressed but gives weird results will revisit this soon 
+                if (ledgeAvailable && (Input.GetKey(KeyCode.W) && !playerMovement.grounded || (playerMovement.grounded && Input.GetKey(KeyCode.W))))
                 {
                     Vector3 currentPos = cam.transform.position + Vector3.up * MaxLedgeHeight + Vector3.down * 0.05f;
                     while (!Physics.Raycast(currentPos, -normal, out hit, 1, LayerMask.GetMask("Ground")))
@@ -50,25 +71,57 @@ namespace Project
                             break;
                         }
                     }
+                    actionManager.OnAbility("Mantle");
+                    animEventHandler.SetIk = false;
+                    if (playerMovement.grounded) vault = true; else vault = false;
+                    lastWall = collision.collider.gameObject;
                     mantling = true;
-                    enterVel = rb.velocity;
+                    enterVel = -collision.relativeVelocity;
                     climb.enabled = false;
                     climbTime = 0;
                     rb.isKinematic = true;
                     playerMovement.enabled = false;
                     LedgePos = currentPos;
+                    climbPos = CalculateClimbHeight(LedgePos) + new Vector3(enterVel.x * forwardLerpFactor, 0, enterVel.z * forwardLerpFactor);
+                    StartPos = transform.position;
+                    if (climbPos.y - StartPos.y - DistanceFromTransformToFeet <= vaultHeight || playerMovement.grounded)
+                    {
+                        vault = true;
+                        _mantleSpeed = vaultSpeed;
+                    }
+                    else
+                    {
+                        vault = false;
+                        _mantleSpeed = MantleSpeed;
+                    }
+
                 }
 
             }
 
         }
 
+        public Vector3 CalculateClimbHeight(Vector3 LedgePos)
+        {
+            float yDistNeeded = LedgePos.y - transform.position.y + 1.2f * DistanceFromTransformToFeet;
+            
+            
+            Vector3 climbPos = LedgePos + yDistNeeded * Vector3.up;
+            return climbPos;
+        }
+
         private void Update()
         {
-            if (mantling)
+            
+
+            if (mantling && LedgePos != Vector3.zero)
             {
                 DoMantle(LedgePos);
 
+            }
+            else
+            {
+                if (playerMovement.grounded) lastWall = null;
             }
         }
 
@@ -76,18 +129,30 @@ namespace Project
 
         public void DoMantle(Vector3 ledgePos)
         {
-
-            Vector3 climbPos = ledgePos + 2 * Vector3.up + new Vector3(rb.velocity.x * climbTime, 0, rb.velocity.z * climbTime);
-
-            rb.MovePosition(Vector3.Lerp(ledgePos, climbPos, climbTime));
-            climbTime = Mathf.Clamp01(climbTime + Time.deltaTime * MantleSpeed);
+            
+            animEventHandler.IKTarget.transform.DOLocalMove(animEventHandler.IKTarget.InverseTransformPoint(ledgePos + 0.3f * playerMovement.orientation.right), 0.1f);
+            rb.MovePosition(Vector3.Lerp(StartPos, climbPos, climbTime));
+            climbTime = Mathf.Clamp01(climbTime + Time.deltaTime * _mantleSpeed);
             if (transform.position.y >= climbPos.y)
             {
-                rb.velocity = enterVel;
+                
+                DOTween.Clear(animEventHandler.IKTarget.transform);
+                animEventHandler.SetIk = true;
+                animEventHandler.SetIKToOrigin();
                 mantling = false;
                 playerMovement.enabled = true;
-                climb.enabled = false;
                 rb.isKinematic = false;
+                climb.enabled = false;
+                
+                if (Input.GetKey(KeyCode.Space) || vault)
+                {
+                    rb.AddForce(1000 * Vector3.up);
+                    rb.velocity = enterVel;
+
+                }
+                else rb.AddForce(slowClimbForce * playerMovement.orientation.forward);
+
+                climbTime = 0;
                 LedgePos = Vector3.zero;
             } 
         }
