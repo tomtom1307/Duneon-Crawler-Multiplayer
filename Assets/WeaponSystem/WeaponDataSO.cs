@@ -12,14 +12,11 @@ namespace Project
         Physical
     }
 
-
+    [Serializable]
     [CreateAssetMenu(menuName = "newWeaponData")]
     public class WeaponDataSO : ScriptableObject
     {
         [field: SerializeField] public int NumberOfAttacks { get; private set; }
-        [field: SerializeField] public GameObject Model{ get; private set; }
-        [field: SerializeField] public Sprite InventorySprite{ get; private set; }
-        [field: SerializeField] public SlotTag itemTag { get; private set; }
         [field: SerializeField] public float Attack1Cooldown { get; private set; }
         [field: SerializeField] public float Attack2Cooldown { get; private set; }
         [field: SerializeField] public float Attack1ManaUse { get; private set; }
@@ -31,7 +28,7 @@ namespace Project
 
         [field: SerializeReference] public List<ComponentData> componentDatas { get; private set; }
 
-
+        [HideInInspector] public GameObject model;
 
         public T GetData<T>()
         {

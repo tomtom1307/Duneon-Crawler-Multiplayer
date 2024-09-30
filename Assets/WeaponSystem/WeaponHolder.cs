@@ -16,7 +16,7 @@ namespace Project.Weapons
         public int CurrentAttackCounter
         {
             get => currentAttackCounter;
-            private set => currentAttackCounter = value >= Data.NumberOfAttacks ? 0  : value;
+            private set => currentAttackCounter = value == Data.NumberOfAttacks ? 0  : value;
         }
 
         [SerializeField] public WeaponDataSO Data;

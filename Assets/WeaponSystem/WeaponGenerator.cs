@@ -12,6 +12,7 @@ namespace Project.Assets.WeaponSystem
         [SerializeField] private WeaponHolder weapon;
         [SerializeField] private WeaponDataSO data;
         [SerializeField] private Transform weaponPos;
+        [SerializeField] private StatManager weaponStats;
 
         private List<WeaponComponent> ComponentsAlreadyOn = new List<WeaponComponent>();
         private List<WeaponComponent> ComponentsAdded = new List<WeaponComponent>();
@@ -21,36 +22,61 @@ namespace Project.Assets.WeaponSystem
 
         private void Start()
         {
-            //GenerateWeapon(data);
+            weaponStats = GetComponent<StatManager>();
         }
 
-        [ContextMenu("TextGenerate")]
-        private void TestGeneration()
-        {
-            GenerateWeapon(data);
-        }
+        
 
         public bool Generating;
-        public void GenerateWeapon(WeaponDataSO data)
+        public void GenerateWeapon(WeaponInstance inst)
         {
+            data = inst.weaponData;
             Generating = true;
+            weaponStats.ChangeStats(inst);
             print("generating Weapon");
             weapon.SetData(data);
-            SpawnVisual(weaponPos,data.Model);
-            
+            if (ModelInstance != null)
+            {
+                Destroy(ModelInstance);
+            }
+            SpawnVisual(weaponPos,data.model);
+
             ComponentDependencies.Clear();
             ComponentsAlreadyOn.Clear();
-            
+            ComponentDependencies.Clear();
+
             ComponentDependencies = data.GetAllDependencies();
 
             foreach (var dependancy in ComponentDependencies)
             {
-                var component = gameObject.AddComponent(dependancy) as WeaponComponent;
+                if(ComponentsAdded.FirstOrDefault(component => component.GetType() == dependancy))
+                {
+                    continue;
+                }
+
+                var weaponComponent = ComponentsAlreadyOn.FirstOrDefault(component => component.GetType() == dependancy);
+
+                if(weaponComponent == null)
+                {
+                    weaponComponent = gameObject.AddComponent(dependancy) as WeaponComponent;
+                }
+
+                ComponentsAdded.Add(weaponComponent);
+
             }
+
+            var componentsToRemove = ComponentsAlreadyOn.Except(ComponentsAdded);
+
+            foreach (var item in componentsToRemove)
+            {
+                Destroy(item);
+            }
+
             Generating = false;
         }
         public void RemoveWeapon()
         {
+            
             print("Removing Weapon");
             ComponentsAlreadyOn = GetComponents<WeaponComponent>().ToList();
             foreach (var item in ComponentsAlreadyOn)
@@ -58,6 +84,13 @@ namespace Project.Assets.WeaponSystem
                 Destroy(item);
             }
             Destroy(ModelInstance);
+        }
+
+        public void SwapWeapon(WeaponInstance inst)
+        {
+            print("Swapping Weapon");
+            GenerateWeapon(inst);
+
         }
 
 

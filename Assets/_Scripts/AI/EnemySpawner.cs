@@ -17,33 +17,45 @@ namespace Project
         public float EnemiesLeft;
         public bool InfiniteWaves;
         public float AmountSpawned;
+        public float spawnDelay;
         public float TotalEnemies;
         public int NumberOfRounds;
         public int CurrentRound;
         public List<Enemies> enemies;
-        public GameObject currentSpawn;
         bool Spawned = false;
         public bool Active = false;
+        GameManager gameManager;
         public bool AllEnemiesKilled;
         public bool AutoRoundTrigger;
+
+
+        List<GameObject> Prefabs = new List<GameObject> { };
         // Start is called before the first frame update
         void Start()
         {
             Actions.Initialize();
+            gameManager = GameManager.instance;
+            print(gameManager);
             CurrentRound = 1;
             Bounds = GetComponent<BoxCollider>();
             NumberOfRounds = FindTotalNumberOfRounds();
             TotalEnemies = CalculateTotalNumberOfEnemies(1);
+
+            foreach (Enemies item in enemies)
+            {
+                Prefabs.Add(item.Prefab);
+            }
+
         }
 
         // Update is called once per frame
         void Update()
         {
             if (!Active || !IsHost) return;
-            
 
-            
-            
+
+
+            int i = 0;
             foreach (var enemy in enemies)
             {
                 if (AmountSpawned >= TotalEnemies) break;
@@ -63,14 +75,18 @@ namespace Project
                     
                     Spawned = true;
                     Transform pos = transform;
-                    if(enemy.Position.Count > 0)
+
+
+                    if(enemy.Position.Count > 0 && !enemy.RandomSpawn)
                     {
                         int Random = UnityEngine.Random.Range(0, enemy.Position.Count);
                         pos = enemy.Position[Random];
                         enemy.Position.Remove(enemy.Position[Random]);
                     }
-                    StartCoroutine(SpawnEnemy(enemy.RandomSpawn, pos, enemy.Prefab));
+                    StartCoroutine(SpawnEnemy(enemy.RandomSpawn, pos, i));
+                    
                 }
+                i++;
             }
             if (EnemiesLeft == 0 && CurrentRound == NumberOfRounds)
             {
@@ -105,8 +121,12 @@ namespace Project
 
         public void StartSpawner()
         {
+            
+
+
+
             Active = true;
-            Actions.SpawnerStarted();
+            Actions.SpawnerUpdate(this, true);
         }
 
         public int FindTotalNumberOfRounds()
@@ -141,38 +161,54 @@ namespace Project
             return EN;
         }
         
-        private IEnumerator SpawnEnemy(bool Random, Transform Position, GameObject prefab)
+        private IEnumerator SpawnEnemy(bool Random, Transform Position, int index)
         {
 
             yield return new WaitForSeconds(SpawnDelay);
             Spawned = false;
-            currentSpawn = prefab;
-            if (Random|| Position.localPosition == Vector3.zero)
+            
+
+            Debug.Log(Position);
+            if (Random || Position.localPosition == Vector3.zero)
             {
-                SpawnEnemyServerRpc();
+                print("doing Random Spawn");
+                RandomPositionSpawnServerRpc(index);
             }
             else
             {
-                SpawnEnemyWithPositionServerRpc(Position.position, Position.rotation);
+                StartCoroutine(DelayedSpawn(Position.position, Position.rotation, GameManager.SpawnDelay, index));
             }
-            
-
         }
 
         [ServerRpc]
-        public void SpawnEnemyServerRpc()
+        public void RandomPositionSpawnServerRpc(int index)
         {
             Vector3 range = 0.5f*Bounds.size;
             Vector3 RandSpawnPos =  transform.position+ new Vector3(UnityEngine.Random.Range(-range.z, range.z), 0, UnityEngine.Random.Range(-range.x, range.x));
-            var Instance = Instantiate(currentSpawn, RandSpawnPos, Quaternion.identity);
+
+            StartCoroutine(DelayedSpawn(RandSpawnPos, Quaternion.identity, GameManager.SpawnDelay, index));
+        }
+
+        public IEnumerator DelayedSpawn(Vector3 pos, Quaternion rot, float delay, int index)
+        {
+            GameManager.instance.DoSpawnEffect(pos, Quaternion.identity);
+            yield return new WaitForSeconds(delay);
+            SpawnEnemyWithPositionServerRpc(pos, rot, index);
+        }
+
+        [ServerRpc]
+        public void SpawnEnemyWithPositionServerRpc(Vector3 pos, Quaternion rot, int index)
+        {
+            GameObject currentSpawn = Prefabs[index];
+            var Instance = Instantiate(currentSpawn, pos, rot);
             Enemy En = Instance.GetComponent<Enemy>();
             En.Spawner = this;
-            
-            
             var InstanceNetworkObj = Instance.GetComponent<NetworkObject>();
             InstanceNetworkObj.Spawn();
-            
+
         }
+
+
 
         public void TriggerNextRound()
         {
@@ -185,17 +221,10 @@ namespace Project
         }
 
 
-        [ServerRpc]
-        public void SpawnEnemyWithPositionServerRpc(Vector3 pos, Quaternion rot)
-        {
-            
-            var Instance = Instantiate(currentSpawn, pos, rot);
-            Enemy En = Instance.GetComponent<Enemy>();
-            En.Spawner = this;
-            var InstanceNetworkObj = Instance.GetComponent<NetworkObject>();
-            InstanceNetworkObj.Spawn();
+        
 
-        }
+
+        
 
         [Serializable]
         public struct Enemies

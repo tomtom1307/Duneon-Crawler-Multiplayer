@@ -9,9 +9,9 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public SlotTag myTag;
 
-   
 
-    public void SetItem(InventoryItem item)
+
+    public void SetItem(InventoryItem item, bool Swap = false)
     {
         Inventory.carriedItem = null;
 
@@ -26,7 +26,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
         if(myTag != SlotTag.None)
         {
-            Inventory.Singleton.EquipEquipment(myTag, myItem);
+            Inventory.Singleton.EquipEquipment(myTag, myItem, Swap);
         }
 
 

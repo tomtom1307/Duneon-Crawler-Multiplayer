@@ -40,13 +40,15 @@ namespace Project
 
                 if (!TD.StaticEnemy)
                 {
-                    TD.DisableNavMeshServerRpc();
+                    //TD.DisableNavMeshServerRpc();
                 }
                 
                 if (collider.GetComponent<Rigidbody>() != null)
                 {
-                    
-                    TD.KnockBackServerRpc(Camera.main.transform.position, currentAttackData.KnockBackAmount);
+                    if (!TD.navMesh.enabled)
+                    {
+                        TD.KnockBackServerRpc(Camera.main.transform.position, currentAttackData.KnockBackAmount);
+                    }
                 }
                 
             }
@@ -62,13 +64,12 @@ namespace Project
 
                 if (!TD.StaticEnemy)
                 {
-                    TD.DisableNavMeshServerRpc();
+                    //TD.DisableNavMeshServerRpc();
                 }
 
 
                 if (collider.GetComponent<Rigidbody>() != null)
                 {
-                    
                     TD.KnockBackServerRpc(Camera.main.transform.position,  currentAttackData.KnockBackAmount);
                 }
                     

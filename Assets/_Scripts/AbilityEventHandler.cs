@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,12 +10,15 @@ namespace Project
     {
         public Animator anim;
         public PlayerActionManager playerActionManager;
+        public Transform IKTarget;
+        public bool SetIk;
         public string[] abilityNames;
-
+        public Vector3 IKpos;
         private void Start()
         {
             anim = GetComponent<Animator>();
-           
+            SetIk = true;
+            
         }
 
         public void StartAnimation(string AnimationName)
@@ -32,6 +36,21 @@ namespace Project
             
         }
 
+
+        //Call 
+        public void SetIKToOrigin()
+        {
+            IKTarget.DOLocalMove(IKpos,.3f);
+        }
+
+
+        private void Update()
+        {
+            if (SetIk)
+            {
+                SetIKToOrigin();
+            }
+        }
 
         public void CamShakeGoesBRRR()
         {

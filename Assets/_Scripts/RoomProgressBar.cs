@@ -12,10 +12,12 @@ namespace Project
         public Image Fill;
         public TextMeshProUGUI Text;
         public GameObject GO;
+        HealthBarEasing HBS;
         public ProgressType PT;
 
         private void Start()
         {
+            HBS = GetComponent<HealthBarEasing>();
             DisableProgressBar();
         }
 
@@ -36,6 +38,8 @@ namespace Project
             if(T == ProgressType.Health)
             {
                 Fill.fillAmount = 1;
+                HBS.ResetEasing();
+
             }
             else
             {

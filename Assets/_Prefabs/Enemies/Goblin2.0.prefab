@@ -2766,18 +2766,18 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3095522959968574423}
+  - component: {fileID: 3393774525216578497}
+  - component: {fileID: 3892318322209069621}
   - component: {fileID: 5660874745640622168}
   - component: {fileID: 3286832535916227073}
   - component: {fileID: 6844700950451139040}
   - component: {fileID: 3266458929852925726}
-  - component: {fileID: 3393774525216578497}
   - component: {fileID: 1498193774233940860}
   - component: {fileID: 2471120161838037738}
   - component: {fileID: 1339916634776647592}
   - component: {fileID: 9203738267757601799}
   - component: {fileID: 4011773848349809829}
   - component: {fileID: 6988014220805821868}
-  - component: {fileID: 3892318322209069621}
   - component: {fileID: 501037904413537466}
   m_Layer: 9
   m_Name: Goblin2.0
@@ -2806,6 +2806,76 @@ Transform:
   - {fileID: 871525430640155465}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3393774525216578497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7553112160091963360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1165096993
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &3892318322209069621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7553112160091963360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188631e4525a6484683453bd6e2789e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StaticEnemy: 0
+  DamageReduction: 1
+  MaxStaggerHealth: 0
+  <MaxHealth>k__BackingField: 14
+  <maxDetectDist>k__BackingField: 100
+  <AttackDistance>k__BackingField: 2.5
+  <MeleeRaycastRange>k__BackingField: 0.7
+  <AttackDamage>k__BackingField: 10
+  HealthBar: {fileID: 3922376924326255246}
+  <xpOnKill>k__BackingField: 5
+  <whatisPlayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 1024
+  colliders:
+  - {fileID: 3266458929852925726}
+  - {fileID: 4354235509625987465}
+  HealthCanvas: {fileID: 2629491045470020135}
+  ProjectileSpawnPos: {fileID: 0}
+  playerlist: []
+  target: {fileID: 0}
+  aggression: 0.5
+  HeadshotColor: {r: 1, g: -6.6, b: -6.6, a: 1}
+  NormalColor: {r: 1, g: 1, b: 1, a: 1}
+  SpawnedObj: {fileID: 0}
+  RotateSpeed: 10
+  damageText: {fileID: 5493454748374447997, guid: 328779aff6d65a54ea955ca4a033948f,
+    type: 3}
+  Attacking: 0
+  EnemyChaseBase: {fileID: 11400000, guid: 99068733950e50b4e8bb60548885e283, type: 2}
+  EnemyAttackBase: {fileID: 11400000, guid: ed781e9e9d60b354d99a8820648108d5, type: 2}
+  ChoasCoresOnDeath: 1
+  ChaosCores: {fileID: 5463404818829652139, guid: 0e3116f6437caf74686034388df2a5c2,
+    type: 3}
+  ArmorBuff: 0
+  armorBuffVFX: {fileID: 0}
+  Floating: 0
+  floatHeight: 0
+  Spawner: {fileID: 0}
 --- !u!54 &5660874745640622168
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2899,26 +2969,6 @@ CapsuleCollider:
   m_Height: 0.79301196
   m_Direction: 1
   m_Center: {x: 0, y: 0.40628818, z: 0}
---- !u!114 &3393774525216578497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7553112160091963360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1165096993
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &1498193774233940860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3096,59 +3146,6 @@ MonoBehaviour:
   effect: {fileID: 0}
   DissolveSpeed: 0.0125
   refreshRate: 0.025
---- !u!114 &3892318322209069621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7553112160091963360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 188631e4525a6484683453bd6e2789e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StaticEnemy: 0
-  DamageToStagger: 0
-  DamageReduction: 1
-  <MaxHealth>k__BackingField: 14
-  <maxDetectDist>k__BackingField: 100
-  <AttackDistance>k__BackingField: 2.5
-  <MeleeAttackRange>k__BackingField: 0.7
-  <TimeBetweenAttacks>k__BackingField: 4
-  <AttackDamage>k__BackingField: 10
-  HealthBar: {fileID: 3922376924326255246}
-  <xpOnKill>k__BackingField: 5
-  <whatisPlayer>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 1024
-  colliders:
-  - {fileID: 3266458929852925726}
-  - {fileID: 4354235509625987465}
-  HealthCanvas: {fileID: 2629491045470020135}
-  ProjectileSpawnPos: {fileID: 0}
-  playerlist: []
-  target: {fileID: 0}
-  aggression: 0.5
-  <HeadshotColor>k__BackingField: {r: 1, g: 0.40392157, b: 0.40392157, a: 1}
-  <NormalColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
-  RandomMovementRange: 5
-  RandomMovementSpeed: 1
-  SpawnedObj: {fileID: 0}
-  RotateSpeed: 10
-  damageText: {fileID: 5493454748374447997, guid: 328779aff6d65a54ea955ca4a033948f,
-    type: 3}
-  Attacking: 0
-  EnemyChaseBase: {fileID: 11400000, guid: 99068733950e50b4e8bb60548885e283, type: 2}
-  EnemyAttackBase: {fileID: 11400000, guid: ed781e9e9d60b354d99a8820648108d5, type: 2}
-  ChoasCoresOnDeath: 1
-  ChaosCores: {fileID: 5463404818829652139, guid: 0e3116f6437caf74686034388df2a5c2,
-    type: 3}
-  ArmorBuff: 0
-  armorBuffVFX: {fileID: 0}
-  Floating: 0
-  floatHeight: 0
-  Spawner: {fileID: 0}
 --- !u!114 &501037904413537466
 MonoBehaviour:
   m_ObjectHideFlags: 0

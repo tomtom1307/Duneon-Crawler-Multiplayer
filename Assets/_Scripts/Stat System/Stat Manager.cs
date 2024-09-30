@@ -33,6 +33,12 @@ namespace Project
            
         }
 
+        public void ChangeStats(WeaponInstance inst)
+        {
+            weaponInstance = inst;
+            InitDamageVals();
+        }
+
         // Update is called once per frame
         public void InitDamageVals()
         {
@@ -69,7 +75,6 @@ namespace Project
                 physicalBonus = 0;
                 magicBonus = 0;
             }
-            print(magicBonus);
             MagicDamage = stats.Intelligence * (BaseWeaponDamage + magicBonus +  ChaosBonus) / 100;
             PhysicalDamage = stats.Strength * (BaseWeaponDamage + physicalBonus + ChaosBonus)/ 100;
             

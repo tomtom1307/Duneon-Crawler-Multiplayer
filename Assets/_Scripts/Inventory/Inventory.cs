@@ -36,11 +36,23 @@ public class Inventory : MonoBehaviour
     {
         Active = false;
         Singleton = this;
+
+        //Get reference to hand object so getting necessary components is easier 
         handLoc = FindAnyObjectByType<HandStuff>();
+
+        //Get the local hand model
         GWL = handLoc.GetComponentInChildren<AbilityEventHandler>().gameObject;
+
+        //Multiplayer Hand Model
         handMult = FindAnyObjectByType<HandMult>();
+
+        //Get Player Attack input 
         PA = handLoc.gameObject.GetComponent<PlayerAttack>(); 
+
+        //Position of weapons
         ClientWeaponTransform = handLoc.transform.Find("Base");
+
+
         //WH = FindAnyObjectByType<WeaponHolder>();
         
     }
@@ -48,26 +60,40 @@ public class Inventory : MonoBehaviour
     private void Update()
     {
         //if (handMult == null) handMult = FindObjectOfType<HandMult>();
+
+        //If not moving an item in inventory do nothing 
         if (carriedItem == null) return;
         
-        
+        //if moving something set that moved thing to the mouse position
         carriedItem.transform.position = Input.mousePosition;
 
     }
 
-    public void SetCarriedItem(InventoryItem item)
+
+    //Called on Click to pick up an item
+    public void SetCarriedItem(InventoryItem item, bool swap  = false)
     {
+        //If carrying an item
         if(carriedItem != null)
         {
-            if (item.activeSlot.myTag != SlotTag.None && item.activeSlot.myTag != carriedItem.myItem.itemTag) 
-            item.activeSlot.SetItem(carriedItem);
+            //and the slot currently the mouse is hovering above contains an item as well but the current carried item is a mismatch in tags return
+            if (item.activeSlot.myTag != SlotTag.None && item.activeSlot.myTag != carriedItem.myItem.itemTag)
+            {
+                return;
+            }
+
+
+            //otherwise swap the itms
+            item.activeSlot.SetItem(carriedItem, true);
         }
 
 
 
 
-        if (item.activeSlot.myTag != SlotTag.None)
-        { EquipEquipment(item.activeSlot.myTag, null); }
+        else if (item.activeSlot.myTag != SlotTag.None)
+        {
+            EquipEquipment(item.activeSlot.myTag, null);
+        }
             
 
 
@@ -80,7 +106,7 @@ public class Inventory : MonoBehaviour
 
 
 
-
+    //Want to impliment an autoequip feature if the slot that this item occupies is already empty 
     public void AutoEquip()
     {
         
@@ -89,13 +115,15 @@ public class Inventory : MonoBehaviour
     public bool Active;
 
 
-    public void EquipEquipment(SlotTag tag, InventoryItem item = null)
+    //Called to equip items such as armor or weapons
+    public void EquipEquipment(SlotTag tag, InventoryItem item = null, bool swap = false)
     {
         
         switch (tag)
         {
             case SlotTag.Weapon:
                 
+                //Dequip
                 if(item ==null)
                 {
                     Active = false;
@@ -107,7 +135,18 @@ public class Inventory : MonoBehaviour
                     
                     //Destroy(GWL);
                 }
+
+                //Swap the items
+                else if (swap)
+                {
+                    Active = false;
+                    WH.enabled = false;
+                    WG.SwapWeapon(item.myItem.weaponInstance);
+                    Active = true;
+                    WH.enabled = true;
+                }
                 
+                //Equip
                 else
                 {
                     Active = true;
@@ -117,8 +156,7 @@ public class Inventory : MonoBehaviour
                         PA.enabled = false;
                     }
                     WH.enabled = true;
-                    WG.GenerateWeapon(item.myItem.weaponData);
-                    WH.statManager.weaponInstance = item.myItem.weaponInstance; 
+                    WG.GenerateWeapon(item.myItem.weaponInstance);
 
                 }
                 break;

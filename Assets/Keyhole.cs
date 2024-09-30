@@ -14,9 +14,11 @@ namespace Project
         public Material dimRed;
         public Material glowingRed;
         Material[] holematerials;
+        GenericSoundSource soundSource;
         // Start is called before the first frame update
         void Start()
         {
+            soundSource = GetComponent<GenericSoundSource>();
             active = true;
             keyObject = transform.GetChild(0).gameObject;
             crystalRend = keyObject.GetComponent<Renderer>();
@@ -32,6 +34,8 @@ namespace Project
                 active=false;
                 Prompt = "";
                 //play sound
+                soundSource.PlaySound(GenericSoundSource.GenSoundType.KeySlotting, 1);
+
                 keyObject.SetActive(true);
                 //Crystalrend.material.Lerp(dimRed, glowingRed,t);
                 crystalRend.material = glowingRed;
