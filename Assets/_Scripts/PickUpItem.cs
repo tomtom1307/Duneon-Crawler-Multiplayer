@@ -12,6 +12,7 @@ public class PickUpItem : _Interactable
     
     public Item itemSO;
     public Transform ModelPos;
+    public bool generateRarity;
     public bool includeVFX;
 
     ParticleSystem ps;
@@ -93,8 +94,9 @@ public class PickUpItem : _Interactable
         //Set rotatin 
         displayModel.transform.localRotation = Quaternion.Euler(new Vector3(0,0,0));
         
-
-        //Calculate total value of table
+        if(generateRarity)
+        {
+            //Calculate total value of table
             foreach (var it in table)
             {
                 total += it;
@@ -116,14 +118,15 @@ public class PickUpItem : _Interactable
             ItemColor = Raritycolor[index];
             //Set the Rarity 
             Rarity = rarity[index];
-            
+        }
 
         //Retrieve inventory 
         inventory = Inventory.Singleton;
 
         //Initialize it as an inventory Item
         InitializeInventoryItem();
-        GameObject VFX = Instantiate(RarityEffects[index], transform);
+        if(includeVFX)
+        {GameObject VFX = Instantiate(RarityEffects[index], transform);}
     }
 
     
