@@ -920,6 +920,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2467a634403ece48bf5f77bce9d8ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5549311604624701127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2261470428298735775}
+  m_Layer: 8
+  m_Name: WeaponPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2261470428298735775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5549311604624701127}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.018711679, y: -0.14312057, z: -0.12832189, w: 0.9811727}
+  m_LocalPosition: {x: -0.031, y: 0.044, z: -0.045}
+  m_LocalScale: {x: 0.25330666, y: 0.25330666, z: 0.25330666}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6432893416880526344}
+  m_LocalEulerAnglesHint: {x: -4.212, y: -16.069, z: -14.307}
 --- !u!1 &5898866929869850984
 GameObject:
   m_ObjectHideFlags: 0
