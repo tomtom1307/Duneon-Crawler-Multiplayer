@@ -133,6 +133,7 @@ public class PickUpItem : _Interactable
         item.inventorySprite = itemSO.inventorySprite;
         item.itemTag = itemSO.itemTag;
         item.model = itemSO.model;
+        item.itemID = itemSO.itemID;
 
 
         //Check itemTag for special initialization conditions
