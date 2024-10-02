@@ -377,6 +377,7 @@ namespace Project
         public void EnableNavMeshServerRpc()
         {
             if (StaticEnemy) return;
+            if (rb == null) return;
             rb.isKinematic = true;
             navMesh.enabled = true;
             animator.applyRootMotion = true;

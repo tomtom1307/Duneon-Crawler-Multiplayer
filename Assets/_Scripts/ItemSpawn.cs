@@ -14,6 +14,8 @@ public class ItemSpawn : _Interactable
 
     private static Dictionary<Rarity,Color> RarityColor;
     ParticleSystem ps;
+    public float floatTime;
+    public float floatHeight;
 
     private GameObject displayModel;
 
@@ -21,6 +23,7 @@ public class ItemSpawn : _Interactable
     Inventory inventory;
     [HideInInspector] public Item item;
     Light pointLight;
+    Sequence itemSeq;
 
 
     public virtual void Start()
@@ -41,8 +44,8 @@ public class ItemSpawn : _Interactable
 
         //Spawn the display model 
         displayModel = Instantiate(itemSO.model, transform);
-        displayModel.transform.DOMove(displayModel.transform.position + Vector3.up * 0.1f, 2).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
-        displayModel.transform.DORotate(new Vector3(-90,0f,180),2).SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
+
+
         
         //Make non interactable
         displayModel.layer = 0;
@@ -53,9 +56,6 @@ public class ItemSpawn : _Interactable
         {
             item.gameObject.layer = 0;
         }
-        
-        //Set rotatin 
-        displayModel.transform.localRotation = Quaternion.Euler(new Vector3(0,0,0));
         
     
         //Retrieve inventory 
@@ -95,6 +95,15 @@ public class ItemSpawn : _Interactable
         
         }
 
+    public void FloatUp()
+    {
+        Debug.Log("Float sequence triggered.");
+        //Initialize Sequence
+        itemSeq = DOTween.Sequence();
+        itemSeq.Append(transform.DOMove(transform.position + Vector3.up*floatHeight,floatTime).SetEase(Ease.InOutSine));
+        itemSeq.Insert(floatTime*0.8f,transform.DORotate(new Vector3(0f,180f,0f),1).SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental));
+        itemSeq.Insert(floatTime, transform.DOMove(transform.position + Vector3.up * (floatHeight- 0.1f), 2).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo));
+    }
 
     private void GetObjComponents()
     {
@@ -114,7 +123,7 @@ public class ItemSpawn : _Interactable
         //Destroy the visuals 
         
         base.Interact();
-        DOTween.Kill(displayModel.transform);
+        itemSeq.Kill();
         Destroy(gameObject);
     }
 
