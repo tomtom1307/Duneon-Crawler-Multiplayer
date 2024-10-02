@@ -7,51 +7,55 @@ using TMPro;
 using UnityEngine;
 
 
-public class PickUpItem : _Interactable
+public class WeaponSpawn : _Interactable
 {
     
     public Item itemSO;
     public Transform ModelPos;
-
-    
+    public bool generateRarity;
+    public bool includeVFX;
 
     ParticleSystem ps;
 
-    
-    
-
-
     //Table and rarity stuff
 
-    public float[] table = 
-    { 
-      700, //Common 
-      200, //Uncommon
-      70,  //Rare
-      29,  //Very Rare
-      1,  //Legendary
-    };
+        public float[] table = 
+        { 
+        700, //Common 
+        200, //Uncommon
+        70,  //Rare
+        29,  //Very Rare
+        1,  //Legendary
+        };
 
-    public string[] rarity =
-    {
-        "Common",
-        "Uncommon",
-        "Rare",
-        "Very Rare",
-        "Legendary"
-    };
+        public string[] rarity =
+        {
+            "Common",
+            "Uncommon",
+            "Rare",
+            "Very Rare",
+            "Legendary"
+        };
 
-    public Color[] Raritycolor =
-    {
-        Color.gray,
-        Color.cyan,
-        Color.blue,
-        Color.magenta,
-        Color.red
-    };
+        public Color[] Raritycolor =
+        {
+            Color.gray,
+            Color.cyan,
+            Color.blue,
+            Color.magenta,
+            Color.red
+        };
+
+
+    
+    
+
+
+
 
     public List<GameObject> RarityEffects;
 
+    private GameObject displayModel;
     [HideInInspector] public string Rarity;
     [HideInInspector] Color ItemColor;
     Inventory inventory;
@@ -66,7 +70,7 @@ public class PickUpItem : _Interactable
     [SerializeField] WeaponInstance WI;
 
 
-    private void Start()
+    public virtual void Start()
     {
         
         //Retrieve the Particle system and other reqs
@@ -74,8 +78,9 @@ public class PickUpItem : _Interactable
         
 
         //Spawn the display model 
-        GameObject displayModel = Instantiate(itemSO.model, ModelPos);
+        displayModel = Instantiate(itemSO.model, ModelPos);
         displayModel.transform.DOMove(displayModel.transform.position + Vector3.up * 0.1f, 2).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
+        
         //Make non interactable
         displayModel.layer = 0;
 
@@ -88,23 +93,31 @@ public class PickUpItem : _Interactable
         
         //Set rotatin 
         displayModel.transform.localRotation = Quaternion.Euler(new Vector3(0,0,0));
-
-        //Calculate total value of table
-        foreach (var it in table)
+        
+        if(generateRarity)
         {
-            total += it;
-        }
-        //Generate random Value
-        randomVal = Random.Range(0, total);
-        index = 0;
-        for (int i = 0; i < table.Length; i++)
-        {
-            if (randomVal <= table[i])
+            //Calculate total value of table
+            foreach (var it in table)
             {
-                //Establish the correct index 
-                index = i ; break;
+                total += it;
             }
-            else randomVal -= table[i];
+            //Generate random Value
+            randomVal = Random.Range(0, total);
+            index = 0;
+            for (int i = 0; i < table.Length; i++)
+            {
+                if (randomVal <= table[i])
+                {
+                    //Establish the correct index 
+                    index = i ; break;
+                }
+                else randomVal -= table[i];
+            }
+
+            //Set the item color
+            ItemColor = Raritycolor[index];
+            //Set the Rarity 
+            Rarity = rarity[index];
         }
 
         //Retrieve inventory 
@@ -112,16 +125,8 @@ public class PickUpItem : _Interactable
 
         //Initialize it as an inventory Item
         InitializeInventoryItem();
-
-        //Spawn VFX
-        GameObject VFX = Instantiate(RarityEffects[index], transform);
-
-        //Set the item color
-        ItemColor = Raritycolor[index];
-        //Set the Rarity 
-        Rarity = rarity[index];
-     
-
+        if(includeVFX)
+        {GameObject VFX = Instantiate(RarityEffects[index], transform);}
     }
 
     
@@ -133,6 +138,7 @@ public class PickUpItem : _Interactable
         item.inventorySprite = itemSO.inventorySprite;
         item.itemTag = itemSO.itemTag;
         item.model = itemSO.model;
+        item.itemID = itemSO.itemID;
 
 
         //Check itemTag for special initialization conditions
@@ -175,9 +181,10 @@ public class PickUpItem : _Interactable
         //Spawn into the inventory 
         inventory.SpawnInventoryItem(Raritycolor[index], item);
 
-        //Destroy the visuals 
-        Destroy(gameObject);
+        //Destroy the visuals
+        DOTween.Kill(displayModel.transform);
         base.Interact();
+        Destroy(gameObject);
     }
 
     

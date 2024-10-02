@@ -6,7 +6,7 @@ namespace Project
 {
     public class ContainerLogic : LootGenerator
     {
-        Animator anim;
+        public Animator anim;
         public bool LootAsChild;
         public List<Transform> LootPositions;
         bool opened = false;
@@ -17,7 +17,6 @@ namespace Project
         public override void Start()
         {
             base.Start();
-            anim = GetComponent<Animator>();
             
         }
 
@@ -26,12 +25,17 @@ namespace Project
             if(!opened)
             {
                 opened = true;
-                foreach(Transform loottransform in LootPositions)
+                Debug.Log(lootTable);
+                if(lootTable != null)
                 {
-                    GameObject loot = GenerateLoot();
-                    if(loot != null) {SpawnLoot(loot, loottransform, aschild: LootAsChild);}
+                    foreach(Transform loottransform in LootPositions)
+                    {
+                        GameObject loot = GenerateLoot();
+                        if(loot != null) {SpawnLoot(loot, loottransform, aschild: LootAsChild);}
+                    }
                 }
-                base.Interact();  
+                base.Interact();
+                Debug.Log(anim);
                 anim.SetBool("Open", true);
                 Prompt = "";
             }
