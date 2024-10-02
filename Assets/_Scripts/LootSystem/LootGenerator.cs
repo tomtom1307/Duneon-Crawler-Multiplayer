@@ -102,7 +102,7 @@ namespace Project
 
 
         //Handle Spawning given a transform 
-        public virtual void SpawnLoot(GameObject loot_prefab, Transform target, bool Inherit_Rotation = false, bool aschild = false)
+        public virtual void SpawnLoot(GameObject loot_prefab, Transform target, bool Inherit_Rotation = false, bool aschild = false, bool autopickup = false)
         {
             GameObject LootItem;
             Quaternion rot;
@@ -124,6 +124,16 @@ namespace Project
                 LootItem = Instantiate(loot_prefab, target.position, rot);
             }
 
+            //guaranteeing loot is autopickup if flag is true
+            if(autopickup)
+            {
+                //Verifying that loot has coin or crystal component
+                if(LootItem.GetComponent<Coins>()!=null)
+                {LootItem.GetComponent<Coins>().AutoPickup = true;}
+                
+                else if(LootItem.GetComponent<CrystalPickup>()!=null)
+                {LootItem.GetComponent<CrystalPickup>().AutoPickup = true;}
+            }
             
             if (LootVFX)
             {
