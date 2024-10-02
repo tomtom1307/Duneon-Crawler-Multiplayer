@@ -31,15 +31,17 @@ namespace Project
 
         public virtual void Start()
         {
-            VFXMap = new Dictionary<VFX, GameObject>
+            if(lootTable != null)
             {
-                { VFX.white, lootTable.whiteVFXPrefab },
-                { VFX.green, lootTable.greenVFXPrefab },
-                { VFX.blue, lootTable.blueVFXPrefab },
-                { VFX.purple, lootTable.purpleVFXPrefab },
-                { VFX.orange, lootTable.orangeVFXPrefab }
-            };
-            
+                VFXMap = new Dictionary<VFX, GameObject>
+                {
+                    { VFX.white, lootTable.whiteVFXPrefab },
+                    { VFX.green, lootTable.greenVFXPrefab },
+                    { VFX.blue, lootTable.blueVFXPrefab },
+                    { VFX.purple, lootTable.purpleVFXPrefab },
+                    { VFX.orange, lootTable.orangeVFXPrefab }
+                };
+            }
 
             
         }

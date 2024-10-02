@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace Project
 {
@@ -17,6 +18,7 @@ namespace Project
             base.Interact();
             PS = interacter.GetComponent<PlayerStats>();
             PS.AddCrystals(CrystalType, 1);
+            DOTween.Kill(transform); //Kill DOTween before destroying object
             Destroy(this.gameObject);
             PlayerSoundSource.Instance.PlaySound(SourceSoundManager.SoundType.WhiteCrystalPickup, 1);
             PlayerSoundSource.Instance.PlaySound(SourceSoundManager.SoundType.ClothesRustle, 0.5f);

@@ -4,15 +4,17 @@ using UnityEngine;
 
 namespace Project
 {
-    public class LeverLogic : _Interactable
+    public class DoorLeverLogic : _Interactable
     {
         Animator anim;
-        [HideInInspector] public EnemySpawnTrap EST;
+        public Animator Door;
         [HideInInspector] public int Channel;
 
         private void Start()
         {
             anim = GetComponent<Animator>();
+            //Door = GetComponentInParent<Animator>();
+            
         }
 
 
@@ -20,7 +22,7 @@ namespace Project
         {
             base.Interact();
             anim.SetBool("Flip", true);
-            EST.OnActivateServerRpc(Channel);
+            Door.SetBool("Open", true);
 
             this.enabled = false;
         }

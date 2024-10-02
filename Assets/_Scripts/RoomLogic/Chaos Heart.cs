@@ -16,7 +16,7 @@ namespace Project
         public bool Trigger = false;
         public Animator TentacleAnim;
         public Color HealthbarColor;
-        public EnemySpawnTrap EST;
+        public TriggerSpawner EST;
         public ChaosHeartRoomFallingChandalier CHChandalier;
         public GameObject Fleshwall;
 
