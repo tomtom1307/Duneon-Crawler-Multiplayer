@@ -7,77 +7,40 @@ using TMPro;
 using UnityEngine;
 
 
-public class PickUpItem : _Interactable
+public class ItemSpawn : _Interactable
 {
     
     public Item itemSO;
-    public Transform ModelPos;
-    public bool generateRarity;
-    public bool includeVFX;
 
+    private static Dictionary<Rarity,Color> RarityColor;
     ParticleSystem ps;
 
-    //Table and rarity stuff
+    private GameObject displayModel;
 
-        public float[] table = 
-        { 
-        700, //Common 
-        200, //Uncommon
-        70,  //Rare
-        29,  //Very Rare
-        1,  //Legendary
-        };
-
-        public string[] rarity =
-        {
-            "Common",
-            "Uncommon",
-            "Rare",
-            "Very Rare",
-            "Legendary"
-        };
-
-        public Color[] Raritycolor =
-        {
-            Color.gray,
-            Color.cyan,
-            Color.blue,
-            Color.magenta,
-            Color.red
-        };
-
-
-    
-    
-
-
-
-
-    public List<GameObject> RarityEffects;
-
-    [HideInInspector] public string Rarity;
-    [HideInInspector] Color ItemColor;
+   
     Inventory inventory;
     [HideInInspector] public Item item;
     Light pointLight;
-    [HideInInspector] public float total;
-    [HideInInspector] public float randomVal;
-    [HideInInspector] public int index;
-
-
-    //For Weapons 
-    [SerializeField] WeaponInstance WI;
 
 
     public virtual void Start()
     {
-        
+        //Initialize Rarity color dictionary
+        RarityColor = new Dictionary<Rarity, Color>()
+        {
+            {Rarity.Common, Color.gray},
+            {Rarity.Uncommon, Color.cyan},
+            {Rarity.Rare, Color.blue},
+            {Rarity.Very_Rare, Color.magenta},
+            {Rarity.Legendary, Color.red}
+        };
+
         //Retrieve the Particle system and other reqs
         GetObjComponents();
         
 
         //Spawn the display model 
-        GameObject displayModel = Instantiate(itemSO.model, ModelPos);
+        displayModel = Instantiate(itemSO.model, transform);
         displayModel.transform.DOMove(displayModel.transform.position + Vector3.up * 0.1f, 2).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
         displayModel.transform.DORotate(new Vector3(-90,0f,180),2).SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
         
@@ -94,39 +57,12 @@ public class PickUpItem : _Interactable
         //Set rotatin 
         displayModel.transform.localRotation = Quaternion.Euler(new Vector3(0,0,0));
         
-        if(generateRarity)
-        {
-            //Calculate total value of table
-            foreach (var it in table)
-            {
-                total += it;
-            }
-            //Generate random Value
-            randomVal = Random.Range(0, total);
-            index = 0;
-            for (int i = 0; i < table.Length; i++)
-            {
-                if (randomVal <= table[i])
-                {
-                    //Establish the correct index 
-                    index = i ; break;
-                }
-                else randomVal -= table[i];
-            }
-
-            //Set the item color
-            ItemColor = Raritycolor[index];
-            //Set the Rarity 
-            Rarity = rarity[index];
-        }
-
+    
         //Retrieve inventory 
         inventory = Inventory.Singleton;
 
         //Initialize it as an inventory Item
         InitializeInventoryItem();
-        if(includeVFX)
-        {GameObject VFX = Instantiate(RarityEffects[index], transform);}
     }
 
     
@@ -145,14 +81,8 @@ public class PickUpItem : _Interactable
         switch(item.itemTag)
         {
             //For Weapons
-            case SlotTag.Weapon:
+            case SlotTag.Objective:
             {
-                    
-                    item.weaponData = itemSO.weaponData;
-                    item.weaponData.model = item.model;
-                    WI = new WeaponInstance(itemSO.weaponData, index);
-                    item.weaponInstance = WI;
-                    
                     break;
             }
             //For head armor
@@ -179,11 +109,13 @@ public class PickUpItem : _Interactable
     protected override void Interact()
     {
         //Spawn into the inventory 
-        inventory.SpawnInventoryItem(Raritycolor[index], item);
+        inventory.SpawnInventoryItem(Color.white, item);
 
         //Destroy the visuals 
-        Destroy(gameObject);
+        
         base.Interact();
+        DOTween.Kill(displayModel.transform);
+        Destroy(gameObject);
     }
 
     
