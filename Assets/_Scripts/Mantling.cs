@@ -60,8 +60,10 @@ namespace Project
                 {
                     ledgeAvailable = false;
                 }
+                if (collision.gameObject.layer != LayerMask.GetMask("Ground")) return;
+
                 //Need to check if space is pressed but gives weird results will revisit this soon 
-                if (ledgeAvailable && (Input.GetKey(KeyCode.W) && !playerMovement.grounded || (playerMovement.grounded && Input.GetKey(KeyCode.W))))
+                if (ledgeAvailable && (Input.GetKey(KeyCode.W)))
                 {
                     Vector3 currentPos = cam.transform.position + Vector3.up * MaxLedgeHeight + Vector3.down * 0.05f;
                     while (!Physics.Raycast(currentPos, -normal, out hit, 1, LayerMask.GetMask("Ground")))
