@@ -35,7 +35,7 @@ namespace Project
             //Note That Generate Loot and SpawnLoot are stored in the inherited class LootGenerator
             GameObject loot = GenerateLoot();
             if(loot != null) { 
-                SpawnLoot(loot, transform);
+                SpawnLoot(loot, transform, autopickup: true);
             }
 
 
