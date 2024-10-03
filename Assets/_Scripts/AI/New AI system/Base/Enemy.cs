@@ -553,6 +553,7 @@ namespace Project
         {
             if (!navMesh.enabled) return;
             
+            Debug.Log(navMesh);  
             navMesh.SetDestination(targetPosition);
         }
 
