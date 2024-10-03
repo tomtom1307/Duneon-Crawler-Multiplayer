@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Project
 {
     [CreateAssetMenu(fileName = "Attack-Melee-Lunge", menuName = "Enemy Logic/ Attack Logic/ Melee-Lunge")]
-    public class EnemyAttackMaintainDistance : EnemyAttackSOBase
+    public class EnemyAttackLunge : EnemyAttackSOBase
     {
         [field: SerializeField] public float lungeDistance { get; set; } = 4f;
 
