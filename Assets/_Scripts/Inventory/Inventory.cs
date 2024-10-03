@@ -16,6 +16,8 @@ public class Inventory : MonoBehaviour
 
 
     [SerializeField] InventorySlot[] inventorySlots;
+    [SerializeField] InventorySlot[] objectiveInventorySlots;
+
 
     [SerializeField] Transform draggablesTransform;
     [SerializeField] InventoryItem itemPrefab;
@@ -99,7 +101,6 @@ public class Inventory : MonoBehaviour
 
         carriedItem = item;
         carriedItem.canvasGroup.blocksRaycasts = false;
-        carriedItem.canvasGroup.interactable = false;
         item.transform.SetParent(draggablesTransform);
         
     }
@@ -205,16 +206,41 @@ public class Inventory : MonoBehaviour
 
     public void SpawnInventoryItem(Color rarity, Item item = null)
     {
+        InventoryItem spawnedItem;
         Item _item = item;
-        for (int i = 0; i < inventorySlots.Length; i++)
+        switch(item.itemTag)
         {
-            // Check if the slot is empty
-            if (inventorySlots[i].myItem == null)
-            {
-                Instantiate(itemPrefab, inventorySlots[i].transform).Initialize(_item, inventorySlots[i],rarity);
+            case SlotTag.Weapon:
+                foreach (InventorySlot slot in inventorySlots)
+                {
+                    // Check if the slot is empty
+                    if (slot.myItem == null)
+                    {
+                        Instantiate(itemPrefab, slot.transform).Initialize(_item, slot,rarity);
+                        break;
+                    }
+                }
                 break;
-            }
+            
+            case SlotTag.Objective:
+                foreach (InventorySlot slot in objectiveInventorySlots)
+                {
+                    // Check if the slot is empty
+                    if (slot.myItem == null)
+                    {
+                        slot.GetComponent<Graphic>().enabled = true;
+                        spawnedItem = Instantiate(itemPrefab, slot.transform);
+                        spawnedItem.Initialize(_item, slot,rarity);
+                        spawnedItem.GetComponent<Graphic>().raycastTarget = false;
+                        break;
+                    }
+                }
+                break;
         }
+    }
+    public void RemoveInventoryItem(InventoryItem item)
+    {
+        
     }
 
     private void OnEnable()
