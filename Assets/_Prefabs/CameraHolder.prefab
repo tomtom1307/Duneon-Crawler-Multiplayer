@@ -320,7 +320,6 @@ GameObject:
   - component: {fileID: 7933067249557868530}
   - component: {fileID: 5623351260724698337}
   - component: {fileID: 5315767015092318870}
-  - component: {fileID: 315796000840505260}
   - component: {fileID: 809755377459880178}
   - component: {fileID: 6895124376529330586}
   m_Layer: 8
@@ -371,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1755492930
+  GlobalObjectIdHash: 38062932
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -439,20 +438,6 @@ MonoBehaviour:
   LandingEffect: 2
   JumpSnap: 2.76
   PM: {fileID: 0}
---- !u!114 &315796000840505260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2866492743846150649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c76b1f082d067224abb3a283c75615da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clipList: []
-  CurrentClip: {fileID: 0}
 --- !u!114 &809755377459880178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,7 +606,6 @@ GameObject:
   - component: {fileID: 8911205024570167678}
   - component: {fileID: 540105110739280589}
   - component: {fileID: 6184043990130087441}
-  - component: {fileID: 3271526672366931032}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -826,43 +810,6 @@ MonoBehaviour:
     DampedPercent: 0.59
     rotationPercent: 0.26
 --- !u!114 &6184043990130087441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4525765832110694384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71be4e0cad2fa454784b000d17f3ae74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeBetweenSteps: 1
-  VelocityDependance:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: -0.21643457
-      value: 0.5944967
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 9.181042
-      value: 0.18993619
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &3271526672366931032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2967,7 +2914,7 @@ PrefabInstance:
     - target: {fileID: -6827007031309217127, guid: cc20fb47e46a9664bb394ea8d6e24bda,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1383204544
+      value: 1857344628
       objectReference: {fileID: 0}
     - target: {fileID: 6236249103363093857, guid: cc20fb47e46a9664bb394ea8d6e24bda,
         type: 3}

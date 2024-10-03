@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.62, y: -6.18, z: 0}
-  m_LocalScale: {x: 0.68, y: 0.68, z: 0.68}
+  m_LocalScale: {x: 0.72807604, y: 0.72807604, z: 0.72807604}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,10 +62,10 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 6.4905663, y: 0.5265926, z: 3.586643, w: 1}
+      - m_Value: {x: 5.3954477, y: 2.4595091, z: 0.15270042, w: 1}
         m_Name: Flash
         m_Overridden: 1
-      - m_Value: {x: 1.0060831, y: 13.298086, z: 15.235006, w: 1}
+      - m_Value: {x: 12.927075, y: 5.4279437, z: 0, w: 1}
         m_Name: Lightning
         m_Overridden: 1
     m_Uint:
@@ -81,7 +81,10 @@ VisualEffect:
     m_NamedObject:
       m_Array: []
     m_Bool:
-      m_Array: []
+      m_Array:
+      - m_Value: 1
+        m_Name: LightningOnOFF
+        m_Overridden: 1
 --- !u!73398921 &355017731628334780
 VFXRenderer:
   serializedVersion: 1
@@ -133,7 +136,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0, b: 0.7934356, a: 1}
+  m_Color: {r: 0.5999999, g: 0.4325971, b: 0.15735842, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -241,7 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
   speed: 1.5
-  onDestroySpawn: {fileID: 5125635176976004437, guid: 58d5af2ebcdbda54c830802a35599a17,
+  onDestroySpawn: {fileID: 5125635176976004437, guid: 0b38339cefa088c4a841a3589dc18547,
     type: 3}
   Flag: 0
 --- !u!114 &5813002849686236906

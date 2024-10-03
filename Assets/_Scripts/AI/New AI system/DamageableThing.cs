@@ -67,8 +67,11 @@ namespace Project
         [ClientRpc]
         public void HandleLocalVisualsClientRpc(float Damage)
         {
-
-            HealthBar.fillAmount = CurrentHealth.Value / MaxHealth;
+            if(HealthBar != null)
+            {
+                HealthBar.fillAmount = CurrentHealth.Value / MaxHealth;
+            }
+            
 
 
             DamageFlash();

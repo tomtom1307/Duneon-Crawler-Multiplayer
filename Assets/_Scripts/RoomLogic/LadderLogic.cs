@@ -1,8 +1,12 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
+using static UnityEditor.Progress;
 
 namespace Project
 {
@@ -11,6 +15,7 @@ namespace Project
 
         public float climbSpeed;
         public List<PlayerMovement> PM;
+        
         private void OnTriggerEnter(Collider other)
         {
 
@@ -20,10 +25,15 @@ namespace Project
                 PM.Add(PMinst);
             }
 
+            
+
         }
 
         private void Update()
         {
+
+            
+
 
             if (PM.Count > 0 && Input.GetKey(KeyCode.Space))
             {
@@ -34,6 +44,7 @@ namespace Project
             }
         }
 
+
         private void OnTriggerExit(Collider other)
         {
             PlayerMovement PMinst;
@@ -41,6 +52,9 @@ namespace Project
             {
                 PM.Remove(PMinst);
             }
+
+
+
         }
 
 

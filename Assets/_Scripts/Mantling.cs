@@ -27,6 +27,7 @@ namespace Project
         public float vaultSpeed;
         public float vaultHeight;
         bool vault;
+        public LayerMask Mantleable;
         public bool mantling;
         public GameObject lastWall;
         private float _mantleSpeed;
@@ -46,8 +47,7 @@ namespace Project
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.collider.gameObject == lastWall) return;
-            
+            if (collision.collider.gameObject == lastWall || collision.collider.gameObject.tag == "Projectile") return;
             Vector3 normal = collision.GetContact(0).normal;
             Vector3 horForward = cam.transform.forward;
             horForward.y = 0; 
@@ -56,17 +56,17 @@ namespace Project
             {
                 bool ledgeAvailable = true;
                 RaycastHit hit;
-                if(Physics.Raycast(cam.transform.position + MaxLedgeHeight*Vector3.up, -normal, out hit, 1, LayerMask.GetMask("Ground")))
+                if(Physics.Raycast(cam.transform.position + MaxLedgeHeight*Vector3.up, -normal, out hit, 1, Mantleable))
                 {
                     ledgeAvailable = false;
                 }
-                if (collision.gameObject.layer != LayerMask.GetMask("Ground")) return;
+                //if (collision.gameObject.layer != LayerMask.GetMask("Ground")) return;
 
                 //Need to check if space is pressed but gives weird results will revisit this soon 
                 if (ledgeAvailable && (Input.GetKey(KeyCode.W)))
                 {
                     Vector3 currentPos = cam.transform.position + Vector3.up * MaxLedgeHeight + Vector3.down * 0.05f;
-                    while (!Physics.Raycast(currentPos, -normal, out hit, 1, LayerMask.GetMask("Ground")))
+                    while (!Physics.Raycast(currentPos, -normal, out hit, 1, Mantleable))
                     {
                         currentPos += Vector3.down * 0.05f;
                         if(currentPos.y < cam.transform.position.y-2f) {

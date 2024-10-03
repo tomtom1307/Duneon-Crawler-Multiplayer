@@ -38,7 +38,7 @@ namespace Project
         [ServerRpc]
         public void AOEServerRpc(float Scale)
         {
-            GameObject visual = Instantiate(Attack2PS, transform.position-Vector3.up*0.4f, Quaternion.Euler(new Vector3(-90,0,0)));
+            GameObject visual = Instantiate(Attack2PS, transform.position-Vector3.up*0.4f, Quaternion.Euler(new Vector3(0,0,0)));
             visual.transform.localScale = Scale* Vector3.one;
             visual.GetComponent<NetworkObject>().Spawn();
 

@@ -493,6 +493,22 @@ namespace Project
 
 
         }
+        /*
+        IEnumerator MoveAcrossNavMeshLink()
+        {
+            OffMeshLinkData data = navMesh.currentOffMeshLinkData;
+            navMesh.updateRotation = false;
+
+            Vector3 startPos = navMesh.transform.position;
+            Vector3 endPos = data.endPos + Vector3.up * navMesh.baseOffset;
+            float duration = (endPos - startPos).magnitude / navMesh.velocity.magnitude;
+            transform.position = endPos;
+            navMesh.updateRotation = true;
+            navMesh.CompleteOffMeshLink();
+            MoveAcrossNavMeshesStarted = false;
+
+        }
+        */
 
         public void SpawnObj(GameObject spawnObj,Vector3 Pos)
         {
@@ -558,6 +574,8 @@ namespace Project
         }
 
 
+        bool MoveAcrossNavMeshesStarted;
+
         public virtual void Update()
         {
             if(!IsOwner) return;
@@ -574,6 +592,13 @@ namespace Project
                     CurrentStaggerHealth.Value += staggerRegenSpeed*Time.deltaTime;       
                         
                 }
+                /*
+                if (navMesh.isOnOffMeshLink && !MoveAcrossNavMeshesStarted)
+                {
+                    StartCoRoutine(MoveAcrossNavMeshLink());
+                    MoveAcrossNavMeshesStarted = true;
+                }
+                */
             }
             
         }

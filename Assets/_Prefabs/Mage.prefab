@@ -10390,7 +10390,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9211036698816209711}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c31699f012679f540a4c0aa988a137fb, type: 3}
   m_Name: 
@@ -10574,11 +10574,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b4a7d4ae69e484ab9e698e463ed53b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Attack1PS: {fileID: 3994689893600592814, guid: 7b09c813fd530774fa7483777d00bd69,
+  Attack1PS: {fileID: 3994689893600592814, guid: 16893b4a52f00e5468066cdfd13bb2f7,
     type: 3}
-  EffectOrigin: {fileID: 4133376731416844796}
+  EffectOrigin: {fileID: 0}
   Speed: 20
-  Attack2PS: {fileID: 5234310766512725819, guid: 7ee0828c82628484f87e29d20e82a029,
+  Attack2PS: {fileID: 7303324915516245008, guid: 1c4b4f1336024d047a8f495ecba075a3,
     type: 3}
   onTouch:
     serializedVersion: 2
@@ -10629,6 +10629,9 @@ MonoBehaviour:
   col: {fileID: 0}
   vaultSpeed: 4
   vaultHeight: 0.5
+  Mantleable:
+    serializedVersion: 2
+    m_Bits: 65
   mantling: 0
   lastWall: {fileID: 0}
   slowClimbForce: 10000
@@ -10787,12 +10790,6 @@ Transform:
 --- !u!1 &2032023895060602556 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6236249103363093857, guid: cc20fb47e46a9664bb394ea8d6e24bda,
-    type: 3}
-  m_PrefabInstance: {fileID: 5384239669414161373}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4133376731416844796 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8350831834292564513, guid: cc20fb47e46a9664bb394ea8d6e24bda,
     type: 3}
   m_PrefabInstance: {fileID: 5384239669414161373}
   m_PrefabAsset: {fileID: 0}
