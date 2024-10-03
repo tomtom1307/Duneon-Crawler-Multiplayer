@@ -18,7 +18,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] InventorySlot[] inventorySlots;
     [SerializeField] InventorySlot[] objectiveInventorySlots;
 
-    [SerializeField] List<Item> itemsStored;
+    [SerializeField] Dictionary<Item, InventoryItem> itemsStored;
 
     [SerializeField] Transform draggablesTransform;
     [SerializeField] InventoryItem itemPrefab;
@@ -52,6 +52,8 @@ public class Inventory : MonoBehaviour
         //Position of weapons
         ClientWeaponTransform = handLoc.transform.Find("Base");
 
+        //Instantiate Dictionary
+        itemsStored = new Dictionary<Item, InventoryItem>();
 
         //WH = FindAnyObjectByType<WeaponHolder>();
         
@@ -204,9 +206,8 @@ public class Inventory : MonoBehaviour
 
     public void SpawnInventoryItem(Color rarity, Item item = null)
     {
-        InventoryItem spawnedItem;
+        InventoryItem spawnedItem=null;
         Item _item = item;
-        itemsStored.Add(item);
         switch(item.itemTag)
         {
             case SlotTag.Weapon:
@@ -215,7 +216,8 @@ public class Inventory : MonoBehaviour
                     // Check if the slot is empty
                     if (slot.myItem == null)
                     {
-                        Instantiate(itemPrefab, slot.transform).Initialize(_item, slot,rarity);
+                        spawnedItem = Instantiate(itemPrefab, slot.transform);
+                        spawnedItem.Initialize(_item, slot,rarity);
                         break;
                     }
                 }
@@ -235,15 +237,33 @@ public class Inventory : MonoBehaviour
                     }
                 }
                 break;
+            default:
+                return;
+                break;
         }
+        Debug.Log(item);
+        Debug.Log(spawnedItem);
+        Debug.Log(itemsStored);
+        itemsStored.Add(item, spawnedItem);
     }
-    public void RemoveInventoryItem(InventoryItem item)
+    public void RemoveInventoryItem(string itemID)
     {
-        
+        InventoryItem removedInventoryItem;
+        foreach(Item item in itemsStored.Keys)
+        {
+            if(item.itemID == itemID)
+            {
+                removedInventoryItem = itemsStored[item];
+                itemsStored.Remove(item);
+                Destroy(item);
+                Destroy(removedInventoryItem.gameObject);
+                break;
+            }
+        }
     }
     public bool ItemIsInInventory(string itemID)
     {
-        foreach (Item item in itemsStored)
+        foreach (Item item in itemsStored.Keys)
         {
             if(item.itemID == itemID)
             {
