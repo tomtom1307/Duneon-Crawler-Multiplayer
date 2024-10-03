@@ -18,15 +18,13 @@ public class Inventory : MonoBehaviour
     [SerializeField] InventorySlot[] inventorySlots;
     [SerializeField] InventorySlot[] objectiveInventorySlots;
 
+    [SerializeField] List<Item> itemsStored;
 
     [SerializeField] Transform draggablesTransform;
     [SerializeField] InventoryItem itemPrefab;
     
-
     GameObject GWL;
     GameObject GWM;
-    [Header("Item List")]
-    [SerializeField] Item[] items;
     [SerializeField] HandStuff handLoc;
     [SerializeField] Transform ClientWeaponTransform;
     [SerializeField] HandMult handMult;
@@ -208,6 +206,7 @@ public class Inventory : MonoBehaviour
     {
         InventoryItem spawnedItem;
         Item _item = item;
+        itemsStored.Add(item);
         switch(item.itemTag)
         {
             case SlotTag.Weapon:
@@ -241,6 +240,17 @@ public class Inventory : MonoBehaviour
     public void RemoveInventoryItem(InventoryItem item)
     {
         
+    }
+    public bool ItemIsInInventory(string itemID)
+    {
+        foreach (Item item in itemsStored)
+        {
+            if(item.itemID == itemID)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void OnEnable()
