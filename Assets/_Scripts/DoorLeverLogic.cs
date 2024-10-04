@@ -7,7 +7,8 @@ namespace Project
     public class DoorLeverLogic : _Interactable
     {
         Animator anim;
-        public Animator Door;
+        public DungeonDoorLogic Door;
+        public bool Lock;
         [HideInInspector] public int Channel;
 
         private void Start()
@@ -20,11 +21,11 @@ namespace Project
 
         protected override void Interact()
         {
+            if (Lock) return;
             base.Interact();
             anim.SetBool("Flip", true);
-            Door.SetBool("Open", true);
-
-            this.enabled = false;
+            Door.TriggerDoor(true);
+            Lock = true;
         }
     }
 }
