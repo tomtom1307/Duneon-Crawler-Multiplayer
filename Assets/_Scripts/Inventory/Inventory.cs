@@ -208,6 +208,8 @@ public class Inventory : MonoBehaviour
     {
         InventoryItem spawnedItem=null;
         Item _item = item;
+
+        //switch case for different types of items being spawned
         switch(item.itemTag)
         {
             case SlotTag.Weapon:
@@ -216,7 +218,9 @@ public class Inventory : MonoBehaviour
                     // Check if the slot is empty
                     if (slot.myItem == null)
                     {
+                        // Instantiating InventoryItem
                         spawnedItem = Instantiate(itemPrefab, slot.transform);
+                        // Initialize InventoryItem and InventorySlot references
                         spawnedItem.Initialize(_item, slot,rarity);
                         break;
                     }
@@ -229,9 +233,15 @@ public class Inventory : MonoBehaviour
                     // Check if the slot is empty
                     if (slot.myItem == null)
                     {
+                        //Making relevant slot appear
                         slot.GetComponent<Graphic>().enabled = true;
+
+                        // Instantiating InventoryItem
                         spawnedItem = Instantiate(itemPrefab, slot.transform);
-                        spawnedItem.Initialize(_item, slot,rarity);
+                        // Initialize InventoryItem and InventorySlot references
+                        spawnedItem.Initialize(_item, slot, rarity);
+
+                        // Making objective item immovable
                         spawnedItem.GetComponent<Graphic>().raycastTarget = false;
                         break;
                     }
@@ -241,20 +251,37 @@ public class Inventory : MonoBehaviour
                 return;
                 break;
         }
-        Debug.Log(item);
-        Debug.Log(spawnedItem);
-        Debug.Log(itemsStored);
+
+        // Updating itemsStored Dictionary
         itemsStored.Add(item, spawnedItem);
     }
     public void RemoveInventoryItem(string itemID)
     {
         InventoryItem removedInventoryItem;
+        //Looping through stored Item instances
         foreach(Item item in itemsStored.Keys)
         {
+            //Selecting first item with matching itemID
             if(item.itemID == itemID)
             {
+                //Obtaining reference to InventoryItem
                 removedInventoryItem = itemsStored[item];
+
+                //Doing tag-specific thingss
+                switch(item.itemTag)
+                {
+                    case SlotTag.Objective:
+                        // Vanishing relevant inventory slot
+                        removedInventoryItem.activeSlot.GetComponent<Graphic>().enabled = false;
+                        break;
+                }
+
+                //Removing and nullifying references from each class's variables
                 itemsStored.Remove(item);
+                removedInventoryItem.activeSlot.myItem = null;
+                removedInventoryItem.activeSlot = null;
+                
+                //Destroying Item instance and InventoryItem game object
                 Destroy(item);
                 Destroy(removedInventoryItem.gameObject);
                 break;
