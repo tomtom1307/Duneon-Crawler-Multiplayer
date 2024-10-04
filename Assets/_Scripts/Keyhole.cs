@@ -34,17 +34,8 @@ namespace Project
             {
                 if(Inventory.Singleton.ItemIsInInventory($"GateKey{correspondingBarricade}")) //Checks if key is in player inventory
                 {
-                    active=false;
-                    Prompt = "";
-                    //play sound
-                    soundSource.PlaySound(GenericSoundSource.GenSoundType.KeySlotting, 1);
-
-                    keyObject.SetActive(true);
-                    //Crystalrend.material.Lerp(dimRed, glowingRed,t);
-                    crystalRend.material = glowingRed;
-                    transform.gameObject.GetComponent<Renderer>().materials = holematerials; //LERP THIS AND THE CRYSTAL MATERIAL IN A COROUTINE
-                    //https://discussions.unity.com/t/help-using-lerp-inside-of-a-coroutine/207869
-                    barricadeAnimator.SetTrigger($"OpenB{correspondingBarricade}");
+                    PlaceKeyServerRpc();
+                    Inventory.Singleton.RemoveInventoryItem($"GateKey{correspondingBarricade}");
                 }
                 else
                 {
