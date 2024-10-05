@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
+using Unity.Netcode;
 
 namespace Project
 {
@@ -24,12 +25,13 @@ namespace Project
 
         private void Update()
         {
-            if (DT.ded && !Broken) { 
-                Break();
+            if (DT.ded && !Broken) {
+                BreakClientRpc();
             }
         }
 
-        private void Break()
+        [ClientRpc]
+        private void BreakClientRpc()
         {
             //Handle Loot Generation
             //Note That Generate Loot and SpawnLoot are stored in the inherited class LootGenerator
