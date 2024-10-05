@@ -21,6 +21,7 @@ namespace Project
             base.Start();
             DT = GetComponent<DamageableThing>();
             SoundSource = GetComponent<GenericSoundSource>();
+            GetComponent<Rigidbody>().isKinematic = false;
         }
 
         private void Update()
