@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 348199860252065691}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: -0.01, z: 0}
-  m_LocalScale: {x: 1.4823159, y: 0.21639, z: 0.17642}
+  m_LocalPosition: {x: 1.18, y: -0.01, z: -0}
+  m_LocalScale: {x: 2.4687972, y: 0.21639, z: 0.17642}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5369838732321151514}
@@ -129,14 +129,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2485839804966362288}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0000011324881, y: -0.000000029802319, z: 0.41982144, w: 0.9076067}
+  m_LocalRotation: {x: -0.0000011324881, y: -0.0000002533197, z: 0.21972546, w: 0.97556174}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8408546652289818151}
   m_Father: {fileID: 5609499109744395003}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 49.647}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 25.386}
 --- !u!1 &4686616092781969337
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,6 +147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5609499109744395003}
   - component: {fileID: 1963049257121576098}
+  - component: {fileID: 2759776917272762612}
   - component: {fileID: 8878735487265881569}
   - component: {fileID: 2779415531040976935}
   m_Layer: 12
@@ -166,7 +167,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -19.69, y: 2.06, z: 35.9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.88278, y: 0.88278, z: 0.88278}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 687248833474148988}
@@ -194,6 +195,26 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2759776917272762612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4686616092781969337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3092775979
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &8878735487265881569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +228,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prompt: Press F to interact
+  interacter: {fileID: 0}
+  Door: {fileID: 0}
+  Lock: 0
+  Channel: 0
 --- !u!65 &2779415531040976935
 BoxCollider:
   m_ObjectHideFlags: 0

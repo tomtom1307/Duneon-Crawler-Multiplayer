@@ -12,7 +12,7 @@ namespace Project
     public class GameManager : NetworkBehaviour
     {
         public static GameManager instance;
-        public List<PlayerStats> playerStats = new List<PlayerStats>();
+        public List<PlayerStats> playerStats;
         [SerializeField] private Transform PlayerPrefab;
 
         public GameObject SpawnEffect;
@@ -21,6 +21,8 @@ namespace Project
 
         private void Start()
         {
+            playerStats = new List<PlayerStats>();
+
             DontDestroyOnLoad(gameObject);
             if (instance==null)
             {
@@ -38,11 +40,12 @@ namespace Project
 
         public void GetPlayerStats()
         {
-            playerStats.Clear();
+            
             if (!IsServer)
             {
                 return;
             }
+            playerStats.Clear();
             var connectedClients = NetworkManager.Singleton.ConnectedClientsList;
             foreach (var client in connectedClients)
             {

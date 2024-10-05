@@ -41,7 +41,7 @@ namespace Project
 
             if (allClientsReady)
             {
-                Loader.LoadNetwork(Loader.Scene.TestWorld);
+                Loader.LoadNetwork(Loader.Scene.MultiplayerTestWorld);
             }
             {
                 

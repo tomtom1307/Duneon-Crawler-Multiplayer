@@ -22,15 +22,19 @@ namespace Project
             NetworkManager.Singleton.StartHost();
         }
 
-        private void NetworkManager_ConnectionApprovalCallBack(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
+        private void NetworkManager_ConnectionApprovalCallBack(NetworkManager.ConnectionApprovalRequest connectApprovalrequest, NetworkManager.ConnectionApprovalResponse connectionApprovalResponse)
         {
-            response.Approved = true;
+            print("Connection Approval");
+            //Check if game is in a state where 
+            connectionApprovalResponse.Approved = true;
         }
+
 
 
         public void StartClient()
         {
             NetworkManager.Singleton.StartClient();
+            print("Starting Client");
         }
 
 

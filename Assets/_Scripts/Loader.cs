@@ -11,11 +11,14 @@ namespace Project
         public enum Scene
         {
             MainMenu,
+            MultiplayerTestWorld,
             TestWorld,
             LoadingScene,
             LobbyScene,
             CharacterSelectScene,
-            ProceduralTestingScene
+            ProceduralTestingScene,
+            BustiWonderLand,
+            MainHallTestWorld,
         }
 
         private static Scene targetScene;
