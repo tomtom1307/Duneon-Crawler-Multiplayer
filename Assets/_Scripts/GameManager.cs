@@ -16,6 +16,7 @@ namespace Project
         [SerializeField] private Transform PlayerPrefab;
 
         public GameObject SpawnEffect;
+        public NetworkVariable<int> NumberOfPlayers;
         public static float SpawnDelay = 1.5f;
         public bool initialized = false;
 
