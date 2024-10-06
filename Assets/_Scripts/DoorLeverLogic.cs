@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Project
@@ -22,9 +23,25 @@ namespace Project
         protected override void Interact()
         {
             if (Lock) return;
+            Lock = true;
             base.Interact();
+            OpenDoorServerRpc();
+            Door.TriggerDoorServerRpc(true);
+
+        }
+
+        [ServerRpc(RequireOwnership =false)]
+        public void OpenDoorServerRpc()
+        {
+            
             anim.SetBool("Flip", true);
-            Door.TriggerDoor(true);
+            OpenDoorClientRpc();
+        }
+
+        [ClientRpc]
+        public void OpenDoorClientRpc()
+        {
+            
             Lock = true;
         }
     }

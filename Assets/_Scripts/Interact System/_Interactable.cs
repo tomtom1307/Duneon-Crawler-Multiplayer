@@ -22,9 +22,20 @@ namespace Project
 
         protected virtual void Interact()
         {
-
+            InteractServerRpc();
         }
 
+        [ServerRpc(RequireOwnership = false)]
+        public void InteractServerRpc()
+        {
+            InteractClientRpc();
+        }
+
+        [ClientRpc]
+        public void InteractClientRpc()
+        {
+            Prompt = "";
+        }
         
 
     }

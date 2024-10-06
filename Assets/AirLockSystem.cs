@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Project
 {
-    public class AirLockSystem : MonoBehaviour
+    public class AirLockSystem : NetworkBehaviour
     {
         List<PlayerMovement> Players;
 
@@ -22,7 +23,7 @@ namespace Project
         private void Start()
         {
             Players = new List<PlayerMovement>();
-            EntranceDoor.TriggerDoor(true);
+            EntranceDoor.TriggerDoorServerRpc(true);
             EntranceLever.Lock = true;
         }
 
@@ -37,7 +38,7 @@ namespace Project
 
 
                 //Check How many Players are required to activate the room 
-                if(Players.Count == 1)
+                if(Players.Count == GameManager.instance.NumberOfPlayers.Value)
                 {
                     PrimeAirLock();
                 }
@@ -47,7 +48,19 @@ namespace Project
 
         public void PrimeAirLock()
         {
-            EntranceDoor.TriggerDoor(false);
+            EntranceDoor.TriggerDoorServerRpc(false);
+            UnlockLeverServerRpc();
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void UnlockLeverServerRpc()
+        {
+            UnlockLeverClientRpc();
+        }
+
+        [ClientRpc]
+        public void UnlockLeverClientRpc()
+        {
             EntranceLever.Lock = false;
         }
 

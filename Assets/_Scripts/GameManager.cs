@@ -50,6 +50,7 @@ namespace Project
             var connectedClients = NetworkManager.Singleton.ConnectedClientsList;
             foreach (var client in connectedClients)
             {
+                NumberOfPlayers.Value++;
                 playerStats.Add(client.PlayerObject.gameObject.GetComponent<PlayerStats>());
             }
         }

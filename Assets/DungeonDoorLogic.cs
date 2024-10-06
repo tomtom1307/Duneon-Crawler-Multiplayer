@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Project
 {
-    public class DungeonDoorLogic : MonoBehaviour
+    public class DungeonDoorLogic : NetworkBehaviour
     {
 
         Animator animator;
@@ -14,7 +15,8 @@ namespace Project
         }
 
 
-        public void TriggerDoor(bool X)
+        [ServerRpc(RequireOwnership = false)]
+        public void TriggerDoorServerRpc(bool X)
         {
             animator.SetBool("Open", X);
         }

@@ -5469,6 +5469,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1069493152973597565, guid: 0c327e52eb761c64ca59758f3592e022,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1994031058
+      objectReference: {fileID: 0}
     - target: {fileID: 2078451991103748459, guid: 0c327e52eb761c64ca59758f3592e022,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5519,22 +5524,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6052305532506532585, guid: 0c327e52eb761c64ca59758f3592e022,
+    - target: {fileID: 2746830153505207855, guid: 0c327e52eb761c64ca59758f3592e022,
         type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 3717690824
+      propertyPath: m_LocalPosition.x
+      value: -0.10000009
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746830153505207855, guid: 0c327e52eb761c64ca59758f3592e022,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.34576905
       objectReference: {fileID: 0}
     - target: {fileID: 6236005326143616865, guid: 0c327e52eb761c64ca59758f3592e022,
         type: 3}
       propertyPath: m_Name
       value: DuneonDoorandLever
       objectReference: {fileID: 0}
-    - target: {fileID: 6616230496767235752, guid: 0c327e52eb761c64ca59758f3592e022,
+    - target: {fileID: 7234339965072506925, guid: 0c327e52eb761c64ca59758f3592e022,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 695939555
+      value: 2304800072
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1069493152973597565, guid: 0c327e52eb761c64ca59758f3592e022, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -6077,6 +6088,16 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3659995309
       objectReference: {fileID: 0}
+    - target: {fileID: 2746491159868911334, guid: 77abc3a08e4190747b7a86e059b1ce48,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3973046785
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252986747393540441, guid: 77abc3a08e4190747b7a86e059b1ce48,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3571087443
+      objectReference: {fileID: 0}
     - target: {fileID: 4758918258469362992, guid: 77abc3a08e4190747b7a86e059b1ce48,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6086,6 +6107,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.0000010430808
+      objectReference: {fileID: 0}
+    - target: {fileID: 5525754761322137014, guid: 77abc3a08e4190747b7a86e059b1ce48,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2918310415
       objectReference: {fileID: 0}
     - target: {fileID: 8171512352824184159, guid: 77abc3a08e4190747b7a86e059b1ce48,
         type: 3}
@@ -14031,6 +14057,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DuneonDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 5908728678988848364, guid: 74fb4f4cc6ec9994c98623240e3df6b0,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1304607464
+      objectReference: {fileID: 0}
     - target: {fileID: 6675596000048137322, guid: 74fb4f4cc6ec9994c98623240e3df6b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14467,15 +14498,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: AirLockSystem
       objectReference: {fileID: 0}
-    - target: {fileID: 1262957494215197730, guid: 77abc3a08e4190747b7a86e059b1ce48,
+    - target: {fileID: 4252986747393540441, guid: 77abc3a08e4190747b7a86e059b1ce48,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 650125429
+      value: 767541778
       objectReference: {fileID: 0}
-    - target: {fileID: 1849119502400845923, guid: 77abc3a08e4190747b7a86e059b1ce48,
+    - target: {fileID: 5525754761322137014, guid: 77abc3a08e4190747b7a86e059b1ce48,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1743025194
+      value: 641272886
       objectReference: {fileID: 0}
     - target: {fileID: 8171512352824184159, guid: 77abc3a08e4190747b7a86e059b1ce48,
         type: 3}
@@ -14527,11 +14558,43 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.078
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4252986747393540441, guid: 77abc3a08e4190747b7a86e059b1ce48, type: 3}
+    - {fileID: 5525754761322137014, guid: 77abc3a08e4190747b7a86e059b1ce48, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1165667185391988135, guid: 77abc3a08e4190747b7a86e059b1ce48,
+        type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1620851588}
   m_SourcePrefab: {fileID: 100100000, guid: 77abc3a08e4190747b7a86e059b1ce48, type: 3}
+--- !u!1 &1620851587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1165667185391988135, guid: 77abc3a08e4190747b7a86e059b1ce48,
+    type: 3}
+  m_PrefabInstance: {fileID: 1620851586}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1620851588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620851587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 592811657
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1628313068
 GameObject:
   m_ObjectHideFlags: 0
@@ -18634,6 +18697,11 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3588916945
       objectReference: {fileID: 0}
+    - target: {fileID: 1528807537370455230, guid: c1ba10aefe40e704cbf1bdeb89ededac,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1078642215
+      objectReference: {fileID: 0}
     - target: {fileID: 1760717580409081043, guid: c1ba10aefe40e704cbf1bdeb89ededac,
         type: 3}
       propertyPath: GlobalObjectIdHash
@@ -18674,6 +18742,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -30.519165
       objectReference: {fileID: 0}
+    - target: {fileID: 3455599300253345303, guid: c1ba10aefe40e704cbf1bdeb89ededac,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2027598776
+      objectReference: {fileID: 0}
+    - target: {fileID: 3669336933925570984, guid: c1ba10aefe40e704cbf1bdeb89ededac,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2371785331
+      objectReference: {fileID: 0}
     - target: {fileID: 4090120772666054945, guid: c1ba10aefe40e704cbf1bdeb89ededac,
         type: 3}
       propertyPath: GlobalObjectIdHash
@@ -18693,6 +18771,11 @@ PrefabInstance:
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2572583924
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991908976301657415, guid: c1ba10aefe40e704cbf1bdeb89ededac,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4105030828
       objectReference: {fileID: 0}
     - target: {fileID: 5196850304984620330, guid: c1ba10aefe40e704cbf1bdeb89ededac,
         type: 3}
@@ -18759,6 +18842,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7106014040731048017, guid: c1ba10aefe40e704cbf1bdeb89ededac,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 767983414
+      objectReference: {fileID: 0}
     - target: {fileID: 7609518325770733408, guid: c1ba10aefe40e704cbf1bdeb89ededac,
         type: 3}
       propertyPath: GlobalObjectIdHash
@@ -18803,6 +18891,11 @@ PrefabInstance:
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3547718305
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188884616505522158, guid: c1ba10aefe40e704cbf1bdeb89ededac,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 111812834
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19523,36 +19616,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 8478825500786976697, guid: dbb5b73e72f61e7408ddb5d24b029269,
-        type: 3}
-      propertyPath: SyncScaleX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8478825500786976697, guid: dbb5b73e72f61e7408ddb5d24b029269,
-        type: 3}
-      propertyPath: SyncScaleY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8478825500786976697, guid: dbb5b73e72f61e7408ddb5d24b029269,
-        type: 3}
-      propertyPath: SyncScaleZ
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8478825500786976697, guid: dbb5b73e72f61e7408ddb5d24b029269,
-        type: 3}
-      propertyPath: SyncRotAngleX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8478825500786976697, guid: dbb5b73e72f61e7408ddb5d24b029269,
-        type: 3}
-      propertyPath: SyncRotAngleY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8478825500786976697, guid: dbb5b73e72f61e7408ddb5d24b029269,
-        type: 3}
-      propertyPath: SyncRotAngleZ
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
