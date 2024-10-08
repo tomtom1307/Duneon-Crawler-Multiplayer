@@ -32,6 +32,7 @@ public class AbilityHolder : NetworkBehaviour
         if(ability == null)
         {
             this.enabled = false;
+            return;
         }
         actionManager = GetComponent<PlayerActionManager>();
         maxCooldownVal = ability.coolDownTime;
