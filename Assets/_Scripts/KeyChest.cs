@@ -7,6 +7,12 @@ namespace Project
     public class KeyChest : ContainerLogic
     {
         public ItemSpawn itemSpawner;
+        [SerializeField] bool unlocked;
+
+        private void OnEnable() => Actions.SpawnerUpdate += UnlockChest;
+        private void OnDisable() => Actions.SpawnerUpdate -= UnlockChest;
+            
+        
         void Start()
         {
             base.Start();
@@ -14,8 +20,25 @@ namespace Project
 
         protected override void Interact()
         {
-            base.Interact();
-            itemSpawner.FloatUp();
+            if(unlocked)
+            {
+                base.Interact();
+                // Causes key to float up
+                itemSpawner.FloatUp();
+            }
+        }
+
+        private void UnlockChest(EnemySpawner enemySpawner, bool start)
+        {
+            // Checks that spawner stopped
+            if(!start)
+            {
+                // Checks that action came from same barrack
+                if(enemySpawner.transform.parent == this.transform.parent) 
+                {
+                    unlocked = true;
+                }
+            }
         }
     }
 }

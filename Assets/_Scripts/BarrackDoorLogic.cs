@@ -20,7 +20,7 @@ namespace Project
         {
             base.Interact();
             anim.SetBool("Open", true);
-            if(triggerspawn) {BarrackSpawnServerRpc();}
+            if(triggerspawn) {triggerspawn = false; BarrackSpawnServerRpc();}
             Prompt = "";
             //Destroy(this);
         }
