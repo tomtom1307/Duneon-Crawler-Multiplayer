@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using Unity.Netcode;
+using DG.Tweening;
 
 namespace Project
 {
@@ -12,10 +13,8 @@ namespace Project
         public bool active;
         public string correspondingBarricade;
         GameObject keyObject;
-        Renderer crystalRend;
-        public Material dimRed;
-        public Material glowingRed;
-        Material[] holematerials;
+        Material keyMat;
+        [SerializeField] Material carvingMat;
         GenericSoundSource soundSource;
         // Start is called before the first frame update
         void Start()
@@ -23,9 +22,10 @@ namespace Project
             soundSource = GetComponent<GenericSoundSource>();
             active = true;
             keyObject = transform.GetChild(0).gameObject;
-            crystalRend = keyObject.GetComponent<Renderer>();
-            holematerials = transform.gameObject.GetComponent<Renderer>().materials;
-            holematerials[2] = glowingRed;
+            keyMat = keyObject.GetComponent<Renderer>().material;
+            carvingMat = transform.gameObject.GetComponent<Renderer>().materials[2];
+            carvingMat.SetFloat("_Tween_Value", 0);
+            keyMat.SetFloat("_Tween_Value", 0);
         }
 
         protected override void Interact()
@@ -53,8 +53,11 @@ namespace Project
 
             keyObject.SetActive(true);
             //Crystalrend.material.Lerp(dimRed, glowingRed,t);
-            crystalRend.material = glowingRed;
-            transform.gameObject.GetComponent<Renderer>().materials = holematerials; //LERP THIS AND THE CRYSTAL MATERIAL IN A COROUTINE
+            DOVirtual.Float(0, 1, 5, val =>
+            {
+                carvingMat.SetFloat("_Tween_Value", val);
+                keyMat.SetFloat("_Tween_Value", val);
+            });
             //https://discussions.unity.com/t/help-using-lerp-inside-of-a-coroutine/207869
             barricadeAnimator.SetTrigger($"OpenB{correspondingBarricade}");
         }

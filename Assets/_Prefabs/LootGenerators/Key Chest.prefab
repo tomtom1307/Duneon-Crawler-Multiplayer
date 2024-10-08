@@ -396,7 +396,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TransitionStateInfoList: []
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 57362642
+    DestinationState: -789563304
+    TransitionDuration: 0
+    TriggerNameHash: 525605218
+    TransitionIndex: 0
   m_Animator: {fileID: 5920886846941547038}
 --- !u!114 &3841225258564185080
 MonoBehaviour:
@@ -1028,7 +1035,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: 963798294112862009, guid: 66a0af7b5cd2cc541ba21cbecc60fa1e, type: 3}
   - {fileID: -4171303728129782380, guid: 66a0af7b5cd2cc541ba21cbecc60fa1e, type: 3}
-  - {fileID: -9054860827279054985, guid: a81d4d5317b37ca4298aec0269132a48, type: 3}
+  - {fileID: 2100000, guid: 0360c4002f3c94d4989d0883cb3a8538, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
