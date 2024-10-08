@@ -26,6 +26,10 @@ namespace Project
                 // Causes key to float up
                 itemSpawner.FloatUp();
             }
+            else
+            {
+                anim.SetTrigger("Rustle");
+            }
         }
 
         private void UnlockChest(EnemySpawner enemySpawner, bool start)
@@ -37,6 +41,7 @@ namespace Project
                 if(enemySpawner.transform.parent == this.transform.parent) 
                 {
                     unlocked = true;
+                    anim.SetBool("Padlock Open", true);
                 }
             }
         }
