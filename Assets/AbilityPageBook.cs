@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Project
@@ -9,7 +10,8 @@ namespace Project
 
         public Canvas Canvas;
 
-        
+        public List<Ability> Abilities;
+        public List<Ability> Equipped_Abilities;
 
         private void Start()
         {
@@ -17,23 +19,51 @@ namespace Project
             Canvas.enabled = false;
         }
 
+        bool active;
+
         protected override void Interact()
         {
+            if (active) return;
             base.Interact();
             Canvas.enabled = true;
+            GetAbilities();
+            PlayerUI.instance.PlayerInUI(true);
 
-            //Disable Camera Movement
-            Camera.main.GetComponent<PlayerCam>().enabled = false;
+
+            active = true;
         }
+
+        public void GetAbilities()
+        {
+            List<AbilityHolder> AH = new List<AbilityHolder>();
+            AH = interacter.gameObject.GetComponents<AbilityHolder>().ToList();
+            foreach (var item in AH)
+            {
+                if(item.ability != null)
+                {
+                    Equipped_Abilities.Add(item.ability);
+                }
+                
+            }
+        }
+
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (active && Input.GetKeyDown(KeyCode.Escape) && Canvas.enabled)
             {
+                ResetBookInteract();
                 Canvas.enabled = false;
-                Camera.main.GetComponent<PlayerCam>().enabled = true;
+                PlayerUI.instance.PlayerInUI(false);
             }
 
+        }
+
+        public void ResetBookInteract()
+        {
+            active = false;
+            Equipped_Abilities.Clear();
+            Prompt = "[F]";
         }
 
 
