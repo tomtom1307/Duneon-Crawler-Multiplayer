@@ -5469,11 +5469,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1069493152973597565, guid: 0c327e52eb761c64ca59758f3592e022,
-        type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 1994031058
-      objectReference: {fileID: 0}
     - target: {fileID: 2078451991103748459, guid: 0c327e52eb761c64ca59758f3592e022,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5524,46 +5519,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2746830153505207855, guid: 0c327e52eb761c64ca59758f3592e022,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.10000009
-      objectReference: {fileID: 0}
-    - target: {fileID: 2746830153505207855, guid: 0c327e52eb761c64ca59758f3592e022,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.34576905
-      objectReference: {fileID: 0}
-    - target: {fileID: 5233325088532764090, guid: 0c327e52eb761c64ca59758f3592e022,
-        type: 3}
-      propertyPath: SyncScaleX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5233325088532764090, guid: 0c327e52eb761c64ca59758f3592e022,
-        type: 3}
-      propertyPath: SyncScaleY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5233325088532764090, guid: 0c327e52eb761c64ca59758f3592e022,
-        type: 3}
-      propertyPath: SyncScaleZ
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5233325088532764090, guid: 0c327e52eb761c64ca59758f3592e022,
-        type: 3}
-      propertyPath: SyncRotAngleX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5233325088532764090, guid: 0c327e52eb761c64ca59758f3592e022,
-        type: 3}
-      propertyPath: SyncRotAngleY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5233325088532764090, guid: 0c327e52eb761c64ca59758f3592e022,
-        type: 3}
-      propertyPath: SyncRotAngleZ
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6236005326143616865, guid: 0c327e52eb761c64ca59758f3592e022,
         type: 3}
       propertyPath: m_Name
@@ -5574,9 +5529,7 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 2304800072
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1069493152973597565, guid: 0c327e52eb761c64ca59758f3592e022, type: 3}
-    - {fileID: 5233325088532764090, guid: 0c327e52eb761c64ca59758f3592e022, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -6118,6 +6071,11 @@ PrefabInstance:
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3659995309
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364755449899581569, guid: 77abc3a08e4190747b7a86e059b1ce48,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2254946142
       objectReference: {fileID: 0}
     - target: {fileID: 2746491159868911334, guid: 77abc3a08e4190747b7a86e059b1ce48,
         type: 3}
@@ -14529,15 +14487,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AirLockSystem
       objectReference: {fileID: 0}
-    - target: {fileID: 4252986747393540441, guid: 77abc3a08e4190747b7a86e059b1ce48,
+    - target: {fileID: 2364755449899581569, guid: 77abc3a08e4190747b7a86e059b1ce48,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 767541778
-      objectReference: {fileID: 0}
-    - target: {fileID: 5525754761322137014, guid: 77abc3a08e4190747b7a86e059b1ce48,
-        type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 641272886
+      value: 1818824475
       objectReference: {fileID: 0}
     - target: {fileID: 8171512352824184159, guid: 77abc3a08e4190747b7a86e059b1ce48,
         type: 3}
@@ -14589,43 +14542,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.078
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4252986747393540441, guid: 77abc3a08e4190747b7a86e059b1ce48, type: 3}
-    - {fileID: 5525754761322137014, guid: 77abc3a08e4190747b7a86e059b1ce48, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1165667185391988135, guid: 77abc3a08e4190747b7a86e059b1ce48,
-        type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 1620851588}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77abc3a08e4190747b7a86e059b1ce48, type: 3}
---- !u!1 &1620851587 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1165667185391988135, guid: 77abc3a08e4190747b7a86e059b1ce48,
-    type: 3}
-  m_PrefabInstance: {fileID: 1620851586}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1620851588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1620851587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 592811657
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!1 &1628313068
 GameObject:
   m_ObjectHideFlags: 0
@@ -18773,6 +18694,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -30.519165
       objectReference: {fileID: 0}
+    - target: {fileID: 2970391018419243120, guid: c1ba10aefe40e704cbf1bdeb89ededac,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3322630070
+      objectReference: {fileID: 0}
     - target: {fileID: 3455599300253345303, guid: c1ba10aefe40e704cbf1bdeb89ededac,
         type: 3}
       propertyPath: GlobalObjectIdHash
@@ -18922,6 +18848,11 @@ PrefabInstance:
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3547718305
+      objectReference: {fileID: 0}
+    - target: {fileID: 8739598440969755017, guid: c1ba10aefe40e704cbf1bdeb89ededac,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2558566654
       objectReference: {fileID: 0}
     - target: {fileID: 9188884616505522158, guid: c1ba10aefe40e704cbf1bdeb89ededac,
         type: 3}

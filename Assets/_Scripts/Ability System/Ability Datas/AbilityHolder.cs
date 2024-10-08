@@ -29,6 +29,10 @@ public class AbilityHolder : NetworkBehaviour
     float maxCooldownVal;
     private void Start()
     {
+        if(ability == null)
+        {
+            this.enabled = false;
+        }
         actionManager = GetComponent<PlayerActionManager>();
         maxCooldownVal = ability.coolDownTime;
     }
@@ -36,7 +40,7 @@ public class AbilityHolder : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IsLocalPlayer)
+        if (!IsLocalPlayer || ability ==null)
         {
             return;
         }
