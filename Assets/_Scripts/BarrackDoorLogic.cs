@@ -11,18 +11,24 @@ namespace Project
         [SerializeField] EnemySpawner roomSpawner;
         Animator anim;
         public bool triggerspawn = true;
+        PlayerCheck playerCheck;
         
         void Start()
         {
             anim = GetComponent<Animator>();
+            playerCheck = transform.parent.parent.parent.gameObject.GetComponent<PlayerCheck>();
         }
         protected override void Interact()
         {
-            base.Interact();
-            anim.SetBool("Open", true);
-            if(triggerspawn) {triggerspawn = false; BarrackSpawnServerRpc();}
-            Prompt = "";
-            //Destroy(this);
+            if(playerCheck.playersIn == GameManager.instance.NumberOfPlayers.Value)
+            {
+                base.Interact();
+                anim.SetBool("Open", true);
+                if(triggerspawn) {triggerspawn = false; BarrackSpawnServerRpc();}
+                Prompt = "";
+                //Destroy(this);
+            }
+
         }
 
         [ServerRpc(RequireOwnership=false)]
