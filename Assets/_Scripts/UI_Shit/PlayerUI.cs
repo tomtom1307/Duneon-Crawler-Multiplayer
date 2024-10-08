@@ -34,10 +34,15 @@ public class PlayerUI : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetKeyDown(InventoryKey)&&!InUI) { 
-            Active = !Active;
-            PlayerInUI(Active);
-            Inventory.SetActive(Active);
+        if (Input.GetKeyDown(InventoryKey)) {
+            if ((InUI && Inventory.activeInHierarchy) || !InUI)
+            {
+                Active = !Active;
+                PlayerInUI(Active);
+                Inventory.SetActive(Active);
+            }
+
+            
             
             
         }
