@@ -13,6 +13,7 @@ public class PlayerUI : MonoBehaviour
     public KeyCode InventoryKey;
     public PlayerCam Pc;
 
+    bool InUI;
     bool Active;
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,7 @@ public class PlayerUI : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetKeyDown(InventoryKey)) { 
+        if (Input.GetKeyDown(InventoryKey)&&!InUI) { 
             Active = !Active;
             PlayerInUI(Active);
             Inventory.SetActive(Active);
@@ -65,10 +66,14 @@ public class PlayerUI : MonoBehaviour
         Cursor.visible = x;
         if (x)
         {
-
+            InUI = true;
             Cursor.lockState = CursorLockMode.None;
         }
-        else Cursor.lockState = CursorLockMode.Locked;
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            InUI = false;
+        }
 
         Cursor.visible = x;
     }
