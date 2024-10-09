@@ -25,6 +25,11 @@ public class Item : ScriptableObject
 
     [Header("If the item can be equipped")]
     public GameObject model;
+    public GameObject whiteModel;
+    public GameObject GreenModel;
+    public GameObject BlueModel;
+    public GameObject PurpleModel;
+    public GameObject OrangeModel;
     
 
 }
