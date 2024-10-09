@@ -12,9 +12,12 @@ namespace Project
 
         public List<Ability> Abilities;
         public List<Ability> Equipped_Abilities;
+        public List<AbilityHolder> Holders;
+        UIAbilities AbilitiesUI;
 
         private void Start()
         {
+            AbilitiesUI = GetComponent<UIAbilities>();
             Canvas = GetComponentInChildren<Canvas>();
             Canvas.enabled = false;
         }
@@ -27,26 +30,36 @@ namespace Project
             base.Interact();
             Canvas.enabled = true;
             GetAbilities();
+            foreach (var item in Abilities)
+            {
+                AbilitiesUI.SpawnAbilityItem(item);
+            }
+            foreach (var item in Equipped_Abilities)
+            {
+                AbilitiesUI.SpawnAbilityItem(item, true);
+            }
             PlayerUI.instance.PlayerInUI(true);
-
-
             active = true;
         }
 
         public void GetAbilities()
         {
-            List<AbilityHolder> AH = new List<AbilityHolder>();
-            AH = interacter.gameObject.GetComponents<AbilityHolder>().ToList();
-            foreach (var item in AH)
+            Holders = new List<AbilityHolder>();
+            Holders = interacter.gameObject.GetComponents<AbilityHolder>().ToList();
+            AbilitiesUI.Holders = Holders;
+
+            foreach (var item in Holders)
             {
-                if(item.ability != null)
+                if (item.ability != null)
                 {
                     Equipped_Abilities.Add(item.ability);
                 }
-                
+
             }
         }
 
+
+        
 
         private void Update()
         {
