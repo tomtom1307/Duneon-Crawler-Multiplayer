@@ -23,7 +23,7 @@ public class TestingNetcodeUI : NetworkBehaviour
             
             Debug.Log("HOST");
             NetworkManager.Singleton.StartHost();
-
+            Actions.InitializeMultiplayerStuffinScene();
             UpdatePlayerNumberServerRpc();
             Hide();
             PC.enabled = enabled;

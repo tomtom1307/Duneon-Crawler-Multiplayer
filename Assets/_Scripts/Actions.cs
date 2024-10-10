@@ -11,9 +11,8 @@ namespace Project
         public static Action<EnemySpawner, bool> SpawnerUpdate;
         public static Action PlayerStart;
         public static Action SpawnerStarted;
-
+        public static Action InitializeMultiplayerStuffinScene;
         public static void Initialize() {
-
             Debug.Log("Initialized Actions");
         }
 

@@ -10,7 +10,6 @@ namespace Project
     {
         List<PlayerMovement> Players;
 
-
         //Entrance to airlock
         public DungeonDoorLogic EntranceDoor;
 
@@ -22,8 +21,9 @@ namespace Project
 
         private void Start()
         {
+            Actions.InitializeMultiplayerStuffinScene += InitializeDoor;
             Players = new List<PlayerMovement>();
-            EntranceDoor.TriggerDoorServerRpc(true);
+            print("Triggered Thingy");
             EntranceLever.Lock = true;
         }
 
@@ -64,6 +64,10 @@ namespace Project
             EntranceLever.Lock = false;
         }
 
+        public void InitializeDoor()
+        {
+            EntranceDoor.TriggerDoorServerRpc(true);
+        }
 
         private void OnTriggerExit(Collider other)
         {

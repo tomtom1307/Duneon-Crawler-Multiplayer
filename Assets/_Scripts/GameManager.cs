@@ -22,6 +22,7 @@ namespace Project
 
         private void Start()
         {
+            
             playerStats = new List<PlayerStats>();
 
             DontDestroyOnLoad(gameObject);

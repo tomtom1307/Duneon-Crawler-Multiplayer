@@ -18,6 +18,7 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         public void TriggerDoorServerRpc(bool X)
         {
+            print("OpenedDoor");
             animator.SetBool("Open", X);
         }
 
