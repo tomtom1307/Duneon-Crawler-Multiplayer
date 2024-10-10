@@ -2604,8 +2604,10 @@ MonoBehaviour:
   <maxDetectDist>k__BackingField: 100
   <AttackDistance>k__BackingField: 4
   <MeleeRaycastRange>k__BackingField: 0.7
+  HealthBarPrefab: {fileID: 2549967030659645805, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
+    type: 3}
+  HealthBarHeight: 0
   <AttackDamage>k__BackingField: 4
-  HealthBar: {fileID: 421485799157757680}
   <xpOnKill>k__BackingField: 100
   <whatisPlayer>k__BackingField:
     serializedVersion: 2
@@ -2613,7 +2615,6 @@ MonoBehaviour:
   colliders:
   - {fileID: 457992599098553896}
   - {fileID: 3826345661416567073}
-  HealthCanvas: {fileID: 8564940169099251354}
   ProjectileSpawnPos: {fileID: 0}
   playerlist: []
   target: {fileID: 0}
@@ -4083,27 +4084,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c, type: 3}
---- !u!114 &421485799157757680 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1876799877737836121, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
-    type: 3}
-  m_PrefabInstance: {fileID: 2293124487440505001}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &7266822535363056402 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8865934045259385787, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
-    type: 3}
-  m_PrefabInstance: {fileID: 2293124487440505001}
-  m_PrefabAsset: {fileID: 0}
---- !u!223 &8564940169099251354 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 7570013475867891251, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
     type: 3}
   m_PrefabInstance: {fileID: 2293124487440505001}
   m_PrefabAsset: {fileID: 0}

@@ -26,16 +26,20 @@ namespace Project
         [field: SerializeField] public float AttackDistance { get; set; } = 4f;
         [field: SerializeField] public float MeleeRaycastRange { get; set; } = 0.7f;
 
-      
+        [field: SerializeField] public GameObject HealthBarPrefab;
+        [field: SerializeField] public float HealthBarHeight;
+        Image HealthBar;
+        Canvas HealthBarCanvas;
+
         [field: SerializeField] public float AttackDamage { get; set; } = 4f;
-        [field: SerializeField] public Image  HealthBar;
+        
         [field: SerializeField] public int xpOnKill { get; set; }
         [field: SerializeField] public LayerMask whatisPlayer{ get; set; }
         public Rigidbody rb { get; set ; }
         public NavMeshAgent navMesh { get; set; }
 
         public List<Collider> colliders;
-        public Canvas HealthCanvas;
+        
         public Transform ProjectileSpawnPos;
         public Animator animator { get; set; }
         
@@ -129,13 +133,13 @@ namespace Project
 
         public virtual void Start()
         {
-            
+            //Set MaxHealth
             if (IsOwner)
             {
                 CurrentHealth.Value = MaxHealth;
                 CurrentStaggerHealth.Value = MaxStaggerHealth;
             }
-            //Set MaxHealth
+            
             
             //Get References
             rb = GetComponent<Rigidbody>();
@@ -156,6 +160,10 @@ namespace Project
                 playerlist.Add(item.GameObject().transform);
             }
 
+            GameObject healthBarObj = Instantiate(HealthBarPrefab, transform);
+            healthBarObj.transform.position = transform.position + HealthBarHeight * Vector3.up;
+            HealthBar = healthBarObj.GetComponent<HealthBarEasing>().health;
+            HealthBarCanvas = healthBarObj.GetComponent<Canvas>();
 
 
             //Final Setup shit
@@ -387,7 +395,7 @@ namespace Project
         [ClientRpc]
         void DisableHealthBarClientRpc()
         {
-            HealthCanvas.enabled = false;
+            HealthBarCanvas.enabled = false;
         }
 
         [HideInInspector] public EnemySpawner Spawner;

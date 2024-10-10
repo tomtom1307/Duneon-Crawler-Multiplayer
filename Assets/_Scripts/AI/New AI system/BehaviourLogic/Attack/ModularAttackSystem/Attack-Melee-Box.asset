@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9b6da8f510e30743a3965c3d6994cb7, type: 3}
-  m_Name: Attack-Ranged-Bow
+  m_Script: {fileID: 11500000, guid: 299c5fad6dfd6f547b7a4fab117c172a, type: 3}
+  m_Name: Attack-Melee-Box
   m_EditorClassIdentifier: 
-  Projectile: {fileID: 5861357039067087006, guid: 813836a0e1c857e48bb794d473a0e50b,
-    type: 3}
-  <lungeDistance>k__BackingField: 4
+  AttackAnimationName: 
+  Damage: 2
+  gameObject: {fileID: 0}
+  transform: {fileID: 0}
+  enemy: {fileID: 0}
+  testing_Attack_Stuff: {fileID: 0}
+  AttackCollider: {fileID: 0}
