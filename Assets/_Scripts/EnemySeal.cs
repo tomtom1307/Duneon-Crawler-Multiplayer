@@ -44,10 +44,12 @@ namespace Project
                 if(spawnersActive != 0 && Open)
                 {
                     Open = false;
+                    // Play Door Closing sound
                 }
                 else if(spawnersActive == 0 && !Open)
                 {
                     Open= true;
+                    // Play Door Opening sound
                 }
                 anim.SetBool("Open", Open);
             }

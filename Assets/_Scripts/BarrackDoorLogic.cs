@@ -12,22 +12,29 @@ namespace Project
         Animator anim;
         public bool triggerspawn = true;
         PlayerCheck playerCheck;
+        GenericSoundSource soundSource;
         
         void Start()
         {
+            soundSource = GetComponent<GenericSoundSource>();
             anim = GetComponent<Animator>();
             playerCheck = transform.parent.parent.parent.gameObject.GetComponent<PlayerCheck>();
         }
         protected override void Interact()
         {
-            if(playerCheck.playersIn == GameManager.instance.NumberOfPlayers.Value)
+            if(!anim.GetBool("Open"))
             {
-                base.Interact();
-                anim.SetBool("Open", true);
-                if(triggerspawn) {triggerspawn = false; BarrackSpawnServerRpc();}
-                Prompt = "";
-                //Destroy(this);
+                if(playerCheck.playersIn == GameManager.instance.NumberOfPlayers.Value)
+                {
+                    base.Interact();
+                    anim.SetBool("Open", true);
+                    DoorSoundClientRpc();
+                    if(triggerspawn) {triggerspawn = false; BarrackSpawnServerRpc();}
+                    Prompt = "";
+                    //Destroy(this);
+                }
             }
+            
 
         }
 
@@ -43,6 +50,11 @@ namespace Project
         public void TriggerSpawner()
         {
             Actions.SpawnerUpdate(roomSpawner,true);
+        }
+        [ClientRpc]
+        void DoorSoundClientRpc()
+        {
+            soundSource.PlaySound(GenericSoundSource.GenSoundType.DoorOpen, 1);
         }
     }
 }
