@@ -23,7 +23,7 @@ public class TestingNetcodeUI : NetworkBehaviour
             
             Debug.Log("HOST");
             NetworkManager.Singleton.StartHost();
-            Actions.InitializeMultiplayerStuffinScene();
+            
             UpdatePlayerNumberServerRpc();
             Hide();
             PC.enabled = enabled;
@@ -34,7 +34,10 @@ public class TestingNetcodeUI : NetworkBehaviour
                 Debug.Log("Setting seed to 0");
                 Seeding.instance.NoRoomGen();
             }
-            
+            if (Actions.InitializeMultiplayerStuffinScene != null)
+            {
+                Actions.InitializeMultiplayerStuffinScene();
+            }
         });
         startClientButton.onClick.AddListener(() =>
         {

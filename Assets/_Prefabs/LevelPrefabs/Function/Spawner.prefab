@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3302727841118844499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7463930004239403012}
+  - component: {fileID: 7061964715163528556}
+  - component: {fileID: 5323354585939436081}
+  - component: {fileID: 3472181466530465334}
+  m_Layer: 11
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7463930004239403012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302727841118844499}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.70707524, z: -0, w: -0.70713836}
+  m_LocalPosition: {x: -43.090096, y: 5.450316, z: 40.3014}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7061964715163528556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302727841118844499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3151465787
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &5323354585939436081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302727841118844499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113baa102afada345b70e202769556b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bounds: {fileID: 3472181466530465334}
+  SpawnDelay: 0.05
+  SpawnRange: 10
+  counter: 0
+  EnemiesLeft: 0
+  InfiniteWaves: 0
+  AmountSpawned: 0
+  spawnDelay: 0
+  TotalEnemies: 0
+  NumberOfRounds: 0
+  CurrentRound: 0
+  enemies:
+  - name: BowGoblins
+    Prefab: {fileID: 7553112160091963360, guid: 62b207a9a61b1fb47bf0a98f09519f95,
+      type: 3}
+    Amount: 1
+    RandomSpawn: 1
+    Rounds: 0100000002000000
+    Position: []
+  - name: SwordGoblins
+    Prefab: {fileID: 7553112160091963360, guid: b182f5c33858e244da3e14a07c8c9ba5,
+      type: 3}
+    Amount: 3
+    RandomSpawn: 1
+    Rounds: 0100000002000000
+    Position: []
+  Active: 0
+  AllEnemiesKilled: 0
+  AutoRoundTrigger: 1
+--- !u!65 &3472181466530465334
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302727841118844499}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 20.79, y: 1, z: 8.97}
+  m_Center: {x: 0, y: 0, z: 0}
