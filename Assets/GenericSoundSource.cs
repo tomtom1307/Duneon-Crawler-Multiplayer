@@ -10,6 +10,7 @@ namespace Project
     public class GenericSoundSource : MonoBehaviour
     {
        // ADD NEW SOUND TYPES HERE FOR ARRAY TO CHANGE IN INSPECTOR
+       //Please add new sounds to the bottom to avoid offsetting older sounds Im sorry this is kind of jank.
         public enum GenSoundType
         {
               BreakSound,
