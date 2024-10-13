@@ -1529,7 +1529,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6303861101246749147}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 3
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1643,7 +1643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3523963817
+  GlobalObjectIdHash: 2726236977
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -1875,6 +1875,7 @@ MonoBehaviour:
   MaxDetectDistance: 20
   Damage: 10
   AttackDistance: 5
+  Spawner: {fileID: 0}
   playerlist: []
   headTarget: {fileID: 179622748855082962}
 --- !u!1 &6306002251336885384

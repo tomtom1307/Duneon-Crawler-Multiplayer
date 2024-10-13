@@ -2623,6 +2623,7 @@ MonoBehaviour:
   NormalColor: {r: 1, g: 1, b: 1, a: 1}
   SpawnedObj: {fileID: 0}
   RotateSpeed: 60
+  SkinmeshRenderer: {fileID: 0}
   damageText: {fileID: 5493454748374447997, guid: 328779aff6d65a54ea955ca4a033948f,
     type: 3}
   Attacking: 0
@@ -2633,9 +2634,9 @@ MonoBehaviour:
     type: 3}
   ArmorBuff: 0
   armorBuffVFX: {fileID: 0}
+  Spawner: {fileID: 0}
   Floating: 0
   floatHeight: 0
-  Spawner: {fileID: 0}
 --- !u!136 &457992599098553896
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2689,7 +2690,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5757779941532737132}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

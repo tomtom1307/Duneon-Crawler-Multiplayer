@@ -35,7 +35,7 @@ namespace Project
 
         public override void DoFrameUpdateLogic()
         {
-            base.DoFrameUpdateLogic();
+            
             if(enemy.target == null)
             {
                 return;

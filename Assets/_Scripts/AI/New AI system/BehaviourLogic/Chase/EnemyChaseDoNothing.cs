@@ -32,7 +32,7 @@ namespace Project
             base.DoPhysicsUpdateLogic();
         }
 
-        public override void Initialize(GameObject gameObject, Enemy enemy)
+        public override void Initialize(GameObject gameObject, NavMeshEnemy enemy)
         {
             base.Initialize(gameObject, enemy);
         }

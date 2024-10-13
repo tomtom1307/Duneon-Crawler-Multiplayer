@@ -9,7 +9,7 @@ namespace Project
         protected Enemy enemy;
         protected Transform transform;
         protected GameObject gameObject;
-
+        protected NavMeshEnemy NMEnemy;
         protected Transform target;
 
         public virtual void Initialize(GameObject gameObject, Enemy enemy)
@@ -17,6 +17,7 @@ namespace Project
             this.gameObject = gameObject;
             transform = gameObject.transform;
             this.enemy = enemy;
+            gameObject.TryGetComponent<NavMeshEnemy>(out NMEnemy);
         }
 
         public virtual void DoEnterLogic()
@@ -33,7 +34,7 @@ namespace Project
         {
             if (!enemy.IsWithinStrikingDistance)
             {
-                enemy.StateMachine.ChangeState(enemy.ChaseState);
+                NMEnemy.StateMachine.ChangeState(NMEnemy.ChaseState);
             }
         }
 

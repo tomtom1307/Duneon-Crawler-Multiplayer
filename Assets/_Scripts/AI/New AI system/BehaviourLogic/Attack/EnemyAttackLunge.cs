@@ -47,13 +47,13 @@ namespace Project
             base.DoEnterLogic();
             _timer = timeBetweenAttacks;
             Reposition();
-            enemy.navMesh.updateRotation = false;
+            NMEnemy.navMesh.updateRotation = false;
            
         }
 
         public override void DoExitLogic()
         {
-            enemy.navMesh.updateRotation = true;
+            NMEnemy.navMesh.updateRotation = true;
             base.DoExitLogic();
         }
 
@@ -81,7 +81,7 @@ namespace Project
 
             if (_timer > (timeBetweenAttacks) && !enemy.Attacking)
             {
-                if (!enemy.navMesh.enabled) return;
+                if (!NMEnemy.navMesh.enabled) return;
                 enemy.Attacking = true;
                 
                 //Debug.Log("Attacking");
@@ -97,8 +97,8 @@ namespace Project
                 //dir = dir.normalized * lungeDistance;
                 dir.y = 0;
                 enemy.animator.SetBool("Attacking", true);
-                
-                enemy.navMesh.SetDestination(enemy.transform.position + dir);
+
+                NMEnemy.navMesh.SetDestination(enemy.transform.position + dir);
                 DOTween.Sequence(enemy.transform.DOMove(enemy.transform.position + dir, 0.2f).SetEase(Ease.InQuad));
 
                 
@@ -130,7 +130,7 @@ namespace Project
         public void Reposition()
         {
             if (enemy.Attacking) return;
-            enemy.MoveEnemy(DesiredPosition);
+            NMEnemy.MoveEnemy(DesiredPosition);
             Debug.Log("Repositioning");
             repositioning = true;
             OffsetVector = RandomPosAroundPlayer(enemy.AttackDistance);

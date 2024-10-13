@@ -35,7 +35,7 @@ namespace Project
                 if(TD != null)
                 {
                     TD.DoDamageServerRpc(Damage);
-                    TD.DisableNavMeshServerRpc();
+                    //TD.DisableNavMeshServerRpc();
                     TD.KnockBackServerRpc(Camera.main.transform.position, KnockBack);
 
                 }

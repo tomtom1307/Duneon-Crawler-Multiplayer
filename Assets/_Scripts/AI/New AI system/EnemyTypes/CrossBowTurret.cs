@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Project
 {
-    public class CrossBowTurret : Enemy
+    public class CrossBowTurret : StaticEnemy
     {
         public Transform Barrel;
         public float AimRotation;
@@ -12,11 +12,11 @@ namespace Project
         public override void InitializeStateMachine()
         {
             //Initialize StateMachine
-            EnemyChaseInstance.Initialize(gameObject, this);
+            
             EnemyAttackInstance.Initialize(gameObject, this);
 
             StateMachine.Initialize(AttackState);
-           initDir = Barrel.forward;
+            initDir = Barrel.forward;
             
         }
 
@@ -47,7 +47,7 @@ namespace Project
                 if(Vector3.Dot(initDir, target.position - transform.position) < 0.6f )
                 {
                     target = null;
-                    StateMachine.ChangeState(ChaseState);
+                    
                 }
                 IsWithinStrikingDistance = true;
                 StateMachine.ChangeState(AttackState);

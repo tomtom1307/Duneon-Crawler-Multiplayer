@@ -14,9 +14,9 @@ namespace Project
 
         private void OnTriggerEnter(Collider other)
         {
-            Enemy enemy;
+            NavMeshEnemy enemy;
 
-            if (other.gameObject.TryGetComponent<Enemy>(out enemy))
+            if (other.gameObject.TryGetComponent<NavMeshEnemy>(out enemy))
             {
                 print("Enemy Ladder Climb");
 
@@ -35,7 +35,7 @@ namespace Project
                 }
             }
         }
-        public void AIExitLadder(Enemy enemy)
+        public void AIExitLadder(NavMeshEnemy enemy)
         {
             enemy.enabled = true;
             enemy.EnableNavMeshServerRpc();

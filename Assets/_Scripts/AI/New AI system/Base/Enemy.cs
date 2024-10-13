@@ -11,7 +11,8 @@ using UnityEngine.UI;
 
 namespace Project
 {
-    public class Enemy : NetworkBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckable
+    [RequireComponent(typeof(Rigidbody))]
+    public class Enemy : NetworkBehaviour, IDamageable, ITriggerCheckable
     {
         #region Definitions
         public bool StaticEnemy;
@@ -36,7 +37,7 @@ namespace Project
         [field: SerializeField] public int xpOnKill { get; set; }
         [field: SerializeField] public LayerMask whatisPlayer{ get; set; }
         public Rigidbody rb { get; set ; }
-        public NavMeshAgent navMesh { get; set; }
+        
 
         public List<Collider> colliders;
         
@@ -48,7 +49,7 @@ namespace Project
         [HideInInspector] public float aggression = 0.5f;
         public EnemyStateMachine StateMachine { get; set; }
         public EnemyIdleState IdleState { get; set; }
-        public EnemyChaseState ChaseState { get; set; }
+        
         public EnemyAttackState AttackState { get; set; }
         public EnemyDedState DedState{ get; set; }
         public bool IsWithinStrikingDistance { get; set; }
@@ -64,7 +65,7 @@ namespace Project
         public GameObject SpawnedObj;
         public float RotateSpeed = 100f;
         //VFX Stuff
-        SkinnedMeshRenderer SkinmeshRenderer;
+        [HideInInspector] public SkinnedMeshRenderer SkinmeshRenderer;
         [field: SerializeField] public GameObject damageText;
         public bool Attacking;
 
@@ -80,17 +81,16 @@ namespace Project
         public EnemyChaseSOBase EnemyChaseInstance { get; set; }
         public EnemyAttackSOBase EnemyAttackInstance { get; set; }
 
-        MeshRenderer MR;
+        
 
-        private float staggerRegenSpeed;
-        bool StaggerRegen = false;
+        
 
 
         #endregion
 
 
 
-        private void Awake()
+        public virtual void Awake()
         {
             ArmorBuff = false;
             EnemyChaseInstance = Instantiate(EnemyChaseBase);
@@ -103,7 +103,7 @@ namespace Project
 
             //Contruct States
             IdleState = new EnemyIdleState(this, StateMachine);
-            ChaseState = new EnemyChaseState(this, StateMachine);
+            
             AttackState = new EnemyAttackState(this, StateMachine);
             DedState = new EnemyDedState(this, StateMachine);
         }
@@ -143,15 +143,7 @@ namespace Project
             
             //Get References
             rb = GetComponent<Rigidbody>();
-            if (!StaticEnemy)
-            {
-                navMesh = GetComponent<NavMeshAgent>();
-                navMesh.avoidancePriority = Random.Range(0, 50);
-                rb.isKinematic = true;
-            }
-
             animator = GetComponent<Animator>();
-
 
             //Find Players in lobby
             List<Object> list = FindObjectsOfType(typeof(PlayerMovement)).ToList();
@@ -171,32 +163,18 @@ namespace Project
             
             dissolve = GetComponent<DissolveController>();
             //
-            if (!StaticEnemy)
-            {
-                SkinmeshRenderer = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-                if (SkinmeshRenderer == null)
-                {
-                    Debug.LogError("This Script Does not support non static enemy types without a skinnedMeshRenderer");
-                }
-                origColors = SkinmeshRenderer.materials;
-                whites = SkinmeshRenderer.materials;
-            }
-            else
-            {
-                MR = gameObject.GetComponentInChildren<MeshRenderer>();
-                origColors = MR.materials;
-                whites = MR.materials;
-            }
+
+          
             
         }
 
         public virtual void InitializeStateMachine()
         {
             //Initialize StateMachine
-            EnemyChaseInstance.Initialize(gameObject, this);
+            
             EnemyAttackInstance.Initialize(gameObject, this);
 
-            StateMachine.Initialize(ChaseState);
+            
         }
 
         #region Health/Networking
@@ -209,43 +187,13 @@ namespace Project
             
         }
 
+
         [ServerRpc(RequireOwnership = false)]
-        public void DoDamageServerRpc(float Damage, bool headshot = false)
+        public virtual void DoDamageServerRpc(float Damage, bool headshot = false)
         {
             if (headshot) Damage *= 2;
             Damage = Damage * DamageReduction;
             CurrentHealth.Value -= (Damage);
-
-            
-
-            if (StaticEnemy)
-            {
-                if (CurrentHealth.Value<= 0)
-                {
-                    Die();
-                }
-            }
-
-
-
-            else
-            {
-                if (CurrentHealth.Value <= 0)
-                {
-                    StateMachine.ChangeState(DedState);
-                    DisableNavMeshServerRpc();
-                    return;
-                }
-
-                CurrentStaggerHealth.Value -= (Damage);
-
-                if (CurrentStaggerHealth.Value < 0)
-                {
-                    DisableNavMeshServerRpc();
-                    CurrentStaggerHealth.Value = MaxStaggerHealth;
-                    animator.Play("Hit", -1, 0f);
-                }
-            }
 
             OnDamage();
             aggression += 0.05f;
@@ -254,12 +202,8 @@ namespace Project
 
         }
 
-        
 
-        public void RegenStaggerHealth()
-        {
-            StaggerRegen = true;
-        }
+        
 
         [ServerRpc(RequireOwnership = false)]
         public void KnockBackServerRpc(Vector3 playerPos, float KnockBack = 5)
@@ -270,70 +214,8 @@ namespace Project
         }
 
 
-        [HideInInspector] public bool Floating;
-        [HideInInspector] public float floatHeight;
 
-        float floatattackDamage;
-
-        [ServerRpc(RequireOwnership = false)]
-        public void FloatAttackRecieveServerRpc(float Height, float Duration, float Damage)
-        {
-            if (StaticEnemy) return;
-
-            CancelInvoke("EnableNavMeshServerRpc");
-            Floating = true;
-            floatHeight = Height;
-            rb.isKinematic = true;
-            navMesh.enabled = false;
-            transform.DOMove(Height * Vector3.up + transform.position, 0.5f);
-            floatattackDamage = Damage;
-            animator.applyRootMotion = false;
-            animator.Play("Floating", -1, 0);
-
-            //print("Floating!");
-            Invoke("EndFloatingEffectServerRpc", Duration);
-
-        }
-
-        [ServerRpc(RequireOwnership = false)]
-        private void EndFloatingEffectServerRpc()
-        {
-            if (StaticEnemy) return;
-            PlayerSoundSource.Instance.PlaySound(SourceSoundManager.SoundType.LevitationHit,0.7f);
-            transform.DOMove(-floatHeight * Vector3.up + transform.position, 0.2f);
-            DoDamageServerRpc(floatattackDamage);
-            
-            
-            rb.isKinematic = false;
-            animator.applyRootMotion = true;
-            animator.Play("Hit", -1, 0);
-            Invoke("EnableNavMeshServerRpc", 0.5f);
-            Floating = false;
-        }
-
-        [ServerRpc(RequireOwnership = false)]
-        public void DisableNavMeshServerRpc()
-        {
-            if (StaticEnemy) return;
-            
-            else if (Floating) return;
-
-            else if(StateMachine.currentState == DedState)
-            {
-                return;
-            }
-            else
-            {
-
-                navMesh.enabled = false;
-                //animator.Play("Hit", -1, 0f);
-                animator.applyRootMotion = false;
-                Invoke("EnableNavMeshServerRpc", 1f);
-            }
-
-        }
-
-        public void Die()
+        public virtual void Die()
         {
             GameManager.instance.AwardXPServerRpc(xpOnKill);
             OnDeathTellSpawner();
@@ -342,56 +224,14 @@ namespace Project
             {
                 Instantiate(ChaosCores, transform.position + 0.5f*new Vector3(Random.Range(-1f,1f),0.5f,Random.Range(-1f,1f)).normalized, Quaternion.identity);
             }
-            if (!StaticEnemy)
-            {
-                Destroy(navMesh);
-                CancelInvoke("EnableNavMeshServerRpc");
-
-                if (Floating)
-                {
-                    transform.DOMove(-floatHeight * Vector3.up + transform.position, 0.1f);
-                    animator.Play("FallingDeath", -1, 0);
-                    CancelInvoke("EndFloatingEffectServerRpc");
-                }
-                else animator.Play("Die", -1, 0);
-
-                dissolve.StartDissolveClientRpc();
+            
+            
                 
-                
-
-
-
-
-                //Invoke("Delete", 4);
-                foreach (var item in colliders)
-                {
-                    item.enabled = false;
-                }
-                Destroy(GetComponent<NetworkRigidbody>());
-                Destroy(rb);
-
-                Destroy(gameObject, 5);
-            }
-            else
-            {
-                Destroy(gameObject);
-                
-            }
 
 
         }
 
-        [ServerRpc(RequireOwnership = false)]
-        public void EnableNavMeshServerRpc()
-        {
-            if (StaticEnemy) return;
-            if (rb == null) return;
-            rb.isKinematic = true;
-            navMesh.enabled = true;
-            animator.applyRootMotion = true;
-
-        }
-
+        
         [ClientRpc]
         void DisableHealthBarClientRpc()
         {
@@ -401,7 +241,7 @@ namespace Project
         [HideInInspector] public EnemySpawner Spawner;
 
 
-        
+
 
         public virtual void OnDeathTellSpawner()
         {
@@ -447,32 +287,15 @@ namespace Project
 
 
 
-        void FlashStart()
+        public virtual void FlashStart()
         {
-            if (StaticEnemy)
-            {
-                MR.SetMaterials(whites.ToList());
-            }
-            else
-            {
-                SkinmeshRenderer.SetMaterials(whites.ToList());
-            }
-            
-
 
             Invoke("FlashEnd", flashTime);
         }
 
-        void FlashEnd()
+        public virtual void FlashEnd()
         {
-            if (StaticEnemy)
-            {
-                MR.SetMaterials(origColors.ToList());
-            }
-            else
-            {
-                SkinmeshRenderer.SetMaterials(origColors.ToList());
-            }
+            
             
         }
 
@@ -498,25 +321,7 @@ namespace Project
 
                 hit.collider.gameObject.GetComponent<PlayerStats>().TakeDamage(AttackDamage,transform.position);
             }
-
-
         }
-        /*
-        IEnumerator MoveAcrossNavMeshLink()
-        {
-            OffMeshLinkData data = navMesh.currentOffMeshLinkData;
-            navMesh.updateRotation = false;
-
-            Vector3 startPos = navMesh.transform.position;
-            Vector3 endPos = data.endPos + Vector3.up * navMesh.baseOffset;
-            float duration = (endPos - startPos).magnitude / navMesh.velocity.magnitude;
-            transform.position = endPos;
-            navMesh.updateRotation = true;
-            navMesh.CompleteOffMeshLink();
-            MoveAcrossNavMeshesStarted = false;
-
-        }
-        */
 
         public void SpawnObj(GameObject spawnObj,Vector3 Pos)
         {
@@ -557,15 +362,6 @@ namespace Project
         }
 
 
-        public void MoveEnemy(Vector3 targetPosition)
-        {
-            if (!navMesh.enabled) return;
-            
-
-            navMesh.SetDestination(targetPosition);
-        }
-
-
         
         public virtual void AttackExit()
         {
@@ -583,38 +379,17 @@ namespace Project
         }
 
 
-        bool MoveAcrossNavMeshesStarted;
-
         public virtual void Update()
         {
             if(!IsOwner) return;
-            if (!StaticEnemy)
-            {
-                Debug.DrawRay(transform.position + 0.5f * Vector3.up, transform.forward * 2f);
-                StateMachine.currentState.FrameUpdate();
-                if (navMesh == null) return;
-                animator.SetFloat("SpeedX", Vector3.Dot(navMesh.velocity, transform.right));
-                animator.SetFloat("SpeedY", Vector3.Dot(navMesh.velocity, transform.forward));
-
-                if(StaggerRegen && CurrentStaggerHealth.Value < MaxStaggerHealth)
-                {
-                    CurrentStaggerHealth.Value += staggerRegenSpeed*Time.deltaTime;       
-                        
-                }
-                /*
-                if (navMesh.isOnOffMeshLink && !MoveAcrossNavMeshesStarted)
-                {
-                    StartCoRoutine(MoveAcrossNavMeshLink());
-                    MoveAcrossNavMeshesStarted = true;
-                }
-                */
-            }
+            
             
         }
 
         private void FixedUpdate()
         {
             if(!IsOwner) return;
+            //print(StateMachine.currentState);
             StateMachine.currentState.PhysicsUpdate();
         }
 

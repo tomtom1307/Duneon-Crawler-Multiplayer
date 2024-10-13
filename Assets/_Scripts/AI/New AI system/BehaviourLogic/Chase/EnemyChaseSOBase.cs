@@ -6,13 +6,13 @@ namespace Project
 {
     public class EnemyChaseSOBase : ScriptableObject
     {
-        protected Enemy enemy;
+        protected NavMeshEnemy enemy;
         protected Transform transform;
         protected GameObject gameObject;
 
         protected Transform target;
 
-        public virtual void Initialize(GameObject gameObject, Enemy enemy)
+        public virtual void Initialize(GameObject gameObject, NavMeshEnemy enemy)
         {
             this.gameObject = gameObject;
             transform = gameObject.transform;

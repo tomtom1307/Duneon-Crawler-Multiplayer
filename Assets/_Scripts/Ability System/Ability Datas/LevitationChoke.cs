@@ -28,13 +28,13 @@ namespace Project
             base.Activate(parent, out fail);
             
             List<Collider> EnemiesFound = Physics.OverlapSphere(parent.transform.position, Range, whatIsEnemy).ToList();
-            Enemy TD;
+            NavMeshEnemy TD;
             parent.GetComponent<PlayerStats>()._mana.Value -= ManaUse;
             Counter = 0;
             foreach (Collider c in EnemiesFound)
             {
 
-                if (c.gameObject.TryGetComponent<Enemy>(out TD))
+                if (c.gameObject.TryGetComponent<NavMeshEnemy>(out TD))
                 {
                     
                     Counter++;
