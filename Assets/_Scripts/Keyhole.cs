@@ -60,6 +60,7 @@ namespace Project
             });
             //https://discussions.unity.com/t/help-using-lerp-inside-of-a-coroutine/207869
             barricadeAnimator.SetTrigger($"OpenB{correspondingBarricade}");
+            barricadeAnimator.SetInteger("OpenedBarricades", barricadeAnimator.GetInteger("OpenedBarricades")+1);
         }
         
 
