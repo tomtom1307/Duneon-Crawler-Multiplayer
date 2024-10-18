@@ -11,7 +11,7 @@ namespace Project
         protected GameObject gameObject;
         protected NavMeshEnemy NMEnemy;
         protected Transform target;
-
+        
         public virtual void Initialize(GameObject gameObject, Enemy enemy)
         {
             this.gameObject = gameObject;
@@ -42,7 +42,11 @@ namespace Project
 
         public virtual void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType type)
         {
-
+            if (type == Enemy.AnimationTriggerType.FinishedAttacking)
+            {
+                Debug.Log("Finished Attacking");
+                enemy.AttackExit();
+            }
         }
 
         public virtual void ResetValues()

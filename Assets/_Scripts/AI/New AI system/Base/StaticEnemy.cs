@@ -12,15 +12,18 @@ namespace Project
         // Start is called before the first frame update
         public override void Start()
         {
+            base.Start();
             MR = gameObject.GetComponentInChildren<MeshRenderer>();
+            rb.isKinematic = true;
             origColors = MR.materials;
             whites = MR.materials;
         }
 
         // Update is called once per frame
-        void Update()
+        public override void Update()
         {
-            
+            base.Update();
+
         }
 
         public override void InitializeStateMachine()
@@ -50,6 +53,11 @@ namespace Project
             }
         }
 
+        public override void Die()
+        {
+            base.Die();
+            Destroy(gameObject);
+        }
 
 
     }

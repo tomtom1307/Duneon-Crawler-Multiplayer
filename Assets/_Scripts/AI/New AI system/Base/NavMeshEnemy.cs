@@ -16,9 +16,10 @@ namespace Project
     public class NavMeshEnemy : Enemy
     {
 
+        [Header("Additional Enemy States")]
+        [SerializeField] private EnemyChaseSOBase EnemyChaseBase;
+
         public EnemyChaseState ChaseState { get; set; }
-
-
         public NavMeshAgent navMesh { get; set; }
 
 
@@ -29,6 +30,7 @@ namespace Project
         public override void Awake()
         {
             base.Awake();
+            EnemyChaseInstance = Instantiate(EnemyChaseBase);
             ChaseState = new EnemyChaseState(this, StateMachine);
         }
 
@@ -94,7 +96,7 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         public void EnableNavMeshServerRpc()
         {
-            if (StaticEnemy) return;
+            
             if (rb == null) return;
             rb.isKinematic = true;
             navMesh.enabled = true;
@@ -108,7 +110,6 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         public void FloatAttackRecieveServerRpc(float Height, float Duration, float Damage)
         {
-            if (StaticEnemy) return;
 
             CancelInvoke("EnableNavMeshServerRpc");
             Floating = true;
@@ -128,7 +129,6 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         private void EndFloatingEffectServerRpc()
         {
-            if (StaticEnemy) return;
             PlayerSoundSource.Instance.PlaySound(SourceSoundManager.SoundType.LevitationHit, 0.7f);
             transform.DOMove(-floatHeight * Vector3.up + transform.position, 0.2f);
             DoDamageServerRpc(floatattackDamage);
@@ -144,9 +144,8 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         public void DisableNavMeshServerRpc()
         {
-            if (StaticEnemy) return;
 
-            else if (Floating) return;
+            if (Floating) return;
 
             else if (StateMachine.currentState == DedState)
             {
@@ -174,7 +173,13 @@ namespace Project
 
         public override void Die()
         {
-            Destroy(navMesh);
+            navMesh.enabled = false;
+            RemoveArmorBuff();
+            //Invoke("Delete", 4);
+            foreach (var item in colliders)
+            {
+                item.enabled = false;
+            }
             CancelInvoke("EnableNavMeshServerRpc");
 
             if (Floating)
@@ -189,16 +194,8 @@ namespace Project
 
             Destroy(gameObject,4);
 
-
-
-
-            //Invoke("Delete", 4);
-            foreach (var item in colliders)
-            {
-                item.enabled = false;
-            }
             Destroy(GetComponent<NetworkRigidbody>());
-            Destroy(rb);
+            rb.isKinematic = true;
 
             
             base.Die();

@@ -12,88 +12,118 @@ using UnityEngine.UI;
 namespace Project
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class Enemy : NetworkBehaviour, IDamageable, ITriggerCheckable
+    [RequireComponent(typeof(Enemy_AnimatorEventHandler))]
+    public class Enemy : NetworkBehaviour, ITriggerCheckable
     {
+
         #region Definitions
-        public bool StaticEnemy;
+
+        #region Hidden Stats
+
         [HideInInspector] public float DamageReduction = 1;
-
-        public float MaxStaggerHealth;
         public NetworkVariable<float> CurrentStaggerHealth { get; set; } = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
-
-        [field: SerializeField] public float MaxHealth { get; set; } = 100f;
         public NetworkVariable<float> CurrentHealth { get; set; } = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);
-        [field: SerializeField] public float maxDetectDist { get; set; } = 100f;
+        #endregion
+
+        #region Old Attack System
         [field: SerializeField] public float AttackDistance { get; set; } = 4f;
         [field: SerializeField] public float MeleeRaycastRange { get; set; } = 0.7f;
 
-        [field: SerializeField] public GameObject HealthBarPrefab;
-        [field: SerializeField] public float HealthBarHeight;
+        #endregion
+
+        #region HealthBarStuff
         Image HealthBar;
         Canvas HealthBarCanvas;
+        #endregion
 
-        [field: SerializeField] public float AttackDamage { get; set; } = 4f;
-        
-        [field: SerializeField] public int xpOnKill { get; set; }
-        [field: SerializeField] public LayerMask whatisPlayer{ get; set; }
-        public Rigidbody rb { get; set ; }
-        
-
-        public List<Collider> colliders;
-        
-        public Transform ProjectileSpawnPos;
+        public Rigidbody rb { get; set; }
+        public List<Collider> colliders { get; set; }
+        private List<Enemy_Attack_ColliderDetector> colliderDetector;
         public Animator animator { get; set; }
-        
         [HideInInspector]public List<Transform> playerlist;
         [HideInInspector] public Transform target;
         [HideInInspector] public float aggression = 0.5f;
-        public EnemyStateMachine StateMachine { get; set; }
-        public EnemyIdleState IdleState { get; set; }
-        
-        public EnemyAttackState AttackState { get; set; }
-        public EnemyDedState DedState{ get; set; }
-        public bool IsWithinStrikingDistance { get; set; }
-        public bool PlayerIsTooClose { get; set; }
-        [field: SerializeField] public Color HeadshotColor = Color.HSVToRGB(0,7.6f,1.00f);
-        [field: SerializeField] public Color NormalColor = Color.HSVToRGB(0, 0, 1.00f);
-        public Material[] origColors { get; set; }
-        public Material[] whites { get; set; }
-        public float flashTime { get; set; } = 1f;
-        public DissolveController dissolve { get; set; }
 
-        
-        public GameObject SpawnedObj;
-        public float RotateSpeed = 100f;
-        //VFX Stuff
-        [HideInInspector] public SkinnedMeshRenderer SkinmeshRenderer;
-        [field: SerializeField] public GameObject damageText;
-        public bool Attacking;
+        #region TriggerBools
+
+        public bool PlayerIsTooClose { get; set; }
+        public bool IsWithinStrikingDistance { get; set; }
 
         #endregion
 
-        #region ScriptableObject Variables
+        #region VFX_var
+        [HideInInspector] public Material[] origColors { get; set; }
+        [HideInInspector] public Material[] whites { get; set; }
+        public float flashTime { get; set; } = 1f;
+        public DissolveController dissolve { get; set; }
+        #endregion
 
-        [SerializeField] private EnemyChaseSOBase EnemyChaseBase;
-        [SerializeField] private EnemyAttackSOBase EnemyAttackBase;
+        public GameObject SpawnedObj { get; set; }
+        
+        //VFX Stuff
+        [HideInInspector] public SkinnedMeshRenderer SkinmeshRenderer;
+        
+        public bool Attacking;
 
-        public int ChoasCoresOnDeath;
+        
+
+        [Header("General Assginments")]
         public GameObject ChaosCores;
+        public GameObject damageText;
+        [field: SerializeField] public Color HeadshotColor = Color.HSVToRGB(0, 7.6f, 1.00f);
+        [field: SerializeField] public Color NormalColor = Color.HSVToRGB(0, 0, 1.00f);
+        [field: SerializeField] public LayerMask whatisPlayer;
+        [field: SerializeField] public GameObject HealthBarPrefab;
+        [field: SerializeField] public float HealthBarHeight;
+
+        
+
+
+        [Header("Special Assignments")]
+        public Transform ProjectileSpawnPos;
+
+
+
+        [Header("Enemy Stats")]
+        public float MaxHealth = 100f;
+        public float MaxStaggerHealth;
+        public float maxDetectDist = 100f;
+        public float RotateSpeed = 100f;
+        
+        [field: SerializeField] public float AttackDamage { get; set; } = 4f;
+        [field: SerializeField] public int xpOnKill { get; set; }
+        public int ChoasCoresOnDeath;
+
+
+        
+        [Header("Enemy States")]
+        [SerializeField] private EnemyAttackSOBase EnemyAttackBase;
+        
+        public Enemy_Attack currentAttack;
+
+        #region StateMachine Variables
+
+        public EnemyStateMachine StateMachine { get; set; }
+
+        public EnemyDedState DedState { get; set; }
+        public EnemyIdleState IdleState { get; set; }
+        public EnemyAttackState AttackState { get; set; }
+
+
         public EnemyChaseSOBase EnemyChaseInstance { get; set; }
         public EnemyAttackSOBase EnemyAttackInstance { get; set; }
 
-        
-
-        
-
-
         #endregion
 
-
+        [HideInInspector] public EnemySpawner Spawner;
+        #endregion
 
         public virtual void Awake()
         {
+            //Disable armor buff
             ArmorBuff = false;
-            EnemyChaseInstance = Instantiate(EnemyChaseBase);
+
+            //Instantiate StateMachine States
             EnemyAttackInstance = Instantiate(EnemyAttackBase);
 
 
@@ -103,13 +133,15 @@ namespace Project
 
             //Contruct States
             IdleState = new EnemyIdleState(this, StateMachine);
-            
             AttackState = new EnemyAttackState(this, StateMachine);
             DedState = new EnemyDedState(this, StateMachine);
         }
 
         [HideInInspector] public bool ArmorBuff = false;
         [HideInInspector] public GameObject armorBuffVFX;
+
+        #region ArmorBuff
+        //Adds a buff
         public void AddArmorBuff(GameObject vfx)
         {
             if (!ArmorBuff)
@@ -120,6 +152,8 @@ namespace Project
             
         }
 
+
+        //Removes Buff
         public void RemoveArmorBuff()
         {
             if (ArmorBuff)
@@ -129,55 +163,89 @@ namespace Project
             ArmorBuff = false;
 
         }
+        #endregion
 
 
-        public virtual void Start()
+        #region StartFunctions
+        public void InitializeHealthValues()
         {
-            //Set MaxHealth
             if (IsOwner)
             {
                 CurrentHealth.Value = MaxHealth;
                 CurrentStaggerHealth.Value = MaxStaggerHealth;
             }
-            
-            
-            //Get References
+        }
+
+        public void GetReferences()
+        {
             rb = GetComponent<Rigidbody>();
             animator = GetComponent<Animator>();
+            dissolve = GetComponent<DissolveController>();
 
-            //Find Players in lobby
+            GetColliders();
+        }
+
+        public void FindPlayers()
+        {
             List<Object> list = FindObjectsOfType(typeof(PlayerMovement)).ToList();
             foreach (var item in list)
             {
                 playerlist.Add(item.GameObject().transform);
             }
+        }
 
+        public void SetUpHealthBar()
+        {
             GameObject healthBarObj = Instantiate(HealthBarPrefab, transform);
             healthBarObj.transform.position = transform.position + HealthBarHeight * Vector3.up;
             HealthBar = healthBarObj.GetComponent<HealthBarEasing>().health;
             HealthBarCanvas = healthBarObj.GetComponent<Canvas>();
-
-
-            //Final Setup shit
-            InitializeStateMachine();
-            
-            dissolve = GetComponent<DissolveController>();
-            //
-
-          
-            
         }
 
         public virtual void InitializeStateMachine()
         {
             //Initialize StateMachine
-            
+
             EnemyAttackInstance.Initialize(gameObject, this);
+
+
+        }
+
+
+        public virtual void GetColliders()
+        {
+            colliders = GetComponentsInChildren<Collider>().ToList();
+            colliders.Add(GetComponent<Collider>());
+
+            colliderDetector = GetComponentsInChildren<Enemy_Attack_ColliderDetector>().ToList();
+
+            foreach (var item in colliderDetector)
+            {
+                item.playerDetected += DamagePlayer;
+            }
+
+        }
+        #endregion
+
+        public virtual void Start()
+        {
+
+            InitializeHealthValues();
+
+            GetReferences();
+
+            FindPlayers();
+
+            SetUpHealthBar();
+
+            InitializeStateMachine();
 
             
         }
 
-        #region Health/Networking
+        
+
+        #region Recieving Damage and KnockBack
 
 
         //So That can check for boss phase changes.
@@ -191,24 +259,35 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         public virtual void DoDamageServerRpc(float Damage, bool headshot = false)
         {
+            //Check if headshot and double damage if true
             if (headshot) Damage *= 2;
+
+            //Apply damage reduction
             Damage = Damage * DamageReduction;
+
+            //Apply Damage
             CurrentHealth.Value -= (Damage);
 
+            //Call for additional checks ie Boss Phase Change
             OnDamage();
+
+            //Increment aggression if we want to keep this as a factor 
             aggression += 0.05f;
+
+            //Call Damage Flash and Numbers
             HandleLocalVisualsClientRpc(Damage, headshot);
             
 
         }
-
-
         
 
         [ServerRpc(RequireOwnership = false)]
         public void KnockBackServerRpc(Vector3 playerPos, float KnockBack = 5)
         {
+            
             rb.isKinematic = false;
+
+            //Find the knockback direction and apply it
             Vector3 dir = transform.position - playerPos;
             rb.AddForce(dir.normalized * KnockBack, ForceMode.Force);
         }
@@ -217,32 +296,28 @@ namespace Project
 
         public virtual void Die()
         {
+            //Award XP to all players
             GameManager.instance.AwardXPServerRpc(xpOnKill);
+
+            //tell the spawner this enemy is dead
             OnDeathTellSpawner();
+
             DisableHealthBarClientRpc();
-            for (int i = 0; i < ChoasCoresOnDeath; i++)
-            {
-                Instantiate(ChaosCores, transform.position + 0.5f*new Vector3(Random.Range(-1f,1f),0.5f,Random.Range(-1f,1f)).normalized, Quaternion.identity);
-            }
-            
-            
-                
 
-
+            SpawnChaosCores();
         }
 
         
-        [ClientRpc]
-        void DisableHealthBarClientRpc()
+
+
+        public void SpawnChaosCores()
         {
-            HealthBarCanvas.enabled = false;
+            for (int i = 0; i < ChoasCoresOnDeath; i++)
+            {
+                Instantiate(ChaosCores, transform.position + 0.5f * new Vector3(Random.Range(-1f, 1f), 0.5f, Random.Range(-1f, 1f)).normalized, Quaternion.identity);
+            }
         }
-
-        [HideInInspector] public EnemySpawner Spawner;
-
-
-
-
+        
         public virtual void OnDeathTellSpawner()
         {
             if (Spawner != null)
@@ -253,7 +328,13 @@ namespace Project
 
 
         #region DamageVFX
-        
+        [ClientRpc]
+        void DisableHealthBarClientRpc()
+        {
+            HealthBarCanvas.enabled = false;
+        }
+
+
         [ClientRpc]
         public void HandleLocalVisualsClientRpc(float Damage, bool headshot = false)
         {
@@ -310,9 +391,26 @@ namespace Project
 
         #endregion
 
-        public void Attack()
-        {
 
+
+        #region Attacking
+
+        public void TriggerAttack(Enemy_Attack EA)
+        {
+            currentAttack = EA;
+            animator.SetInteger("AttackInt", EA.AnimationIntValue);
+            Attacking = true;
+            animator.SetBool("Attacking", true);
+        }
+
+
+        public virtual void Attack()
+        {
+            SphereCastAttack();
+        }
+
+        public void SphereCastAttack()
+        {
             RaycastHit hit;
            
             Physics.SphereCast(transform.position+0.5f*Vector3.up, 0.2f, transform.forward, out hit, MeleeRaycastRange, whatisPlayer);
@@ -323,10 +421,17 @@ namespace Project
             }
         }
 
+        public void DamagePlayer(PlayerStats ps)
+        {
+            ps.TakeDamage(currentAttack.Damage,transform.position);
+        }
+
         public void SpawnObj(GameObject spawnObj,Vector3 Pos)
         {
-
+            //Set Reference to object since gameobjects can't be passed as variables for Rpc's
             SpawnedObj = spawnObj;
+
+            //Call Rpc
             SpawnObjServerRpc(Pos);
         }
 
@@ -362,13 +467,50 @@ namespace Project
         }
 
 
-        
         public virtual void AttackExit()
         {
-            Attacking = false;
+            
+            currentAttack = null;
             animator.SetBool("Attacking", false);
+            animator.SetInteger("AttackInt", 0);
+            Attacking = false;
         }
 
+
+        public void AttackDetect()
+        {
+            currentAttack.Detect(this);
+        }
+
+
+        public void StopDetect()
+        {
+            currentAttack.StopDetecting(this);
+        }
+
+        #region Detection Helper Functions
+
+        public void EnableMeleeCollider()
+        {
+            foreach (var detector in colliderDetector)
+            {
+                detector.TriggerCollider(true);
+            }
+        }
+
+        public void DisbleMeleeCollider()
+        {
+            foreach (var detector in colliderDetector)
+            {
+                detector.TriggerCollider(false);
+            }
+        }
+
+        #endregion
+
+
+
+        #endregion
 
         public void LookAtTarget()
         {
@@ -381,8 +523,8 @@ namespace Project
 
         public virtual void Update()
         {
-            if(!IsOwner) return;
-            
+            //if(!IsOwner) return;
+            StateMachine.currentState.FrameUpdate();
             
         }
 
@@ -403,7 +545,7 @@ namespace Project
 
         public Transform DetectPlayer()
         {
-            //print("Detecting Player...");
+            
             float MinDist = maxDetectDist;
             Transform target = null;
             foreach (var item in playerlist)
@@ -421,11 +563,11 @@ namespace Project
 
 
 
-        #region Animation Triggers
+        #region State Change Triggers
 
-        private void AnimationTriggerEvent(AnimationTriggerType triggerType)
+        public void AnimationTriggerEvent(AnimationTriggerType triggerType)
         {
-            if (!IsOwner) return;
+            //if (!IsOwner) return;
             StateMachine.currentState.AnimationTriggerEvent(triggerType);
         }
 
@@ -441,6 +583,7 @@ namespace Project
         }
 
 
+        
 
 
         public enum AnimationTriggerType
@@ -449,7 +592,8 @@ namespace Project
             FinishedAttacking,
             EnemyDamaged,
             PlayFootStepSound,
-            SpawnProjectile
+            SpawnProjectile,
+            AttackDetection
         }
 
 

@@ -59,10 +59,6 @@ namespace Project
                 }
                 TD.DoDamageServerRpc(weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
 
-                if (!TD.StaticEnemy)
-                {
-                    //TD.DisableNavMeshServerRpc();
-                }
 
 
                 if (collider.GetComponent<Rigidbody>() != null)
