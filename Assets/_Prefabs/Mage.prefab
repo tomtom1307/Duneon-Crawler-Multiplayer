@@ -10102,6 +10102,7 @@ GameObject:
   - component: {fileID: 2321408594484804605}
   - component: {fileID: 3849479021292416335}
   - component: {fileID: 321253326310683013}
+  - component: {fileID: 5858946004857471506}
   m_Layer: 10
   m_Name: Mage
   m_TagString: Player
@@ -10636,6 +10637,22 @@ MonoBehaviour:
   lastWall: {fileID: 0}
   slowClimbForce: 10000
   forwardLerpFactor: 0.1
+  active: 1
+--- !u!114 &5858946004857471506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9211036698816209711}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b70c44b5507047c418b2b267c20779b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHeight: 0.5
+  checkDistance: 0.05
+  stepHeight: 0.1
 --- !u!1 &9219590606935053950
 GameObject:
   m_ObjectHideFlags: 0

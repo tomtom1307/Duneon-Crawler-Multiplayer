@@ -33,6 +33,7 @@ namespace Project
         private float _mantleSpeed;
         public float slowClimbForce;
         public float forwardLerpFactor;
+        public bool active;
         private void Start()
         {
             col = GetComponent<CapsuleCollider>();
@@ -47,6 +48,8 @@ namespace Project
 
         private void OnCollisionEnter(Collision collision)
         {
+            if(!active) return;
+            
             if (collision.collider.gameObject == lastWall || collision.collider.gameObject.tag == "Projectile") return;
             Vector3 normal = collision.GetContact(0).normal;
             Vector3 horForward = cam.transform.forward;
@@ -99,7 +102,9 @@ namespace Project
 
                 }
 
-            }
+                }
+            
+            
 
         }
 
