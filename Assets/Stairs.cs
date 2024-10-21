@@ -15,6 +15,9 @@ namespace Project
         private Vector3 upperCastDisp;
         private Vector3 castDirection;
         private LayerMask layerMask;
+        private float horizontalInput;
+        private float verticalInput;
+        private Transform orientation;
         [SerializeField] float maxHeight;
         [SerializeField] float checkDistance;
         [SerializeField] float stepHeight;
@@ -36,6 +39,8 @@ namespace Project
             // Getting reference to Rigidbody
             playerBody = GetComponent<Rigidbody>();
 
+            // Getting reference to orientation Transform
+            orientation = GetComponent<PlayerMovement>().orientation;
 
             // Initializing LayerMask
             layerMask = LayerMask.GetMask("Ground");
@@ -43,28 +48,23 @@ namespace Project
 
         void FixedUpdate()
         {
-            /*
-            TODO:
-
-            - Fix velocity issue: REPLACE cast direction with input direction instead of velocity
+            // Get movement input and define raycast direction
             horizontalInput = Input.GetAxisRaw("Horizontal");
             verticalInput = Input.GetAxisRaw("Vertical");
-            
-            -> construct a vector3 from these inputs based on the Orientation object's rotation
+            castDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-            */
-            // Defining Raycast positions
-            castDirection = playerBody.velocity; castDirection.y = 0; castDirection = castDirection.normalized;
-
+            // Set upper raycast to specified height
             upperCastDisp.y = maxHeight;
 
+            // Set raycast origins
             lowerCastPos = transform.position + playerCollider.center + lowerCastDisp;
             upperCastPos = lowerCastPos + upperCastDisp;
 
+            // Draw raycasts
             Debug.DrawRay(lowerCastPos, castDirection * (colRadius + checkDistance), Color.red, Time.deltaTime);
             Debug.DrawRay(upperCastPos, castDirection * (colRadius + checkDistance), Color.red, Time.deltaTime);
 
-            
+            // if lower raycast hits but upper does not: Move player up.
             RaycastHit lowerhit;
             if (Physics.Raycast(lowerCastPos, castDirection, out lowerhit, (colRadius + checkDistance), layerMask))
             {
