@@ -9,6 +9,7 @@ namespace Project
     {
         [SerializeField] public Enemy_Attack_Melee_Base Melee_Attack1;
         [SerializeField] public Enemy_Attack_Melee_Base Melee_attack2;
+        [SerializeField] public Enemy_Attack_AOE_Base SlamAttack;
 
         public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType type)
         {
@@ -36,6 +37,10 @@ namespace Project
             if (Input.GetKeyDown(KeyCode.P) && !enemy.Attacking)
             {
                 enemy.TriggerAttack(Melee_attack2);
+            }
+            if(Input.GetKeyDown(KeyCode.R) && !enemy.Attacking)
+            {
+                enemy.TriggerAttack(SlamAttack);
             }
 
         }

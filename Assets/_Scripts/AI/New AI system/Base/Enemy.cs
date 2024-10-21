@@ -76,7 +76,6 @@ namespace Project
         [field: SerializeField] public GameObject HealthBarPrefab;
         [field: SerializeField] public float HealthBarHeight;
 
-        
 
 
         [Header("Special Assignments")]
@@ -353,7 +352,6 @@ namespace Project
         {
             DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
             Color color = headshot ? HeadshotColor : NormalColor;
-            //indicator.SetDamageColor(color); 
 
 
             indicator.SetDamageText(Mathf.RoundToInt(dam), color);
@@ -423,7 +421,27 @@ namespace Project
 
         public void DamagePlayer(PlayerStats ps)
         {
-            ps.TakeDamage(currentAttack.Damage,transform.position);
+            //Cast Attack as an AOE attack if this works then Do AOE logic
+            Enemy_Attack_AOE_Base AOEAttack = currentAttack as Enemy_Attack_AOE_Base;
+
+            if (AOEAttack != null)
+            {
+                //Distance to Player
+                float Distance = Vector3.Distance(transform.position, ps.transform.position);
+                //Apply Damage Distance Scaling
+                float DamageVal = currentAttack.Damage * AOEDamageFalloffFunction(Distance, AOEAttack.AttackRadius);
+
+                //Apply new Damage Value
+                ps.TakeDamage(DamageVal, transform.position);
+            }
+
+            //Otherwise
+            else
+            {
+                //Damage the player
+                ps.TakeDamage(currentAttack.Damage, transform.position);
+            }
+
         }
 
         public void SpawnObj(GameObject spawnObj,Vector3 Pos)
@@ -448,6 +466,11 @@ namespace Project
             Destroy(projectile,5);
         }
 
+
+        public void SpawnFX(GameObject Go)
+        {
+            Instantiate(Go, transform.position, Quaternion.identity);
+        }
 
         public bool CheckLOS(out Vector3 opposingDirection)
         {
@@ -504,6 +527,30 @@ namespace Project
             {
                 detector.TriggerCollider(false);
             }
+        }
+
+        public void DoOverlapSphere(float radius)
+        {
+            // Create a list if playerColliders
+            List<Collider> players = new List<Collider>();
+
+            //Check players within a sphere of a certain radius
+            players = Physics.OverlapSphere(transform.position, radius, whatisPlayer).ToList();
+
+            //Check collider has Stats to then apply damage
+            foreach (var collider in players) 
+            {
+                PlayerStats PS;
+                if(collider.TryGetComponent<PlayerStats>(out PS))
+                {
+                    DamagePlayer(PS);
+                }
+            }
+        }
+
+        public float AOEDamageFalloffFunction(float playerDistance, float r)
+        {
+            return (-1 / 1.7f)* Mathf.Pow(playerDistance/ r, 2) + 1; 
         }
 
         #endregion
@@ -593,7 +640,8 @@ namespace Project
             EnemyDamaged,
             PlayFootStepSound,
             SpawnProjectile,
-            AttackDetection
+            AttackDetection,
+            SpawnVFX
         }
 
 

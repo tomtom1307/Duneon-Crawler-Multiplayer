@@ -10,6 +10,13 @@ namespace Project
         public string AttackAnimationName;
         public int AnimationIntValue;
         public float Damage;
+        public GameObject VFX;
+
+        // Base Attack that Does nothing so far lol
+        public virtual void Attack()
+        {
+
+        }
 
         //Basic 
         public void BaseDetect(){}

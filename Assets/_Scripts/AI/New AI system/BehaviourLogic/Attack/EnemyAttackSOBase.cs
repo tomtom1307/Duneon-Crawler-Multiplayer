@@ -47,6 +47,10 @@ namespace Project
                 Debug.Log("Finished Attacking");
                 enemy.AttackExit();
             }
+            if(type == Enemy.AnimationTriggerType.SpawnVFX)
+            {
+                enemy.SpawnFX(enemy.currentAttack.VFX);
+            }
         }
 
         public virtual void ResetValues()
