@@ -7,9 +7,10 @@ namespace Project
     [CreateAssetMenu(fileName = "AttackB-Melee-Box", menuName = "Enemy Logic/ Attack Logic/ TestBox")]
     public class EnemyAttack_B_TestBox : EnemyAttackSOBase
     {
-        [SerializeField] public Enemy_Attack_Melee_Base Melee_Attack1;
-        [SerializeField] public Enemy_Attack_Melee_Base Melee_attack2;
-        [SerializeField] public Enemy_Attack_AOE_Base SlamAttack;
+        
+        public List<Enemy_Attack_Melee_Base> MeleeAttacks;
+        public List<Enemy_Attack_AOE_Base> AoEAttacks;
+        
 
         public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType type)
         {
@@ -31,16 +32,16 @@ namespace Project
         {
             if (Input.GetKeyDown(KeyCode.L) && !enemy.Attacking)
             {
-                enemy.TriggerAttack(Melee_Attack1);
+                enemy.TriggerAttack(MeleeAttacks[0]);
             }
 
             if (Input.GetKeyDown(KeyCode.P) && !enemy.Attacking)
             {
-                enemy.TriggerAttack(Melee_attack2);
+                enemy.TriggerAttack(MeleeAttacks[1]);
             }
             if(Input.GetKeyDown(KeyCode.R) && !enemy.Attacking)
             {
-                enemy.TriggerAttack(SlamAttack);
+                enemy.TriggerAttack(AoEAttacks[0]);
             }
 
         }

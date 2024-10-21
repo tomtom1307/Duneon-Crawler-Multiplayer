@@ -441,6 +441,7 @@ namespace Project
                 //Damage the player
                 ps.TakeDamage(currentAttack.Damage, transform.position);
             }
+            PlayerHitLogic(ps);
 
         }
 
@@ -506,9 +507,23 @@ namespace Project
         }
 
 
+
         public void StopDetect()
         {
             currentAttack.StopDetecting(this);
+        }
+
+
+        //Function for adding forces and such to each player
+        public void PlayerHitLogic(PlayerStats ps)
+        {
+            currentAttack.playerHitLogic(ps ,this);
+        }
+
+
+        public void DoAttackLogic()
+        {
+            
         }
 
         #region Detection Helper Functions
@@ -531,6 +546,7 @@ namespace Project
 
         public void DoOverlapSphere(float radius)
         {
+
             // Create a list if playerColliders
             List<Collider> players = new List<Collider>();
 
