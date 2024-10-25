@@ -42,9 +42,10 @@ namespace Project
                     if (TD == null) return;
                 }
                 TD.DoDamageServerRpc(ChargePercentage * weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
-                if(collider.GetComponent<Rigidbody>() != null)
+                NavMeshEnemy NME;
+                if(collider.TryGetComponent<NavMeshEnemy>(out NME))
                 {
-                    TD.DisableNavMeshServerRpc();
+                    NME.DisableNavMeshServerRpc();
                     TD.KnockBackServerRpc(Camera.main.transform.position, ChargePercentage*currentAttackData.KnockBackAmount);
                 }
                 

@@ -5,14 +5,17 @@ using UnityEngine;
 namespace Project
 {
     [CreateAssetMenu(fileName = "AttackB-Melee-Box", menuName = "Enemy Logic/ Attack Logic/ TestBox")]
-    public class EnemyAttackTestBox : EnemyAttackSOBase
+    public class EnemyAttack_B_TestBox : EnemyAttackSOBase
     {
-        public Enemy_Attack_Melee_Base Melee_Attack1;
-        bool Attacking = false;
+        
+        public List<Enemy_Attack_Melee_Base> MeleeAttacks;
+        public List<Enemy_Attack_AOE_Base> AoEAttacks;
+        
 
         public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType type)
         {
             base.DoAnimationTriggerEventLogic(type);
+            
         }
 
         public override void DoEnterLogic()
@@ -27,11 +30,20 @@ namespace Project
 
         public override void DoFrameUpdateLogic()
         {
-            if (Input.GetKeyDown(KeyCode.L) && !Attacking)
+            if (Input.GetKeyDown(KeyCode.L) && !enemy.Attacking)
             {
-                Attacking = true;
-                
+                enemy.TriggerAttack(MeleeAttacks[0]);
             }
+
+            if (Input.GetKeyDown(KeyCode.P) && !enemy.Attacking)
+            {
+                enemy.TriggerAttack(MeleeAttacks[1]);
+            }
+            if(Input.GetKeyDown(KeyCode.R) && !enemy.Attacking)
+            {
+                enemy.TriggerAttack(AoEAttacks[0]);
+            }
+
         }
 
         public override void DoPhysicsLogic()

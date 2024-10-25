@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Project
 {
-    public class Boss : Enemy
+    public class Boss : NavMeshEnemy
     {
         //
         public int currentPhase;

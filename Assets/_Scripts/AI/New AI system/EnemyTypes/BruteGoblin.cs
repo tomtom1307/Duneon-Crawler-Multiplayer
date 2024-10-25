@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Project
 {
-    public class BruteGoblin : Enemy
+    public class BruteGoblin : NavMeshEnemy
     {
         
     }

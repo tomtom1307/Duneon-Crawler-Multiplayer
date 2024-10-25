@@ -17,9 +17,6 @@ namespace Project
         {
             BoxCollider = GetComponent<BoxCollider>();
             TriggerCollider(false);
-
-            
-
         }
 
         

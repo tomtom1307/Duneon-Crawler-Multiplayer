@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Project
 {
-    public class BowGoblin : Enemy
+    public class BowGoblin : NavMeshEnemy
     {
         
     }

@@ -38,34 +38,27 @@ namespace Project
                 
                 TD.DoDamageServerRpc(weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic), true);
 
-                if (!TD.StaticEnemy)
-                {
-                    //TD.DisableNavMeshServerRpc();
-                }
+                
                 
                 if (collider.GetComponent<Rigidbody>() != null)
                 {
-                    if (!TD.navMesh.enabled)
-                    {
+                    //if (!TD.navMesh.enabled)
+                    //{
                         TD.KnockBackServerRpc(Camera.main.transform.position, currentAttackData.KnockBackAmount);
-                    }
+                    //}
                 }
                 
             }
             else
             {
                 weapon.statManager.GiveWeaponXP(3, weapon.statManager.weaponXPscaling);
-                TD =collider.GetComponent<Enemy>();
+                TD = collider.GetComponent<Enemy>();
                 if(TD == null)
                 {
                     TD = collider.GetComponentInParent<Enemy>();    
                 }
                 TD.DoDamageServerRpc(weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
 
-                if (!TD.StaticEnemy)
-                {
-                    //TD.DisableNavMeshServerRpc();
-                }
 
 
                 if (collider.GetComponent<Rigidbody>() != null)

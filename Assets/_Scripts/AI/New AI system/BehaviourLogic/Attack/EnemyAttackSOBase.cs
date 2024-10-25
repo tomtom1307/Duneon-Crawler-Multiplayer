@@ -9,14 +9,15 @@ namespace Project
         protected Enemy enemy;
         protected Transform transform;
         protected GameObject gameObject;
-
+        protected NavMeshEnemy NMEnemy;
         protected Transform target;
-
+        
         public virtual void Initialize(GameObject gameObject, Enemy enemy)
         {
             this.gameObject = gameObject;
             transform = gameObject.transform;
             this.enemy = enemy;
+            gameObject.TryGetComponent<NavMeshEnemy>(out NMEnemy);
         }
 
         public virtual void DoEnterLogic()
@@ -33,7 +34,7 @@ namespace Project
         {
             if (!enemy.IsWithinStrikingDistance)
             {
-                enemy.StateMachine.ChangeState(enemy.ChaseState);
+                NMEnemy.StateMachine.ChangeState(NMEnemy.ChaseState);
             }
         }
 
@@ -41,7 +42,15 @@ namespace Project
 
         public virtual void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType type)
         {
-
+            if (type == Enemy.AnimationTriggerType.FinishedAttacking)
+            {
+                Debug.Log("Finished Attacking");
+                enemy.AttackExit();
+            }
+            if(type == Enemy.AnimationTriggerType.SpawnVFX)
+            {
+                enemy.SpawnFX(enemy.currentAttack.VFX);
+            }
         }
 
         public virtual void ResetValues()

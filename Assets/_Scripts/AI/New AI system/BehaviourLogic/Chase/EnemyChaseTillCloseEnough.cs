@@ -52,12 +52,15 @@ namespace Project
             if (Timer > RecalcPath)
             {
                 Timer = 0;
+                Debug.Log(_targetPos);
+                Debug.Log(enemy);
+
                 enemy.MoveEnemy(_targetPos);
             }
             
         }
 
-        public override void Initialize(GameObject gameObject, Enemy enemy)
+        public override void Initialize(GameObject gameObject, NavMeshEnemy enemy)
         {
             base.Initialize(gameObject, enemy);
         }

@@ -59,14 +59,14 @@ namespace Project
             if (!enemy.Attacking)
             {
                 DesiredPosition = enemy.target.position + OffsetVector;
-                enemy.MoveEnemy(DesiredPosition);
+                NMEnemy.MoveEnemy(DesiredPosition);
             }
             enemy.LookAtTarget();
             _timer += Time.deltaTime;
 
             if (!enemy.IsWithinStrikingDistance)
             {
-                enemy.StateMachine.ChangeState(enemy.ChaseState);
+                NMEnemy.StateMachine.ChangeState(NMEnemy.ChaseState);
                 Debug.Log("Back To Chasing");
             }
 
@@ -79,10 +79,10 @@ namespace Project
             }
 
 
-            if (_timer > (timeBetweenAttacks - Mathf.Clamp((enemy.aggression), 0.1f, 1)) && !enemy.Attacking && enemy.navMesh.isActiveAndEnabled)
+            if (_timer > (timeBetweenAttacks - Mathf.Clamp((enemy.aggression), 0.1f, 1)) && !enemy.Attacking && NMEnemy.navMesh.isActiveAndEnabled)
             {
                 _timer = 0;
-                enemy.navMesh.SetDestination(transform.position);
+                NMEnemy.navMesh.SetDestination(transform.position);
                 enemy.animator.SetBool("Attacking", true);
                 enemy.Attacking = true;
                 Vector3 ArrowDir = enemy.target.position - transform.position;
@@ -116,7 +116,7 @@ namespace Project
         {
             if (enemy.Attacking)
             {
-                enemy.navMesh.SetDestination(transform.position);
+                NMEnemy.navMesh.SetDestination(transform.position);
                 return;
             } 
             Debug.Log("Repositioning");
