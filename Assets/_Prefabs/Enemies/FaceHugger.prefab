@@ -9,7 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7991517518486076927}
-  m_Layer: 0
+  - component: {fileID: 1174416272389453839}
+  - component: {fileID: 5782084157924850947}
+  - component: {fileID: 991801656355769146}
+  m_Layer: 9
   m_Name: FaceHugger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,6 +35,97 @@ Transform:
   - {fileID: 8461005598946905876}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 5.469, z: 0}
+--- !u!114 &1174416272389453839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2281583436380288510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2776280914
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &5782084157924850947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2281583436380288510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b084bd009f20245b307ec629695802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StaticEnemy: 0
+  DamageReduction: 1
+  MaxStaggerHealth: 0
+  <MaxHealth>k__BackingField: 10
+  <maxDetectDist>k__BackingField: 100
+  <AttackDistance>k__BackingField: 4
+  <MeleeRaycastRange>k__BackingField: 0.7
+  HealthBarPrefab: {fileID: 2549967030659645805, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
+    type: 3}
+  HealthBarHeight: 0
+  <AttackDamage>k__BackingField: 4
+  <xpOnKill>k__BackingField: 0
+  <whatisPlayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 0
+  colliders: []
+  ProjectileSpawnPos: {fileID: 0}
+  playerlist: []
+  target: {fileID: 0}
+  aggression: 0.5
+  HeadshotColor: {r: 1, g: -6.6, b: -6.6, a: 1}
+  NormalColor: {r: 1, g: 1, b: 1, a: 1}
+  SpawnedObj: {fileID: 0}
+  RotateSpeed: 100
+  damageText: {fileID: 5493454748374447997, guid: 328779aff6d65a54ea955ca4a033948f,
+    type: 3}
+  Attacking: 0
+  EnemyChaseBase: {fileID: 11400000, guid: 9760cfff5f656224b80f278b21953db7, type: 2}
+  EnemyAttackBase: {fileID: 11400000, guid: ed781e9e9d60b354d99a8820648108d5, type: 2}
+  ChoasCoresOnDeath: 0
+  ChaosCores: {fileID: 5463404818829652139, guid: 0e3116f6437caf74686034388df2a5c2,
+    type: 3}
+  ArmorBuff: 0
+  armorBuffVFX: {fileID: 4890339054365469361, guid: 4b826e943f1a18740b65278d8a753f8d,
+    type: 3}
+  Floating: 0
+  floatHeight: 0
+  Spawner: {fileID: 0}
+--- !u!65 &991801656355769146
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2281583436380288510}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1817324, y: 2.860857, z: 3.053855}
+  m_Center: {x: 0.0028585761, y: 0.27464962, z: 0.64709145}
 --- !u!1 &5107629627301617839
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,7 +137,7 @@ GameObject:
   - component: {fileID: 684919611715816662}
   - component: {fileID: 5025214652210360729}
   - component: {fileID: 8791724919643028241}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Torus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +220,7 @@ GameObject:
   - component: {fileID: 8461005598946905876}
   - component: {fileID: 6976769475068396658}
   - component: {fileID: 2900703030803828474}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,14 +235,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5248091552630757591}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.47217193, y: -0.52635896, z: -0.52635896, w: 0.47217187}
-  m_LocalPosition: {x: 5.290454, y: -2.4599996, z: -0.623436}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 684919611715816662}
   m_Father: {fileID: 7991517518486076927}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -96.212}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
 --- !u!33 &6976769475068396658
 MeshFilter:
   m_ObjectHideFlags: 0
