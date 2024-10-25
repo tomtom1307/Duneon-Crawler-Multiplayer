@@ -121,10 +121,6 @@ namespace Project
 
         public void StartSpawner()
         {
-            
-
-
-
             Active = true;
             Actions.SpawnerUpdate(this, true);
         }
