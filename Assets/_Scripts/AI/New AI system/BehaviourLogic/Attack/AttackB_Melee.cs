@@ -6,16 +6,13 @@ using UnityEngine;
 namespace Project
 {
     [CreateAssetMenu(fileName = "Attack-Melee-Lunge", menuName = "Enemy Logic/ Attack Logic/ Melee-Lunge")]
-    public class EnemyAttackLunge : EnemyAttackSOBase
+    public class AttackB_Melee : EnemyAttackSOBase
     {
-        [field: SerializeField] public float lungeDistance { get; set; } = 4f;
-
+        public Enemy_Attack_Melee_Base[] meleeAttacks;
+        
         private float _timer;
 
         public float timeBetweenAttacks = 2f;
-        private float exitTimer;
-        private float timeTillRetreat = 1;
-        private float distanceTillRetreat;
         bool repositioning = false;
         Vector3 DesiredPosition;
         Vector3 OffsetVector;
@@ -33,10 +30,7 @@ namespace Project
                 enemy.animator.SetBool("Attacking", false);
                 Reposition();
             }
-            else if (type == Enemy.AnimationTriggerType.CallHit)
-            {
-                enemy.Attack();
-            }
+            
 
         }
 
@@ -83,7 +77,7 @@ namespace Project
             {
                 if (!NMEnemy.navMesh.enabled) return;
                 enemy.Attacking = true;
-                
+                /*
                 //Debug.Log("Attacking");
                 Vector3 dir = enemy.target.position - enemy.transform.position;
                 if(dir.magnitude >= lungeDistance)
@@ -96,10 +90,12 @@ namespace Project
                 }
                 //dir = dir.normalized * lungeDistance;
                 dir.y = 0;
-                enemy.animator.SetBool("Attacking", true);
-
                 NMEnemy.navMesh.SetDestination(enemy.transform.position + dir);
                 DOTween.Sequence(enemy.transform.DOMove(enemy.transform.position + dir, 0.2f).SetEase(Ease.InQuad));
+                */
+                //enemy.animator.SetBool("Attacking", true);
+                enemy.TriggerAttack(meleeAttacks[0]);
+                
 
                 
             }

@@ -9,6 +9,7 @@ namespace Project
 {
     public class DamageableThing : NetworkBehaviour
     {
+         
         public Material[] origColors { get; set; }
         public Material[] whites { get; set; }
         [SerializeField] public NetworkVariable<float> CurrentHealth = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone, writePerm: NetworkVariableWritePermission.Owner);

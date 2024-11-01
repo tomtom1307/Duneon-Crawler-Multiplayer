@@ -12,7 +12,7 @@ namespace Project
         {
             base.DoDamageServerRpc(Damage, headshot);
 
-            animator.Play("HitFlinch");
+            animator.Play("HitFlinch", -1, 0f);
         }
 
 

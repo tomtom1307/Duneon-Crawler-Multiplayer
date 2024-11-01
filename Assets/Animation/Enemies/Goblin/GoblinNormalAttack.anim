@@ -55695,11 +55695,18 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.774088
-    functionName: AnimationTriggerEvent
+  - time: 0.56666666
+    functionName: StartHitDetection
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 94b084bd009f20245b307ec629695802,
       type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.96666664
+    functionName: StopHitDetection
+    data: 
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

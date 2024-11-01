@@ -443,7 +443,7 @@ VisualEffect:
       - m_Value: {x: -0, y: 0, z: 0}
         m_Name: Transform_angles
         m_Overridden: 1
-      - m_Value: {x: -23.183, y: -6.953, z: 7.2475}
+      - m_Value: {x: -14.763604, y: -6.9434505, z: -10.4883375}
         m_Name: Transform_position
         m_Overridden: 1
       - m_Value: {x: 1.1909, y: 1.1909, z: 1.1909}
@@ -701,6 +701,8 @@ GameObject:
   - component: {fileID: 5833335877716964575}
   - component: {fileID: 2995266004822814784}
   - component: {fileID: 2351242734678222984}
+  - component: {fileID: 2511881632393355018}
+  - component: {fileID: 1005382605321789543}
   m_Layer: 0
   m_Name: GoblinSword 1
   m_TagString: Untagged
@@ -775,6 +777,40 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2511881632393355018
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2306121488681312871}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.5580142, y: 0.5736508, z: 0.40968907}
+  m_Center: {x: 0.14009503, y: -0.0030448446, z: 0.027939625}
+--- !u!114 &1005382605321789543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2306121488681312871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d48c1e06c95b0324491523844a847614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoxCollider: {fileID: 0}
 --- !u!1 &2527020566761613228
 GameObject:
   m_ObjectHideFlags: 0
@@ -2554,6 +2590,7 @@ GameObject:
   - component: {fileID: 4011773848349809829}
   - component: {fileID: 6988014220805821868}
   - component: {fileID: 501037904413537466}
+  - component: {fileID: 6807813790862960438}
   m_Layer: 9
   m_Name: Goblin2.0
   m_TagString: Untagged
@@ -2592,7 +2629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3117921090
+  GlobalObjectIdHash: 2790197866
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -2632,9 +2669,7 @@ MonoBehaviour:
   HealthBarPrefab: {fileID: 2549967030659645805, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
     type: 3}
   HealthBarHeight: 1
-  EnemyChaseBase: {fileID: 11400000, guid: 99068733950e50b4e8bb60548885e283, type: 2}
-  EnemyAttackBase: {fileID: 11400000, guid: ed781e9e9d60b354d99a8820648108d5, type: 2}
-  Attacks: []
+  ProjectileSpawnPos: {fileID: 0}
   MaxHealth: 15
   MaxStaggerHealth: 0
   maxDetectDist: 100
@@ -2642,10 +2677,12 @@ MonoBehaviour:
   <AttackDamage>k__BackingField: 10
   <xpOnKill>k__BackingField: 5
   ChoasCoresOnDeath: 1
-  ProjectileSpawnPos: {fileID: 0}
+  EnemyAttackBase: {fileID: 11400000, guid: ed781e9e9d60b354d99a8820648108d5, type: 2}
+  currentAttack: {fileID: 0}
   Spawner: {fileID: 0}
   ArmorBuff: 0
   armorBuffVFX: {fileID: 0}
+  EnemyChaseBase: {fileID: 11400000, guid: 99068733950e50b4e8bb60548885e283, type: 2}
   Floating: 0
   floatHeight: 0
 --- !u!54 &5660874745640622168
@@ -2928,6 +2965,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cf43f10b30382a48a7a5ad449626ae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6807813790862960438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7553112160091963360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb3885ddc1bb7a94a9f67495405088c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7555038442735127333
