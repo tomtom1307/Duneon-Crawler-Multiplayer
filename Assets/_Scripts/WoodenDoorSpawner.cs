@@ -48,7 +48,8 @@ namespace Project
         public void TriggerSpawner()
         {
             // Actions.SpawnerUpdate(roomSpawner, true);
-            roomSpawner.StartSpawner();
+            roomSpawner.Active = true;
+            Debug.Log("yes");
         }
         [ClientRpc]
         void DoorSoundClientRpc()
