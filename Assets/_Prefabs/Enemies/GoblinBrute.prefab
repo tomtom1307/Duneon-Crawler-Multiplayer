@@ -2518,6 +2518,7 @@ GameObject:
   - component: {fileID: 1716988141057329569}
   - component: {fileID: 8800288243733829161}
   - component: {fileID: 4503789274289611729}
+  - component: {fileID: 6013135689573503558}
   m_Layer: 9
   m_Name: GoblinBrute
   m_TagString: Untagged
@@ -2576,7 +2577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3252410807
+  GlobalObjectIdHash: 1684162640
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -2604,8 +2605,7 @@ MonoBehaviour:
   aggression: 0.5
   SkinmeshRenderer: {fileID: 0}
   Attacking: 0
-  ChaosCores: {fileID: 5463404818829652139, guid: 0e3116f6437caf74686034388df2a5c2,
-    type: 3}
+  ChaosCores: {fileID: 0}
   damageText: {fileID: 5493454748374447997, guid: 328779aff6d65a54ea955ca4a033948f,
     type: 3}
   HeadshotColor: {r: 1, g: -6.6, b: -6.6, a: 1}
@@ -2616,9 +2616,7 @@ MonoBehaviour:
   HealthBarPrefab: {fileID: 2549967030659645805, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
     type: 3}
   HealthBarHeight: 2
-  EnemyChaseBase: {fileID: 11400000, guid: 99068733950e50b4e8bb60548885e283, type: 2}
-  EnemyAttackBase: {fileID: 11400000, guid: ed781e9e9d60b354d99a8820648108d5, type: 2}
-  Attacks: []
+  ProjectileSpawnPos: {fileID: 0}
   MaxHealth: 60
   MaxStaggerHealth: 30
   maxDetectDist: 100
@@ -2626,10 +2624,12 @@ MonoBehaviour:
   <AttackDamage>k__BackingField: 4
   <xpOnKill>k__BackingField: 100
   ChoasCoresOnDeath: 3
-  ProjectileSpawnPos: {fileID: 0}
+  EnemyAttackBase: {fileID: 11400000, guid: ed781e9e9d60b354d99a8820648108d5, type: 2}
+  currentAttack: {fileID: 0}
   Spawner: {fileID: 0}
   ArmorBuff: 0
   armorBuffVFX: {fileID: 0}
+  EnemyChaseBase: {fileID: 11400000, guid: 99068733950e50b4e8bb60548885e283, type: 2}
   Floating: 0
   floatHeight: 0
 --- !u!136 &457992599098553896
@@ -2685,7 +2685,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5757779941532737132}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2777,6 +2777,18 @@ MonoBehaviour:
   effect: {fileID: 0}
   DissolveSpeed: 0.0125
   refreshRate: 0.025
+--- !u!114 &6013135689573503558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5757779941532737132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb3885ddc1bb7a94a9f67495405088c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5957809120350612664
 GameObject:
   m_ObjectHideFlags: 0
@@ -3226,6 +3238,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3391633777339480667}
+  - component: {fileID: 7569580988211292157}
   m_Layer: 9
   m_Name: mixamorig:Hips
   m_TagString: Untagged
@@ -3251,6 +3264,103 @@ Transform:
   - {fileID: 9090039795052149598}
   m_Father: {fileID: 7852041069222699560}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7569580988211292157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6901884259278719835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneShape: 1
+  drawBones: 1
+  drawTripods: 0
+  boneSize: 1
+  tripodSize: 1
+  boneColor: {r: 0, g: 0, b: 1, a: 0.5}
+  m_Transforms:
+  - {fileID: 3391633777339480667}
+  - {fileID: 1016452376986620535}
+  - {fileID: 8410931553247982949}
+  - {fileID: 7243305519926014294}
+  - {fileID: 6414749786791662790}
+  - {fileID: 3837570765385315533}
+  - {fileID: 2456903465498015101}
+  - {fileID: 8369029384264193158}
+  - {fileID: 5859405007825931463}
+  - {fileID: 2164870614475073384}
+  - {fileID: 8018157253635723693}
+  - {fileID: 3843757851341343448}
+  - {fileID: 2224602317737819660}
+  - {fileID: 9090039795052149598}
+  - {fileID: 5773598152193184827}
+  - {fileID: 7960047232019883889}
+  - {fileID: 5878348615852173383}
+  - {fileID: 8460672850738528987}
+  - {fileID: 3029163003157920051}
+  - {fileID: 753451102201633173}
+  - {fileID: 1505404588632748039}
+  - {fileID: 6749719512638579480}
+  - {fileID: 1224564760194934413}
+  - {fileID: 6272589276297131988}
+  - {fileID: 2255146960737539036}
+  - {fileID: 7980850077879557163}
+  - {fileID: 3842872421939051294}
+  - {fileID: 1047985007792533643}
+  - {fileID: 1155443445822055379}
+  - {fileID: 1669530865748048951}
+  - {fileID: 4588029169423458366}
+  - {fileID: 3816056414801662439}
+  - {fileID: 8457812889215304416}
+  - {fileID: 6581687365141635393}
+  - {fileID: 5668476550569341534}
+  - {fileID: 93124583758940645}
+  - {fileID: 7010307447952302422}
+  - {fileID: 4759869209824614549}
+  - {fileID: 2113348843981292124}
+  - {fileID: 1188182116357020455}
+  - {fileID: 5324248272734063136}
+  - {fileID: 2540672859138054851}
+  - {fileID: 6573479901223995586}
+  - {fileID: 3915243204118774947}
+  - {fileID: 8122166829084794651}
+  - {fileID: 8137340538216958618}
+  - {fileID: 248762028959418193}
+  - {fileID: 6657790738009445810}
+  - {fileID: 8872612847522762099}
+  - {fileID: 4134089305255165148}
+  - {fileID: 5730800376752910052}
+  - {fileID: 6513757978611740408}
+  - {fileID: 6556408526249217112}
+  - {fileID: 6899343992444681453}
+  - {fileID: 8457479335619104375}
+  - {fileID: 8433778979975155372}
+  - {fileID: 6874011467969898092}
+  - {fileID: 211076966180675222}
+  - {fileID: 7299713128635411387}
+  - {fileID: 3894141365058108921}
+  - {fileID: 2929326902293504276}
+  - {fileID: 6816081047107089630}
+  - {fileID: 7704985368591917849}
+  - {fileID: 2252298999185307355}
+  - {fileID: 7957918188669458901}
+  - {fileID: 6809541243783364186}
+  - {fileID: 2972959544537390952}
+  - {fileID: 5823143770013145670}
+  - {fileID: 1376458733196077667}
+  - {fileID: 6336896206656480489}
+  - {fileID: 4896630117234235230}
+  - {fileID: 6776047388934726794}
+  - {fileID: 7518955773100004677}
+  - {fileID: 6546858428872228526}
+  - {fileID: 5960818380268328523}
+  - {fileID: 3076841138166302885}
+  - {fileID: 6799254067660326338}
+  - {fileID: 866145618264692366}
 --- !u!1 &7004522458976727675
 GameObject:
   m_ObjectHideFlags: 0

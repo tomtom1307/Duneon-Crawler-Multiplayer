@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2685770928310696469}
   - component: {fileID: 124663276822063351}
   - component: {fileID: 8105968351628944460}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone Beam 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6745059941196240301}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 13.274073, y: 0, z: -7.9878006}
-  m_LocalScale: {x: 1, y: 1, z: 1.6912702}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.60402, y: 2.1650832, z: 1.0215609}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &2685770928310696469
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3986188387995331715, guid: 64cdea1f37d90b14ca091e4f0e772404, type: 3}
+  - {fileID: 2100000, guid: f892d5e827e4586448bf8b57c046de7b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

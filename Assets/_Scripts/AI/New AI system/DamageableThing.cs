@@ -19,6 +19,7 @@ namespace Project
         [field: SerializeField] public GameObject damageText;
         [field: SerializeField] public float MaxHealth { get; set; } = 100f;
         MeshRenderer MR;
+        SkinnedMeshRenderer SMR;
         public bool DoesNotDestroy;
         public GameObject DestroyVisual;
         private float flashTime = 0.1f;
@@ -29,12 +30,22 @@ namespace Project
 
         private void Start()
         {
-            
-            ded = false;
-            MR = gameObject.GetComponentInChildren<MeshRenderer>();
-            origColors = MR.materials;
-            whites = MR.materials;
             CurrentHealth.Value = MaxHealth;
+            ded = false;
+            if (!TryGetComponent<MeshRenderer>(out MR))
+            {
+                SMR = GetComponentInChildren<SkinnedMeshRenderer>();
+                if (SMR == null) return;
+                origColors = SMR.materials;
+                whites = SMR.materials;
+            }
+            else
+            {
+                origColors = MR.materials;
+                whites = MR.materials;
+            }
+            
+            
            
 
         }

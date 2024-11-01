@@ -20,7 +20,12 @@ namespace Project
             if(collider.tag == "Damageable")
             {
                 DamageableThing DT = collider.GetComponent<DamageableThing>();
+                if ((DT == null))
+                {
+                    DT = collider.GetComponentInParent<DamageableThing>();
+                }
                 DT.TakeDamageServerRpc(weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
+                return;
             }
 
             else if(collider.tag == "Projectile")
