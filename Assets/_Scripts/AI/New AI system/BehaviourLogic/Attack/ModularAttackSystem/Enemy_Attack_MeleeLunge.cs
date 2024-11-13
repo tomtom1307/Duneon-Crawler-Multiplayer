@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +10,22 @@ namespace Project
     {
 
         public float LungeDistance;
+        public float LungeSpeed;
         public override void Attack(PlayerStats ps, Enemy enemy)
         {
             base.Attack(ps, enemy);
+
+            Vector3 dir = ps.transform.position - enemy.transform.position;
+            dir.y = 0;
+            
+            if (Vector3.Distance(ps.transform.position, enemy.transform.position) > LungeDistance)
+            {
+                dir = dir.normalized;
+            }
+            
+            
+            enemy.transform.DOMove(enemy.transform.position + dir * LungeDistance, LungeSpeed).SetEase(Ease.OutQuint);
+            
         }
 
         public override void Detect(Enemy_Attack_ColliderDetector detector)

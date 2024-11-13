@@ -29,7 +29,7 @@ namespace Project
         public bool Invincible;
 
 
-        private void Start()
+        public virtual void Start()
         {
             CurrentHealth.Value = MaxHealth;
             ded = false;
@@ -52,20 +52,25 @@ namespace Project
         }
 
 
-        
+        public virtual void OnDamaged()
+        {
+        }
 
 
         [ServerRpc(RequireOwnership = false)]
-        public void TakeDamageServerRpc(float Damage)
+        public virtual void TakeDamageServerRpc(float Damage)
         {
             if (Invincible) return;
             CurrentHealth.Value -= Damage;
             if(CurrentHealth.Value <= 0)
             {
                 ded = true;
+                HealthBarCanvas.gameObject.SetActive(false);
+                Invincible = true;
                 if (DoesNotDestroy)
                 {
                     Destroy(DestroyVisual);
+                    
                 }
                 else
                 {
@@ -100,7 +105,10 @@ namespace Project
         void FlashStart()
         {
 
-            MR.SetMaterials(whites.ToList());
+            if(MR != null)
+            {
+                MR.SetMaterials(whites.ToList());
+            }
 
 
 
@@ -109,7 +117,11 @@ namespace Project
 
         void FlashEnd()
         {
-            MR.SetMaterials(origColors.ToList());
+            if (MR != null)
+            {
+                MR.SetMaterials(origColors.ToList());
+            }
+            
         }
 
         void GenerateDamageNumber(float dam)

@@ -18,6 +18,11 @@ namespace Project
             enemy.AnimationTriggerEvent(triggerType);
         }
 
+        public void AttackLogic()
+        {
+            enemy.DoAttackLogic();
+        }
+
         public void StartHitDetection()
         {
             enemy.AttackDetect();

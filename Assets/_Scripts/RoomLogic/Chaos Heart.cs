@@ -37,9 +37,6 @@ namespace Project
 
 
                 //Do The Roar
-                CHChandalier.DT.ToggleInvincibility(false);
-                DT.ToggleInvincibility(true);
-                TentacleAnim.SetTrigger("Protect");
                 spawner.TriggerNextRound();
             }
             if (DT.ded)

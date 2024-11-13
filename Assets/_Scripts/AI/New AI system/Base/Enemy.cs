@@ -99,7 +99,8 @@ namespace Project
         [Header("Enemy States")]
         [SerializeField] private EnemyAttackSOBase EnemyAttackBase;
         
-        public Enemy_Attack currentAttack;
+        public Enemy_Attack currentAttack {  get; set; }
+        public PlayerStats currentPlayer { get; set; }
 
         #region StateMachine Variables
 
@@ -396,11 +397,13 @@ namespace Project
 
         public void TriggerAttack(Enemy_Attack EA)
         {
+            Attacking = true;
             currentAttack = EA;
             currentAttack.EnterLogic(this);
             animator.SetInteger("AttackInt", EA.AnimationIntValue);
-            Attacking = true;
             animator.SetBool("Attacking", true);
+            
+            
         }
 
 
@@ -520,12 +523,13 @@ namespace Project
         public void PlayerHitLogic(PlayerStats ps)
         {
             currentAttack.playerHitLogic(ps ,this);
+            currentPlayer = ps;
         }
 
 
         public void DoAttackLogic()
         {
-            
+            currentAttack.Attack(currentPlayer ,this);
         }
 
         #region Detection Helper Functions
@@ -619,6 +623,7 @@ namespace Project
                 {
                     MinDist = Vector3.Distance(transform.position, item.position);
                     target = item;
+                    currentPlayer = item.GetComponent<PlayerStats>();
                 }
             }
 

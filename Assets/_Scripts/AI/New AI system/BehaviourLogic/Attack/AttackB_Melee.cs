@@ -25,9 +25,7 @@ namespace Project
             if (type == Enemy.AnimationTriggerType.FinishedAttacking)
             {
                 _timer = Random.Range(0f, 1.5f);
-                enemy.Attacking = false;
                 Debug.Log("AttackAnimationFinished!");
-                enemy.animator.SetBool("Attacking", false);
                 Reposition();
             }
             
@@ -36,11 +34,12 @@ namespace Project
 
         public override void DoEnterLogic()
         {
+            Debug.Log("AttackEnterLogic");
             //Debug.Log("Attacking");
             //enemy.navMesh.velocity = Vector3.zero;
             base.DoEnterLogic();
-            _timer = timeBetweenAttacks;
-            Reposition();
+            enemy.TriggerAttack(meleeAttacks[0]);
+            enemy.Attacking = false;
             NMEnemy.navMesh.updateRotation = false;
            
         }
@@ -76,24 +75,6 @@ namespace Project
             if (_timer > (timeBetweenAttacks) && !enemy.Attacking)
             {
                 if (!NMEnemy.navMesh.enabled) return;
-                enemy.Attacking = true;
-                /*
-                //Debug.Log("Attacking");
-                Vector3 dir = enemy.target.position - enemy.transform.position;
-                if(dir.magnitude >= lungeDistance)
-                {
-                    dir = lungeDistance*dir.normalized;
-                }
-                else
-                {
-                    dir = 0.8f * dir;
-                }
-                //dir = dir.normalized * lungeDistance;
-                dir.y = 0;
-                NMEnemy.navMesh.SetDestination(enemy.transform.position + dir);
-                DOTween.Sequence(enemy.transform.DOMove(enemy.transform.position + dir, 0.2f).SetEase(Ease.InQuad));
-                */
-                //enemy.animator.SetBool("Attacking", true);
                 enemy.TriggerAttack(meleeAttacks[0]);
                 
 

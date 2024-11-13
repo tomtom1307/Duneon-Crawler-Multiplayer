@@ -29,7 +29,7 @@ namespace Project
             enemy.target = enemy.DetectPlayer();
             enemy.animator.SetBool("Attacking", false);
             Vector3 randomPos = new Vector3(Random.Range(-1f,1f),0, Random.Range(-1f, 1f)).normalized;
-            _targetPos = enemy.target.position +  enemy.AttackDistance * (randomPos + enemy.transform.position - enemy.target.position).normalized;
+            _targetPos = enemy.target.position + 0.5f * enemy.AttackDistance * (randomPos + enemy.transform.position - enemy.target.position).normalized;
             enemy.MoveEnemy(_targetPos);
         }
 
@@ -48,12 +48,10 @@ namespace Project
             Timer += Time.deltaTime;
             base.DoFrameUpdateLogic();
             Vector3 randomPos = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
-            _targetPos = enemy.target.position + enemy.AttackDistance * (randomPos + enemy.transform.position - enemy.target.position).normalized;
+            _targetPos = enemy.target.position + 0.5f*enemy.AttackDistance * (randomPos + enemy.transform.position - enemy.target.position).normalized;
             if (Timer > RecalcPath)
             {
                 Timer = 0;
-                Debug.Log(_targetPos);
-                Debug.Log(enemy);
 
                 enemy.MoveEnemy(_targetPos);
             }

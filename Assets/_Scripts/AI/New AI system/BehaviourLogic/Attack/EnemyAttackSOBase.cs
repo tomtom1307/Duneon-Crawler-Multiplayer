@@ -18,6 +18,7 @@ namespace Project
             transform = gameObject.transform;
             this.enemy = enemy;
             gameObject.TryGetComponent<NavMeshEnemy>(out NMEnemy);
+            Debug.Log("NAVMESH ENEMY:", NMEnemy);
         }
 
         public virtual void DoEnterLogic()

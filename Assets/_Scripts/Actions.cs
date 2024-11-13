@@ -16,5 +16,10 @@ namespace Project
             Debug.Log("Initialized Actions");
         }
 
+
+        // Chaos Heart Room 
+        public static Action TriggerShieldGenerator;
+        public static Action<ShieldGeneratorTentacle, bool> ShieldGeneratorTentacleUpdate;
+
     }
 }

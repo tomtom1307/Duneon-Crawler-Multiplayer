@@ -85,7 +85,6 @@ namespace Project
 
         public void MoveEnemy(Vector3 targetPosition)
         {
-            Debug.Log(navMesh);
             if (!navMesh.enabled) return;
 
 

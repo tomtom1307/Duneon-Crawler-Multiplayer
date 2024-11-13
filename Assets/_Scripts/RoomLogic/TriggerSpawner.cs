@@ -37,6 +37,7 @@ namespace Project
         {
             print("Triggered");
             //Put Condition for players inside run 
+            
             spawner.Active = true;
             
         }
