@@ -59,7 +59,8 @@ namespace Project
         #endregion
 
         public GameObject SpawnedObj { get; set; }
-        
+        public GameObject DesignatedRoom { get; set; }
+
         //VFX Stuff
         [HideInInspector] public SkinnedMeshRenderer SkinmeshRenderer;
         
@@ -244,7 +245,7 @@ namespace Project
 
         
 
-        #region Recieving Damage and KnockBack
+        #region Receiving Damage and KnockBack
 
 
         //So That can check for boss phase changes.
@@ -396,6 +397,7 @@ namespace Project
         public void TriggerAttack(Enemy_Attack EA)
         {
             currentAttack = EA;
+            currentAttack.EnterLogic(this);
             animator.SetInteger("AttackInt", EA.AnimationIntValue);
             Attacking = true;
             animator.SetBool("Attacking", true);
@@ -493,7 +495,7 @@ namespace Project
 
         public virtual void AttackExit()
         {
-            
+            currentAttack.ExitLogic(this);
             currentAttack = null;
             animator.SetBool("Attacking", false);
             animator.SetInteger("AttackInt", 0);
@@ -536,7 +538,7 @@ namespace Project
             }
         }
 
-        public void DisbleMeleeCollider()
+        public void DisableMeleeCollider()
         {
             foreach (var detector in colliderDetector)
             {

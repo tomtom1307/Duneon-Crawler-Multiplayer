@@ -38,5 +38,11 @@ namespace Project
         public virtual void Detect(Enemy_Attack_ColliderDetector detector){}
 
         public virtual void StopDetecting(Enemy_Attack_ColliderDetector detector){}
+
+        // AttackLogic
+
+        public virtual void EnterLogic(Enemy enemy) {}
+
+        public virtual void ExitLogic(Enemy enemy){}
     }
 }

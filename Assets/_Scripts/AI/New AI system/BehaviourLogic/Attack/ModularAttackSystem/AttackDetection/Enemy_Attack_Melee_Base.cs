@@ -13,7 +13,7 @@ namespace Project
 
         public override void StopDetecting(Enemy enemy)
         {
-            enemy.DisbleMeleeCollider();
+            enemy.DisableMeleeCollider();
         }
 
 

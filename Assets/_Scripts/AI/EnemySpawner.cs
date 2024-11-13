@@ -199,6 +199,8 @@ namespace Project
             var Instance = Instantiate(currentSpawn, pos, rot);
             Enemy En = Instance.GetComponent<Enemy>();
             En.Spawner = this;
+            En.DesignatedRoom = GetComponentInParent<Room>().gameObject;
+            //Debug.Log("yabadabadoo:");
             var InstanceNetworkObj = Instance.GetComponent<NetworkObject>();
             InstanceNetworkObj.Spawn();
 
