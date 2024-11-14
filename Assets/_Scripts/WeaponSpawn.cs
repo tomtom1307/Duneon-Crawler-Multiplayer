@@ -84,6 +84,10 @@ public class WeaponSpawn : _Interactable
         //Make non interactable
         displayModel.layer = 0;
 
+
+        //Allow weapon to be interacted with
+        isActive = true;
+
         //Do the same for subsequent meshes 
         List<MeshRenderer> MRS = displayModel.GetComponentsInChildren<MeshRenderer>().ToList();
         foreach (var item in MRS)
@@ -178,6 +182,8 @@ public class WeaponSpawn : _Interactable
     //Interact function
     protected override void Interact()
     {
+        if (!isActive) return;
+        isActive = false;
         //Spawn into the inventory 
         inventory.SpawnInventoryItem(Raritycolor[index], item);
 

@@ -8,7 +8,15 @@ namespace Project
     public abstract class _Interactable : NetworkBehaviour
     {
         public string Prompt = "[F]";
+        public bool isActive;
         [HideInInspector] public GameObject interacter;
+
+        private void Start()
+        {
+            isActive = true;
+        }
+
+
 
         public void BaseInteract(GameObject GO = null)
         {

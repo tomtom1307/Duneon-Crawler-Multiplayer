@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 7245206222951380618}
   m_Layer: 9
   m_Name: Bone.003
-  m_TagString: Untagged
+  m_TagString: Damageable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -489,7 +489,7 @@ GameObject:
   - component: {fileID: 2314284903810760400}
   m_Layer: 9
   m_Name: ShieldGeneratorTentacle
-  m_TagString: Untagged
+  m_TagString: Damageable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -672,10 +672,10 @@ GameObject:
   - component: {fileID: 4051062482223921457}
   - component: {fileID: 9220441397731038699}
   - component: {fileID: 3585557546516793438}
-  - component: {fileID: 5074942078999873947}
+  - component: {fileID: 1325545721457163419}
   m_Layer: 9
   m_Name: ShieldGeneratorTentacle
-  m_TagString: Untagged
+  m_TagString: Damageable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -771,7 +771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2608169414
+  GlobalObjectIdHash: 126564241
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -779,7 +779,7 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &5074942078999873947
+--- !u!114 &1325545721457163419
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -788,17 +788,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 8662950213038557066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8af8f848cc6b63c4383a2d85981efc9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b7f205a9ff403943aa7e9e4fafb1df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentHealth:
     m_InternalValue: 0
-  HealthBar: {fileID: 0}
-  HealthBarCanvas: {fileID: 0}
-  <NormalColor>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
-  damageText: {fileID: 0}
-  <MaxHealth>k__BackingField: 100
-  DoesNotDestroy: 0
+  HealthBar: {fileID: 8502264259405475714}
+  HealthBarCanvas: {fileID: 503190266167236584}
+  <NormalColor>k__BackingField: {r: 1, g: 1, b: 1, a: 0}
+  damageText: {fileID: 5493454748374447997, guid: 328779aff6d65a54ea955ca4a033948f,
+    type: 3}
+  <MaxHealth>k__BackingField: 10
+  DoesNotDestroy: 1
   DestroyVisual: {fileID: 0}
   TimeLeftAfterDeath: 0
   ded: 0
@@ -920,22 +921,22 @@ PrefabInstance:
     - target: {fileID: 8865934045259385787, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.84906036
+      value: 0.84926605
       objectReference: {fileID: 0}
     - target: {fileID: 8865934045259385787, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.0026883304
       objectReference: {fileID: 0}
     - target: {fileID: 8865934045259385787, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.528296
+      value: -0.5279583
       objectReference: {fileID: 0}
     - target: {fileID: 8865934045259385787, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.000108278575
       objectReference: {fileID: 0}
     - target: {fileID: 8865934045259385787, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
         type: 3}
@@ -950,26 +951,44 @@ PrefabInstance:
     - target: {fileID: 8865934045259385787, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -0.268
       objectReference: {fileID: 0}
     - target: {fileID: 8865934045259385787, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -63.781
+      value: -63.736
       objectReference: {fileID: 0}
     - target: {fileID: 8865934045259385787, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 0.152
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c, type: 3}
+--- !u!223 &503190266167236584 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7570013475867891251, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
+    type: 3}
+  m_PrefabInstance: {fileID: 8067538782847730139}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1513077318030576224 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8865934045259385787, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
     type: 3}
   m_PrefabInstance: {fileID: 8067538782847730139}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8502264259405475714 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1876799877737836121, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
+    type: 3}
+  m_PrefabInstance: {fileID: 8067538782847730139}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
