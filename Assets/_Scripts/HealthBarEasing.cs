@@ -1,12 +1,13 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Project
 {
-    public class HealthBarEasing : MonoBehaviour
+    public class HealthBarEasing : NetworkBehaviour
     {
         // Start is called before the first frame update
         public Image health;

@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Project
 {
-    public class Enemy_Attack_ColliderDetector : MonoBehaviour
+    public class Enemy_Attack_ColliderDetector : NetworkBehaviour
     {
         [HideInInspector] public BoxCollider BoxCollider;
         public event Action<PlayerStats> playerDetected;

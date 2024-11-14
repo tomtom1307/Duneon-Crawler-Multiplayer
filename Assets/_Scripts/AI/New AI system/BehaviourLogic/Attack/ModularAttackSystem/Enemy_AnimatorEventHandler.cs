@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Project
 {
-    public class Enemy_AnimatorEventHandler : MonoBehaviour
+    public class Enemy_AnimatorEventHandler : NetworkBehaviour
     {
         Enemy enemy;
 
