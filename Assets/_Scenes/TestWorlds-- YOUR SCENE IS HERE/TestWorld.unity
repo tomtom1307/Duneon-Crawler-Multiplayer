@@ -2269,8 +2269,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.3433962, g: 0.3433962, b: 0.3433962, a: 1}
-  m_Intensity: 0.5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0.12
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2313,7 +2313,7 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1.22
-  m_ColorTemperature: 6968
+  m_ColorTemperature: 7185
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -2328,13 +2328,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341422617}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.93875813, y: -0.27419233, z: 0.1793728, w: 0.106663704}
   m_LocalPosition: {x: -436.75003, y: -261.00342, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 920283891}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 17.375, y: -196.953, z: -150.045}
 --- !u!114 &341422620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5972,7 +5972,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &744043145
 Transform:
   m_ObjectHideFlags: 0
@@ -5981,13 +5981,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744043144}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.12211791, y: -0.21474017, z: 0.96862835, w: -0.027072707}
+  m_LocalRotation: {x: -0.12177173, y: -0.2026783, z: 0.9712239, w: -0.028589347}
   m_LocalPosition: {x: -436.75003, y: -261.00342, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 920283891}
-  m_LocalEulerAnglesHint: {x: 155, y: -194.371, z: 0}
+  m_LocalEulerAnglesHint: {x: 156.381, y: -194.212, z: 0.3860016}
 --- !u!114 &744043146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6023,7 +6023,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 0.22
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

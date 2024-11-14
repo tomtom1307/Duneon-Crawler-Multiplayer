@@ -498,8 +498,13 @@ namespace Project
 
         public virtual void AttackExit()
         {
-            currentAttack.ExitLogic(this);
-            currentAttack = null;
+            if (currentAttack != null)
+            {
+                currentAttack.ExitLogic(this);
+                currentAttack = null;
+            }
+            
+            
             animator.SetBool("Attacking", false);
             animator.SetInteger("AttackInt", 0);
             Attacking = false;

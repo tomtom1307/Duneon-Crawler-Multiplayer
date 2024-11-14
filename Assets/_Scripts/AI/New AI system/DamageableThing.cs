@@ -65,7 +65,10 @@ namespace Project
             if(CurrentHealth.Value <= 0)
             {
                 ded = true;
-                HealthBarCanvas.gameObject.SetActive(false);
+                if(HealthBarCanvas != null)
+                {
+                    HealthBarCanvas.gameObject.SetActive(false);
+                }
                 Invincible = true;
                 if (DoesNotDestroy)
                 {

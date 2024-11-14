@@ -367,6 +367,7 @@ GameObject:
   - component: {fileID: 6819155638037708445}
   - component: {fileID: 2183878522249519581}
   - component: {fileID: 5551894037036776275}
+  - component: {fileID: 7490986132982247970}
   m_Layer: 0
   m_Name: MainHall
   m_TagString: Untagged
@@ -460,6 +461,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playersIn: 0
+--- !u!114 &7490986132982247970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321210293417115530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9af2753505376734696e2685d38351f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: {x: 0, y: 0}
+  prefab: {fileID: 0}
+  ocupied: []
+  DoorPos: 
+  CorridorStartPos: []
+  Considered: 0
 --- !u!1 &1349203637389373753
 GameObject:
   m_ObjectHideFlags: 0
@@ -3568,7 +3587,7 @@ GameObject:
   - component: {fileID: 8734598835892823987}
   - component: {fileID: 5111936103521468814}
   - component: {fileID: 696978361277138841}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5923,7 +5942,7 @@ PrefabInstance:
     - target: {fileID: 2818720292422201993, guid: 5b40d944c20ea444db6bffe09534bfdf,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.624
+      value: 2.744
       objectReference: {fileID: 0}
     - target: {fileID: 2818720292422201993, guid: 5b40d944c20ea444db6bffe09534bfdf,
         type: 3}
@@ -5974,8 +5993,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -876546973899608171, guid: 169dee78e811e9240bf0b5f8eb42ec97,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: 1916a875e3232904281dbdd846eef5af, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
