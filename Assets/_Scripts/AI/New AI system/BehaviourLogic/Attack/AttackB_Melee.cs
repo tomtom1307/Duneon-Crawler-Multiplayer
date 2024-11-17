@@ -10,7 +10,6 @@ namespace Project
     {
         public Enemy_Attack_Melee_Base[] meleeAttacks;
         
-        private float _timer;
 
         public float timeBetweenAttacks = 2f;
         bool repositioning = false;
@@ -38,6 +37,7 @@ namespace Project
             //Debug.Log("Attacking");
             //enemy.navMesh.velocity = Vector3.zero;
             base.DoEnterLogic();
+            NMEnemy.navMesh.SetDestination(target.position);
             enemy.TriggerAttack(meleeAttacks[0]);
             enemy.Attacking = false;
             NMEnemy.navMesh.updateRotation = false;
@@ -76,8 +76,7 @@ namespace Project
             {
                 if (!NMEnemy.navMesh.enabled) return;
                 enemy.TriggerAttack(meleeAttacks[0]);
-                
-
+                NMEnemy.navMesh.SetDestination(target.position);
                 
             }
 

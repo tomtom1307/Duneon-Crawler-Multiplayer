@@ -2519,6 +2519,7 @@ GameObject:
   - component: {fileID: 8800288243733829161}
   - component: {fileID: 4503789274289611729}
   - component: {fileID: 6013135689573503558}
+  - component: {fileID: 8569976317996902898}
   m_Layer: 9
   m_Name: GoblinBrute
   m_TagString: Untagged
@@ -2577,7 +2578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2775320531
+  GlobalObjectIdHash: 1684162640
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -2597,8 +2598,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017b752cde65b3e448f6c0d8d1430a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnFXSize: 2.3
   DamageReduction: 1
-  <AttackDistance>k__BackingField: 4
+  <AttackDistance>k__BackingField: 2
   <MeleeRaycastRange>k__BackingField: 0.7
   playerlist: []
   target: {fileID: 0}
@@ -2625,11 +2627,11 @@ MonoBehaviour:
   <AttackDamage>k__BackingField: 4
   <xpOnKill>k__BackingField: 100
   ChoasCoresOnDeath: 3
-  EnemyAttackBase: {fileID: 11400000, guid: ed781e9e9d60b354d99a8820648108d5, type: 2}
-  currentAttack: {fileID: 0}
+  EnemyAttackBase: {fileID: 11400000, guid: 00004714f0d4a1d488083d3d692004a6, type: 2}
   Spawner: {fileID: 0}
   ArmorBuff: 0
   armorBuffVFX: {fileID: 0}
+  DisableOnStart: 0
   EnemyChaseBase: {fileID: 11400000, guid: 99068733950e50b4e8bb60548885e283, type: 2}
   Floating: 0
   floatHeight: 0
@@ -2788,6 +2790,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb3885ddc1bb7a94a9f67495405088c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8569976317996902898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5757779941532737132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cf43f10b30382a48a7a5ad449626ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5957809120350612664

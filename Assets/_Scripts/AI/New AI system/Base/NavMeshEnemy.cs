@@ -15,7 +15,7 @@ namespace Project
     [RequireComponent(typeof(Animator))]
     public class NavMeshEnemy : Enemy
     {
-
+        public bool DisableOnStart;
         [Header("Additional Enemy States")]
         [SerializeField] private EnemyChaseSOBase EnemyChaseBase;
 
@@ -40,7 +40,9 @@ namespace Project
         {
             
             navMesh = GetComponent<NavMeshAgent>();
-
+            if (DisableOnStart) {
+                gameObject.SetActive(false);
+            }
             base.Start();
             print(navMesh);
             navMesh.avoidancePriority = Random.Range(0, 50);
@@ -141,7 +143,7 @@ namespace Project
         }
 
         [ServerRpc(RequireOwnership = false)]
-        public void DisableNavMeshServerRpc()
+        public void DisableNavMeshServerRpc(bool DisableAutoReenable = false)
         {
 
             if (Floating) return;
@@ -156,6 +158,7 @@ namespace Project
                 navMesh.enabled = false;
                 //animator.Play("Hit", -1, 0f);
                 animator.applyRootMotion = false;
+                if (DisableAutoReenable) return;
                 Invoke("EnableNavMeshServerRpc", 1f);
             }
 

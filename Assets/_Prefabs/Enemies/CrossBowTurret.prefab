@@ -230,6 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e161e7887cb648a4faa6af107d5761a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnFXSize: 1
   DamageReduction: 1
   <AttackDistance>k__BackingField: 15
   <MeleeRaycastRange>k__BackingField: 0.7
@@ -259,7 +260,6 @@ MonoBehaviour:
   <xpOnKill>k__BackingField: 10
   ChoasCoresOnDeath: 2
   EnemyAttackBase: {fileID: 11400000, guid: 40cffd7b8b88dfd4ebeb8ed8611d79f7, type: 2}
-  currentAttack: {fileID: 0}
   Spawner: {fileID: 0}
   ArmorBuff: 0
   armorBuffVFX: {fileID: 0}

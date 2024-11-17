@@ -187,7 +187,9 @@ namespace Project
 
         public IEnumerator DelayedSpawn(Vector3 pos, Quaternion rot, float delay, int index)
         {
-            GameManager.instance.DoSpawnEffect(pos, Quaternion.identity);
+            float size = Prefabs[index].GetComponent<Enemy>().SpawnFXSize;
+            print("SpawnFXSize;"+size);
+            GameManager.instance.DoSpawnEffect(pos, Quaternion.identity, size);
             yield return new WaitForSeconds(delay);
             SpawnEnemyWithPositionServerRpc(pos, rot, index);
         }

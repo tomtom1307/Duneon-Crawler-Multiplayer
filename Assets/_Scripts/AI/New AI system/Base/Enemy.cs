@@ -15,7 +15,7 @@ namespace Project
     [RequireComponent(typeof(Enemy_AnimatorEventHandler))]
     public class Enemy : NetworkBehaviour, ITriggerCheckable
     {
-
+        public float SpawnFXSize = 1;
         #region Definitions
 
         #region Hidden Stats
@@ -241,7 +241,7 @@ namespace Project
 
             InitializeStateMachine();
 
-            
+            target = DetectPlayer();
         }
 
         
@@ -450,24 +450,29 @@ namespace Project
 
         }
 
-        public void SpawnObj(GameObject spawnObj,Vector3 Pos)
+        public void SpawnProjectile(GameObject spawnObj,Vector3 Pos, float Speed, float Damage, bool Gravity = true)
         {
             //Set Reference to object since gameobjects can't be passed as variables for Rpc's
             SpawnedObj = spawnObj;
 
             //Call Rpc
-            SpawnObjServerRpc(Pos);
+            SpawnObjServerRpc(Pos, Speed, Damage, Gravity);
         }
 
 
         [ServerRpc(RequireOwnership = false)]
-        public void SpawnObjServerRpc(Vector3 Pos)
+        public void SpawnObjServerRpc(Vector3 Pos, float Speed, float Damage, bool Gravity)
         {
-            
-            Vector3 DirVec = -(transform.position - target.position).normalized;
+            Vector3 DirVec = -(ProjectileSpawnPos.position - currentPlayer.transform.position).normalized;
             var projectile = Instantiate(SpawnedObj, Pos ,Quaternion.identity);
             projectile.GetComponent<NetworkObject>().Spawn();
-            projectile.GetComponent<Projectile>().Direction = DirVec;
+
+
+            Projectile proj = projectile.GetComponent<Projectile>();
+            proj.Direction = DirVec;
+            proj.Speed = Speed;
+            proj.damage = Damage;
+            proj.GetComponent<Rigidbody>().useGravity = Gravity;
             
             Destroy(projectile,5);
         }
@@ -476,6 +481,19 @@ namespace Project
         public void SpawnFX(GameObject Go)
         {
             Instantiate(Go, transform.position, Quaternion.identity);
+        }
+
+        
+        public bool LOS(Vector3 TargetPos)
+        {
+            if(Physics.Raycast(transform.position, TargetPos - transform.position, 100, whatisPlayer))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool CheckLOS(out Vector3 opposingDirection)
@@ -580,13 +598,39 @@ namespace Project
             return (-1 / 1.7f)* Mathf.Pow(playerDistance/ r, 2) + 1; 
         }
 
+        public void EnableNavMesh(bool x)
+        {
+            //Cast this script as a NavmeshEnemy script if this works then trigger respective RPC logic
+            NavMeshEnemy NME = this as NavMeshEnemy;
+
+            if (NME != null)
+            {
+                if (x)
+                {
+                    NME.EnableNavMeshServerRpc();
+                }
+                else if (!x)
+                {
+                    NME.DisableNavMeshServerRpc(true);
+                }
+            }
+
+            //Otherwise
+            else
+            {
+                return;
+            }
+
+        }
+
+
         #endregion
 
 
 
         #endregion
 
-        public void LookAtTarget()
+        public virtual void LookAtTarget()
         {
             Vector3 lookPos = target.position - transform.position;
             lookPos.y = 0;

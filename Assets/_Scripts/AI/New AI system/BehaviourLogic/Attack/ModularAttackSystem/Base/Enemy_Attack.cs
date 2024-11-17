@@ -11,6 +11,7 @@ namespace Project
         public string AttackAnimationName;
         public int AnimationIntValue;
         public float Damage;
+        public bool DisableNavMesh = false;
         public GameObject VFX;
 
         // Base Attack that Does nothing so far lol
@@ -41,8 +42,20 @@ namespace Project
 
         // AttackLogic
 
-        public virtual void EnterLogic(Enemy enemy) {}
+        public virtual void EnterLogic(Enemy enemy) {
+            if (DisableNavMesh)
+            {
+                enemy.EnableNavMesh(false);
+            }
+        }
 
-        public virtual void ExitLogic(Enemy enemy){}
+        public virtual void ExitLogic(Enemy enemy)
+        {
+            if (DisableNavMesh)
+            {
+                enemy.EnableNavMesh(true);
+            }
+        }
+
     }
 }

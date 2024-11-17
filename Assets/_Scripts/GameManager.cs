@@ -80,17 +80,21 @@ namespace Project
         }
 
 
-        public void DoSpawnEffect(Vector3 pos,  Quaternion rot)
+        public void DoSpawnEffect(Vector3 pos,  Quaternion rot, float size)
         {
             SpawnObj = SpawnEffect;
-            SpawnObjectServerRpc(pos, rot, pos);
+            SpawnObjectServerRpc(pos, rot, pos, size);
         }
 
 
         [ServerRpc(RequireOwnership =false)]
-        public void SpawnObjectServerRpc(Vector3 pos, Quaternion rot, Vector3 finalPos)
+        public void SpawnObjectServerRpc(Vector3 pos, Quaternion rot, Vector3 finalPos, float size = 0)
         {
             var SpawnedObj = Instantiate(SpawnObj, pos, rot);
+            if(SpawnedObj.TryGetComponent<ChaosSpawnFX>(out ChaosSpawnFX fx))
+            {
+                SpawnedObj.transform.localScale = size * transform.localScale;
+            }
             NetworkObject NO = SpawnedObj.GetComponent<NetworkObject>();
             if(NO != null) { NO.Spawn();
                 Invoke("NO.Despawn", 5);

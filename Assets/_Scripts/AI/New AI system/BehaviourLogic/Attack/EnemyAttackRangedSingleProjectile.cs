@@ -8,7 +8,9 @@ namespace Project
     [CreateAssetMenu(fileName = "Attack-SingleRanged", menuName = "Enemy Logic/ Attack Logic/ Single Projectile logic")]
     public class EnemyAttackRangedSingleProjectile : EnemyAttackSOBase
     {
-        public GameObject Projectile;
+
+        public Enemy_Attack rangedAttack;
+        
         private float _timer;
 
         public float timeBetweenAttacks = 2f;
@@ -34,7 +36,8 @@ namespace Project
             }
             else if (type == Enemy.AnimationTriggerType.SpawnProjectile)
             {
-                enemy.SpawnObj(Projectile, enemy.ProjectileSpawnPos.position);
+                //enemy.SpawnObj(Projectile, enemy.ProjectileSpawnPos.position);
+                
             }
 
         }
@@ -83,9 +86,7 @@ namespace Project
             {
                 _timer = 0;
                 NMEnemy.navMesh.SetDestination(transform.position);
-                enemy.animator.SetBool("Attacking", true);
-                enemy.Attacking = true;
-                Vector3 ArrowDir = enemy.target.position - transform.position;
+                enemy.TriggerAttack(rangedAttack);
 
             }
 

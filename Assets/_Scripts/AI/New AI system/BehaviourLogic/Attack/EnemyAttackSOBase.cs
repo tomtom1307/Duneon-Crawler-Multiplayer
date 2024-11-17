@@ -11,6 +11,7 @@ namespace Project
         protected GameObject gameObject;
         protected NavMeshEnemy NMEnemy;
         protected Transform target;
+        [HideInInspector] public float _timer;
         
         public virtual void Initialize(GameObject gameObject, Enemy enemy)
         {
@@ -23,17 +24,17 @@ namespace Project
 
         public virtual void DoEnterLogic()
         {
-
+            target = NMEnemy.target;
         }
 
         public virtual void DoExitLogic()
         {
-
+            
         }
 
         public virtual void DoFrameUpdateLogic()
         {
-            if (!enemy.IsWithinStrikingDistance)
+            if (!enemy.IsWithinStrikingDistance && !enemy.Attacking)
             {
                 NMEnemy.StateMachine.ChangeState(NMEnemy.ChaseState);
             }
@@ -47,6 +48,7 @@ namespace Project
             {
                 Debug.Log("Finished Attacking");
                 enemy.AttackExit();
+                _timer = 0;
             }
             if(type == Enemy.AnimationTriggerType.SpawnVFX)
             {

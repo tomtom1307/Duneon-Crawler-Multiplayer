@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2837861051
+  GlobalObjectIdHash: 4030971940
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18cb079c0ff8ec24ea7f0c486be4eec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnFXSize: 0.5
   DamageReduction: 1
   <AttackDistance>k__BackingField: 4
   <MeleeRaycastRange>k__BackingField: 0.7
@@ -106,10 +107,10 @@ MonoBehaviour:
   <xpOnKill>k__BackingField: 10
   ChoasCoresOnDeath: 1
   EnemyAttackBase: {fileID: 11400000, guid: 24287d164776d8a4688850899c4f33bc, type: 2}
-  currentAttack: {fileID: 0}
   Spawner: {fileID: 0}
   ArmorBuff: 0
   armorBuffVFX: {fileID: 0}
+  DisableOnStart: 0
   EnemyChaseBase: {fileID: 11400000, guid: c49708bdf6a8e1b4890b04e6f7748833, type: 2}
   Floating: 0
   floatHeight: 0

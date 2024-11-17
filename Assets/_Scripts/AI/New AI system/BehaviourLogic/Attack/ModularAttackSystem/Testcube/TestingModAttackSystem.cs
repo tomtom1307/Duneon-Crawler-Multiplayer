@@ -9,7 +9,10 @@ namespace Project
     public class TestingModAttackSystem : StaticEnemy
     {
 
-
+        public override void LookAtTarget()
+        {
+            
+        }
 
 
     }

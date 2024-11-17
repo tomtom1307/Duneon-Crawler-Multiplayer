@@ -34,7 +34,7 @@ namespace Project
         {
             if (rb == null) return; 
            
-            if(rb.velocity.magnitude > 0.1f)
+            if(rb.velocity.magnitude > 1f)
             {
                 transform.rotation = Quaternion.LookRotation(-rb.velocity);
             }
@@ -43,10 +43,11 @@ namespace Project
 
 
         PlayerStats stats;
+        Quaternion rot;
         private void OnCollisionEnter(Collision collision)
         {
             if (hit)return;
-            
+            rot = transform.rotation;
             tr.enabled = false;
             hit = true;
             
@@ -56,6 +57,7 @@ namespace Project
             if (collision.gameObject.TryGetComponent<PlayerStats>(out stats))
             {
                 transform.parent = collision.gameObject.transform;
+                transform.rotation = rot;
                 stats.TakeDamage(damage, StartPos);
             }
             

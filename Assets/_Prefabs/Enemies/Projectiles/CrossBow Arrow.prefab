@@ -76,7 +76,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 68621d2e75f93d142960b8093ecc034a,
         type: 3}
       propertyPath: m_Name
-      value: ArrowProjectile 2
+      value: CrossBow Arrow
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 68621d2e75f93d142960b8093ecc034a,
         type: 3}
@@ -286,7 +286,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 1, g: 0.48867923, b: 0.48867923, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -311,7 +311,7 @@ TrailRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0

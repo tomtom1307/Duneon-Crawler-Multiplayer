@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7291929344673857079}
   - component: {fileID: 7235592759897523761}
   - component: {fileID: 2925380214652754040}
+  - component: {fileID: 1935825943523016465}
   m_Layer: 0
   m_Name: GroundSlam
   m_TagString: Untagged
@@ -133,3 +134,17 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &1935825943523016465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4023597735562660489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69cc6fe35383d7e4081d08fd26047cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LifeTime: 2
+  clips: []

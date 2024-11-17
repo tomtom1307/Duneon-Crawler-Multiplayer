@@ -10,6 +10,7 @@ namespace Project
         
         public List<Enemy_Attack_Melee_Base> MeleeAttacks;
         public List<Enemy_Attack_AOE_Base> AoEAttacks;
+        public List<Enemy_Attack_Ranged_Base> RangedAttacks;
         
 
         public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType type)
@@ -30,6 +31,7 @@ namespace Project
 
         public override void DoFrameUpdateLogic()
         {
+            enemy.DetectPlayer();
             if (Input.GetKeyDown(KeyCode.L) && !enemy.Attacking)
             {
                 enemy.TriggerAttack(MeleeAttacks[0]);
@@ -43,8 +45,17 @@ namespace Project
             {
                 enemy.TriggerAttack(AoEAttacks[0]);
             }
+            if(Input.GetKeyDown(KeyCode.M) && !enemy.Attacking)
+            {
+                
+                enemy.FindPlayers();
+                enemy.target = enemy.DetectPlayer();
+                enemy.TriggerAttack(RangedAttacks[0]);
 
+            }
         }
+
+
 
         public override void DoPhysicsLogic()
         {

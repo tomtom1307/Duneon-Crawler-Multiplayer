@@ -46,7 +46,7 @@ namespace Project
                 _timer = 0;
                 enemy.Attacking = true;
                 Vector3 ArrowDir = enemy.target.position - transform.position;
-                enemy.SpawnObj(Projectile, enemy.ProjectileSpawnPos.position);
+                //enemy.SpawnObj(Projectile, enemy.ProjectileSpawnPos.position);
 
             }
 

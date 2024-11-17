@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9b6da8f510e30743a3965c3d6994cb7, type: 3}
-  m_Name: AttackB-Ranged
+  m_Script: {fileID: 11500000, guid: 45355402021d79f46be4cc1fb8255bc1, type: 3}
+  m_Name: AttackB-MindlessChasing
   m_EditorClassIdentifier: 
-  rangedAttack: {fileID: 11400000, guid: e6a9f0fcf6ed1eb4ab25e05ee631ef37, type: 2}
+  _timer: 0
   timeBetweenAttacks: 2
+  Attacks:
+  - {fileID: 11400000, guid: 8cdde242b29696946be023570821710f, type: 2}
