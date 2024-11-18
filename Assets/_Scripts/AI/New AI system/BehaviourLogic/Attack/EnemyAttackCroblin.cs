@@ -8,6 +8,7 @@ namespace Project
     [CreateAssetMenu(fileName = "Attack-Croblin", menuName = "Enemy Logic/ Attack Logic/ Croblin")]
     public class EnemyAttackCroblin : EnemyAttackSOBase
     {
+        public int attackType;
 
         public Enemy_Attack_Melee_Base[] meleeAttacks;
         public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType type)
@@ -40,7 +41,7 @@ namespace Project
 
             if (NMEnemy.IsWithinStrikingDistance && !NMEnemy.Attacking)
             {
-                int attackType = Random.Range(0, 2);
+                attackType = Random.Range(0, 2);
                 Debug.Log(attackType);
 
                 NMEnemy.TriggerAttack(meleeAttacks[attackType]);

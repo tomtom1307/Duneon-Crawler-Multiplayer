@@ -38,9 +38,9 @@ namespace Project
 
         public Rigidbody rb { get; set; }
         public List<Collider> colliders { get; set; }
-        private List<Enemy_Attack_ColliderDetector> colliderDetector;
+        protected List<Enemy_Attack_ColliderDetector> colliderDetector;
         public Animator animator { get; set; }
-        [HideInInspector]public List<Transform> playerlist;
+        [HideInInspector] public List<Transform> playerlist;
         [HideInInspector] public Transform target;
         [HideInInspector] public float aggression = 0.5f;
 
