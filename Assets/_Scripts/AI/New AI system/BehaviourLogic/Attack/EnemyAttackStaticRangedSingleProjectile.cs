@@ -8,7 +8,6 @@ namespace Project
     public class EnemyAttackStaticRangedSingleProjectile : EnemyAttackSOBase
     {
         public GameObject Projectile;
-        private float _timer;
 
         public float timeBetweenAttacks = 2f;
         bool repositioning = false;

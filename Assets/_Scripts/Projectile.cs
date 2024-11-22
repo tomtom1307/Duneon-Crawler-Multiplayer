@@ -8,6 +8,7 @@ namespace Project
 {
     public class Projectile : NetworkBehaviour
     {
+        public bool ParentOnHit;
         public float Speed;
         public float damage;
         public Vector3 StartPos;
@@ -54,7 +55,7 @@ namespace Project
             Destroy(Nrb);
             Destroy(rb);
             GetComponent<Collider>().enabled = false;
-            if (collision.gameObject.TryGetComponent<PlayerStats>(out stats))
+            if (collision.gameObject.TryGetComponent<PlayerStats>(out stats)&& ParentOnHit)
             {
                 transform.parent = collision.gameObject.transform;
                 transform.rotation = rot;

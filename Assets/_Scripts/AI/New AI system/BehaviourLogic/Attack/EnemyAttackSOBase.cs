@@ -24,7 +24,7 @@ namespace Project
 
         public virtual void DoEnterLogic()
         {
-            target = NMEnemy.target;
+            if(NMEnemy != null) { target = NMEnemy.target; }
         }
 
         public virtual void DoExitLogic()
