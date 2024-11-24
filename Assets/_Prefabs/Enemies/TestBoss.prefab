@@ -2395,6 +2395,7 @@ GameObject:
   - component: {fileID: 4011773848349809829}
   - component: {fileID: 6988014220805821868}
   - component: {fileID: 501037904413537466}
+  - component: {fileID: 6807813790862960438}
   m_Layer: 9
   m_Name: TestBoss
   m_TagString: Untagged
@@ -2454,44 +2455,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f362263b246ca4d4aa35c40fbf8a0ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StaticEnemy: 0
+  Damageable: 1
+  SpawnFXSize: 1
   DamageReduction: 1
-  MaxStaggerHealth: 100
-  <MaxHealth>k__BackingField: 150
-  <maxDetectDist>k__BackingField: 100
   <AttackDistance>k__BackingField: 10
   <MeleeRaycastRange>k__BackingField: 0.7
-  <AttackDamage>k__BackingField: 4
-  HealthBar: {fileID: 7193110400829022960}
-  <xpOnKill>k__BackingField: 1000
-  <whatisPlayer>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 1024
-  colliders:
-  - {fileID: 3266458929852925726}
-  - {fileID: 6785931013666903639}
-  HealthCanvas: {fileID: 2629491045470020135}
-  ProjectileSpawnPos: {fileID: 9193177544929556559}
   playerlist: []
   target: {fileID: 0}
   aggression: 0.5
-  HeadshotColor: {r: 1, g: -6.6, b: -6.6, a: 1}
-  NormalColor: {r: 1, g: 1, b: 1, a: 1}
-  SpawnedObj: {fileID: 0}
-  RotateSpeed: 100
-  damageText: {fileID: 5493454748374447997, guid: 328779aff6d65a54ea955ca4a033948f,
-    type: 3}
+  SkinmeshRenderer: {fileID: 0}
   Attacking: 0
-  EnemyChaseBase: {fileID: 11400000, guid: 99068733950e50b4e8bb60548885e283, type: 2}
-  EnemyAttackBase: {fileID: 11400000, guid: 2f5adbf8962152742b2ede0d86759741, type: 2}
-  ChoasCoresOnDeath: 5
   ChaosCores: {fileID: 5463404818829652139, guid: 0e3116f6437caf74686034388df2a5c2,
     type: 3}
+  damageText: {fileID: 5493454748374447997, guid: 328779aff6d65a54ea955ca4a033948f,
+    type: 3}
+  HeadshotColor: {r: 1, g: -6.6, b: -6.6, a: 1}
+  NormalColor: {r: 1, g: 1, b: 1, a: 1}
+  whatisPlayer:
+    serializedVersion: 2
+    m_Bits: 0
+  HealthBarPrefab: {fileID: 0}
+  HealthBarHeight: 0
+  ProjectileSpawnPos: {fileID: 9193177544929556559}
+  MaxHealth: 100
+  MaxStaggerHealth: 100
+  maxDetectDist: 100
+  RotateSpeed: 100
+  <AttackDamage>k__BackingField: 4
+  <xpOnKill>k__BackingField: 1000
+  ChoasCoresOnDeath: 5
+  EnemyAttackBase: {fileID: 11400000, guid: 2f5adbf8962152742b2ede0d86759741, type: 2}
+  Spawner: {fileID: 0}
   ArmorBuff: 0
   armorBuffVFX: {fileID: 0}
+  DisableOnStart: 0
+  EnemyChaseBase: {fileID: 11400000, guid: 99068733950e50b4e8bb60548885e283, type: 2}
   Floating: 0
   floatHeight: 0
-  Spawner: {fileID: 0}
   currentPhase: 0
   PhaseTriggerHealthPercentage:
   - 75
@@ -2779,6 +2779,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cf43f10b30382a48a7a5ad449626ae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6807813790862960438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7553112160091963360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb3885ddc1bb7a94a9f67495405088c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7706628729454464320
@@ -3267,12 +3279,6 @@ PrefabInstance:
       addedObject: {fileID: 203387994523158290}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d9203b925937914d9af0f969ce8b919, type: 3}
---- !u!223 &2629491045470020135 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 7951876910624306249, guid: 6d9203b925937914d9af0f969ce8b919,
-    type: 3}
-  m_PrefabInstance: {fileID: 5343355789575444078}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3925418142841667503 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8961752896032516545, guid: 6d9203b925937914d9af0f969ce8b919,
@@ -3562,15 +3568,3 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8779965694698294441}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7193110400829022960 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1876799877737836121, guid: 5b6dc9bb8a79b0a4fa7bac860c570f9c,
-    type: 3}
-  m_PrefabInstance: {fileID: 8779965694698294441}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
