@@ -26,7 +26,8 @@ namespace Project
             PickupSound,
             WhiteCrystalPickup,
             GoldPickupSound,
-            ClothesRustle
+            ClothesRustle,
+            None
         }
 
 

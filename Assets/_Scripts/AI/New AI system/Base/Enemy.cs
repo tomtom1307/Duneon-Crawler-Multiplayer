@@ -15,6 +15,7 @@ namespace Project
     [RequireComponent(typeof(Enemy_AnimatorEventHandler))]
     public class Enemy : NetworkBehaviour, ITriggerCheckable
     {
+        public bool Damageable = true;
         public float SpawnFXSize = 1;
         #region Definitions
 
@@ -197,6 +198,7 @@ namespace Project
 
         public void SetUpHealthBar()
         {
+            if(!Damageable) { return; }
             GameObject healthBarObj = Instantiate(HealthBarPrefab, transform);
             healthBarObj.transform.position = transform.position + HealthBarHeight * Vector3.up;
             HealthBar = healthBarObj.GetComponent<HealthBarEasing>().health;
@@ -450,26 +452,26 @@ namespace Project
 
         }
 
-        public void SpawnProjectile(GameObject spawnObj,Vector3 Pos, float Speed, float Damage, bool Gravity = true)
+        public void SpawnProjectile(GameObject spawnObj,Vector3 Pos, Vector3 ShootDir, float Speed, float Damage, bool Gravity = true)
         {
             //Set Reference to object since gameobjects can't be passed as variables for Rpc's
             SpawnedObj = spawnObj;
 
             //Call Rpc
-            SpawnObjServerRpc(Pos, Speed, Damage, Gravity);
+            SpawnObjServerRpc(Pos, ShootDir,Speed, Damage, Gravity);
         }
 
 
         [ServerRpc(RequireOwnership = false)]
-        public void SpawnObjServerRpc(Vector3 Pos, float Speed, float Damage, bool Gravity)
+        public void SpawnObjServerRpc(Vector3 Pos, Vector3 ShootDir, float Speed, float Damage, bool Gravity)
         {
-            Vector3 DirVec = -(ProjectileSpawnPos.position - currentPlayer.transform.position).normalized;
+            
             var projectile = Instantiate(SpawnedObj, Pos ,Quaternion.identity);
             projectile.GetComponent<NetworkObject>().Spawn();
 
 
             Projectile proj = projectile.GetComponent<Projectile>();
-            proj.Direction = DirVec;
+            proj.Direction = ShootDir;
             proj.Speed = Speed;
             proj.damage = Damage;
             proj.GetComponent<Rigidbody>().useGravity = Gravity;

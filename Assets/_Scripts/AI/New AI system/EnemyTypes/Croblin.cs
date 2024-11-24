@@ -19,7 +19,7 @@ namespace Project
 
         public void ChooseCollider(PlayerStats ps)
         {
-            EnemyAttackCroblin Croblin = EnemyAttackInstance as EnemyAttackCroblin;
+            EnemyAttack_B_Croblin Croblin = EnemyAttackInstance as EnemyAttack_B_Croblin;
 
             if (Croblin != null)
             {

@@ -8,6 +8,7 @@ namespace Project
 {
     public class Projectile : NetworkBehaviour
     {
+        public bool ParentOnHit;
         public float Speed;
         public float damage;
         public Vector3 StartPos;
@@ -46,22 +47,27 @@ namespace Project
         Quaternion rot;
         private void OnCollisionEnter(Collision collision)
         {
-            if (hit)return;
+            OnCollision(collision);
+        }
+
+        public virtual void OnCollision(Collision collision)
+        {
+            if (hit) return;
             rot = transform.rotation;
             tr.enabled = false;
             hit = true;
-            
+
             Destroy(Nrb);
             Destroy(rb);
             GetComponent<Collider>().enabled = false;
-            if (collision.gameObject.TryGetComponent<PlayerStats>(out stats))
+            if (collision.gameObject.TryGetComponent<PlayerStats>(out stats) && ParentOnHit)
             {
                 transform.parent = collision.gameObject.transform;
                 transform.rotation = rot;
                 stats.TakeDamage(damage, StartPos);
             }
-            
-            if(IsOwner) Destroy(gameObject, 2f);
+
+            if (IsOwner) Destroy(gameObject, 2f);
         }
     }
 }

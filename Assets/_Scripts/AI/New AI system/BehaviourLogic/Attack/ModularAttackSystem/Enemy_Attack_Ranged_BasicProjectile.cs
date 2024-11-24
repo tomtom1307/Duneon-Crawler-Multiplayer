@@ -11,7 +11,8 @@ namespace Project
         {
             base.Attack(ps, enemy);
             Debug.Log(ps);
-            enemy.SpawnProjectile(ProjectileModel, enemy.ProjectileSpawnPos.position, ProjectileSpeed, Damage);
+            Vector3 dir = ps.transform.position - enemy.transform.position;
+            enemy.SpawnProjectile(ProjectileModel, enemy.ProjectileSpawnPos.position, dir, ProjectileSpeed, Damage);
         }
 
 

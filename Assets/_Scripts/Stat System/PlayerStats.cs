@@ -173,12 +173,13 @@ namespace Project
 
 
 
-        public void TakeDamage(float damage, Vector3 damageOrigin)
+        public void TakeDamage(float damage, Vector3 damageOrigin, SourceSoundManager.SoundType soundType = SourceSoundManager.SoundType.Hit)
         {   
             if(IsOwner)
             {
                 CS.StartShake(CS.onHit);
-                HandleDamageArrowShit(damageOrigin);
+                if(damageOrigin != Vector3.zero) { HandleDamageArrowShit(damageOrigin); }
+                
             }
             
             
@@ -189,7 +190,7 @@ namespace Project
             
             _health.Value -= damage;
             healthBarFill.fillAmount = _health.Value / MaxHealth;
-            PlayerSoundSource.Instance.PlaySound(SourceSoundManager.SoundType.Hit, 0.7f);
+            PlayerSoundSource.Instance.PlaySound(soundType, 0.7f);
             //HealthBar Animations
             //DamageSounds
             //Camera effects
