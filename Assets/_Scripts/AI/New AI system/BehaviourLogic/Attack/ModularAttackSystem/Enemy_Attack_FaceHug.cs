@@ -11,7 +11,7 @@ namespace Project
         {
             //base.Attack(ps, enemy);
 
-            enemy.transform.parent = ps.transform;
+            enemy.DamagePlayer(ps);
 
             // Disable navmesh while croblin on face
         }
