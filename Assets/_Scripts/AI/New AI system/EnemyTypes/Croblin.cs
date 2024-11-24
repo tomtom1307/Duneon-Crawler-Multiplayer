@@ -23,7 +23,7 @@ namespace Project
 
             if (Croblin != null)
             {
-                if (Croblin.attackType == 1 )
+                if (Croblin.attackType == 1)
                 {
                     HugPlayer(ps);
                 }
@@ -49,6 +49,19 @@ namespace Project
         public void HugPlayer(PlayerStats ps)
         {
             // Parenting logic and place onto correct location
+
+            GameObject HugPos = GameObject.Find("HugPos");
+
+            RotateSpeed = 0f;
+
+            EnableNavMesh(false);
+
+            transform.parent = HugPos.transform;
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+
+            Collider collider = GetComponent<Collider>();
+            collider.enabled = false;
         }
     }
 }
