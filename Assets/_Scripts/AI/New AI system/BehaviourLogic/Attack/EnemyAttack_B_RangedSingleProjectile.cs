@@ -11,7 +11,6 @@ namespace Project
 
         public Enemy_Attack rangedAttack;
         
-        private float _timer;
 
         public float timeBetweenAttacks = 2f;
         bool repositioning = false;

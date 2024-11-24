@@ -4,12 +4,11 @@ using UnityEngine;
 
 namespace Project
 {
-    [CreateAssetMenu(fileName = "Attack-StaticPredictiveRanged", menuName = "Enemy Logic/ Attack Logic/ Static Predictive Projectile logic")]
-    public class EnemyAttackStaticRangedPredictiveProjectile : EnemyAttackSOBase
+    public class EnemyAttackStaticRangedSingleProjectile : EnemyAttackSOBase
     {
-        public Enemy_Attack attack;
+        public GameObject Projectile;
+
         public float timeBetweenAttacks = 2f;
-        public float PredictionFactor;
         bool repositioning = false;
         Vector3 DesiredPosition;
         Vector3 OffsetVector;
@@ -34,11 +33,9 @@ namespace Project
 
         public override void DoFrameUpdateLogic()
         {
-            Debug.Log(enemy.target);
+            
             if(enemy.target == null)
             {
-                enemy.FindPlayers();
-                enemy.target = enemy.DetectPlayer();
                 return;
             }
             _timer += Time.deltaTime;
@@ -46,12 +43,8 @@ namespace Project
             {
                 _timer = 0;
                 enemy.Attacking = true;
-                
-
-                
-                //Implement arc calculation
-                Vector3 ShootDir = enemy.target.position - transform.position+ PredictionFactor*enemy.target.gameObject.GetComponent<Rigidbody>().velocity;
-                enemy.TriggerAttack(attack);
+                Vector3 ArrowDir = enemy.target.position - transform.position;
+                //enemy.SpawnObj(Projectile, enemy.ProjectileSpawnPos.position);
 
             }
 

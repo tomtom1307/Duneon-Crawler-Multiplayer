@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a4df8d84520b394589d9b1df0d95403, type: 3}
-  m_Name: AttackB-StaticSingleRanged
+  m_Script: {fileID: 11500000, guid: 265c12b90467720469a705aaa7480a63, type: 3}
+  m_Name: Attack-StaticRanged-SmallLivingCryptMouth
   m_EditorClassIdentifier: 
-  Projectile: {fileID: 5861357039067087006, guid: dfb3c08cf0f1f6740a230329ab66f663,
-    type: 3}
+  _timer: 0
+  attack: {fileID: 11400000, guid: 1b09b788790c0ef42bf0916be9d4c3ec, type: 2}
+  timeBetweenAttacks: 2
+  MaxAttackDistance: 50

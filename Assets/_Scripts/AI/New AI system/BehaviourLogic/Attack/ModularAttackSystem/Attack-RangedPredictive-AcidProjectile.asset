@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 889059f43616d5b41aa669b02d3c95d7, type: 3}
-  m_Name: Attack-Ranged-AcidProjectile
+  m_Script: {fileID: 11500000, guid: 97e3dd738f99f0d49a9a23b4162ddd63, type: 3}
+  m_Name: Attack-RangedPredictive-AcidProjectile
   m_EditorClassIdentifier: 
   AttackAnimationName: 
   AnimationIntValue: 1
@@ -21,3 +21,5 @@ MonoBehaviour:
     type: 3}
   ProjectileSpeed: 2
   Gravity: 1
+  PredictionFactor: 1
+  DistanceGravityFactor: 0.2

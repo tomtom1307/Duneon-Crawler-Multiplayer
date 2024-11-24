@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 namespace Project
 {
     [CreateAssetMenu(fileName = "Attack-Croblin", menuName = "Enemy Logic/ Attack Logic/ Croblin")]
-    public class EnemyAttackCroblin : EnemyAttackSOBase
+    public class EnemyAttack_B_Croblin : EnemyAttackSOBase
     {
         public int attackType;
 

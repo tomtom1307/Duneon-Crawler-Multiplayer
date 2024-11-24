@@ -4,16 +4,12 @@ using UnityEngine;
 
 namespace Project
 {
-    [CreateAssetMenu(fileName = "Attack-StaticSingleRanged", menuName = "Enemy Logic/ Attack Logic/ Static Single Projectile logic")]
-    public class EnemyAttackStaticRangedSingleProjectile : EnemyAttackSOBase
+    [CreateAssetMenu(fileName = "Attack-StaticRanged", menuName = "Enemy Logic/ Attack Logic/ Ranged/ Static Projectile logic")]
+    public class EnemyAttackStaticRangedNewAttackSystem : EnemyAttackSOBase
     {
-        public GameObject Projectile;
-
+        public Enemy_Attack attack;
         public float timeBetweenAttacks = 2f;
-        bool repositioning = false;
-        Vector3 DesiredPosition;
-        Vector3 OffsetVector;
-
+        public float MaxAttackDistance;
 
         public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType type)
         {
@@ -34,19 +30,23 @@ namespace Project
 
         public override void DoFrameUpdateLogic()
         {
-            
             if(enemy.target == null)
             {
+                enemy.FindPlayers();
+                enemy.target = enemy.DetectPlayer();
+                target = enemy.target;
                 return;
             }
             _timer += Time.deltaTime;
             if (_timer > timeBetweenAttacks)
             {
+                if (Vector3.Distance(transform.position, target.position) > MaxAttackDistance) return;
                 _timer = 0;
                 enemy.Attacking = true;
-                Vector3 ArrowDir = enemy.target.position - transform.position;
-                //enemy.SpawnObj(Projectile, enemy.ProjectileSpawnPos.position);
 
+                //Implement arc calculation
+                enemy.TriggerAttack(attack);
+                
             }
 
         }
@@ -65,5 +65,7 @@ namespace Project
         {
             base.ResetValues();
         }
+
+        
     }
 }
