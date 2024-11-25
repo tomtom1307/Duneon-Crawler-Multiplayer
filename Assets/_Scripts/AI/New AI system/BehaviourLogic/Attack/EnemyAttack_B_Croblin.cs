@@ -41,7 +41,7 @@ namespace Project
 
             if (NMEnemy.IsWithinStrikingDistance && !NMEnemy.Attacking)
             {
-                attackType = Random.Range(0, 2);
+                attackType = Random.Range(1, 2);
                 Debug.Log(attackType);
 
                 NMEnemy.TriggerAttack(meleeAttacks[attackType]);

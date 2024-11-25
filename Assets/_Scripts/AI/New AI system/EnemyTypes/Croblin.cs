@@ -55,13 +55,19 @@ namespace Project
             RotateSpeed = 0f;
 
             EnableNavMesh(false);
+            animator.applyRootMotion = true;
 
             transform.parent = HugPos.transform;
+
+            // animator.enabled = false;
+
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
 
             Collider collider = GetComponent<Collider>();
             collider.enabled = false;
+
+            
         }
     }
 }
