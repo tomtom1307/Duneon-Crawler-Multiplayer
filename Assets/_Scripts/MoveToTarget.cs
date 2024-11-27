@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -10,6 +11,7 @@ namespace Project
         public Vector3 target;
         public float speed;
         public GameObject onDestroySpawn;
+        public event Action reachedtarget;
         public bool Flag = false;
         public override void OnNetworkSpawn()
         {
@@ -33,6 +35,9 @@ namespace Project
                 if(onDestroySpawn!= null && !Flag)
                 {
                     Flag = true;
+                    //Trigger Damage Dealing
+                    if(reachedtarget != null) reachedtarget();
+
                     SpawnExplosionServerRpc();
                 }
                 else

@@ -15,8 +15,8 @@ namespace Project
         public LayerMask onTouch;
         Transform target; 
         public float Distance;
-        
-        GameObject Visual;
+
+        public MoveToTarget VisualInfo;
 
         private void Start()
         {
@@ -27,12 +27,13 @@ namespace Project
 
 
         [ServerRpc]
-        public void FakeProjectileServerRpc(Vector3 EndPos)
+        public void ProjectileServerRpc(Vector3 EndPos)
         {
-
+            
             GameObject visual = Instantiate(Attack1PS, transform.position-Vector3.down*0.2f, Quaternion.identity);
             visual.GetComponent<NetworkObject>().Spawn();
             visual.GetComponent<MoveToTarget>().target = EndPos;
+            VisualInfo = visual.GetComponent<MoveToTarget>();
         }
 
         [ServerRpc]
