@@ -23,7 +23,7 @@ namespace Project
 
         private void HandleAttackAction()
         {
-            weapon._soundSource.PlaySound(SourceSoundManager.SoundType.Attack1, 0.1f);
+            weapon._soundSource.PlaySound(SourceSoundManager.SoundType.Attack1, 1f);
             Ray ray = new Ray(cam.transform.forward, cam.transform.position);
             RaycastHit hit;
             //Debug.Log("Handle Attack Action");
