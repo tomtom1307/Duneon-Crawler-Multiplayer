@@ -22,12 +22,15 @@ namespace Project
 
         private void OnTriggerStay(Collider other)
         {
-            _timer += Time.deltaTime;
-            //TODO: Spawn Acid on screen VFX to indicate to the player they're 
-            if(_timer > DamageTick && PS != null)
+            if(other.gameObject.layer == 10)
             {
-                PS.TakeDamage(DPS * DamageTick, Vector3.zero, SourceSoundManager.SoundType.Hit);
-                _timer = 0;
+                _timer += Time.deltaTime;
+                //TODO: Spawn Acid on screen VFX to indicate to the player they're 
+                if (_timer > DamageTick && PS != null)
+                {
+                    PS.TakeDamage(DPS * DamageTick, Vector3.zero, SourceSoundManager.SoundType.Hit);
+                    _timer = 0;
+                }
             }
             
         }
