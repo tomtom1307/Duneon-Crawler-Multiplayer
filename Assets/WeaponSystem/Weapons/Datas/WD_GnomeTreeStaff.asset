@@ -13,19 +13,25 @@ MonoBehaviour:
   m_Name: WD_GnomeTreeStaff
   m_EditorClassIdentifier: 
   <NumberOfAttacks>k__BackingField: 3
+  <AnimController>k__BackingField: {fileID: 9100000, guid: 9f0ede580d481364388ddb12abdebc00,
+    type: 2}
   <Attack1Cooldown>k__BackingField: 0.05
   <Attack2Cooldown>k__BackingField: 0.4
   <Attack1ManaUse>k__BackingField: 5
   <Attack2ManaUse>k__BackingField: 30
   <Attack1Type>k__BackingField: 0
   <Attack2Type>k__BackingField: 0
+  <Attack1VFX>k__BackingField: {fileID: 3994689893600592814, guid: 16893b4a52f00e5468066cdfd13bb2f7,
+    type: 3}
+  <Attack2VFX>k__BackingField: {fileID: 7303324915516245008, guid: 1c4b4f1336024d047a8f495ecba075a3,
+    type: 3}
   <AttackSpeed>k__BackingField: 0
   <componentDatas>k__BackingField:
   - rid: 1852571019049697289
   - rid: 1852571019049697290
   - rid: 1852571070197661696
   - rid: 1852571070197661698
-  model: {fileID: 6236249103363093857, guid: cc20fb47e46a9664bb394ea8d6e24bda, type: 3}
+  model: {fileID: 6236249103363093857, guid: e54e12e86a754a540a63ba22c8e99720, type: 3}
   references:
     version: 2
     RefIds:

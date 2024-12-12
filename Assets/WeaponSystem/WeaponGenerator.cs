@@ -13,6 +13,7 @@ namespace Project.Assets.WeaponSystem
         [SerializeField] private WeaponDataSO data;
         [SerializeField] private Transform weaponPos;
         [SerializeField] private StatManager weaponStats;
+        Animator anim;
 
         private List<WeaponComponent> ComponentsAlreadyOn = new List<WeaponComponent>();
         private List<WeaponComponent> ComponentsAdded = new List<WeaponComponent>();
@@ -22,6 +23,7 @@ namespace Project.Assets.WeaponSystem
 
         private void Start()
         {
+            anim = GetComponentInChildren<Animator>();
             weaponStats = GetComponent<StatManager>();
         }
 
@@ -32,6 +34,8 @@ namespace Project.Assets.WeaponSystem
         {
             data = inst.weaponData;
             Generating = true;
+            weapon.visualAttacks.Attack1PS = data.Attack1VFX;
+            weapon.visualAttacks.Attack2PS = data.Attack2VFX;
             weaponStats.ChangeStats(inst);
             print("generating Weapon");
             weapon.SetData(data);
@@ -40,7 +44,7 @@ namespace Project.Assets.WeaponSystem
                 Destroy(ModelInstance);
             }
             SpawnVisual(weaponPos,data.model);
-
+            anim.runtimeAnimatorController = data.AnimController;
             ComponentDependencies.Clear();
             ComponentsAlreadyOn.Clear();
             ComponentDependencies.Clear();

@@ -10,20 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac5988b9f2e739b4f9e903129079fe36, type: 3}
-  m_Name: Staff 2Data
+  m_Name: WD_HookStaff
   m_EditorClassIdentifier: 
-  <NumberOfAttacks>k__BackingField: 2
+  <NumberOfAttacks>k__BackingField: 1
+  <AnimController>k__BackingField: {fileID: 9100000, guid: c4e27733e3967964babf9235ad5e3c58,
+    type: 2}
   <Attack1Cooldown>k__BackingField: 0.05
   <Attack2Cooldown>k__BackingField: 0.4
-  <Attack1ManaUse>k__BackingField: 5
+  <Attack1ManaUse>k__BackingField: 0.1
   <Attack2ManaUse>k__BackingField: 30
   <Attack1Type>k__BackingField: 0
   <Attack2Type>k__BackingField: 0
+  <Attack1VFX>k__BackingField: {fileID: 5932860462258750439, guid: 5e4f34137f00c7f44bfcca89e46e7a72,
+    type: 3}
+  <Attack2VFX>k__BackingField: {fileID: 0}
   <AttackSpeed>k__BackingField: 0
   <componentDatas>k__BackingField:
   - rid: 1852571019049697289
   - rid: 1852571019049697290
-  model: {fileID: 6236249103363093857, guid: cc20fb47e46a9664bb394ea8d6e24bda, type: 3}
+  model: {fileID: 6236249103363093857, guid: 56e9c179d8ee62a42bf36bb3cf1b6e3f, type: 3}
   references:
     version: 2
     RefIds:
@@ -32,7 +37,6 @@ MonoBehaviour:
       data:
         name: ActionRayCastData
         <AttackData>k__BackingField:
-        - <Distance>k__BackingField: 30
         - <Distance>k__BackingField: 30
         <DetectableLayers>k__BackingField:
           serializedVersion: 2
@@ -43,9 +47,6 @@ MonoBehaviour:
       data:
         name: DamageData
         <AttackData>k__BackingField:
-        - <DamageAmount>k__BackingField: 0
-          <KnockBackAmount>k__BackingField: 250
-          type: 0
-        - <DamageAmount>k__BackingField: 0
-          <KnockBackAmount>k__BackingField: 250
+        - <DamageAmount>k__BackingField: 30
+          <KnockBackAmount>k__BackingField: 100
           type: 0
