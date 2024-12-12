@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.VFX;
 using static UnityEditor.Progress;
@@ -14,7 +15,8 @@ namespace Project
         //List to store all possible loot options with their respective drop chance
         public LootTable lootTable;
         public bool LootVFX;
-
+        public List<Transform> SpawnedLoot;
+        public List<VFX> VFXcolor;
         public enum VFX
         {
             white,
@@ -89,6 +91,7 @@ namespace Project
                 //Maybe check the rarest item and give the 
                 LootItem droppedItem = possibleItems[UnityEngine.Random.Range(0, possibleItems.Count)];
                 color = droppedItem.VFXColor;
+                VFXcolor.Add(color);
                 return droppedItem.prefab;
 
                 
@@ -123,9 +126,8 @@ namespace Project
             {
                 LootItem = Instantiate(loot_prefab, target.position, rot);
             }
-
             //guaranteeing loot is autopickup if flag is true
-            if(autopickup)
+            if (autopickup)
             {
                 //Verifying that loot has coin or crystal component
                 if(LootItem.GetComponent<Coins>()!=null)
@@ -137,31 +139,44 @@ namespace Project
             
             if (LootVFX)
             {
-                SpawnVFX(LootItem.transform);
+                //SpawnVFX(LootItem.transform);
+                Debug.Log("LootItemVFX");
+                SpawnedLoot.Add(LootItem.transform);
             }
         }
 
         //Handle Spawning given a position and a rotation 
         public virtual void SpawnLoot(GameObject loot_prefab, Vector3 pos, Quaternion rot )
         {
-            
-
-
             GameObject lootitem = Instantiate(loot_prefab, pos, rot);
-            //Animate Up and down movement
             lootitem.GetComponent<_Interactable>();
-            if (LootVFX)
+            
+        }
+
+        //For animation event so jump animation doesnt happen immediately
+        public void AnimationSpawnVFX()
+        {
+            int i = 0;
+            foreach (var item in SpawnedLoot)
             {
-                SpawnVFX(lootitem.transform);
+                SpawnVFX(item, VFXcolor[i]);
+                i++;
             }
         }
 
 
 
-        public void SpawnVFX(Transform item)
+        public void SpawnVFX(Transform item, VFX color)
         {
             var VFX = Instantiate(GetVFXPrefab(color), item);
-            item.transform.DOMove(item.transform.position+Vector3.up*0.1f, 2).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
+
+            //Calculate Jump Direction 
+            Vector3 jumpDir = (interacter.transform.position - transform.position)+new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), 0, UnityEngine.Random.Range(-0.5f, 0.5f));
+            jumpDir.y = 0;
+            //DO Jump
+            DOTween.Sequence().SetDelay(UnityEngine.Random.Range(0, .7f)).Append(item.transform.DOJump(item.transform.position + 1.5f * jumpDir.normalized, 2, 1, 1f));
+            //Append(item.transform.DOMove(item.transform.position + Vector3.up * 0.1f, 2).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo));
+
             VFX.transform.localScale *= 10;
             VFX.GetComponentInChildren<VisualEffect>().playRate = 4;
 

@@ -12,7 +12,7 @@ namespace Project
         public override void Attack(PlayerStats ps, Enemy enemy)
         {
             base.Attack(ps, enemy);
-            Debug.Log(ps);
+           
             float Distance = Vector3.Distance(enemy.target.position, enemy.ProjectileSpawnPos.position);
             Vector3 effPos = (ps.transform.position + PredictionFactor * ps.GetComponent<Rigidbody>().velocity);
             Vector3 dir = effPos - enemy.ProjectileSpawnPos.position + Distance * DistanceGravityFactor * Vector3.up;

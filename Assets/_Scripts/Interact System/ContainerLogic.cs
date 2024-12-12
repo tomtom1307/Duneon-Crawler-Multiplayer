@@ -26,11 +26,7 @@ namespace Project
             if (!opened)
             {
                 opened = true;
-                Debug.Log(lootTable);
                 OpenContainerServerRpc();
-                Debug.Log(anim);
-                
-
             }
         }
 
