@@ -29,8 +29,9 @@ namespace Project
         [ServerRpc]
         public void ProjectileServerRpc(Vector3 EndPos)
         {
-            
-            GameObject visual = Instantiate(Attack1PS, transform.position-Vector3.down*0.2f, Quaternion.identity);
+            if (Attack1PS == null) return;
+
+            GameObject visual = Instantiate(Attack1PS, transform.position-Vector3.down*0.2f+Vector3.right*0.1f, Quaternion.LookRotation(Camera.main.transform.position));
             visual.GetComponent<NetworkObject>().Spawn();
             visual.GetComponent<MoveToTarget>().target = EndPos;
             VisualInfo = visual.GetComponent<MoveToTarget>();
@@ -39,6 +40,7 @@ namespace Project
         [ServerRpc]
         public void AOEServerRpc(float Scale)
         {
+            if (Attack2PS == null) return;
             GameObject visual = Instantiate(Attack2PS, transform.position-Vector3.up*0.4f, Quaternion.Euler(new Vector3(0,0,0)));
             visual.transform.localScale = Scale* Vector3.one;
             visual.GetComponent<NetworkObject>().Spawn();

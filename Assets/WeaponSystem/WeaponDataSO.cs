@@ -17,6 +17,9 @@ namespace Project
     [CreateAssetMenu(menuName = "newWeaponData")]
     public class WeaponDataSO : ScriptableObject
     {
+
+
+        [field: SerializeField] public WeaponInputsSO Inputs;
         [field: SerializeField] public int NumberOfAttacks { get; private set; }
         [field: SerializeField] public AnimatorController AnimController{ get; private set; }
         [field: SerializeField] public float Attack1Cooldown { get; private set; }

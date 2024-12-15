@@ -25989,10 +25989,20 @@ PrefabInstance:
       propertyPath: m_RenderPostProcessing
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 703486241948437930, guid: e7848a2b43e2dab458db3b93ebb81616,
+        type: 3}
+      propertyPath: m_VolumeLayerMask.m_Bits
+      value: 32503
+      objectReference: {fileID: 0}
     - target: {fileID: 2025150431086967482, guid: e7848a2b43e2dab458db3b93ebb81616,
         type: 3}
       propertyPath: field of view
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2025150431086967482, guid: e7848a2b43e2dab458db3b93ebb81616,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 29303
       objectReference: {fileID: 0}
     - target: {fileID: 2953001315858319818, guid: e7848a2b43e2dab458db3b93ebb81616,
         type: 3}
@@ -26027,12 +26037,12 @@ PrefabInstance:
     - target: {fileID: 5305731970440251891, guid: e7848a2b43e2dab458db3b93ebb81616,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -38.100006
+      value: 12.3102455
       objectReference: {fileID: 0}
     - target: {fileID: 5305731970440251891, guid: e7848a2b43e2dab458db3b93ebb81616,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 24.15
+      value: -19.074226
       objectReference: {fileID: 0}
     - target: {fileID: 5305731970440251891, guid: e7848a2b43e2dab458db3b93ebb81616,
         type: 3}
@@ -26129,6 +26139,11 @@ PrefabInstance:
       propertyPath: clips.Array.data[0].sounds.Array.data[4]
       value: 
       objectReference: {fileID: 8300000, guid: 6890a952aca4bdd4cb2da7bdf626e862, type: 3}
+    - target: {fileID: 8204212719088513424, guid: e7848a2b43e2dab458db3b93ebb81616,
+        type: 3}
+      propertyPath: clips.Array.data[2].sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: f9c5e944640f2b142b2794c33c8d43b3, type: 3}
     - target: {fileID: 8917142456486590394, guid: e7848a2b43e2dab458db3b93ebb81616,
         type: 3}
       propertyPath: GlobalObjectIdHash
@@ -27967,10 +27982,20 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 651566410
       objectReference: {fileID: 0}
+    - target: {fileID: 5129454082650791025, guid: c1ba10aefe40e704cbf1bdeb89ededac,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5280432170723566990, guid: c1ba10aefe40e704cbf1bdeb89ededac,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -47.057755
+      objectReference: {fileID: 0}
+    - target: {fileID: 5324707250193656195, guid: c1ba10aefe40e704cbf1bdeb89ededac,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5379995823614639836, guid: c1ba10aefe40e704cbf1bdeb89ededac,
         type: 3}
@@ -28131,6 +28156,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354339244520852305, guid: c1ba10aefe40e704cbf1bdeb89ededac,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7361322197554519173, guid: c1ba10aefe40e704cbf1bdeb89ededac,
         type: 3}

@@ -28,7 +28,7 @@ namespace Project
         public void Update()
         {
             transform.position = Vector3.Lerp(transform.position, transform.position+40 * dir, speed*Time.deltaTime);
-            
+            transform.rotation = Quaternion.LookRotation(dir);
             if (Vector3.Dot(target-transform.position, dir) < 0) 
             {
                 
