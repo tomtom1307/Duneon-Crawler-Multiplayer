@@ -19,7 +19,6 @@ namespace Project
         protected override void Interact()
         {
 
-            base.Interact();
             PS = interacter.GetComponent<PlayerStats>();
             if (PS.ChaosCores >= UpgradePrice)
             {

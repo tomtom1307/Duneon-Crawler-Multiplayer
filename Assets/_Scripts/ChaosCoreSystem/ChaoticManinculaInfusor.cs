@@ -19,7 +19,6 @@ namespace Project
         protected override void Interact()
         {
 
-            base.Interact();
             PS = interacter.GetComponent<PlayerStats>();
             WS = interacter.GetComponent<HandleCam>().PC.gameObject.GetComponentInChildren<StatManager>();
             if (PS.ChaosCores >= UpgradePrice)

@@ -17,6 +17,9 @@ namespace Project
         public bool LootVFX;
         public List<Transform> SpawnedLoot;
         public List<VFX> VFXcolor;
+        public float JumpRandomness;
+        public Vector3 JumpDir;
+        public float JumpDelay = 0.7f;
         public enum VFX
         {
             white,
@@ -28,12 +31,13 @@ namespace Project
 
         private Dictionary<VFX, GameObject> VFXMap;
 
-
+        GenericSoundSource GSS;
 
 
         public virtual void Start()
         {
-            if(lootTable != null)
+            GSS = GetComponent<GenericSoundSource>();
+            if (lootTable != null)
             {
                 VFXMap = new Dictionary<VFX, GameObject>
                 {
@@ -150,7 +154,14 @@ namespace Project
         {
             GameObject lootitem = Instantiate(loot_prefab, pos, rot);
             lootitem.GetComponent<_Interactable>();
-            
+
+            if (LootVFX)
+            {
+                //SpawnVFX(LootItem.transform);
+                Debug.Log("LootItemVFX");
+                SpawnedLoot.Add(lootitem.transform);
+            }
+
         }
 
         //For animation event so jump animation doesnt happen immediately
@@ -171,15 +182,26 @@ namespace Project
             var VFX = Instantiate(GetVFXPrefab(color), item);
 
             //Calculate Jump Direction 
-            Vector3 jumpDir = (interacter.transform.position - transform.position)+new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), 0, UnityEngine.Random.Range(-0.5f, 0.5f));
-            jumpDir.y = 0;
+
+            Vector3 jumpDir = (JumpDir)+new Vector3(UnityEngine.Random.Range(-JumpRandomness, JumpRandomness), 0, UnityEngine.Random.Range(-JumpRandomness, JumpRandomness));
+
             //DO Jump
-            DOTween.Sequence().SetDelay(UnityEngine.Random.Range(0, .7f)).Append(item.transform.DOJump(item.transform.position + 1.5f * jumpDir.normalized, 2, 1, 1f));
+            float delay = UnityEngine.Random.Range(0, JumpDelay);
+            DOTween.Sequence().SetDelay(delay).Append(item.transform.DOJump(item.transform.position + 1.5f * jumpDir.normalized, 2, 1, 1f));
+            Invoke(nameof(JumpSound), delay);
             //Append(item.transform.DOMove(item.transform.position + Vector3.up * 0.1f, 2).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo));
 
             VFX.transform.localScale *= 10;
             VFX.GetComponentInChildren<VisualEffect>().playRate = 4;
 
+        }
+
+
+        public void JumpSound()
+        {
+            if (GSS!=null){
+                GSS.PlaySound(GenericSoundSource.GenSoundType.ItemDropping, 1, false, true);
+            }
         }
     }
 

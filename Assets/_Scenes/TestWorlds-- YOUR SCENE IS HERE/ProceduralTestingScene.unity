@@ -488,6 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
+  playerPrefab: {fileID: 0}
   SpawnPositions:
   - {fileID: 375011396}
   - {fileID: 169642607}
@@ -704,14 +705,8 @@ MonoBehaviour:
   Padding: 1
   MaxAttempts: 100
   roomsObj:
-  - {fileID: 7613832322365280668, guid: c1ba10aefe40e704cbf1bdeb89ededac, type: 3}
   - {fileID: 4040660832918103063, guid: 83533ff4bd823b04e9eea0a69397736a, type: 3}
-  - {fileID: 3793683279550195937, guid: 2b4fe91a323d2994f9e5c0f98d18a05b, type: 3}
-  - {fileID: 2643074001092121180, guid: 56e9c2ffb9974b444a7e4a7fda9b3477, type: 3}
   - {fileID: 3097702107386220095, guid: 84fd41d3cc82d3546a69f907c19956d8, type: 3}
-  - {fileID: 2374672016853763114, guid: 033974bbb80d9f44fa28d6d7f2140d64, type: 3}
-  - {fileID: 2374672016853763114, guid: 1e5fdf981e86f1042bf78395ba9d0088, type: 3}
-  - {fileID: 4635007244107462727, guid: 71d0a03224bd42c44987a44339c24785, type: 3}
   ObligatoryRoomsObj:
   - {fileID: 5304486166763116221, guid: d4aae8bdacdbc0844acb9cc3c8025fcc, type: 3}
   corridorPrefab: {fileID: 8767618854634293907, guid: 66a875dd011a44d40a5b3c6267766eda,

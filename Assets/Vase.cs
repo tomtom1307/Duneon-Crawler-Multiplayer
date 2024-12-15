@@ -39,6 +39,7 @@ namespace Project
             GameObject loot = GenerateLoot();
             if(loot != null) { 
                 SpawnLoot(loot, transform, autopickup: true);
+                AnimationSpawnVFX();
             }
 
 
