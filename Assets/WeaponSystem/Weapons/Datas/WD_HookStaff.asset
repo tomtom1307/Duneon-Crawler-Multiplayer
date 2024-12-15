@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5988b9f2e739b4f9e903129079fe36, type: 3}
   m_Name: WD_HookStaff
   m_EditorClassIdentifier: 
+  ChargeUpSpeed: 4
   Inputs: {fileID: 11400000, guid: 678da3be682b7dd42bdc64469596e130, type: 2}
   <NumberOfAttacks>k__BackingField: 1
   <AnimController>k__BackingField: {fileID: 9100000, guid: c4e27733e3967964babf9235ad5e3c58,
@@ -38,7 +39,7 @@ MonoBehaviour:
         <AttackData>k__BackingField:
         - Projectile: {fileID: 5932860462258750439, guid: 5e4f34137f00c7f44bfcca89e46e7a72,
             type: 3}
-          Deviation: 0.2
-          Damage: 10
+          Deviation: 0.1
+          Damage: 5
           Speed: 23.97
-        SpawnAmount: 10
+        SpawnAmount: 7

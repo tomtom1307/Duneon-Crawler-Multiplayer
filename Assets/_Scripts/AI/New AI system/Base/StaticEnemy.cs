@@ -47,7 +47,7 @@ namespace Project
         public override void DoDamageServerRpc(float Damage, bool headshot = false)
         {
             base.DoDamageServerRpc(Damage, headshot);
-            if (CurrentHealth.Value <= 0)
+            if (CurrentHealth.Value <= 0 && StateMachine.currentState != DedState)
             {
                 Die();
             }

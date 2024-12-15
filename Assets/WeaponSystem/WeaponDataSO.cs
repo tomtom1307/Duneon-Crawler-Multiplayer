@@ -18,6 +18,7 @@ namespace Project
     public class WeaponDataSO : ScriptableObject
     {
 
+        [field: SerializeField] public float ChargeUpSpeed;
 
         [field: SerializeField] public WeaponInputsSO Inputs;
         [field: SerializeField] public int NumberOfAttacks { get; private set; }

@@ -65,7 +65,7 @@ namespace Project
         protected override void HandleEnter()
         {
             base.HandleEnter();
-
+            
             currentAttackData = data.AttackData[weapon.CurrentAttackCounter];
 
         }

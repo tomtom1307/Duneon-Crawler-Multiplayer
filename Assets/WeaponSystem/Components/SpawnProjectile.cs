@@ -49,8 +49,10 @@ namespace Project
 
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
+
             eventHandler.OnProjectileAction -= SpawnPlayerProjectile;
         }
 

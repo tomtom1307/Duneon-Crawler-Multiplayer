@@ -40,7 +40,7 @@ namespace Project
                 }
                 if (!PA.fullyCharged)
                 {
-                    PA.ChargePercentage += (Time.deltaTime * PA.ChargeSpeed);
+                    PA.ChargePercentage += (Time.deltaTime * weapon.Data.ChargeUpSpeed);
                     PA.ChargePercentage = Mathf.Clamp(PA.ChargePercentage, 0, 1);
                 }
                 
