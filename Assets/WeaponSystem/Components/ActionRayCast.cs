@@ -23,7 +23,7 @@ namespace Project
 
         private void HandleAttackAction()
         {
-            weapon._soundSource.PlaySound(SourceSoundManager.SoundType.Attack1, 0.3f);
+            weapon._soundSource.PlaySound(SourceSoundManager.SoundType.Attack1, 1.5f);
             Ray ray = new Ray(cam.transform.forward, cam.transform.position);
             RaycastHit hit;
             //Debug.Log("Handle Attack Action");
@@ -38,12 +38,13 @@ namespace Project
                 {
                     target = hit.point;
                 }
-                weapon.visualAttacks.FakeProjectileServerRpc(target);
+                weapon.visualAttacks.ProjectileServerRpc(target);
                 
                 return;
             }
-            weapon.visualAttacks.FakeProjectileServerRpc(hit.point);
-            OnDetectedCollider?.Invoke(detected);
+            weapon.visualAttacks.ProjectileServerRpc(hit.point);
+            weapon.visualAttacks.VisualInfo.reachedtarget += ReachedTarget;
+            
             if (detected.tag == "Head")
             {
                 Headshot = true;
@@ -54,7 +55,16 @@ namespace Project
 
         }
 
+        public void ReachedTarget()
+        {
+            if (detected == null)
+            {
+                return;
+            }
+            OnDetectedCollider?.Invoke(detected);
+        }
 
+        
  
 
         protected override void OnDestroy()

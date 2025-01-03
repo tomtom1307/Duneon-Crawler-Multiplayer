@@ -18,12 +18,16 @@ namespace Project
               Elevator,
               ElevatorStop,
               KeySlotting,
+              ItemDropping,
               
         }
+
+        public float StartingPitch;
 
         private void Start()
         {
             audioSource = GetComponent<AudioSource>();
+            StartingPitch = audioSource.pitch;
         }
 
 
@@ -31,14 +35,24 @@ namespace Project
 
         [HideInInspector] public AudioSource audioSource;
         public SoundList[] clips;
-        public virtual void PlaySound(GenSoundType sound, float volume, bool looping = false)
+        public virtual void PlaySound(GenSoundType sound, float volume, bool looping = false, bool varyPitch = false)
         {
             AudioClip[] _clips = clips[(int)sound].Sounds;
             if (_clips.Length == 0) return;
             AudioClip randomClip = _clips[UnityEngine.Random.Range(0, _clips.Length)];
 
+            if (varyPitch)
+            {
+                audioSource.pitch = UnityEngine.Random.Range(StartingPitch-0.2f, StartingPitch + 0.2f);
+            }
+            else
+            {
+                audioSource.pitch = StartingPitch;
+            }
+
             if (looping)
             {
+                
                 audioSource.loop = true;
                 audioSource.clip = randomClip;
                 audioSource.volume = volume;

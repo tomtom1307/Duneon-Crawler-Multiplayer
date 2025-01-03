@@ -12,6 +12,7 @@ namespace Project
         {
             anim = GetComponent<Animator>();
             base.Start();
+            died = false;
             Trigger();
             
         }
@@ -33,17 +34,18 @@ namespace Project
             base.TakeDamageServerRpc(Damage);
             OnDamaged();
         }
-
+        bool died;
         public override void OnDamaged()
         {
             base.OnDamaged();
             anim.SetTrigger("Hit");
-            if(CurrentHealth.Value <= 0)
+            if(CurrentHealth.Value <= 0 && !died)
             {
-
+                died = true;
                 anim.SetBool("hide", true);
                 Actions.ShieldGeneratorTentacleUpdate(this, false);
             }
+
             
         }
 

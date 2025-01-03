@@ -296,9 +296,11 @@ namespace Project
         }
 
 
-
+        bool ded;
         public virtual void Die()
         {
+            if (ded) return;
+            ded = true;
             //Award XP to all players
             GameManager.instance.AwardXPServerRpc(xpOnKill);
 

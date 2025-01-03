@@ -46,7 +46,7 @@ namespace Project
         {
             if (type == Enemy.AnimationTriggerType.FinishedAttacking)
             {
-                Debug.Log("Finished Attacking");
+               
                 enemy.AttackExit();
                 _timer = 0;
             }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Project
@@ -16,13 +17,20 @@ namespace Project
     [CreateAssetMenu(menuName = "newWeaponData")]
     public class WeaponDataSO : ScriptableObject
     {
+
+        [field: SerializeField] public float ChargeUpSpeed;
+
+        [field: SerializeField] public WeaponInputsSO Inputs;
         [field: SerializeField] public int NumberOfAttacks { get; private set; }
+        [field: SerializeField] public AnimatorController AnimController{ get; private set; }
         [field: SerializeField] public float Attack1Cooldown { get; private set; }
         [field: SerializeField] public float Attack2Cooldown { get; private set; }
         [field: SerializeField] public float Attack1ManaUse { get; private set; }
         [field: SerializeField] public float Attack2ManaUse { get; private set; }
         [field: SerializeField] public DamageType Attack1Type { get; private set; }
         [field: SerializeField] public DamageType Attack2Type { get; private set; }
+        [field: SerializeField] public GameObject Attack1VFX { get; private set; }
+        [field: SerializeField] public GameObject Attack2VFX { get; private set; }
 
         [field: SerializeField] public float AttackSpeed { get; private set; }
 

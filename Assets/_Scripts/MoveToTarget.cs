@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -10,6 +11,7 @@ namespace Project
         public Vector3 target;
         public float speed;
         public GameObject onDestroySpawn;
+        public event Action reachedtarget;
         public bool Flag = false;
         public override void OnNetworkSpawn()
         {
@@ -26,13 +28,16 @@ namespace Project
         public void Update()
         {
             transform.position = Vector3.Lerp(transform.position, transform.position+40 * dir, speed*Time.deltaTime);
-            
+            transform.rotation = Quaternion.LookRotation(dir);
             if (Vector3.Dot(target-transform.position, dir) < 0) 
             {
                 
                 if(onDestroySpawn!= null && !Flag)
                 {
                     Flag = true;
+                    //Trigger Damage Dealing
+                    if(reachedtarget != null) reachedtarget();
+
                     SpawnExplosionServerRpc();
                 }
                 else

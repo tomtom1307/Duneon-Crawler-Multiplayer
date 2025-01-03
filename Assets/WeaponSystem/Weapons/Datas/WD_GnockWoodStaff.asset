@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5988b9f2e739b4f9e903129079fe36, type: 3}
+  m_Name: WD_GnockWoodStaff
+  m_EditorClassIdentifier: 
+  ChargeUpSpeed: 3
+  Inputs: {fileID: 11400000, guid: 678da3be682b7dd42bdc64469596e130, type: 2}
+  <NumberOfAttacks>k__BackingField: 3
+  <AnimController>k__BackingField: {fileID: 9100000, guid: 9f0ede580d481364388ddb12abdebc00,
+    type: 2}
+  <Attack1Cooldown>k__BackingField: 0.05
+  <Attack2Cooldown>k__BackingField: 0.4
+  <Attack1ManaUse>k__BackingField: 5
+  <Attack2ManaUse>k__BackingField: 30
+  <Attack1Type>k__BackingField: 0
+  <Attack2Type>k__BackingField: 0
+  <Attack1VFX>k__BackingField: {fileID: 3994689893600592814, guid: 16893b4a52f00e5468066cdfd13bb2f7,
+    type: 3}
+  <Attack2VFX>k__BackingField: {fileID: 7303324915516245008, guid: 1c4b4f1336024d047a8f495ecba075a3,
+    type: 3}
+  <AttackSpeed>k__BackingField: 0
+  <componentDatas>k__BackingField:
+  - rid: 1852571019049697289
+  - rid: 1852571019049697290
+  - rid: 1852571070197661696
+  - rid: 1852571070197661698
+  model: {fileID: 6236249103363093857, guid: e54e12e86a754a540a63ba22c8e99720, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: 1852571019049697289
+      type: {class: ActionRayCastData, ns: Project, asm: Assembly-CSharp}
+      data:
+        name: ActionRayCastData
+        <AttackData>k__BackingField:
+        - <Distance>k__BackingField: 30
+        - <Distance>k__BackingField: 30
+        - <Distance>k__BackingField: 30
+        <DetectableLayers>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 512
+        <detectionRadius>k__BackingField: 0.06
+    - rid: 1852571019049697290
+      type: {class: DamageData, ns: Project, asm: Assembly-CSharp}
+      data:
+        name: DamageData
+        <AttackData>k__BackingField:
+        - <DamageAmount>k__BackingField: 100
+          <KnockBackAmount>k__BackingField: 100
+          type: 0
+        - <DamageAmount>k__BackingField: 110
+          <KnockBackAmount>k__BackingField: 130
+          type: 0
+        - <DamageAmount>k__BackingField: 150
+          <KnockBackAmount>k__BackingField: 200
+          type: 0
+    - rid: 1852571070197661696
+      type: {class: SphereOverlapData, ns: Project, asm: Assembly-CSharp}
+      data:
+        name: SphereOverlapData
+        <AttackData>k__BackingField:
+        - <Distance>k__BackingField: 10
+        - <Distance>k__BackingField: 10
+        - <Distance>k__BackingField: 10
+        <DetectableLayers>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 512
+        <detectionRadius>k__BackingField: 10
+    - rid: 1852571070197661698
+      type: {class: SecondaryDamageData, ns: Project, asm: Assembly-CSharp}
+      data:
+        name: SecondaryDamageData
+        <AttackData>k__BackingField:
+        - <DamageAmount>k__BackingField: 40
+          <KnockBackAmount>k__BackingField: 2000
+        - <DamageAmount>k__BackingField: 40
+          <KnockBackAmount>k__BackingField: 2000
+        - <DamageAmount>k__BackingField: 40
+          <KnockBackAmount>k__BackingField: 4000

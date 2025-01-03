@@ -19,6 +19,8 @@ namespace Project.Weapons
             private set => currentAttackCounter = value == Data.NumberOfAttacks ? 0  : value;
         }
 
+        public int Counter;
+
         [SerializeField] public WeaponDataSO Data;
         [SerializeField] List<WeaponComponent> components;
         public event Action OnExit;
@@ -74,7 +76,7 @@ namespace Project.Weapons
         private void Update()
         {
             attackCounterResetTimer.Tick();
-            
+            Counter = currentAttackCounter;
         }
 
         private void ResetAttackCounter() => CurrentAttackCounter = 0;
