@@ -25,6 +25,8 @@ namespace Project
 
             // find furthest nest and head to it
 
+            enemy.EnableNavMesh(true); //
+
             NestLocation = enemy.DesignatedRoom.GetComponent<RoomEnemyBrain>().NestLocation;
 
             float distance = 0;
@@ -34,6 +36,7 @@ namespace Project
             foreach (Transform t in NestLocation) 
             {
                 float newDistance = Vector3.Distance (enemy.transform.position, t.position);
+                enemy.target = t; 
 
                 if (distance < newDistance) 
                 { 

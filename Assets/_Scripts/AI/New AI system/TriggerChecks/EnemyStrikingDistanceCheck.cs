@@ -22,7 +22,7 @@ namespace Project
         private void Update()
         {
             if (!IsOwner) return;
-            float distance = Vector3.Distance(enemy.target.position, transform.position) ;
+            float distance = Vector3.Distance(enemy.target.position, transform.position);
             
 
             

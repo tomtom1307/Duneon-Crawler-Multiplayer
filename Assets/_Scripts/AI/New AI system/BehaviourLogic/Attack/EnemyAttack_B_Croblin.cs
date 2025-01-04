@@ -16,6 +16,7 @@ namespace Project
             base.DoAnimationTriggerEventLogic(type);
 
             if (type == Enemy.AnimationTriggerType.FinishedAttacking) {
+                NMEnemy.transform.SetParent(null, true); //
                 NMEnemy.StateMachine.ChangeState(NMEnemy.ChaseState);
                 Debug.Log("EnterChaseState");
             }

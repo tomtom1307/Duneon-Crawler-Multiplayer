@@ -29,7 +29,7 @@ namespace Project
                 }
                 else
                 {
-                    DamagePlayer(ps);
+                    CroblinScratch(ps);
                 }
             }
         }
@@ -67,7 +67,12 @@ namespace Project
             Collider collider = GetComponent<Collider>();
             collider.enabled = false;
 
-            
+            DamagePlayer(ps);
+        }
+
+        public void CroblinScratch(PlayerStats ps)
+        {
+            DamagePlayer(ps);
         }
     }
 }

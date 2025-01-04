@@ -341,6 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03095238905b83943b2ddca0e95d52d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartingPitch: 1
   audioSource: {fileID: 72519632}
   clips:
   - name: BreakSound
@@ -353,6 +354,8 @@ MonoBehaviour:
   - name: ElevatorStop
     sounds: []
   - name: KeySlotting
+    sounds: []
+  - name: ItemDropping
     sounds: []
 --- !u!82 &72519632
 AudioSource:
@@ -20111,11 +20114,6 @@ PrefabInstance:
       value: Croblin
       objectReference: {fileID: 0}
     - target: {fileID: 2281583436380288510, guid: ea2d5427783a1ba46a99f0041b1db18f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5248091552630757591, guid: ea2d5427783a1ba46a99f0041b1db18f,
         type: 3}
       propertyPath: m_IsActive
       value: 0
