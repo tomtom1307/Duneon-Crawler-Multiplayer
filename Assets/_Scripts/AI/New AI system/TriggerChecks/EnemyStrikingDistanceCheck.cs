@@ -30,6 +30,9 @@ namespace Project
             if (distance < enemy.AttackDistance)
             {
                 enemy.SetStrikingDistanceBool(true);
+
+                Debug.Log(enemy.IsWithinStrikingDistance + "yes I am within striking distance");
+                print(enemy.target);
                 //print("InRange");
                 timer = 0;
             }

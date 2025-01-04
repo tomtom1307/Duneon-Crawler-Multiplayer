@@ -52,6 +52,9 @@ namespace Project
 
         public override void DoExitLogic()
         {
+            enemy.SetStrikingDistanceBool(false);
+            enemy.target = enemy.DetectPlayer();
+            
             base.DoExitLogic();
         }
 
@@ -61,13 +64,13 @@ namespace Project
 
             //Debug.Log(enemy.DesignatedRoom);
 
-            if (Vector3.Distance(enemy.transform.position, targetTransform.position) < 3)
+            if (Vector3.Distance(enemy.transform.position, targetTransform.position) < 1)
             {
                 //Start timer with HideTime
 
                 _timer += Time.deltaTime;
 
-                if (_timer > HideTime) 
+                if (_timer > HideTime)
                 {
                     enemy.StateMachine.ChangeState(enemy.AttackState);
                     Debug.Log(enemy.AttackState);
