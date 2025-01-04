@@ -24,9 +24,10 @@ namespace Project
 
         public override void DoEnterLogic()
         {
+            //NMEnemy.target = NMEnemy.DetectPlayer();
             base.DoEnterLogic();
-            NMEnemy.target = NMEnemy.DetectPlayer();
-            Debug.Log(NMEnemy.target);
+            
+            //Debug.Log(NMEnemy.target);
         }
 
         public override void DoExitLogic()
@@ -44,6 +45,7 @@ namespace Project
             {
                 attackType = Random.Range(1, 2);
                 Debug.Log(attackType);
+                Debug.Log(NMEnemy.target + "This is the current target of the croblin");
 
                 NMEnemy.TriggerAttack(meleeAttacks[attackType]);
 
