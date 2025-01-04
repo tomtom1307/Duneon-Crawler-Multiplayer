@@ -1,3 +1,4 @@
+using Project.Assets.WeaponSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +23,11 @@ namespace Project.Weapons
         public int Counter;
 
         [SerializeField] public WeaponDataSO Data;
+        WeaponGenerator WG;
+        public WeaponInstance[] WeaponDatas;
+        public int currentWeaponIndex;
+        public int HeldWeaponAmount;
+
         [SerializeField] List<WeaponComponent> components;
         public event Action OnExit;
         public event Action OnEnter;
@@ -62,21 +68,70 @@ namespace Project.Weapons
 
         private void Start()
         {
+            WG = GetComponent<WeaponGenerator>();
             _soundSource = GetComponentInChildren<PlayerSoundSource>();
-            
+            WeaponDatas = new WeaponInstance[HeldWeaponAmount];
         }
 
         public void SetData(WeaponDataSO data)
         {
             Data = data;
-            
-         }
+        }
 
 
         private void Update()
         {
             attackCounterResetTimer.Tick();
             Counter = currentAttackCounter;
+
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+            if (scroll > 0f) // Scroll Up
+            {
+                NextWeaponSlot();
+
+            }
+            else if (scroll < 0f) // Scroll Down
+            {
+                PreviousWeaponSlot();
+            }
+
+
+        }
+
+        public void NextWeaponSlot()
+        {
+            do
+            {
+                currentWeaponIndex = (currentWeaponIndex + 1) % HeldWeaponAmount; // Mod returns index to zero at max val
+            } while (WeaponDatas[currentWeaponIndex].weaponData == null); // Skip empty slots
+            print(WeaponDatas[currentWeaponIndex].weaponData);
+
+            SwitchWeapon(currentWeaponIndex);
+        }
+
+        public void PreviousWeaponSlot()
+        {
+            do
+            {
+                currentWeaponIndex--;
+                if (currentWeaponIndex < 0)
+                    currentWeaponIndex = HeldWeaponAmount - 1;
+            } while (WeaponDatas[currentWeaponIndex].weaponData == null); // Skip empty slots
+
+            SwitchWeapon(currentWeaponIndex);
+        }
+
+
+
+        public void SwitchWeapon(int index)
+        {
+            if (WeaponDatas[index].level == 0)
+            {
+
+                return;
+            }
+            WG.SwapWeapon(WeaponDatas[index]);
         }
 
         private void ResetAttackCounter() => CurrentAttackCounter = 0;

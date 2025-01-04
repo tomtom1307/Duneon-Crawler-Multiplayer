@@ -9,7 +9,7 @@ namespace Project
         private PlayerStats PS;
         private StatManager WS;
         string OGPrompt;
-        
+        public float DamageUpgrade;
         public int UpgradePrice = 5;
         private void Start()
         {
@@ -23,7 +23,7 @@ namespace Project
             WS = interacter.GetComponent<HandleCam>().PC.gameObject.GetComponentInChildren<StatManager>();
             if(PS.ChaosCores >= UpgradePrice)
             {
-                WS.weaponInstance.ChaosBonus += 1f;
+                WS.weaponInstance.ChaosBonus += DamageUpgrade;
                 
                 WS.ChaosBonus = WS.weaponInstance.ChaosBonus;
                 PS.ChaosCores -= UpgradePrice;

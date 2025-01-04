@@ -117,7 +117,7 @@ public class Inventory : MonoBehaviour
 
 
     //Called to equip items such as armor or weapons
-    public void EquipEquipment(SlotTag tag, InventoryItem item = null, bool swap = false)
+    public void EquipEquipment(SlotTag tag, InventoryItem item = null, bool swap = false, int SlotVal = 0)
     {
         
         switch (tag)
@@ -132,8 +132,8 @@ public class Inventory : MonoBehaviour
                     WH.enabled = false;
                     PA.enabled = false;
                     WG.RemoveWeapon();
+                    WH.WeaponDatas[SlotVal] = null;
 
-                    
                     //Destroy(GWL);
                 }
 
@@ -157,7 +157,8 @@ public class Inventory : MonoBehaviour
                         PA.enabled = false;
                     }
                     WH.enabled = true;
-                    WG.GenerateWeapon(item.myItem.weaponInstance);
+                    //WG.GenerateWeapon(item.myItem.weaponInstance);
+                    WH.WeaponDatas[SlotVal] = item.myItem.weaponInstance;
 
                 }
                 break;

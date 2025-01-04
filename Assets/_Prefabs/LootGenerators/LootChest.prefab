@@ -281,6 +281,8 @@ GameObject:
   - component: {fileID: 1538902961640154338}
   - component: {fileID: 5496043842542058905}
   - component: {fileID: 2874945180867237826}
+  - component: {fileID: 6182348540763506408}
+  - component: {fileID: 5136179731012490698}
   m_Layer: 12
   m_Name: Chest1
   m_TagString: Untagged
@@ -359,7 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1481267800
+  GlobalObjectIdHash: 2974704629
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -407,6 +409,9 @@ MonoBehaviour:
   LootVFX: 1
   SpawnedLoot: []
   VFXcolor: 
+  JumpRandomness: 0.7
+  JumpDir: {x: 0, y: 0, z: -1}
+  JumpDelay: 0.7
   anim: {fileID: 8887542488498991813}
   LootAsChild: 0
   LootPositions:
@@ -502,6 +507,130 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1354007, y: 1.5934489, z: 3.9747124}
   m_Center: {x: -0.9813115, y: 0.6994168, z: -1.0038453}
+--- !u!82 &6182348540763506408
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4370832459581325792}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5136179731012490698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4370832459581325792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03095238905b83943b2ddca0e95d52d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingPitch: 1
+  audioSource: {fileID: 6182348540763506408}
+  clips:
+  - name: BreakSound
+    sounds: []
+  - name: DoorOpen
+    sounds: []
+  - name: Elevator
+    sounds: []
+  - name: ElevatorStop
+    sounds: []
+  - name: KeySlotting
+    sounds: []
+  - name: ItemDropping
+    sounds:
+    - {fileID: 8300000, guid: 934bea76aceb8af47803b1bd6a718f00, type: 3}
 --- !u!1 &4414416916535668528
 GameObject:
   m_ObjectHideFlags: 0

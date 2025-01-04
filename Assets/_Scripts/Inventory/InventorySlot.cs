@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public InventoryItem myItem { get;  set; }
-
+    public int SlotVal;
     public SlotTag myTag;
 
 
@@ -26,7 +26,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
         if(myTag != SlotTag.None)
         {
-            Inventory.Singleton.EquipEquipment(myTag, myItem, Swap);
+            Inventory.Singleton.EquipEquipment(myTag, myItem, Swap, SlotVal);
         }
 
 
