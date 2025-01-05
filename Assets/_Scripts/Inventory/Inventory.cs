@@ -128,11 +128,10 @@ public class Inventory : MonoBehaviour
                 if(item ==null)
                 {
                     Active = false;
-                    GWL.SetActive(false);
-                    WH.enabled = false;
-                    PA.enabled = false;
-                    WG.RemoveWeapon();
-                    WH.WeaponDatas[SlotVal] = null;
+                    //GWL.SetActive(false);
+                    //WH.enabled = false;
+                    //PA.enabled = false;
+                    WH.RemoveWeapon(SlotVal);
 
                     //Destroy(GWL);
                 }
@@ -141,7 +140,6 @@ public class Inventory : MonoBehaviour
                 else if (swap)
                 {
                     Active = false;
-                    WH.enabled = false;
                     WG.SwapWeapon(item.myItem.weaponInstance);
                     Active = true;
                     WH.enabled = true;
@@ -152,13 +150,15 @@ public class Inventory : MonoBehaviour
                 {
                     Active = true;
                     GWL.SetActive(true);
+                    /*
                     if (!PA.enabled)
                     {
                         PA.enabled = false;
                     }
+                    */
                     WH.enabled = true;
                     //WG.GenerateWeapon(item.myItem.weaponInstance);
-                    WH.WeaponDatas[SlotVal] = item.myItem.weaponInstance;
+                    WH.SlotWeapon(item.myItem.weaponInstance, SlotVal);
 
                 }
                 break;

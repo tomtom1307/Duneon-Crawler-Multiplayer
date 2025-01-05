@@ -32,6 +32,7 @@ namespace Project.Assets.WeaponSystem
         public bool Generating;
         public void GenerateWeapon(WeaponInstance inst)
         {
+
             data = inst.weaponData;
             Generating = true;
             weapon.visualAttacks.Attack1PS = data.Attack1VFX;
@@ -93,6 +94,7 @@ namespace Project.Assets.WeaponSystem
         public void SwapWeapon(WeaponInstance inst)
         {
             print("Swapping Weapon");
+            RemoveWeapon();
             GenerateWeapon(inst);
 
         }

@@ -5,19 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 
 namespace Project.Weapons
 {
     public class WeaponHolder : NetworkBehaviour
     {
-        
+
         [SerializeField] private float attackCounterResetCooldown = 2f;
         public StatManager statManager { get; private set; }
         public int CurrentAttackCounter
         {
             get => currentAttackCounter;
-            private set => currentAttackCounter = value == Data.NumberOfAttacks ? 0  : value;
+            private set => currentAttackCounter = value == Data.NumberOfAttacks ? 0 : value;
         }
 
         public int Counter;
@@ -26,6 +27,8 @@ namespace Project.Weapons
         WeaponGenerator WG;
         public WeaponInstance[] WeaponDatas;
         public int currentWeaponIndex;
+        public float SwapCoolDown;
+        public bool Swapping;
         public int HeldWeaponAmount;
 
         [SerializeField] List<WeaponComponent> components;
@@ -59,7 +62,7 @@ namespace Project.Weapons
             baseGO = transform.Find("Base").gameObject;
             eventHandler = baseGO.GetComponent<AnimationEventHandler>();
             anim = GetComponentInChildren<Animator>();
-            
+
             attackCounterResetTimer = new Timer(attackCounterResetCooldown);
 
 
@@ -71,6 +74,8 @@ namespace Project.Weapons
             WG = GetComponent<WeaponGenerator>();
             _soundSource = GetComponentInChildren<PlayerSoundSource>();
             WeaponDatas = new WeaponInstance[HeldWeaponAmount];
+            allSlotsEmpty = true;
+
         }
 
         public void SetData(WeaponDataSO data)
@@ -83,15 +88,19 @@ namespace Project.Weapons
         {
             attackCounterResetTimer.Tick();
             Counter = currentAttackCounter;
+            if (allSlotsEmpty || State == AttackState.active) return;
+
 
             float scroll = Input.GetAxis("Mouse ScrollWheel");
 
-            if (scroll > 0f) // Scroll Up
+            
+
+            if (scroll > 0) // Scroll Up
             {
                 NextWeaponSlot();
 
             }
-            else if (scroll < 0f) // Scroll Down
+            else if (scroll < -0) // Scroll Down
             {
                 PreviousWeaponSlot();
             }
@@ -101,6 +110,7 @@ namespace Project.Weapons
 
         public void NextWeaponSlot()
         {
+            int StartInd = currentWeaponIndex;
             do
             {
                 currentWeaponIndex = (currentWeaponIndex + 1) % HeldWeaponAmount; // Mod returns index to zero at max val
@@ -112,6 +122,8 @@ namespace Project.Weapons
 
         public void PreviousWeaponSlot()
         {
+            int StartInd = currentWeaponIndex;
+
             do
             {
                 currentWeaponIndex--;
@@ -126,13 +138,59 @@ namespace Project.Weapons
 
         public void SwitchWeapon(int index)
         {
-            if (WeaponDatas[index].level == 0)
+            if (WeaponDatas[index].level == 0 || WeaponDatas[index] == statManager.weaponInstance)
             {
-
                 return;
             }
             WG.SwapWeapon(WeaponDatas[index]);
         }
+
+        public void SlotWeapon(WeaponInstance WI,int SlotVal)
+        {
+
+            WeaponDatas[SlotVal] = WI;
+            NextWeaponSlot();
+
+            UpdateInventoryState();
+
+
+        }
+
+        public void RemoveWeapon(int SlotVal)
+        {
+            WeaponDatas[SlotVal] = null;
+            if (SlotVal == currentWeaponIndex)
+            {
+                WG.RemoveWeapon();
+                NextWeaponSlot();
+            }
+
+            UpdateInventoryState();
+            
+
+        }
+
+        bool allSlotsEmpty;
+
+        void UpdateInventoryState()
+        {
+            allSlotsEmpty = AreAllSlotsEmpty();
+            if (allSlotsEmpty)
+            {
+                Debug.Log("All weapon slots are empty!");
+            }
+        }
+
+        bool AreAllSlotsEmpty()
+        {
+            foreach (WeaponInstance weapon in WeaponDatas)
+            {
+                if (weapon != null)
+                    return false; // If any slot is not empty, return false
+            }
+            return true; // All slots are empty
+        }
+
 
         private void ResetAttackCounter() => CurrentAttackCounter = 0;
 
