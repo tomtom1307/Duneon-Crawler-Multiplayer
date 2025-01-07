@@ -11,6 +11,21 @@ using UnityEngine;
 [CustomEditor(typeof(WeaponDataSO))]
 public class WeaponDataSOEditor : Editor
 {
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        if (GUILayout.Button("Add Component Data"))
+        {
+            // Open the popup window with the current WeaponDataSO instance
+            AddComponentDataPopup.ShowWindow((WeaponDataSO)target);
+        }
+    }
+}
+
+
+
+    /*
     //Only 1 can exist
     private static List<Type> dataComponentTypes = new List<Type>();
     private WeaponDataSO dataSO;
@@ -64,4 +79,5 @@ public class WeaponDataSOEditor : Editor
 
 
     }
-}
+    */
+

@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChargeUpSpeed: 3
   Inputs: {fileID: 11400000, guid: 678da3be682b7dd42bdc64469596e130, type: 2}
-  <NumberOfAttacks>k__BackingField: 3
   <AnimController>k__BackingField: {fileID: 9100000, guid: 9f0ede580d481364388ddb12abdebc00,
     type: 2}
   <Attack1Cooldown>k__BackingField: 0.05
@@ -33,6 +32,12 @@ MonoBehaviour:
   - rid: 1852571019049697290
   - rid: 1852571070197661696
   - rid: 1852571070197661698
+  <NumberOfAttacks>k__BackingField: 3
+  <NumberOfAttacks1>k__BackingField: 0
+  <componentDatas1>k__BackingField:
+  - rid: 4241533400671846405
+  <NumberOfAttacks2>k__BackingField: 0
+  <componentDatas2>k__BackingField: []
   model: {fileID: 6236249103363093857, guid: e54e12e86a754a540a63ba22c8e99720, type: 3}
   references:
     version: 2
@@ -86,3 +91,12 @@ MonoBehaviour:
           <KnockBackAmount>k__BackingField: 2000
         - <DamageAmount>k__BackingField: 40
           <KnockBackAmount>k__BackingField: 4000
+    - rid: 4241533400671846405
+      type: {class: ActionRayCastData, ns: Project, asm: Assembly-CSharp}
+      data:
+        name: ActionRayCastData
+        <AttackData>k__BackingField: []
+        <DetectableLayers>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 0
+        <detectionRadius>k__BackingField: 0
