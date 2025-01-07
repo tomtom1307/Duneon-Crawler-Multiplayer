@@ -16,7 +16,7 @@ namespace Project.Weapons
         private void AnimationFinishedTrigger() => OnFinish?.Invoke();
         private void AttackActionTrigger() => OnAttackAction?.Invoke();
         private void AOEAttackTrigger() => OnAOEAction?.Invoke();
-        private void ProjectileTrigger(int amount) => OnProjectileAction?.Invoke();
+        private void ProjectileTrigger() => OnProjectileAction?.Invoke();
 
 
     }

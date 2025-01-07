@@ -21,7 +21,14 @@ namespace Project
 
         public void SpawnPlayerProjectile()
         {
-            ChargePercentage = PA.ChargePercentage;
+            if (data.Chargable)
+            {
+                ChargePercentage = PA.ChargePercentage;
+            }
+            else
+            {
+                ChargePercentage = 1;
+            }
             int spawnTarget = Mathf.RoundToInt((data.SpawnAmount * ChargePercentage));
             for (int i = 0; i < spawnTarget; i++) {
                 float manaUse;

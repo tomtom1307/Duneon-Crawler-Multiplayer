@@ -12,29 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5988b9f2e739b4f9e903129079fe36, type: 3}
   m_Name: Sword 1Data
   m_EditorClassIdentifier: 
-  <NumberOfAttacks>k__BackingField: 3
-  <Model>k__BackingField: {fileID: 0}
-  <InventorySprite>k__BackingField: {fileID: 0}
-  <itemTag>k__BackingField: 0
+  ChargeUpSpeed: 0
+  Inputs: {fileID: 0}
+  <AnimController>k__BackingField: {fileID: 0}
   <Attack1Cooldown>k__BackingField: 0
   <Attack2Cooldown>k__BackingField: 0
+  <Attack1ManaUse>k__BackingField: 0
+  <Attack2ManaUse>k__BackingField: 0
+  <Attack1Type>k__BackingField: 0
+  <Attack2Type>k__BackingField: 0
+  <Attack1VFX>k__BackingField: {fileID: 0}
+  <Attack2VFX>k__BackingField: {fileID: 0}
+  <AttackSpeed>k__BackingField: 0
   <componentDatas>k__BackingField:
-  - rid: 1852571019049697281
   - rid: 1852571019049697282
+  - rid: 4241533400671846402
+  <NumberOfAttacks>k__BackingField: 3
+  <NumberOfAttacks1>k__BackingField: 0
+  <componentDatas1>k__BackingField: []
+  <NumberOfAttacks2>k__BackingField: 0
+  <componentDatas2>k__BackingField: []
+  model: {fileID: 0}
   references:
     version: 2
     RefIds:
-    - rid: 1852571019049697281
-      type: {class: DamageData, ns: Project, asm: Assembly-CSharp}
-      data:
-        name: DamageData
-        <AttackData>k__BackingField:
-        - <DamageAmount>k__BackingField: 0
-          <KnockBackAmount>k__BackingField: 0
-        - <DamageAmount>k__BackingField: 0
-          <KnockBackAmount>k__BackingField: 0
-        - <DamageAmount>k__BackingField: 0
-          <KnockBackAmount>k__BackingField: 0
     - rid: 1852571019049697282
       type: {class: ActionRayCastData, ns: Project, asm: Assembly-CSharp}
       data:
@@ -47,3 +48,8 @@ MonoBehaviour:
           serializedVersion: 2
           m_Bits: 512
         <detectionRadius>k__BackingField: 0
+    - rid: 4241533400671846402
+      type: {class: DamageData, ns: Project, asm: Assembly-CSharp}
+      data:
+        name: DamageData
+        <AttackData>k__BackingField: []

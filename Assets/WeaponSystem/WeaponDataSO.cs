@@ -72,7 +72,14 @@ namespace Project
 
         public List<Type> GetAllDependencies()
         {
-            return componentDatas.Select(component => component.ComponentDependancy).ToList();
+            // Combine dependencies from componentDatas1 (Attack1) and componentDatas2 (Attack2)
+            var allDependencies = componentDatas1
+                .Select(component => component.ComponentDependancy)
+                .Union(componentDatas2.Select(component => component.ComponentDependancy)) // Ensures no duplicates
+                .ToList();
+
+            // Return the combined list without duplicates
+            return allDependencies;
         }
 
         public void AddData(ComponentData data)

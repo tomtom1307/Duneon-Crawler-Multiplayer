@@ -94,7 +94,7 @@ public class Inventory : MonoBehaviour
 
         else if (item.activeSlot.myTag != SlotTag.None)
         {
-            EquipEquipment(item.activeSlot.myTag, null);
+            EquipEquipment(item.activeSlot.myTag, null, false, item.activeSlot.SlotVal);
         }
             
 

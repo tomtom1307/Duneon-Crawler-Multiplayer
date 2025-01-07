@@ -72,8 +72,6 @@ public class AddComponentDataPopup : EditorWindow
                     dataSO.AddData(comp);
                 }
 
-                // Close the window after adding the component
-                Close();
             }
         }
     }

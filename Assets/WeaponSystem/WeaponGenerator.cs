@@ -27,58 +27,65 @@ namespace Project.Assets.WeaponSystem
             weaponStats = GetComponent<StatManager>();
         }
 
-        
+
 
         public bool Generating;
         public void GenerateWeapon(WeaponInstance inst)
         {
-
             data = inst.weaponData;
+            weapon.SetData(data);
             Generating = true;
+
+            // Set weapon visuals and stats
             weapon.visualAttacks.Attack1PS = data.Attack1VFX;
             weapon.visualAttacks.Attack2PS = data.Attack2VFX;
             weaponStats.ChangeStats(inst);
-            print("generating Weapon");
-            weapon.SetData(data);
+
+            print("Generating Weapon");
+
+            // Destroy old model if exists
             if (ModelInstance != null)
             {
                 Destroy(ModelInstance);
             }
-            SpawnVisual(weaponPos,data.model);
+            SpawnVisual(weaponPos, data.model);
             anim.runtimeAnimatorController = data.AnimController;
-            ComponentDependencies.Clear();
-            ComponentsAlreadyOn.Clear();
-            ComponentDependencies.Clear();
 
+            // Get all dependencies from data
             ComponentDependencies = data.GetAllDependencies();
+            print(ComponentDependencies);
 
-            foreach (var dependancy in ComponentDependencies)
+            // Enable Required Components
+            foreach (var dependency in ComponentDependencies)
             {
-                if(ComponentsAdded.FirstOrDefault(component => component.GetType() == dependancy))
+                var weaponComponent = ComponentsAlreadyOn.FirstOrDefault(component => component.GetType() == dependency);
+
+                if (weaponComponent == null)
                 {
-                    continue;
+                    weaponComponent = gameObject.AddComponent(dependency) as WeaponComponent;
+                    ComponentsAlreadyOn.Add(weaponComponent);
                 }
 
-                var weaponComponent = ComponentsAlreadyOn.FirstOrDefault(component => component.GetType() == dependancy);
-
-                if(weaponComponent == null)
+                if (!ComponentsAdded.Contains(weaponComponent))
                 {
-                    weaponComponent = gameObject.AddComponent(dependancy) as WeaponComponent;
+                    ComponentsAdded.Add(weaponComponent);
                 }
 
-                ComponentsAdded.Add(weaponComponent);
-
+                weaponComponent.InUse = true;
             }
 
-            var componentsToRemove = ComponentsAlreadyOn.Except(ComponentsAdded);
+            // Disable Unused Components
+            var componentsToRemove = ComponentsAlreadyOn.Except(ComponentsAdded).ToList();
 
             foreach (var item in componentsToRemove)
             {
-                Destroy(item);
+                item.InUse = false;
+                ComponentsAdded.Remove(item); // Remove from active components
             }
 
             Generating = false;
         }
+
         public void RemoveWeapon()
         {
             
@@ -88,6 +95,7 @@ namespace Project.Assets.WeaponSystem
             {
                 Destroy(item);
             }
+            
             Destroy(ModelInstance);
         }
 

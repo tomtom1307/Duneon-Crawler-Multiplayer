@@ -14,7 +14,7 @@ namespace Project
         //protected AnimationEventHandler eventHandler => weapon.EventHandler;
         protected AnimationEventHandler eventHandler;
 
-
+        public bool InUse;
         public enum AttackType
         {
             Attack1,
@@ -69,12 +69,28 @@ namespace Project
         protected T1 data2;
         protected T1 data;
         protected T2 currentAttackData;
-
+        
 
         protected override void HandleEnter()
         {
+            if (!InUse) return;
+            Debug.Log("WeaponComponent:" + typeof(T1).Name + ":" + InUse);
             base.HandleEnter();
-             
+            if (weapon.attackType == WeaponHolder.AttackType.attack1)
+            {
+                if (data1 != null)
+                {
+                    data = data1;
+                }
+            }
+            else if (weapon.attackType == WeaponHolder.AttackType.attack2)
+            {
+                if(data2 != null)
+                {
+                    data = data2;
+                }
+                
+            }
             currentAttackData = data.AttackData[weapon.CurrentAttackCounter];
 
         }
@@ -84,6 +100,9 @@ namespace Project
             base.Start();
 
             data = weapon.Data.GetData<T1>();
+            data1 = weapon.Data.GetData<T1>(1);
+            data2 = weapon.Data.GetData<T1>(2);
+
         }
     }
     

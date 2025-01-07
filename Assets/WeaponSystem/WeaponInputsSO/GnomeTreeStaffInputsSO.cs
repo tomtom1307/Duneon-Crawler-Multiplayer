@@ -12,6 +12,7 @@ namespace Project
         
         public override void InputLogic(WeaponHolder weapon, PlayerAttack PA)
         {
+
             if (Input.GetMouseButtonUp(1))
             {
                 weapon._soundSource.StopSound();

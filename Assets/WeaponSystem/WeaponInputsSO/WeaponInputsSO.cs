@@ -10,6 +10,7 @@ namespace Project
         public virtual void InputLogic(WeaponHolder weapon, PlayerAttack PA)
         {
 
+            
         }
 
 

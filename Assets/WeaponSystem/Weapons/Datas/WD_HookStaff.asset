@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChargeUpSpeed: 4
   Inputs: {fileID: 11400000, guid: 678da3be682b7dd42bdc64469596e130, type: 2}
-  <NumberOfAttacks>k__BackingField: 1
   <AnimController>k__BackingField: {fileID: 9100000, guid: c4e27733e3967964babf9235ad5e3c58,
     type: 2}
   <Attack1Cooldown>k__BackingField: 0.05
@@ -26,13 +25,31 @@ MonoBehaviour:
   <Attack1VFX>k__BackingField: {fileID: 0}
   <Attack2VFX>k__BackingField: {fileID: 0}
   <AttackSpeed>k__BackingField: 0
-  <componentDatas>k__BackingField:
-  - rid: 7395105553690656769
+  <componentDatas>k__BackingField: []
+  <NumberOfAttacks>k__BackingField: 1
+  <NumberOfAttacks1>k__BackingField: 0
+  <componentDatas1>k__BackingField:
+  - rid: 4241533400671846407
+  <NumberOfAttacks2>k__BackingField: 0
+  <componentDatas2>k__BackingField:
+  - rid: 4241533400671846408
   model: {fileID: 6236249103363093857, guid: 56e9c179d8ee62a42bf36bb3cf1b6e3f, type: 3}
   references:
     version: 2
     RefIds:
-    - rid: 7395105553690656769
+    - rid: 4241533400671846407
+      type: {class: ProjectileSpawnData, ns: Project, asm: Assembly-CSharp}
+      data:
+        name: ProjectileSpawnData
+        <AttackData>k__BackingField:
+        - Projectile: {fileID: 5932860462258750439, guid: 5e4f34137f00c7f44bfcca89e46e7a72,
+            type: 3}
+          Deviation: 0
+          Damage: 2
+          Speed: 23.97
+        SpawnAmount: 1
+        Chargable: 0
+    - rid: 4241533400671846408
       type: {class: ProjectileSpawnData, ns: Project, asm: Assembly-CSharp}
       data:
         name: ProjectileSpawnData
@@ -40,6 +57,7 @@ MonoBehaviour:
         - Projectile: {fileID: 5932860462258750439, guid: 5e4f34137f00c7f44bfcca89e46e7a72,
             type: 3}
           Deviation: 0.1
-          Damage: 5
+          Damage: 2
           Speed: 23.97
-        SpawnAmount: 12
+        SpawnAmount: 10
+        Chargable: 1

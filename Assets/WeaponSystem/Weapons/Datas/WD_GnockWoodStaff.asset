@@ -33,11 +33,14 @@ MonoBehaviour:
   - rid: 1852571070197661696
   - rid: 1852571070197661698
   <NumberOfAttacks>k__BackingField: 3
-  <NumberOfAttacks1>k__BackingField: 0
+  <NumberOfAttacks1>k__BackingField: 1
   <componentDatas1>k__BackingField:
   - rid: 4241533400671846405
+  - rid: 4241533400671846409
   <NumberOfAttacks2>k__BackingField: 0
-  <componentDatas2>k__BackingField: []
+  <componentDatas2>k__BackingField:
+  - rid: 4241533400671846410
+  - rid: 4241533400671846411
   model: {fileID: 6236249103363093857, guid: e54e12e86a754a540a63ba22c8e99720, type: 3}
   references:
     version: 2
@@ -95,8 +98,48 @@ MonoBehaviour:
       type: {class: ActionRayCastData, ns: Project, asm: Assembly-CSharp}
       data:
         name: ActionRayCastData
-        <AttackData>k__BackingField: []
+        <AttackData>k__BackingField:
+        - <Distance>k__BackingField: 30
+        - <Distance>k__BackingField: 30
+        - <Distance>k__BackingField: 30
         <DetectableLayers>k__BackingField:
           serializedVersion: 2
-          m_Bits: 0
-        <detectionRadius>k__BackingField: 0
+          m_Bits: 512
+        <detectionRadius>k__BackingField: 0.06
+    - rid: 4241533400671846409
+      type: {class: DamageData, ns: Project, asm: Assembly-CSharp}
+      data:
+        name: DamageData
+        <AttackData>k__BackingField:
+        - <DamageAmount>k__BackingField: 100
+          <KnockBackAmount>k__BackingField: 100
+          type: 0
+        - <DamageAmount>k__BackingField: 110
+          <KnockBackAmount>k__BackingField: 130
+          type: 0
+        - <DamageAmount>k__BackingField: 150
+          <KnockBackAmount>k__BackingField: 200
+          type: 0
+    - rid: 4241533400671846410
+      type: {class: SphereOverlapData, ns: Project, asm: Assembly-CSharp}
+      data:
+        name: SphereOverlapData
+        <AttackData>k__BackingField:
+        - <Distance>k__BackingField: 10
+        - <Distance>k__BackingField: 10
+        - <Distance>k__BackingField: 10
+        <DetectableLayers>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 512
+        <detectionRadius>k__BackingField: 10
+    - rid: 4241533400671846411
+      type: {class: SecondaryDamageData, ns: Project, asm: Assembly-CSharp}
+      data:
+        name: SecondaryDamageData
+        <AttackData>k__BackingField:
+        - <DamageAmount>k__BackingField: 40
+          <KnockBackAmount>k__BackingField: 2000
+        - <DamageAmount>k__BackingField: 40
+          <KnockBackAmount>k__BackingField: 2000
+        - <DamageAmount>k__BackingField: 40
+          <KnockBackAmount>k__BackingField: 4000

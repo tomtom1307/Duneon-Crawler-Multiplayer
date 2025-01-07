@@ -52,7 +52,17 @@ namespace Project.Weapons
             active,
             coolDown
         }
+
         [SerializeField] public AttackState State = AttackState.ready;
+
+
+        public enum AttackType
+        {
+            attack1,
+            attack2
+        }
+
+        public AttackType attackType = AttackType.attack1;
 
 
         private void Awake()
@@ -88,89 +98,143 @@ namespace Project.Weapons
         {
             attackCounterResetTimer.Tick();
             Counter = currentAttackCounter;
+
             if (allSlotsEmpty || State == AttackState.active) return;
 
-
             float scroll = Input.GetAxis("Mouse ScrollWheel");
-
-            
 
             if (scroll > 0) // Scroll Up
             {
                 NextWeaponSlot();
-
             }
-            else if (scroll < -0) // Scroll Down
+            else if (scroll < 0) // Scroll Down
             {
                 PreviousWeaponSlot();
             }
-
 
         }
 
         public void NextWeaponSlot()
         {
-            int StartInd = currentWeaponIndex;
+            if (allSlotsEmpty) return;
+
+            int startingIndex = currentWeaponIndex; // Store the original index
+            int attempts = 0;
+
             do
             {
-                currentWeaponIndex = (currentWeaponIndex + 1) % HeldWeaponAmount; // Mod returns index to zero at max val
-            } while (WeaponDatas[currentWeaponIndex].weaponData == null); // Skip empty slots
-            print(WeaponDatas[currentWeaponIndex].weaponData);
+                currentWeaponIndex = (currentWeaponIndex + 1) % HeldWeaponAmount;
+                attempts++;
 
-            SwitchWeapon(currentWeaponIndex);
+                if (WeaponDatas[currentWeaponIndex] != null && WeaponDatas[currentWeaponIndex].weaponData != null)
+                {
+                    SwitchWeapon(currentWeaponIndex);
+                    return;
+                }
+
+            } while (attempts < HeldWeaponAmount);
+
+            // Revert to the original index if no valid weapon is found
+            currentWeaponIndex = startingIndex;
+            Debug.Log("No valid weapons found when scrolling up.");
         }
+
+
+
+
 
         public void PreviousWeaponSlot()
         {
-            int StartInd = currentWeaponIndex;
+            if (allSlotsEmpty) return;
+
+            int startingIndex = currentWeaponIndex;
+            int attempts = 0;
 
             do
             {
                 currentWeaponIndex--;
                 if (currentWeaponIndex < 0)
                     currentWeaponIndex = HeldWeaponAmount - 1;
-            } while (WeaponDatas[currentWeaponIndex].weaponData == null); // Skip empty slots
 
+                attempts++;
+
+                // Break the loop if we've gone through all slots
+                if (attempts >= HeldWeaponAmount)
+                {
+                    Debug.Log("No valid weapons found when scrolling down.");
+                    return;
+                }
+
+            } while (WeaponDatas[currentWeaponIndex] == null);
+
+            // Switch to the valid weapon found
             SwitchWeapon(currentWeaponIndex);
         }
 
 
 
+
+
         public void SwitchWeapon(int index)
         {
-            if (WeaponDatas[index].level == 0 || WeaponDatas[index] == statManager.weaponInstance)
+            currentAttackCounter = 0;
+
+            if (WeaponDatas[index] == null || WeaponDatas[index].weaponData == null)
             {
+                Debug.Log("Invalid weapon slot. Swap Aborted.");
                 return;
             }
+
+            if (WeaponDatas[index] == statManager.weaponInstance)
+            {
+                Debug.Log("Already using this weapon. Swap Aborted.");
+                return;
+            }
+
             WG.SwapWeapon(WeaponDatas[index]);
+            statManager.weaponInstance = WeaponDatas[index];
         }
 
-        public void SlotWeapon(WeaponInstance WI,int SlotVal)
-        {
 
+        public void SlotWeapon(WeaponInstance WI, int SlotVal)
+        {
+            Debug.Log("Slotting Weapon");
             WeaponDatas[SlotVal] = WI;
-            NextWeaponSlot();
 
             UpdateInventoryState();
 
-
+            if (currentWeaponIndex == SlotVal || allSlotsEmpty)
+            {
+                currentWeaponIndex = SlotVal;
+                SwitchWeapon(currentWeaponIndex);
+            }
         }
+
 
         public void RemoveWeapon(int SlotVal)
         {
-            WeaponDatas[SlotVal] = null;
-            if (SlotVal == currentWeaponIndex)
+            if (WeaponDatas[SlotVal] != null)
             {
-                WG.RemoveWeapon();
-                NextWeaponSlot();
+                Debug.Log($"Removing weapon from slot {SlotVal}");
+                WeaponDatas[SlotVal] = null;
+
+                if (SlotVal == currentWeaponIndex)
+                {
+                    WG.RemoveWeapon();
+                    statManager.weaponInstance = null;
+                    Data = null;
+
+                    // Attempt to switch to the next available weapon
+                    NextWeaponSlot();
+                }
+
+                UpdateInventoryState();
             }
-
-            UpdateInventoryState();
-            
-
         }
 
-        bool allSlotsEmpty;
+
+
+        public bool allSlotsEmpty;
 
         void UpdateInventoryState()
         {
@@ -178,13 +242,16 @@ namespace Project.Weapons
             if (allSlotsEmpty)
             {
                 Debug.Log("All weapon slots are empty!");
+                currentWeaponIndex = 0; // Reset to a default index
             }
         }
+
 
         bool AreAllSlotsEmpty()
         {
             foreach (WeaponInstance weapon in WeaponDatas)
             {
+                Debug.Log(weapon);
                 if (weapon != null)
                     return false; // If any slot is not empty, return false
             }
@@ -210,6 +277,8 @@ namespace Project.Weapons
                 
                 case (1):
                 {
+                        attackType = AttackType.attack1;
+
                         if(Data.Attack1Type == DamageType.Magic)
                         {
                             if (!statManager.stats.DoMagicAttack(Data.Attack1ManaUse))
@@ -231,7 +300,7 @@ namespace Project.Weapons
                 case (2):
                 {
 
-
+                    attackType = AttackType.attack2;
 
                     Cooldown = Data.Attack2Cooldown;
                     
