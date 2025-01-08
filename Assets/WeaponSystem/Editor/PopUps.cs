@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Project;
+using UnityEngine.NVIDIA;
 
 public class AddComponentDataPopup : EditorWindow
 {
@@ -17,6 +18,7 @@ public class AddComponentDataPopup : EditorWindow
     // The constructor method accepts the target WeaponDataSO
     public static void ShowWindow(WeaponDataSO targetDataSO)
     {
+
         // Create a window for adding ComponentData
         var window = GetWindow<AddComponentDataPopup>("Add Component Data");
         window.dataSO = targetDataSO;
@@ -26,7 +28,6 @@ public class AddComponentDataPopup : EditorWindow
 
     private void OnEnable()
     {
-        // Load the component types when the window is enabled
         if (dataComponentTypes.Count == 0)
         {
             LoadComponentTypes();
@@ -53,9 +54,13 @@ public class AddComponentDataPopup : EditorWindow
         {
             if (GUILayout.Button(datacompType.Name))
             {
+                
+
                 // Create a new instance of the selected component type
                 var comp = Activator.CreateInstance(datacompType) as ComponentData;
                 if (comp == null) return;
+
+                Debug.Log(comp);
 
                 // Here we handle the component insertion based on the selected attack option
                 if (LeftOrRightClick == 0) // Attack1

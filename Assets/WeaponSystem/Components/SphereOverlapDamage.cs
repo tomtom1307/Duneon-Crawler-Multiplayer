@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Project
 {
-    public class SecondaryAttack : WeaponComponent<SecondaryDamageData, SecondaryAttackDamage>
+    public class SphereOverlapDamage : WeaponComponent<SecondaryDamageData, SecondaryAttackDamage>
     {
         private ActionSphereOverlap sphereDetect;
         Enemy TD;
@@ -14,11 +14,10 @@ namespace Project
         private void HandleColliderDetection(Collider collider)
         {
             
-            bool isMagic;
+            bool isMagic = true;
 
 
-            if (weapon.Data.Attack2Type == DamageType.Magic) isMagic = true;
-            else isMagic = false;
+            
 
             ChargePercentage = PA.ChargePercentage;
 

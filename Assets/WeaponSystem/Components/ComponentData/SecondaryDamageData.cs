@@ -8,7 +8,7 @@ namespace Project
     {
         public SecondaryDamageData()
         {
-            ComponentDependancy = typeof(SecondaryAttack);
+            ComponentDependancy = typeof(SphereOverlapDamage);
         }
     }
 }
