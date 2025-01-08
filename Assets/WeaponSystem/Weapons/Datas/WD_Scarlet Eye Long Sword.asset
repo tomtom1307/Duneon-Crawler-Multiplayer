@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: WD_Scarlet Eye Long Sword
   m_EditorClassIdentifier: 
   Position: {x: 0, y: 0, z: 0}
-  Rotation: {x: 0, y: 0, z: 0}
-  Scale: {x: 1, y: 1, z: 1}
+  Rotation: {x: -201.85, y: 0, z: 0}
+  Scale: {x: 0.03, y: 0.03, z: 0.03}
   ChargeUpSpeed: 0
   Inputs: {fileID: 11400000, guid: 678da3be682b7dd42bdc64469596e130, type: 2}
   <AnimController>k__BackingField: {fileID: 9100000, guid: c14caf3d408e2de48b680b3e8a71ac78,
@@ -29,12 +29,34 @@ MonoBehaviour:
   <Attack2VFX>k__BackingField: {fileID: 0}
   <AttackSpeed>k__BackingField: 0
   <componentDatas>k__BackingField: []
-  <NumberOfAttacks>k__BackingField: 0
+  <NumberOfAttacks>k__BackingField: 1
   <NumberOfAttacks1>k__BackingField: 0
-  <componentDatas1>k__BackingField: []
+  <componentDatas1>k__BackingField:
+  - rid: 4241533424308584470
+  - rid: 4241533424308584469
   <NumberOfAttacks2>k__BackingField: 0
   <componentDatas2>k__BackingField: []
   model: {fileID: 9178786679817380025, guid: 54088ff21b0dc6348884e1488713a01d, type: 3}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 4241533424308584469
+      type: {class: SphereOverlapData, ns: Project, asm: Assembly-CSharp}
+      data:
+        name: SphereOverlapData
+        <AttackData>k__BackingField:
+        - <Distance>k__BackingField: 15.63
+        <DetectableLayers>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 512
+        <detectionRadius>k__BackingField: 7.86
+        Chargable: 0
+    - rid: 4241533424308584470
+      type: {class: SecondaryDamageData, ns: Project, asm: Assembly-CSharp}
+      data:
+        name: SecondaryDamageData
+        <AttackData>k__BackingField:
+        - <DamageAmount>k__BackingField: 100
+          <KnockBackAmount>k__BackingField: 10
+        HitNoneEnemies: 1
+        Chargable: 0

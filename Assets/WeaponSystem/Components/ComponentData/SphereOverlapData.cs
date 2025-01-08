@@ -12,6 +12,7 @@ namespace Project
         [field: SerializeField] public float detectionRadius { get; private set; }
         private Camera cam;
 
+        public bool Chargable;
         public SphereOverlapData()
         {
             ComponentDependancy = typeof(ActionSphereOverlap);

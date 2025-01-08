@@ -16,10 +16,16 @@ namespace Project
             
             bool isMagic = true;
 
+            Debug.Log("SphereOverLapDAMAGE");
 
+            if (data.Chargable)
+            {
+                ChargePercentage = PA.ChargePercentage;
+            }
+            else {
+                ChargePercentage = 1;
+            }
             
-
-            ChargePercentage = PA.ChargePercentage;
 
             
             if(collider.tag == "Projectile")
@@ -33,7 +39,15 @@ namespace Project
             }
             else
             {
-                
+                DamageableThing DT;
+
+                if (collider.tag == "Damageable")
+                {
+                    DT = collider.GetComponent<DamageableThing>();
+                    Debug.Log("Damageablething;");
+                    DT.TakeDamageServerRpc(currentAttackData.DamageAmount);
+                }
+
                 TD = collider.GetComponent<Enemy>();
                 if(TD == null)
                 {
@@ -47,6 +61,9 @@ namespace Project
                     NME.DisableNavMeshServerRpc();
                     TD.KnockBackServerRpc(Camera.main.transform.position, ChargePercentage*currentAttackData.KnockBackAmount);
                 }
+
+                
+                
                 
             }
 

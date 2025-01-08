@@ -35,7 +35,14 @@ namespace Project
             }
 
             else manaUse = weapon.Data.Attack2ManaUse;
-            ChargePercentage = PA.ChargePercentage;
+            if (data.Chargable)
+            {
+                ChargePercentage = PA.ChargePercentage;
+            }
+            else
+            {
+                ChargePercentage = 1;
+            }
             print(weapon.visualAttacks);
             weapon.visualAttacks.AOEServerRpc(ChargePercentage);
             //Debug.Log("Handle Attack Action");
