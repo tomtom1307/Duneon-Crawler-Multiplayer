@@ -45,7 +45,7 @@ namespace Project
                 {
                     DT = collider.GetComponent<DamageableThing>();
                     Debug.Log("Damageablething;");
-                    DT.TakeDamageServerRpc(currentAttackData.DamageAmount);
+                    DT.TakeDamageServerRpc(weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
                 }
 
                 TD = collider.GetComponent<Enemy>();

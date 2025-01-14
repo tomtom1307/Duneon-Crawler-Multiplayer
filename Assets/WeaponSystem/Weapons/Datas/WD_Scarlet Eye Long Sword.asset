@@ -29,7 +29,7 @@ MonoBehaviour:
   <Attack2VFX>k__BackingField: {fileID: 0}
   <AttackSpeed>k__BackingField: 0
   <componentDatas>k__BackingField: []
-  <NumberOfAttacks>k__BackingField: 1
+  <NumberOfAttacks>k__BackingField: 2
   <NumberOfAttacks1>k__BackingField: 0
   <componentDatas1>k__BackingField:
   - rid: 4241533424308584470
@@ -45,11 +45,13 @@ MonoBehaviour:
       data:
         name: SphereOverlapData
         <AttackData>k__BackingField:
-        - <Distance>k__BackingField: 15.63
+        - <Distance>k__BackingField: 2
+        - <Distance>k__BackingField: 2
         <DetectableLayers>k__BackingField:
           serializedVersion: 2
           m_Bits: 512
-        <detectionRadius>k__BackingField: 7.86
+        <detectionRadius>k__BackingField: 1.5
+        <offset>k__BackingField: {x: 0, y: 0, z: 1}
         Chargable: 0
     - rid: 4241533424308584470
       type: {class: SecondaryDamageData, ns: Project, asm: Assembly-CSharp}
@@ -57,6 +59,8 @@ MonoBehaviour:
         name: SecondaryDamageData
         <AttackData>k__BackingField:
         - <DamageAmount>k__BackingField: 100
-          <KnockBackAmount>k__BackingField: 10
+          <KnockBackAmount>k__BackingField: 100
+        - <DamageAmount>k__BackingField: 150
+          <KnockBackAmount>k__BackingField: 150
         HitNoneEnemies: 1
         Chargable: 0

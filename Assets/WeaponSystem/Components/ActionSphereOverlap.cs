@@ -46,7 +46,8 @@ namespace Project
             print(weapon.visualAttacks);
             weapon.visualAttacks.AOEServerRpc(ChargePercentage);
             //Debug.Log("Handle Attack Action");
-            detected = Physics.OverlapSphere(cam.transform.position, data.detectionRadius* ChargePercentage, data.DetectableLayers);
+            Vector3 offset = data.offset.x * cam.transform.right + data.offset.z * cam.transform.forward + data.offset.y * cam.transform.up;
+            detected = Physics.OverlapSphere(cam.transform.position + offset, data.detectionRadius* ChargePercentage, data.DetectableLayers);
             weapon.statManager.stats.DoMagicAttack(manaUse * ChargePercentage);
 
 
