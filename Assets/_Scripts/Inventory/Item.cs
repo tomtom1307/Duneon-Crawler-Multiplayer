@@ -12,6 +12,7 @@ public enum Rarity { Common, Uncommon, Rare, Very_Rare, Legendary}
 [CreateAssetMenu(menuName = "newItem")]
 public class Item : ScriptableObject
 {
+    public string Name;
     public Sprite inventorySprite;
     public SlotTag itemTag;
     public Rarity rarity;

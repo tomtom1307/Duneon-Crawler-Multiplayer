@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Project
 {
-    public class SecondaryAttack : WeaponComponent<SecondaryDamageData, SecondaryAttackDamage>
+    public class SphereOverlapDamage : WeaponComponent<SecondaryDamageData, SecondaryAttackDamage>
     {
         private ActionSphereOverlap sphereDetect;
         Enemy TD;
@@ -14,13 +14,18 @@ namespace Project
         private void HandleColliderDetection(Collider collider)
         {
             
-            bool isMagic;
+            bool isMagic = true;
 
+            Debug.Log("SphereOverLapDAMAGE");
 
-            if (weapon.Data.Attack2Type == DamageType.Magic) isMagic = true;
-            else isMagic = false;
-
-            ChargePercentage = PA.ChargePercentage;
+            if (data.Chargable)
+            {
+                ChargePercentage = PA.ChargePercentage;
+            }
+            else {
+                ChargePercentage = 1;
+            }
+            
 
             
             if(collider.tag == "Projectile")
@@ -34,7 +39,15 @@ namespace Project
             }
             else
             {
-                
+                DamageableThing DT;
+
+                if (collider.tag == "Damageable")
+                {
+                    DT = collider.GetComponent<DamageableThing>();
+                    Debug.Log("Damageablething;");
+                    DT.TakeDamageServerRpc(weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
+                }
+
                 TD = collider.GetComponent<Enemy>();
                 if(TD == null)
                 {
@@ -48,6 +61,9 @@ namespace Project
                     NME.DisableNavMeshServerRpc();
                     TD.KnockBackServerRpc(Camera.main.transform.position, ChargePercentage*currentAttackData.KnockBackAmount);
                 }
+
+                
+                
                 
             }
 

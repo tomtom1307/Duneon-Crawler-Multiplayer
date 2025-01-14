@@ -17,20 +17,27 @@ namespace Project
     [CreateAssetMenu(menuName = "newWeaponData")]
     public class WeaponDataSO : ScriptableObject
     {
+        [Header("Hand Transform")]
+        public Vector3 Position;
+        public Vector3 Rotation;
+        public Vector3 Scale = Vector3.one;
+
+
+
 
         [field: SerializeField] public float ChargeUpSpeed;
 
         [field: SerializeField] public WeaponInputsSO Inputs;
         
-        [field: SerializeField] public AnimatorController AnimController{ get; private set; }
-        [field: SerializeField] public float Attack1Cooldown { get; private set; }
-        [field: SerializeField] public float Attack2Cooldown { get; private set; }
-        [field: SerializeField] public float Attack1ManaUse { get; private set; }
-        [field: SerializeField] public float Attack2ManaUse { get; private set; }
-        [field: SerializeField] public DamageType Attack1Type { get; private set; }
-        [field: SerializeField] public DamageType Attack2Type { get; private set; }
-        [field: SerializeField] public GameObject Attack1VFX { get; private set; }
-        [field: SerializeField] public GameObject Attack2VFX { get; private set; }
+        [field: SerializeField] public AnimatorController AnimController{ get; set; }
+        [field: SerializeField] public float Attack1Cooldown { get;  set; }
+        [field: SerializeField] public float Attack2Cooldown { get; set; }
+        [field: SerializeField] public float Attack1ManaUse { get;  set; }
+        [field: SerializeField] public float Attack2ManaUse { get;  set; }
+        [field: SerializeField] public DamageType Attack1Type { get;  set; }
+        [field: SerializeField] public DamageType Attack2Type { get;  set; }
+        [field: SerializeField] public GameObject Attack1VFX { get;  set; }
+        [field: SerializeField] public GameObject Attack2VFX { get;  set; }
 
         [field: SerializeField] public float AttackSpeed { get; private set; }
 

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using static UnityEditor.Progress;
 
 
@@ -50,7 +51,8 @@ namespace Project.Weapons
         {
             ready,
             active,
-            coolDown
+            coolDown,
+            ChainedAttack
         }
 
         [SerializeField] public AttackState State = AttackState.ready;
@@ -331,6 +333,12 @@ namespace Project.Weapons
         }
 
 
+        public void TriggerNextAttack()
+        {
+            CurrentAttackCounter++;
+            State = WeaponHolder.AttackState.ChainedAttack;
+        }
+
         public void Exit()
         {
             StartCoroutine(cooldown(Cooldown));
@@ -357,9 +365,10 @@ namespace Project.Weapons
             {
                 item.enabled = true;
             }
+            eventHandler.NextAttackTrigger += TriggerNextAttack;
             eventHandler.OnFinish += Exit;
             eventHandler.OnAttackAction += DoAttackScreenShake;
-            eventHandler.OnAOEAction += DoAOEScreenShake;
+            //eventHandler.OnAOEAction += DoAOEScreenShake;
             attackCounterResetTimer.OntimerDone += ResetAttackCounter;
         }
 
@@ -376,7 +385,7 @@ namespace Project.Weapons
             State = AttackState.ready;
             attackCounterResetTimer.OntimerDone -= ResetAttackCounter;
             eventHandler.OnAttackAction -= DoAttackScreenShake;
-            eventHandler.OnAOEAction -= DoAOEScreenShake;
+            //eventHandler.OnAOEAction -= DoAOEScreenShake;
             eventHandler.OnFinish -= Exit;
         }
     }

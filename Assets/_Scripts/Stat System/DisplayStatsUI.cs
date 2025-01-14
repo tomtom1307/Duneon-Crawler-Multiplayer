@@ -29,6 +29,7 @@ namespace Project
         private void Start()
         {
             Singleton = this;
+            
         }
 
         public void UpdateXPBar(int xp, int requiredxp)

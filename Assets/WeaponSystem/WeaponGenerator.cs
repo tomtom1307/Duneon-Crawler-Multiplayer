@@ -49,6 +49,7 @@ namespace Project.Assets.WeaponSystem
                 Destroy(ModelInstance);
             }
             SpawnVisual(weaponPos, data.model);
+            
             anim.runtimeAnimatorController = data.AnimController;
 
             // Get all dependencies from data
@@ -111,6 +112,9 @@ namespace Project.Assets.WeaponSystem
         public void SpawnVisual(Transform parent, GameObject model) 
         { 
             ModelInstance = Instantiate(model, parent);
+            ModelInstance.transform.localPosition = data.Position; 
+            ModelInstance.transform.localEulerAngles = data.Rotation; 
+            ModelInstance.transform.localScale = data.Scale; 
         }
 
     }
