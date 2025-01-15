@@ -15,13 +15,8 @@ namespace Project
         protected AnimationEventHandler eventHandler;
 
         public bool InUse;
-        public enum AttackType
-        {
-            Attack1,
-            Attack2
-        }
-
-        public AttackType attackType;
+       
+        public List<int> Attacks = new List<int>();
 
         public virtual void Init()
         {
@@ -67,6 +62,11 @@ namespace Project
 
         public IEnumerator WaitForDataInitialization()
         {
+            if(weapon == null)
+            {
+                Debug.Log("No WeaponHolder Found getting component now");
+                weapon = GetComponent<WeaponHolder>();
+            }
             while (weapon.Data == null)
             {
                 Debug.Log("Waiting for weapon.Data to be initialized...");
@@ -82,7 +82,7 @@ namespace Project
 
     public abstract class WeaponComponent<T1,T2> : WeaponComponent where T1: ComponentData<T2> where T2: AttackData
     {
-        protected T1 data1;
+        [SerializeField] protected T1 data1;
         protected T1 data2;
         protected T1 data;
         protected T2 currentAttackData;
@@ -96,22 +96,19 @@ namespace Project
             base.HandleEnter();
             if (weapon.attackType == WeaponHolder.AttackType.attack1)
             {
-                if (data1 != null)
-                {
-                    data = data1;
-                }
+                if (!Attacks.Contains(1)) return;
+                data = data1;
             }
             else if (weapon.attackType == WeaponHolder.AttackType.attack2)
             {
-                if(data2 != null)
-                {
-                    data = data2;
-                }
-                
+                if (!Attacks.Contains(2)) return;
+                data = data2;
+
             }
             else if (data == null)
             {
                 Debug.LogError("Found No Datas!");
+                return;
             }
             else if(data.AttackData == null)
             {
@@ -136,11 +133,34 @@ namespace Project
 
         public override void Init()
         {
+            
             Debug.Log("Weapon Data is"+ weapon.Data);
 
             //data = weapon.Data.GetData<T1>();
             data1 = weapon.Data.GetData<T1>(1);
+            if(data1 == null)
+            {
+                Debug.Log(this.name + "Data1 is null");
+                
+            }
+            else
+            {
+                Attacks.Add(1);
+                print(data1);
+            }
+        
             data2 = weapon.Data.GetData<T1>(2);
+
+            if (data2 == null)
+            {
+                Debug.Log("WeaponComponent:" + typeof(T1).Name + "Data2 is null");
+            }
+            else
+            {
+                print(data2);
+                Attacks.Add(2);
+            }
+            
         }
 
         

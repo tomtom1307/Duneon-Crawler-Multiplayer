@@ -108,6 +108,7 @@ namespace Project
 
         private void OnTriggerEnter(Collider other)
         {
+            if (!Pierce) return;
             if (other.GetComponent<Collider>().gameObject.layer == 10) return;
             if (hit) return;
 

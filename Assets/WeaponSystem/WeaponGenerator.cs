@@ -77,9 +77,13 @@ namespace Project.Assets.WeaponSystem
                 {
                     ComponentsAdded.Add(weaponComponent);
                 }
+                else
+                {
+                    StartCoroutine(weaponComponent.WaitForDataInitialization());
+                }
 
                 weaponComponent.InUse = true;
-                StartCoroutine(weaponComponent.WaitForDataInitialization());
+                
             }
 
             // Disable Unused Components
