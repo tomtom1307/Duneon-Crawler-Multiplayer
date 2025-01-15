@@ -85,6 +85,10 @@ namespace Project
                 .Union(componentDatas2.Select(component => component.ComponentDependancy)) // Ensures no duplicates
                 .ToList();
 
+
+            Debug.Log("ALL DEPENDENCIES" + allDependencies);
+
+
             // Return the combined list without duplicates
             return allDependencies;
         }

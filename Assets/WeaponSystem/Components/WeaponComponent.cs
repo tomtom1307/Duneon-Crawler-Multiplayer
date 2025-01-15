@@ -25,12 +25,19 @@ namespace Project
 
         public virtual void Init()
         {
-
+            
         }
 
         protected virtual void Start()
         {
             weapon = GetComponent<WeaponHolder>();
+
+            if (weapon == null)
+            {
+                Debug.LogError("WeaponHolder component is missing on this GameObject!");
+                return;
+            }
+
             eventHandler = GetComponentInChildren<AnimationEventHandler>();
             weapon.OnEnter += HandleEnter;
 
@@ -58,7 +65,17 @@ namespace Project
             weapon.OnEnter -= HandleEnter;
         }
 
+        public IEnumerator WaitForDataInitialization()
+        {
+            while (weapon.Data == null)
+            {
+                Debug.Log("Waiting for weapon.Data to be initialized...");
+                yield return null; // Wait for the next frame
+            }
 
+            Debug.Log("weapon.Data is initialized. Proceeding with setup.");
+            Init();
+        }
 
     }
 
@@ -96,7 +113,16 @@ namespace Project
             {
                 Debug.LogError("Found No Datas!");
             }
+            else if(data.AttackData == null)
+            {
+                Debug.LogError("Found No Attack Data List");
+            }
+            else if (data.AttackData[weapon.CurrentAttackCounter] == null)
+            {
+                Debug.LogError("Found No Attack Data");
+            }
             currentAttackData = data.AttackData[weapon.CurrentAttackCounter];
+            
 
         }
 
@@ -104,11 +130,20 @@ namespace Project
         {
             base.Start();
 
-            data = weapon.Data.GetData<T1>();
-            data1 = weapon.Data.GetData<T1>(1);
-            data2 = weapon.Data.GetData<T1>(2);
+            StartCoroutine(WaitForDataInitialization());
 
         }
+
+        public override void Init()
+        {
+            Debug.Log("Weapon Data is"+ weapon.Data);
+
+            //data = weapon.Data.GetData<T1>();
+            data1 = weapon.Data.GetData<T1>(1);
+            data2 = weapon.Data.GetData<T1>(2);
+        }
+
+        
     }
     
 }

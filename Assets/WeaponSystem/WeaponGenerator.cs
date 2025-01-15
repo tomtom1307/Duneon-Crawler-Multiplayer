@@ -15,10 +15,10 @@ namespace Project.Assets.WeaponSystem
         [SerializeField] private StatManager weaponStats;
         Animator anim;
 
-        private List<WeaponComponent> ComponentsAlreadyOn = new List<WeaponComponent>();
-        private List<WeaponComponent> ComponentsAdded = new List<WeaponComponent>();
+        [SerializeField] private List<WeaponComponent> ComponentsAlreadyOn = new List<WeaponComponent>();
+        [SerializeField] private List<WeaponComponent> ComponentsAdded = new List<WeaponComponent>();
 
-        private List<Type> ComponentDependencies = new List<Type>();
+        [SerializeField] private List<Type> ComponentDependencies = new List<Type>();
         private GameObject ModelInstance;
 
         private void Start()
@@ -32,6 +32,9 @@ namespace Project.Assets.WeaponSystem
         public bool Generating;
         public void GenerateWeapon(WeaponInstance inst)
         {
+            
+            ComponentsAdded.Clear();
+
             data = inst.weaponData;
             weapon.SetData(data);
             Generating = true;
@@ -54,7 +57,10 @@ namespace Project.Assets.WeaponSystem
 
             // Get all dependencies from data
             ComponentDependencies = data.GetAllDependencies();
-            print(ComponentDependencies);
+            Debug.Log("Dependancies!");
+            foreach ( var  component in ComponentDependencies) {
+                Debug.Log(component.Name);
+            }
 
             // Enable Required Components
             foreach (var dependency in ComponentDependencies)
@@ -73,6 +79,7 @@ namespace Project.Assets.WeaponSystem
                 }
 
                 weaponComponent.InUse = true;
+                StartCoroutine(weaponComponent.WaitForDataInitialization());
             }
 
             // Disable Unused Components
@@ -81,8 +88,10 @@ namespace Project.Assets.WeaponSystem
             foreach (var item in componentsToRemove)
             {
                 item.InUse = false;
-                ComponentsAdded.Remove(item); // Remove from active components
+                Destroy(item);
             }
+
+            
 
             Generating = false;
         }
@@ -91,19 +100,21 @@ namespace Project.Assets.WeaponSystem
         {
             
             print("Removing Weapon");
-            ComponentsAlreadyOn = GetComponents<WeaponComponent>().ToList();
-            foreach (var item in ComponentsAlreadyOn)
+            foreach( var component in ComponentsAlreadyOn)
             {
-                Destroy(item);
+                Destroy(component);
             }
             
             Destroy(ModelInstance);
+
+            ComponentsAlreadyOn.Clear();
+            ComponentsAlreadyOn = GetComponents<WeaponComponent>().ToList();
         }
 
         public void SwapWeapon(WeaponInstance inst)
         {
             print("Swapping Weapon");
-            RemoveWeapon();
+            //RemoveWeapon();
             GenerateWeapon(inst);
 
         }
