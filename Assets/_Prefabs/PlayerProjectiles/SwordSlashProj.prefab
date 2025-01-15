@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -169,7 +169,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 10
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -870,7 +870,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20.29
+      scalar: 40
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5113,7 +5113,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 10
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5814,7 +5814,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20.29
+      scalar: 40
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -9873,6 +9873,7 @@ MonoBehaviour:
   damage: 5
   StartPos: {x: 0, y: 0, z: 0}
   Direction: {x: 0, y: 0, z: 0}
+  OffsetRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!54 &1435131974679505517
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -83,7 +83,7 @@ namespace Project
     public abstract class WeaponComponent<T1,T2> : WeaponComponent where T1: ComponentData<T2> where T2: AttackData
     {
         [SerializeField] protected T1 data1;
-        protected T1 data2;
+        [SerializeField] protected T1 data2;
         protected T1 data;
         protected T2 currentAttackData;
         
@@ -133,7 +133,7 @@ namespace Project
 
         public override void Init()
         {
-            
+            Attacks.Clear(); 
             Debug.Log("Weapon Data is"+ weapon.Data);
 
             //data = weapon.Data.GetData<T1>();

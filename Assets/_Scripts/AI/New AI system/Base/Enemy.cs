@@ -287,7 +287,7 @@ namespace Project
         [ServerRpc(RequireOwnership = false)]
         public void KnockBackServerRpc(Vector3 playerPos, float KnockBack = 5)
         {
-            
+            if (ded) return;
             rb.isKinematic = false;
 
             //Find the knockback direction and apply it
@@ -300,6 +300,7 @@ namespace Project
         public virtual void Die()
         {
             if (ded) return;
+            rb.isKinematic = true;
             ded = true;
             //Award XP to all players
             GameManager.instance.AwardXPServerRpc(xpOnKill);

@@ -175,20 +175,25 @@ namespace Project
 
         public override void Die()
         {
+            CancelInvoke("EnableNavMeshServerRpc");
+            Debug.Log("NM Enemy Ded");
             navMesh.enabled = false;
             RemoveArmorBuff();
             //Invoke("Delete", 4);
+            rb.isKinematic = true;
+            rb.useGravity = false;
             foreach (var item in colliders)
             {
                 item.enabled = false;
             }
-            CancelInvoke("EnableNavMeshServerRpc");
+            
 
             if (Floating)
             {
+                CancelInvoke("EndFloatingEffectServerRpc");
                 transform.DOMove(-floatHeight * Vector3.up + transform.position, 0.1f);
                 animator.Play("FallingDeath", -1, 0);
-                CancelInvoke("EndFloatingEffectServerRpc");
+                
             }
             else animator.Play("Die", -1, 0);
 
@@ -197,7 +202,7 @@ namespace Project
             Destroy(gameObject,4);
 
             Destroy(GetComponent<NetworkRigidbody>());
-            rb.isKinematic = true;
+           
 
             
             base.Die();
