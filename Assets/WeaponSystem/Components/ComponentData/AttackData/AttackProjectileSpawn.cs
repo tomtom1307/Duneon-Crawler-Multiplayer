@@ -11,6 +11,7 @@ namespace Project
         public GameObject Projectile;
         public float Deviation;
         public float Damage;
+        public Vector3 SpawnRotation;
         public float Speed;
 
     }

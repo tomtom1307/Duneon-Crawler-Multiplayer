@@ -11,8 +11,12 @@ namespace Project
         public override void DoDamageServerRpc(float Damage, bool headshot = false)
         {
             base.DoDamageServerRpc(Damage, headshot);
+            if (!Attacking)
+            {
+                animator.Play("HitFlinch", -1, 0f);
 
-            animator.Play("HitFlinch", -1, 0f);
+            }
+            
         }
 
 

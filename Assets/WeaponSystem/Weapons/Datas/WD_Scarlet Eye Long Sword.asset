@@ -65,6 +65,7 @@ MonoBehaviour:
           <KnockBackAmount>k__BackingField: 150
         HitNoneEnemies: 1
         Chargable: 0
+        IgnoreStaggerHealth: 1
     - rid: 4241533567859949568
       type: {class: ProjectileSpawnData, ns: Project, asm: Assembly-CSharp}
       data:
@@ -74,11 +75,13 @@ MonoBehaviour:
             type: 3}
           Deviation: 0
           Damage: 5
+          SpawnRotation: {x: 0, y: 0, z: 135}
           Speed: 10
         - Projectile: {fileID: 7254740226249318928, guid: d9d67567f9f7c8f4f92804ade882b85e,
             type: 3}
           Deviation: 0
           Damage: 5
+          SpawnRotation: {x: 0, y: 0, z: 133.3}
           Speed: 10
         SpawnAmount: 1
         Chargable: 1

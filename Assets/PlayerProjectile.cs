@@ -21,6 +21,7 @@ namespace Project
         NetworkRigidbody Nrb;
         NetworkObject NO;
         bool hit;
+        public Quaternion OffsetRot;
         // Start is called before the first frame update
         void Start()
         {
@@ -40,7 +41,7 @@ namespace Project
 
             if (rb.velocity.magnitude > 1f)
             {
-                transform.rotation = Quaternion.LookRotation(-rb.velocity);
+                transform.rotation = Quaternion.LookRotation(-rb.velocity) * OffsetRot;
             }
 
         }

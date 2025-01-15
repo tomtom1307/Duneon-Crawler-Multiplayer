@@ -76,12 +76,9 @@ namespace Project.Assets.WeaponSystem
                 if (!ComponentsAdded.Contains(weaponComponent))
                 {
                     ComponentsAdded.Add(weaponComponent);
-                }
-                else
-                {
                     StartCoroutine(weaponComponent.WaitForDataInitialization());
                 }
-
+                
                 weaponComponent.InUse = true;
                 
             }

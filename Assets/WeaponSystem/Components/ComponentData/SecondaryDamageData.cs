@@ -11,7 +11,7 @@ namespace Project
     {
         public bool HitNoneEnemies = true;
         public bool Chargable = false;
-        
+        public bool IgnoreStaggerHealth;
         public SecondaryDamageData()
         {
             

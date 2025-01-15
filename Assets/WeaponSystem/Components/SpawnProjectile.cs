@@ -41,11 +41,12 @@ namespace Project
                 }
 
                 else manaUse = weapon.Data.Attack2ManaUse;
-                GameObject proj = Instantiate(currentAttackData.Projectile, cam.transform.position, Quaternion.identity);
+                GameObject proj = Instantiate(currentAttackData.Projectile, cam.transform.position, Quaternion.Euler(currentAttackData.SpawnRotation));
                 NetworkObject NO = proj.GetComponent<NetworkObject>();
                 NO.Spawn();
                 PlayerProjectile PP = proj.GetComponent<PlayerProjectile>();
                 PP.Speed = currentAttackData.Speed;
+                PP.OffsetRot = Quaternion.Euler(currentAttackData.SpawnRotation);
                 PP.damage = currentAttackData.Damage*ChargePercentage;
                 weapon.statManager.stats.DoMagicAttack(manaUse);
                 Vector3 dir = (cam.transform.forward) + new Vector3(Random.Range(-currentAttackData.Deviation, currentAttackData.Deviation), Random.Range(-currentAttackData.Deviation, currentAttackData.Deviation), Random.Range(-currentAttackData.Deviation, currentAttackData.Deviation));
