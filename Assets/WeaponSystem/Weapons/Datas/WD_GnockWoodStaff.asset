@@ -82,6 +82,8 @@ MonoBehaviour:
           serializedVersion: 2
           m_Bits: 512
         <detectionRadius>k__BackingField: 10
+        <offset>k__BackingField: {x: 0, y: 0, z: 0}
+        Chargable: 1
     - rid: 4241533400671846411
       type: {class: SecondaryDamageData, ns: Project, asm: Assembly-CSharp}
       data:
@@ -93,3 +95,5 @@ MonoBehaviour:
           <KnockBackAmount>k__BackingField: 2000
         - <DamageAmount>k__BackingField: 40
           <KnockBackAmount>k__BackingField: 4000
+        HitNoneEnemies: 1
+        Chargable: 1

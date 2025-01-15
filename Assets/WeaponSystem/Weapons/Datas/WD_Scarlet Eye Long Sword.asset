@@ -15,7 +15,7 @@ MonoBehaviour:
   Position: {x: 0, y: 0, z: 0}
   Rotation: {x: -201.85, y: 0, z: 0}
   Scale: {x: 0.03, y: 0.03, z: 0.03}
-  ChargeUpSpeed: 0
+  ChargeUpSpeed: 1
   Inputs: {fileID: 11400000, guid: 678da3be682b7dd42bdc64469596e130, type: 2}
   <AnimController>k__BackingField: {fileID: 9100000, guid: c14caf3d408e2de48b680b3e8a71ac78,
     type: 2}
@@ -30,12 +30,13 @@ MonoBehaviour:
   <AttackSpeed>k__BackingField: 0
   <componentDatas>k__BackingField: []
   <NumberOfAttacks>k__BackingField: 2
-  <NumberOfAttacks1>k__BackingField: 0
+  <NumberOfAttacks1>k__BackingField: 2
   <componentDatas1>k__BackingField:
   - rid: 4241533424308584470
   - rid: 4241533424308584469
-  <NumberOfAttacks2>k__BackingField: 0
-  <componentDatas2>k__BackingField: []
+  <NumberOfAttacks2>k__BackingField: 2
+  <componentDatas2>k__BackingField:
+  - rid: 4241533567859949568
   model: {fileID: 9178786679817380025, guid: 54088ff21b0dc6348884e1488713a01d, type: 3}
   references:
     version: 2
@@ -64,3 +65,20 @@ MonoBehaviour:
           <KnockBackAmount>k__BackingField: 150
         HitNoneEnemies: 1
         Chargable: 0
+    - rid: 4241533567859949568
+      type: {class: ProjectileSpawnData, ns: Project, asm: Assembly-CSharp}
+      data:
+        name: ProjectileSpawnData
+        <AttackData>k__BackingField:
+        - Projectile: {fileID: 7254740226249318928, guid: d9d67567f9f7c8f4f92804ade882b85e,
+            type: 3}
+          Deviation: 0
+          Damage: 5
+          Speed: 10
+        - Projectile: {fileID: 7254740226249318928, guid: d9d67567f9f7c8f4f92804ade882b85e,
+            type: 3}
+          Deviation: 0
+          Damage: 5
+          Speed: 10
+        SpawnAmount: 1
+        Chargable: 1

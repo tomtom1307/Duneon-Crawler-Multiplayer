@@ -11,7 +11,9 @@ namespace Project
     {
         public GameObject SpawnOnDeath;
         public bool ParentOnHit;
+        public bool Pierce;
         public float Speed;
+        public float Lifetime = 20;
         public float damage;
         public Vector3 StartPos;
         public Vector3 Direction;
@@ -28,6 +30,7 @@ namespace Project
             hit = false;
             rb.isKinematic = false;
             rb.AddForce(Speed * Direction, ForceMode.Impulse);
+            Invoke(nameof(DestroyProjectile), Lifetime);
         }
 
         // Update is called once per frame
@@ -58,11 +61,16 @@ namespace Project
             
             rot = transform.rotation;
             
-            hit = true;
+            
 
-            Destroy(Nrb);
-            Destroy(rb);
-            GetComponent<Collider>().enabled = false;
+            if (!Pierce)
+            {
+                hit = true;
+                Destroy(Nrb);
+                Destroy(rb);
+                GetComponent<Collider>().enabled = false;
+            }
+            
             if (collision.gameObject.TryGetComponent<Enemy>(out enemy))
             {
                 if (ParentOnHit)
@@ -73,6 +81,9 @@ namespace Project
                 
                 enemy.DoDamageServerRpc(damage);
                 enemy.KnockBackServerRpc(StartPos, 10f);
+
+                if (Pierce) return;
+
                 DestroyProjectile();
                 
             }
@@ -80,10 +91,14 @@ namespace Project
             else if(collision.gameObject.TryGetComponent(out TD))
             {
                 TD.TakeDamageServerRpc(damage);
-                DestroyProjectile();
+                if (!Pierce)
+                {
+                    DestroyProjectile();
+                }
+                
             }
             
-            else if (IsOwner)
+            else if (IsOwner && !Pierce)
             {
                 DestroyProjectile();
             }
@@ -91,8 +106,59 @@ namespace Project
             
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.GetComponent<Collider>().gameObject.layer == 10) return;
+            if (hit) return;
+
+            rot = transform.rotation;
+
+
+
+            if (!Pierce)
+            {
+                hit = true;
+                Destroy(Nrb);
+                Destroy(rb);
+                GetComponent<Collider>().enabled = false;
+            }
+
+            if (other.gameObject.TryGetComponent<Enemy>(out enemy))
+            {
+                if (ParentOnHit)
+                {
+                    transform.parent = other.gameObject.transform;
+                    transform.rotation = rot;
+                }
+
+                enemy.DoDamageServerRpc(damage);
+                enemy.KnockBackServerRpc(StartPos, 10f);
+
+                if (Pierce) return;
+
+                DestroyProjectile();
+
+            }
+
+            else if (other.gameObject.TryGetComponent(out TD))
+            {
+                TD.TakeDamageServerRpc(damage);
+                if (!Pierce)
+                {
+                    DestroyProjectile();
+                }
+
+            }
+
+            else if (IsOwner && !Pierce)
+            {
+                DestroyProjectile();
+            }
+        }
+
         public void DestroyProjectile()
         {
+            Debug.Log("DESTROYED PROJ");
             if (SpawnOnDeath != null)
             {
                 //Spawn thing 

@@ -21,6 +21,7 @@ namespace Project
 
         public void SpawnPlayerProjectile()
         {
+            
             if (data.Chargable)
             {
                 ChargePercentage = PA.ChargePercentage;

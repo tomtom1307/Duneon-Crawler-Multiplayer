@@ -73,8 +73,9 @@ namespace Project
 
         protected override void HandleEnter()
         {
-            if (!InUse) return;
+            
             Debug.Log("WeaponComponent:" + typeof(T1).Name + ":" + InUse);
+            if (!InUse) return;
             base.HandleEnter();
             if (weapon.attackType == WeaponHolder.AttackType.attack1)
             {
@@ -90,6 +91,10 @@ namespace Project
                     data = data2;
                 }
                 
+            }
+            else if (data == null)
+            {
+                Debug.LogError("Found No Datas!");
             }
             currentAttackData = data.AttackData[weapon.CurrentAttackCounter];
 
