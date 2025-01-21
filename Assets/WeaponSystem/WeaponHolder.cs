@@ -31,6 +31,7 @@ namespace Project.Weapons
         public float SwapCoolDown;
         public bool Swapping;
         public int HeldWeaponAmount;
+        
 
         [SerializeField] List<WeaponComponent> components;
         public event Action OnExit;
@@ -42,7 +43,12 @@ namespace Project.Weapons
         [HideInInspector] public GameObject baseGO { get; private set; }
         public AnimationEventHandler eventHandler { get; private set; }
         private int currentAttackCounter;
+
+        public WeaponVFXHandler VFXHandler;
+
+        //deprecated 
         public VFXHandler visualAttacks;
+        
         private Timer attackCounterResetTimer;
 
         private int CurrentAttack;
@@ -83,6 +89,7 @@ namespace Project.Weapons
 
         private void Start()
         {
+            VFXHandler = GetComponentInChildren<WeaponVFXHandler>();
             WG = GetComponent<WeaponGenerator>();
             _soundSource = GetComponentInChildren<PlayerSoundSource>();
             WeaponDatas = new WeaponInstance[HeldWeaponAmount];

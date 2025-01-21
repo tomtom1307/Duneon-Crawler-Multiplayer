@@ -48,6 +48,7 @@ namespace Project
                     if(DT != null )
                     {
                         DT.TakeDamageServerRpc(weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
+                        weapon.VFXHandler.SpawnOnHitParticleFX(DT.transform);
                     }
                    
                 }
@@ -59,6 +60,7 @@ namespace Project
                     if (TD == null) return;
                 }
                 TD.DoDamageServerRpc(ChargePercentage * weapon.statManager.GetDamageVal(currentAttackData.DamageAmount, isMagic));
+                weapon.VFXHandler.SpawnOnHitParticleFX(TD.transform);
                 NavMeshEnemy NME;
                 if (collider.TryGetComponent<NavMeshEnemy>(out NME))
                 {
